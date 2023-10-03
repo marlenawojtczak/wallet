@@ -1,0 +1,38 @@
+:root {
+  /* Brand colors */
+  --brand-primary: #4a56e2;
+  --brand-secondary: #24cca8;
+  --brand-accent: #ff6596;
+  --brand-logout: #bdbdbd;
+
+  /* Background colors */
+  --bg-light: #ffffff;
+  --bg-accent: #e7eaf2;
+  --bg-primary: #c5baff;
+  --bg-secondary: #ffd8d0;
+  --bg-gray: #dcdcdf;
+  --bg-transactions-element: #4a57e21e;
+  --bg-progress-bar: #e5f1ef;
+  --bg-modal-overlay: #00000040;
+  --bg-category-select: #00000008;
+
+  /* Font colors */
+  --font-light: #fff;
+  --font-dark: #000;
+
+  /* Borders */
+  --border-transactions: #dcdcdf;
+
+  /* Shadows */
+  --shadow-progress-bar: #24cca880;
+  --shadow-category-select: #0000001a;
+
+  /* Other UI colors */
+  --switch-main: #e0e0e0;
+  --nav-active: #4e58dd;
+  --nav-inactive: #7079e3;
+
+  /* Breakpoints */
+  --bp-mobile: 767px;
+  --bp-tablet: 1279px;
+}
