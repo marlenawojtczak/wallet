@@ -20,6 +20,8 @@ All images are stored in Docker Hub. To run frontend in Docker, you need to have
 
     docker run -d -p 4000:4000 platyna100/wallet-frontend
 
+### Running Frontend in Docker from your local changes
+
 #### Building Docker image
 
     docker build -t frontend -f frontend/Dockerfile frontend
