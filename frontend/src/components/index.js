@@ -12,3 +12,4 @@ export * from "./ModalLogout";
 export * from "./Navigation";
 export * from "./RegisterForm";
 export * from "./Table";
+export * from "./UserMenu";
