@@ -1,5 +1,6 @@
 import { DiagramTable } from "./DiagramTab.styled";
 import { Table } from "../Table";
+import { ChartContainer } from "../Chart";
 
 const options = [
   { label: "Main expenses", color: "var(--expenses)" },
@@ -17,6 +18,7 @@ export const DiagramTab = () => {
   return (
     <>
       <DiagramTable>
+        <ChartContainer />
         <Table options={options} />
       </DiagramTable>
     </>

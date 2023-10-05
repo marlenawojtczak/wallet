@@ -12,12 +12,12 @@ import {
   TableSelectors,
   SelectStyles,
 } from "./Table.styled";
-import { useState } from "react";
+// import { useState } from "react";
 import Select from "react-select";
 
 export const Table = ({ options }) => {
-  const [selectedMonth, setSelectedMonth] = useState("march");
-  const [selectedYear, setSelectedYear] = useState("2023");
+  // const [selectedMonth, setSelectedMonth] = useState("march");
+  // const [selectedYear, setSelectedYear] = useState("2023");
 
   const months = [
     { value: "january", label: "January" },
@@ -33,15 +33,15 @@ export const Table = ({ options }) => {
     <>
       <TableSelectors>
         <Select
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
+          // value={selectedMonth}
+          // onChange={(e) => setSelectedMonth(e.target.value)}
           options={months}
           styles={SelectStyles}
           placeholder={"Month"}
         ></Select>
         <Select
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
+          // value={selectedYear}
+          // onChange={(e) => setSelectedYear(e.target.value)}
           options={years}
           styles={SelectStyles}
           placeholder={"Year"}
