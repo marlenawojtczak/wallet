@@ -73,7 +73,6 @@ export const TableHeader = styled.div`
   font-size: 18px;
   font-weight: 700;
   margin: 0 20px;
-
   padding: 0 20px;
   background-color: var(--bg-light);
   height: 58px;
@@ -109,7 +108,6 @@ export const SelectStyles = {
     ...styles,
     borderRadius: 30,
     height: 50,
-    // width: 280,
     backgroundColor: "transparent",
     cursor: "pointer",
     margin: "0 20px 0 20px",
