@@ -1,5 +1,9 @@
-import React from "react";
+import { React } from "react";
+import { Navigation } from "./Navigation";
+import { HomeTab } from "./HomeTab";
+import Media from "react-media";
 import { Route, Routes } from "react-router-dom";
+
 // import { SharedLayout } from "./components";
 // import { PrivateRoute } from "../PrivateRoute";
 // import { RestrictedRoute } from "../RestrictedRoute";
@@ -9,12 +13,30 @@ import { Route, Routes } from "react-router-dom";
 // const Login = lazy(() => import("../../pages/Login"));
 // const Contacts = lazy(() => import("../../pages/Contacts"));
 
-import { Navigation } from "./Navigation";
+// const mediaQueries = {
+//   mobile: "(max-width: 768px)",
+//   tablet: "(min-width: 769px) and (max-width: 1279px)",
+//   desktop: "(min-width: 1280px)",
+// };
 
 export const App = () => {
   return (
     <>
-      <p>This is the App.jsx. Below is an example of an imported component.</p>
+      {/* <Media queries={mediaQueries}>
+        {(matches) => (
+          <>
+            {matches.mobile && (
+              <div>
+                Mobile View
+                <HomeTab />
+              </div>
+            )}
+            {matches.tablet && <div>Tablet View</div>}
+            {matches.desktop && <div>Desktop View</div>}
+          </>
+        )}
+      </Media> */}
+      <HomeTab />
       <Navigation />
     </>
   );
