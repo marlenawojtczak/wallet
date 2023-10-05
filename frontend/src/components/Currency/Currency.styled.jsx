@@ -1,7 +1,30 @@
 import styled from "styled-components";
 
-export const Example = styled.p`
-  // styles here
+export const CurrencyStyle = styled.div`
+@media screen and (max-width: 768px) {
+height: 80px;
+margin: 12px 20px 0;
+border-radius: 30px;
+border: 2px solid black;
+text-align: center
+
+}
+@media screen and (min-width: 769px) and (max-width: 1279px) {
+  width: 336px;
+  height: 182px;
+  border-radius: 30px;
+  background: #4A56E2;
+  text-align: center;
+  position: absolute;
+  top: 112px;
+  right: 32px;
+  
+ 
+}
+@media screen and (min-width: 1280px) {
+  height: 80px;
+  border: 2px solid blue;
+  margin: 214px 0 32px 16px;
 `;
 
 /* 

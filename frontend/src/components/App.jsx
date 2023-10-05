@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { SharedLayout } from "../components";
@@ -9,6 +10,11 @@ import { SharedLayout } from "../components";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 // import { motion, AnimatePresence } from "framer-motion";
+=======
+import { React } from "react";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+>>>>>>> 05.10
 
 // import { SharedLayout } from "./components";
 // import { PrivateRoute } from "../PrivateRoute";
@@ -19,12 +25,6 @@ import { useSelector } from "react-redux";
 // const Login = lazy(() => import("../../pages/Login"));
 // const Contacts = lazy(() => import("../../pages/Contacts"));
 
-// const mediaQueries = {
-//   mobile: "(max-width: 768px)",
-//   tablet: "(min-width: 769px) and (max-width: 1279px)",
-//   desktop: "(min-width: 1280px)",
-// };
-
 export const App = () => {
   // const {
   //   isModalLogoutOpen,
@@ -34,22 +34,7 @@ export const App = () => {
 
   return (
     <>
-      {/* <Media queries={mediaQueries}>
-        {(matches) => (
-          <>
-            {matches.mobile && (
-              <div>
-                Mobile View
-                <HomeTab />
-              </div>
-            )}
-            {matches.tablet && <div>Tablet View</div>}
-            {matches.desktop && <div>Desktop View</div>}
-          </>
-        )}
-      </Media> */}
-      <HomeTab />
-      <Navigation />
+      <HomePage />
     </>
   );
 };

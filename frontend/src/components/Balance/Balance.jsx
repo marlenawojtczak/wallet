@@ -1,9 +1,11 @@
-import { Example } from "./Balance.styled";
+import { BalanceStyle } from "./Balance.styled";
 
 export const Balance = () => {
   return (
     <>
-      <Example>Balance</Example>
+      <BalanceStyle>
+        <h2>Balance</h2>
+      </BalanceStyle>
     </>
   );
 };
