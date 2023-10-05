@@ -17,7 +17,7 @@ export const App = () => {
   return (
     <>
       <p>This is the App.jsx. Below is an example of an imported component.</p>
-      <Navigation />
+      <HeaderNavigation />
       <DiagramTab />
       <Header />
     </>
