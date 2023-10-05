@@ -1,3 +1,4 @@
+import { RegisterForm } from "../../components/RegisterForm/RegisterForm";
 import { Helmet } from "react-helmet";
 import img from "../../assets/temporary/registrationpage.jpg";
 
@@ -8,6 +9,9 @@ const RegistrationPage = () => {
         <title>Registration</title>
       </Helmet>
       {/* HERE PUT YOUR COMPONENTS  */}
+      <div style={{ width: "320px", margin: "50px 200px" }}>
+        <RegisterForm />
+      </div>
 
       {/* YOU CAN DELETE CODE BELOW LATER */}
       <ul>

@@ -15,6 +15,7 @@
   --bg-progress-bar: #e5f1ef;
   --bg-modal-overlay: #00000040;
   --bg-category-select: #00000008;
+  --bg-btn-focus: #24cca7;
 
   /* Font colors */
   --font-light: #fff;
@@ -46,4 +47,9 @@
   --education: #81e1ff;
   --leisure: #24cca7;
   --other: #00ad84;
+
+  /* PlaceholderColor */
+  ::placeholder {
+    color: var(--brand-logout);
+  }
 }
