@@ -7,6 +7,9 @@ const LoginPage = () => {
       <Helmet>
         <title>Login</title>
       </Helmet>
+      {/* HERE PUT YOUR COMPONENTS  */}
+
+      {/* YOU CAN DELETE CODE BELOW LATER */}
       <ul>
         This is <b>Login Page</b>. Please import and use here <b>componets </b>
         like:

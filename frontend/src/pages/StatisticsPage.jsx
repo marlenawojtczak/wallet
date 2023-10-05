@@ -1,3 +1,4 @@
+import { DiagramTab } from "../components/DiagramTab";
 import { Helmet } from "react-helmet";
 import img from "../assets/temporary/statisticspage.jpg";
 
@@ -7,6 +8,10 @@ const StatisticsPage = () => {
       <Helmet>
         <title>Statistics</title>
       </Helmet>
+      {/* HERE PUT YOUR COMPONENTS  */}
+      <DiagramTab />
+
+      {/* YOU CAN DELETE CODE BELOW LATER */}
       <ul>
         This is <b>Statistics Page</b>. Please import and use here{" "}
         <b>componets </b>
@@ -26,6 +31,7 @@ const StatisticsPage = () => {
       </ul>
 
       <img src={img} width="800" alt="Statisticspage" />
+      <hr />
     </>
   );
 };

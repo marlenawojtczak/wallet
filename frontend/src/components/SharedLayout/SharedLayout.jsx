@@ -1,6 +1,6 @@
 // import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import { Header, ButtonAddTransactions } from "../../components";
+import { Header, ButtonAddTransactions, Navigation } from "../../components";
 
 // export const SharedLayout = () => {
 //   return (
@@ -17,6 +17,7 @@ export const SharedLayout = () => {
   return (
     <div>
       <Header />
+      <Navigation />
       <Outlet />
     </div>
   );

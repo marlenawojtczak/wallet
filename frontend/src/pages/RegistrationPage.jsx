@@ -7,6 +7,9 @@ const RegistrationPage = () => {
       <Helmet>
         <title>Registration</title>
       </Helmet>
+      {/* HERE PUT YOUR COMPONENTS  */}
+
+      {/* YOU CAN DELETE CODE BELOW LATER */}
       <ul>
         This is <b>Registration Page</b>. Please import and use here{" "}
         <b>componets </b>

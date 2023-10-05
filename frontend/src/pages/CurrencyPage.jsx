@@ -7,6 +7,9 @@ const CurrencyPage = () => {
       <Helmet>
         <title>Currency</title>
       </Helmet>
+      {/* HERE PUT YOUR COMPONENTS  */}
+
+      {/* YOU CAN DELETE CODE BELOW LATER */}
       <ul>
         This is <b>Currency Page</b>. Please import and use here{" "}
         <b>componets </b>
