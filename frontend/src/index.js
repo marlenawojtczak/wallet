@@ -9,13 +9,13 @@ import { GlobalStyles } from "./stylesheet/GlobalStyles";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-      <HashRouter>
-        <GlobalStyles />
-        <App />
-      </HashRouter>
-      {/* </PersistGate> */}
-    </Provider>
+    {/* <Provider store={store}> */}
+    {/* <PersistGate loading={null} persistor={persistor}> */}
+    <GlobalStyles />
+    <HashRouter>
+      <App />
+    </HashRouter>
+    {/* </PersistGate> */}
+    {/* </Provider> */}
   </React.StrictMode>
 );

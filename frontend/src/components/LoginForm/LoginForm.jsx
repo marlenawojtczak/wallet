@@ -7,3 +7,5 @@ export const LoginForm = () => {
     </>
   );
 };
+
+console.log("LoginForm");
