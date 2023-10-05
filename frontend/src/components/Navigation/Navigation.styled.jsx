@@ -29,13 +29,16 @@ export const Link = styled(NavLink)`
   text-decoration: none;
   color: var(--font-dark);
 
-  /* &.${(selected) => selected.activeClassName} {
-    color: red;
-  } */
-
   &:hover svg path#Vector {
     fill: var(--brand-primary);
     cursor: pointer;
+  }
+
+  &.active {
+    font-weight: 700;
+    svg path#Vector {
+      fill: var(--brand-primary);
+    }
   }
 `;
 
