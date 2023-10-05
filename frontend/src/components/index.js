@@ -9,7 +9,7 @@ export * from "./Loader";
 export * from "./LoginForm";
 export * from "./ModalAddTransaction";
 export * from "./ModalLogout";
-export * from "./Navigation";
+export * from "./HeaderNavigation";
 export * from "./RegisterForm";
 export * from "./Table";
 export * from "./UserMenu";
