@@ -13,3 +13,4 @@ export * from "./HeaderNavigation";
 export * from "./RegisterForm";
 export * from "./Table";
 export * from "./UserMenu";
+export * from "./Navigation";
