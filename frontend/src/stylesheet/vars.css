@@ -35,4 +35,15 @@
   /* Breakpoints */
   --bp-mobile: 767px;
   --bp-tablet: 1279px;
+
+  /* Chart colors */
+  --expenses: #fed057;
+  --products: #ffd8d0;
+  --car: #fd9498;
+  --self: #c5baff;
+  --child: #6e78e8;
+  --house: #4a56e2;
+  --education: #81e1ff;
+  --leisure: #24cca7;
+  --other: #00ad84;
 }

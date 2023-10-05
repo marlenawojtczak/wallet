@@ -10,12 +10,14 @@ import { Route, Routes } from "react-router-dom";
 // const Contacts = lazy(() => import("../../pages/Contacts"));
 
 import { Navigation } from "./Navigation";
+import { DiagramTab } from "./DiagramTab";
 
 export const App = () => {
   return (
     <>
       <p>This is the App.jsx. Below is an example of an imported component.</p>
       <Navigation />
+      <DiagramTab />
     </>
   );
 };

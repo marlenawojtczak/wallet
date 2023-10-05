@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Example = styled.p`
-  // styles here
+export const DiagramTable = styled.div`
+  background-color: var(--bg-accent);
 `;
 
 /* 
