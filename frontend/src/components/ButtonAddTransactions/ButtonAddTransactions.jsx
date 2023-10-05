@@ -1,9 +1,11 @@
-import { Example } from "./ButtonAddTransactions.styled";
+import { Button } from "./ButtonAddTransactions.styled";
+import * as React from "react";
+import { ReactComponent as PlusElement } from "../../assets/icons/+.svg";
 
-export const ButtonAddTransactions = () => {
+export const ButtonAddTransactions = ({ onClick }) => {
   return (
-    <>
-      <Example>ButtonAddTransactions</Example>
-    </>
+    <Button onClick={onClick}>
+      <PlusElement />
+    </Button>
   );
 };
