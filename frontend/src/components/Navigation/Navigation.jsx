@@ -14,13 +14,13 @@ export const Navigation = () => {
     <NavWrapper>
       <NavList>
         <li>
-          <Link to="/" activeClassName="selected">
+          <Link to="/">
             <HomeIcon></HomeIcon>
             <NavName>Home</NavName>
           </Link>
         </li>
         <li>
-          <Link to="/statistics" activeClassName="selected">
+          <Link to="/statistics">
             <StatisticsIcon></StatisticsIcon>
             <NavName>Statistics</NavName>
           </Link>

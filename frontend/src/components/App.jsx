@@ -8,7 +8,7 @@ import { SharedLayout } from "../components";
 // import { ModalEditTransaction } from "./ModalEditTransaction";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 
 const Home = lazy(() => import("../pages/HomePage"));
 const Register = lazy(() => import("../pages/RegistrationPage"));
