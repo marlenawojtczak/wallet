@@ -11,12 +11,14 @@ import { Route, Routes } from "react-router-dom";
 
 import { DiagramTab } from "./DiagramTab";
 import { Header } from "./Header";
+import { Navigation } from "./Navigation";
 
 export const App = () => {
   return (
     <>
       <p>This is the App.jsx. Below is an example of an imported component.</p>
       <Header />
+      <Navigation />
       <DiagramTab />
     </>
   );

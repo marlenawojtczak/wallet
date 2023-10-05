@@ -16,7 +16,7 @@ export const LogoTitle = styled.span`
   color: var(--font-dark);
   font-family: "Poppins";
   font-weight: 700;
-  font-size: 25px;
+  font-size: 30px;
 `;
 
 /* 

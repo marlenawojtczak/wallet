@@ -11,17 +11,7 @@ export const HeaderWrapper = styled.header`
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
-  margin: 0 auto;
-  max-width: 480px;
-
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    max-width: 768px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    max-width: 1200px;
-  }
+  margin: 0 20px;
 `;
 
 /* 
