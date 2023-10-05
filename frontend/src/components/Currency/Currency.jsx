@@ -1,9 +1,11 @@
-import { Example } from "./Currency.styled";
+import { CurrencyStyle } from "./Currency.styled";
 
 export const Currency = () => {
   return (
     <>
-      <Example>Currency</Example>
+      <CurrencyStyle>
+        <h2>Currency</h2>
+      </CurrencyStyle>
     </>
   );
 };

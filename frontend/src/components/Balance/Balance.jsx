@@ -1,9 +1,11 @@
-import { Example } from "./Balance.styled";
+import { Wrapper } from "./Balance.styled";
 
 export const Balance = () => {
   return (
     <>
-      <Example>Balance</Example>
+      <Wrapper>
+        <h2>Balance</h2>
+      </Wrapper>
     </>
   );
 };

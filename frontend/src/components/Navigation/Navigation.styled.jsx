@@ -17,7 +17,7 @@ export const NavList = styled.ul`
 
   @media screen and (min-width: 768px) {
     flex-direction: column;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 32px;
     gap: 12px;
     max-width: 150px;
   }

@@ -9,12 +9,15 @@ import { SharedLayout } from "../components";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 // import { motion, AnimatePresence } from "framer-motion";
+// import Media from "react-media";
 
-const Home = lazy(() => import("../pages/HomePage"));
-const Register = lazy(() => import("../pages/RegistrationPage"));
-const Login = lazy(() => import("../pages/LoginPage"));
-const Statistics = lazy(() => import("../pages/StatisticsPage"));
-const Currency = lazy(() => import("../pages/CurrencyPage"));
+const Home = lazy(() => import("../pages/HomePage/HomePage"));
+const Register = lazy(() =>
+  import("../pages/RegistrationPage/RegistrationPage")
+);
+const Login = lazy(() => import("../pages/LoginPage/LoginPage"));
+const Statistics = lazy(() => import("../pages/StatisticsPage/StatisticsPage"));
+const Currency = lazy(() => import("../pages/CurrencyPage/CurrencyPage"));
 
 export const App = () => {
   // const {
@@ -25,6 +28,21 @@ export const App = () => {
 
   return (
     <>
+      {/* <Media queries={mediaQueries}>
+        {(matches) => (
+          <>
+            {matches.mobile && (
+              <div>
+                Mobile View
+                <HomeTab />
+              </div>
+            )}
+            {matches.tablet && <div>Tablet View</div>}
+            {matches.desktop && <div>Desktop View</div>}
+          </>
+        )}
+      </Media> */}
+
       {/* <AnimatePresence>
         {(isModalLogoutOpen ||
           isModalAddTransactionOpen ||
