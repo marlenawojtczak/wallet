@@ -1,11 +1,11 @@
-import { BalanceStyle } from "./Balance.styled";
+import { Wrapper } from "./Balance.styled";
 
 export const Balance = () => {
   return (
     <>
-      <BalanceStyle>
+      <Wrapper>
         <h2>Balance</h2>
-      </BalanceStyle>
+      </Wrapper>
     </>
   );
 };

@@ -4,7 +4,7 @@ export const HomeTab = () => {
   return (
     <>
       <Home>
-        <h2>HomeTab</h2>
+        <h2>Home</h2>
       </Home>
     </>
   );
