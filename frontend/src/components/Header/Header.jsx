@@ -1,9 +1,16 @@
-import { Example } from "./Header.styled";
+import { HeaderNavigation } from "../HeaderNavigation/HeaderNavigation";
+import { UserMenu } from "../UserMenu/UserMenu";
+import { HeaderWrapper, HeaderContainer } from "./Header.styled";
 
 export const Header = () => {
   return (
     <>
-      <Example>Header</Example>
+      <HeaderWrapper>
+        <HeaderContainer>
+          <HeaderNavigation />
+          <UserMenu />
+        </HeaderContainer>
+      </HeaderWrapper>
     </>
   );
 };

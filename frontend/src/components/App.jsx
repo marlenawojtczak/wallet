@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 
 import { Navigation } from "./Navigation";
 import { DiagramTab } from "./DiagramTab";
+import { Header } from "./Header";
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
       <p>This is the App.jsx. Below is an example of an imported component.</p>
       <Navigation />
       <DiagramTab />
+      <Header />
     </>
   );
 };
