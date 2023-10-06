@@ -1,11 +1,23 @@
-import { Wrapper } from "./Balance.styled";
+import {
+  BalanceElement,
+  BalanceHeader,
+  BalanceContent,
+} from "./Balance.styled";
 
 export const Balance = () => {
+  const balance = "100999";
+
   return (
     <>
-      <Wrapper>
-        <h2>Balance</h2>
-      </Wrapper>
+      <BalanceElement>
+        <BalanceHeader>your balance</BalanceHeader>
+        <BalanceContent>
+          <span style={{ fontWeight: 400, fontFamily: "Circe", fontSize: 30 }}>
+            ₴
+          </span>{" "}
+          {balance}
+        </BalanceContent>
+      </BalanceElement>
     </>
   );
 };
