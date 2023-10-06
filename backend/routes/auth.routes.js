@@ -10,4 +10,8 @@ authRouter.post("/sign-up", validateUser, tryCatchWrapper(singup));
 
 authRouter.post("/sign-in", validateLogin, tryCatchWrapper(signin));
 
-authRouter.post("/sign-out", authenticateUser, tryCatchWrapper(signout));
+authRouter.post(
+  "/sign-out",
+  tryCatchWrapper(authenticateUser),
+  tryCatchWrapper(signout)
+);

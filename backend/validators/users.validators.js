@@ -17,14 +17,6 @@ const userLoginSchema = Joi.object({
   }),
 });
 
-const userVerifySchema = Joi.object({
-  email: Joi.string()
-    .email()
-    .pattern(emailRegexp)
-    .required()
-    .messages({ "any.required": "Missing required field email" }),
-});
-
 async function validate(schema, obj, next) {
   try {
     await schema.validateAsync(obj);
@@ -45,9 +37,4 @@ export const validateUser = (req, res, next) => {
 export const validateLogin = (req, res, next) => {
   const { userPayLoad } = req.body;
   return validate(userLoginSchema, userPayLoad, next);
-};
-
-export const validateVerifyUser = (req, res, next) => {
-  const { userPayLoad } = req.body;
-  return validate(userVerifySchema, userPayLoad, next);
 };
