@@ -22,9 +22,12 @@ text-align: center
  
 }
 @media screen and (min-width: 1280px) {
-  height: 80px;
+  width: 393px;
+  height: 331px;
   border: 2px solid blue;
-  margin: 214px 0 32px 16px;
+  border-radius: 30px;
+  background: #4A56E2;
+ margin: 32px 0 63px 16px;
 `;
 
 /* 
