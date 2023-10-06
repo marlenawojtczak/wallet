@@ -73,7 +73,5 @@ export const signout = async (req, res, next) => {
 
   await User.findByIdAndUpdate(_id, { token: "" });
 
-  res.status(204).send({
-    message: "Logout successful",
-  });
+  res.status(204).end();
 };

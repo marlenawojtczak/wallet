@@ -5,8 +5,7 @@ import { JWT_SECRET } from "../config/config.js";
 export const authenticateUser = async (req, res, next) => {
   const authorization = req.headers.authorization;
   if (!authorization) {
-    return res.status(401).json({
-      status: false,
+    return res.status(401).send({
       message: "Not authorized",
     });
   }
