@@ -1,4 +1,4 @@
-import { StyledChart, InsideText } from "./Chart.styled";
+import { StyledChart, InsideText, ChartHeader } from "./Chart.styled";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
@@ -33,14 +33,9 @@ export const ChartContainer = () => {
   };
 
   const options = {
-    // responsive: true,
     cutout: "75%",
     maintainAspectRatio: true,
     plugins: {
-      title: {
-        display: false,
-        text: "tytul",
-      },
       legend: {
         display: false,
       },
@@ -50,16 +45,7 @@ export const ChartContainer = () => {
   return (
     <>
       <StyledChart>
-        <h2
-          style={{
-            textAlign: "left",
-            fontFamily: "Poppins",
-            fontSize: 30,
-            fontWeight: 400,
-          }}
-        >
-          Statistics
-        </h2>
+        <ChartHeader>Statistics</ChartHeader>
         <Doughnut data={chartData} options={options} />
         <InsideText>₴ {balance}</InsideText>
       </StyledChart>

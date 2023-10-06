@@ -1,4 +1,6 @@
+import Media from "react-media";
 import {
+  TableContainer,
   StyledTable,
   List,
   ListItem,
@@ -10,7 +12,9 @@ import {
   Income,
   TableHeader,
   TableSelectors,
-  SelectStyles,
+  SelectStylesSmall,
+  SelectStylesMedium,
+  SelectStylesLarge,
 } from "./Table.styled";
 // import { useState } from "react";
 import Select from "react-select";
@@ -30,23 +34,74 @@ export const Table = ({ options }) => {
   ];
 
   return (
-    <>
-      <TableSelectors>
-        <Select
-          // value={selectedMonth}
-          // onChange={(e) => setSelectedMonth(e.target.value)}
-          options={months}
-          styles={SelectStyles}
-          placeholder={"Month"}
-        ></Select>
-        <Select
-          // value={selectedYear}
-          // onChange={(e) => setSelectedYear(e.target.value)}
-          options={years}
-          styles={SelectStyles}
-          placeholder={"Year"}
-        ></Select>
-      </TableSelectors>
+    <TableContainer>
+      <Media
+        queries={{
+          small: "(max-width: 767px)",
+          medium: "(min-width: 768px) and (max-width: 1279px)",
+          large: "(min-width: 1280px)",
+        }}
+      >
+        {(matches) => (
+          <TableSelectors>
+            {matches.small && (
+              <>
+                <Select
+                  // value={selectedMonth}
+                  // onChange={(e) => setSelectedMonth(e.target.value)}
+                  options={months}
+                  styles={SelectStylesSmall}
+                  placeholder={"Month"}
+                ></Select>
+                <Select
+                  // value={selectedYear}
+                  // onChange={(e) => setSelectedYear(e.target.value)}
+                  options={years}
+                  styles={SelectStylesSmall}
+                  placeholder={"Year"}
+                ></Select>
+              </>
+            )}
+            {matches.medium && (
+              <>
+                <Select
+                  // value={selectedMonth}
+                  // onChange={(e) => setSelectedMonth(e.target.value)}
+                  options={months}
+                  styles={SelectStylesMedium}
+                  placeholder={"Month"}
+                ></Select>
+                <Select
+                  // value={selectedYear}
+                  // onChange={(e) => setSelectedYear(e.target.value)}
+                  options={years}
+                  styles={SelectStylesMedium}
+                  placeholder={"Year"}
+                ></Select>
+              </>
+            )}
+            {matches.large && (
+              <>
+                <Select
+                  // value={selectedMonth}
+                  // onChange={(e) => setSelectedMonth(e.target.value)}
+                  options={months}
+                  styles={SelectStylesLarge}
+                  placeholder={"Month"}
+                ></Select>
+                <Select
+                  // value={selectedYear}
+                  // onChange={(e) => setSelectedYear(e.target.value)}
+                  options={years}
+                  styles={SelectStylesLarge}
+                  placeholder={"Year"}
+                ></Select>
+              </>
+            )}
+          </TableSelectors>
+        )}
+      </Media>
+
       <TableHeader>
         <span>Category</span>
         <span>Sum</span>
@@ -74,6 +129,6 @@ export const Table = ({ options }) => {
           </Income>
         </Sum>
       </StyledTable>
-    </>
+    </TableContainer>
   );
 };

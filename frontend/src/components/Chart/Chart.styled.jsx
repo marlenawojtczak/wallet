@@ -3,7 +3,18 @@ import styled from "styled-components";
 export const StyledChart = styled.div`
   width: 280px;
   margin: auto;
+  padding: 0 20px;
   position: relative;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+    width: 336px;
+    padding: 0;
+    margin: 0 0 auto auto;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 288px;
+  }
 `;
 
 export const InsideText = styled.p`
@@ -15,6 +26,25 @@ export const InsideText = styled.p`
   font-family: "Circe";
   font-size: 18px;
   font-weight: 700;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 6px;
+  }
+`;
+
+export const ChartHeader = styled.p`
+  text-align: left;
+  font-family: "Poppins";
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 8px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 20px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 20px;
+  }
 `;
 /* 
 ALTERNATIVE WAY - in case we want to receive a document from the library, e.g. Material User Interface
