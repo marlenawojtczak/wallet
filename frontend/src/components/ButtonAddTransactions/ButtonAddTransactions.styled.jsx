@@ -16,4 +16,9 @@ export const Button = styled.button`
   &:hover {
     background-color: var(--brand-logout);
   }
+
+  @media screen and (min-width: 769px) and (max-width: 1279px) {
+    bottom: 40px;
+    right: 40px;
+  }
 `;
