@@ -1,12 +1,25 @@
 import styled from "styled-components";
 
-export const StyledTable = styled.div`
-  /* max-width: 395px; */
+export const TableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
   min-width: 280px;
+
+  @media screen and (min-width: 768px) {
+    min-width: 336px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-top: 65px;
+    min-width: 395px;
+  }
+`;
+
+export const StyledTable = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* box-shadow: 0px 1px 0px var(--bg-gray); */
 `;
 
 export const List = styled.ul`
@@ -29,6 +42,10 @@ export const ListItem = styled.li`
   padding: 14px 20px;
   margin: 0 20px;
   box-shadow: 0px 1px 0px var(--bg-gray);
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 `;
 
 export const ColorIcon = styled.div`
@@ -45,9 +62,12 @@ export const Amount = styled.p``;
 export const Sum = styled.div`
   display: flex;
   flex-direction: column;
-  /* padding: 14px 40px; */
   margin: 0 20px;
   box-shadow: 0px -1px 0px var(--bg-gray);
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 `;
 export const Expenses = styled.div`
   display: flex;
@@ -78,6 +98,10 @@ export const TableHeader = styled.div`
   height: 58px;
   border-radius: 30px;
   align-items: center;
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 `;
 
 export const TableSelectors = styled.div`
@@ -86,21 +110,18 @@ export const TableSelectors = styled.div`
   gap: 20px;
   margin-bottom: 20px;
   margin-top: 32px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    gap: 32px;
+  }
 `;
 
-// export const Selector = styled.select`
-//   font-family: "Circe";
-//   font-size: 16px;
-//   font-weight: 400;
-//   margin: 0 20px;
-//   padding: 0 20px;
-//   border: 1px solid var(--font-dark);
-//   height: 58px;
-//   border-radius: 30px;
-//   align-items: center;
-// `;
-
-export const SelectStyles = {
+export const SelectStylesSmall = {
   container: (styles) => ({
     ...styles,
   }),
@@ -146,13 +167,11 @@ export const SelectStyles = {
     boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
     borderRadius: 20,
     overflow: "hidden",
-    width: 280,
-    margin: "0 20px",
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
       ...styles,
-      padding: "14px 20px",
+      padding: "12px 20px",
       backgroundColor: "var(--bg-accent)",
       color: "var(--font-dark)",
       cursor: "pointer",
@@ -169,6 +188,140 @@ export const SelectStyles = {
   }),
 };
 
+export const SelectStylesMedium = {
+  container: (styles) => ({
+    ...styles,
+  }),
+  control: (styles) => ({
+    ...styles,
+    borderRadius: 30,
+    height: 50,
+    backgroundColor: "transparent",
+    cursor: "pointer",
+    padding: "0 20px 0 20px",
+    border: "1px solid var(--font-dark)",
+    "&:hover": {
+      color: "var(--font-dark)",
+    },
+    width: 160,
+  }),
+  indicatorSeparator: () => ({ display: "none" }),
+  valueContainer: (styles) => ({
+    ...styles,
+  }),
+  input: (styles) => ({
+    ...styles,
+    position: "relative",
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: "var(--font-dark)",
+  }),
+  singleValue: (styles) => ({
+    ...styles,
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    transform: "scale(1.5)",
+    color: "var(--font-dark)",
+    "&:hover": {
+      color: "var(--font-dark)",
+    },
+  }),
+  menu: (styles) => ({
+    ...styles,
+    backgroundColor: "var(--bg-gray)",
+    boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
+    borderRadius: 20,
+    overflow: "hidden",
+    width: 160,
+  }),
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...styles,
+      padding: "12px 20px",
+      backgroundColor: "var(--bg-accent)",
+      color: "var(--font-dark)",
+      cursor: "pointer",
+      background:
+        isFocused || isSelected ? "var(--font-light)" : "var(--bg-gray)",
+    };
+  },
+
+  menuList: (styles) => ({
+    ...styles,
+    background: "var(--bg-accent)",
+    borderRadius: 20,
+    cursor: "pointer",
+  }),
+};
+
+export const SelectStylesLarge = {
+  container: (styles) => ({
+    ...styles,
+  }),
+  control: (styles) => ({
+    ...styles,
+    borderRadius: 30,
+    height: 50,
+    backgroundColor: "transparent",
+    cursor: "pointer",
+    padding: "0 20px 0 20px",
+    border: "1px solid var(--font-dark)",
+    "&:hover": {
+      color: "var(--font-dark)",
+    },
+    width: 181,
+  }),
+  indicatorSeparator: () => ({ display: "none" }),
+  valueContainer: (styles) => ({
+    ...styles,
+  }),
+  input: (styles) => ({
+    ...styles,
+    position: "relative",
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: "var(--font-dark)",
+  }),
+  singleValue: (styles) => ({
+    ...styles,
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    transform: "scale(1.5)",
+    color: "var(--font-dark)",
+    "&:hover": {
+      color: "var(--font-dark)",
+    },
+  }),
+  menu: (styles) => ({
+    ...styles,
+    backgroundColor: "var(--bg-gray)",
+    boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
+    borderRadius: 20,
+    overflow: "hidden",
+  }),
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...styles,
+      padding: "12px 20px",
+      backgroundColor: "var(--bg-accent)",
+      color: "var(--font-dark)",
+      cursor: "pointer",
+      background:
+        isFocused || isSelected ? "var(--font-light)" : "var(--bg-gray)",
+    };
+  },
+
+  menuList: (styles) => ({
+    ...styles,
+    background: "var(--bg-accent)",
+    borderRadius: 20,
+    cursor: "pointer",
+  }),
+};
 /* 
 ALTERNATIVE WAY - in case we want to receive a document from the library, e.g. Material User Interface
 
