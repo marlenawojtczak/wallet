@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { authRouter } from "./routes/auth.routes.js";
+import { usersRouter } from "./routes/users.routes.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(helmet());
 app.use(errorHandler);
 
 app.use("/api/auth", authRouter);
+app.use("/api/users", usersRouter);
 
 app.get("/", (req, res) => {
   return res.status(200).send({
