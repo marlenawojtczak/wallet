@@ -3,32 +3,77 @@ import User from "../models/users.model.js";
 import { JWT_SECRET } from "../config/config.js";
 
 export const singup = async (req, res, next) => {
-  try {
-    const body = req.body;
-    const { email } = body;
+  const body = req.body;
+  const { email } = body;
 
-    const user = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-    if (user) {
-      return res.status(409).json({
-        status: false,
-        message: "User with this email already exists",
-      });
-    }
-
-    const verificationToken = jwt.sign(email, JWT_SECRET);
-
-    const newUser = await User.create({
-      ...body,
-      verificationToken,
-    });
-
-    return res.status(201).json({
-      status: true,
-      email: newUser.email,
-    });
-  } catch (error) {
-    console.log(error.message);
-    next(error);
+  if (user) {
+    return res
+      .status(409)
+      .send({ message: `User with ${email} email already exists` });
   }
+
+  const newUser = await User.create({
+    ...body,
+  });
+
+  return res.status(201).send({
+    email,
+    id: newUser._id,
+  });
+};
+
+export const signin = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).send({
+      message: "Missing required fields",
+    });
+  }
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res
+      .status(403)
+      .send({ message: `User with ${email} email doesn't exist` });
+  }
+
+  const passwordIsValid = await user.isValidPassword(password);
+
+  if (!passwordIsValid) {
+    return res.status(401).send({
+      message: "Password is incorrect",
+    });
+  }
+
+  const body = {
+    email: user.email,
+    _id: user._id,
+  };
+
+  const validityPeroid = "1h";
+  const token = jwt.sign(body, JWT_SECRET, { expiresIn: validityPeroid });
+
+  await User.findByIdAndUpdate(user._id, { token });
+
+  res.status(200).send({
+    message: "Login successful",
+    token,
+    user: {
+      email: user.email,
+    },
+  });
+};
+
+export const signout = async (req, res, next) => {
+  const { _id } = req.user;
+
+  await User.findByIdAndUpdate(_id, { token: "" });
+
+  res.status(204).send({
+    message: "Logout successful",
+  });
 };
