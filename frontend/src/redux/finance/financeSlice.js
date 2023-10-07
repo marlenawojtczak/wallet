@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+  user: {
+    name: "",
+  },
+};
 
 const financeSlice = createSlice({
   name: "finance",
