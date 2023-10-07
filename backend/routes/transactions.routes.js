@@ -3,10 +3,11 @@ import { tryCatchWrapper } from "../middlewares/tryCatchWrapper.js";
 import { authenticateUser } from "../middlewares/authenticateUser.js";
 import { addTransactionValidation } from "../validators/transactions.validators.js";
 import {
-  addTransaction,
   getTransactions,
+  addTransaction,
   updateTransaction,
   deleteTransaction,
+  getCategoriesTotals,
 } from "../controllers/transactions.controller.js";
 
 export const transactionsRouter = Router();
@@ -35,4 +36,10 @@ transactionsRouter.delete(
   "/:transactionId",
   tryCatchWrapper(authenticateUser),
   tryCatchWrapper(deleteTransaction)
+);
+
+transactionsRouter.get(
+  "/categories",
+  tryCatchWrapper(authenticateUser),
+  tryCatchWrapper(getCategoriesTotals)
 );

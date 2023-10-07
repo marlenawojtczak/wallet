@@ -14,7 +14,7 @@ const transactionSchema = new Schema(
       enum: transactionsType,
       required: true,
     },
-    categoryId: {
+    category: {
       type: String,
       enum: transactionsCategory,
       required: true,
