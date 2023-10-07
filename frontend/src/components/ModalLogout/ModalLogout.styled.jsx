@@ -3,13 +3,8 @@ import ReactModal from "react-modal";
 
 export const ModalOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  visibility: hidden;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 export const Modal = styled(ReactModal)`
@@ -20,7 +15,7 @@ export const Modal = styled(ReactModal)`
   top: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  z-index: 2;
+  z-index: 1;
 `;
 
 export const Text = styled.span`
