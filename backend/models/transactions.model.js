@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema(
   {
-    transactionDate: {
+    date: {
       type: Date,
       required: true,
     },
