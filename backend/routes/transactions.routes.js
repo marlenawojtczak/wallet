@@ -6,6 +6,7 @@ import {
   addTransaction,
   getTransactions,
   updateTransaction,
+  deleteTransaction,
 } from "../controllers/transactions.controller.js";
 
 export const transactionsRouter = Router();
@@ -28,4 +29,10 @@ transactionsRouter.patch(
   tryCatchWrapper(authenticateUser),
   tryCatchWrapper(addTransactionValidation),
   tryCatchWrapper(updateTransaction)
+);
+
+transactionsRouter.delete(
+  "/:transactionId",
+  tryCatchWrapper(authenticateUser),
+  tryCatchWrapper(deleteTransaction)
 );

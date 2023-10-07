@@ -25,7 +25,20 @@ export const updateTransaction = async (req, res, next) => {
     }
   );
   if (!result) {
-    return res.status(404).json({ message: "Not found transaction" });
+    return res.status(404).send({ message: "Transaction not found" });
   }
-  return res.status(200).json(result);
+  return res.status(200).send(result);
+};
+
+export const deleteTransaction = async (req, res, next) => {
+  const { transactionId } = req.params;
+  const { _id: owner } = req.user;
+  const result = await Transaction.findOneAndDelete({
+    _id: transactionId,
+    owner,
+  });
+  if (!result) {
+    return res.status(404).send({ message: "Transaction not found" });
+  }
+  return res.status(204).end();
 };
