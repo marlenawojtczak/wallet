@@ -1,6 +1,7 @@
 export const transactionsType = ["INCOME", "EXPENSE"];
 
 export const transactionsCategory = [
+  "Income",
   "Main expenses",
   "Products",
   "Car",

@@ -18,7 +18,12 @@ const transactionAddSchema = Joi.object({
 });
 
 export const addTransactionValidation = async (req, res, next) => {
-  const { transactionPayLoad } = req.body;
+  const { transactionPayLoad, type, categoryId } = req.body;
+  if (type === "EXPENSE" && categoryId === "Income") {
+    return res.status(409).send({
+      message: "Transaction category type does not match transaction type",
+    });
+  }
   await transactionAddSchema.validateAsync(transactionPayLoad);
   next();
 };
