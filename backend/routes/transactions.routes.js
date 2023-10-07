@@ -5,9 +5,16 @@ import { addTransactionValidation } from "../validators/transactions.validators.
 import {
   addTransaction,
   getTransactions,
+  updateTransaction,
 } from "../controllers/transactions.controller.js";
 
 export const transactionsRouter = Router();
+
+transactionsRouter.get(
+  "/",
+  tryCatchWrapper(authenticateUser),
+  tryCatchWrapper(getTransactions)
+);
 
 transactionsRouter.post(
   "/",
@@ -16,8 +23,9 @@ transactionsRouter.post(
   tryCatchWrapper(addTransaction)
 );
 
-transactionsRouter.get(
-  "/",
+transactionsRouter.patch(
+  "/:transactionId",
   tryCatchWrapper(authenticateUser),
-  tryCatchWrapper(getTransactions)
+  tryCatchWrapper(addTransactionValidation),
+  tryCatchWrapper(updateTransaction)
 );
