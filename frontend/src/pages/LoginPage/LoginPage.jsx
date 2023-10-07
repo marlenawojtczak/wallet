@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import { LoginForm } from "../../components/LoginForm/LoginForm";
 import img from "../../assets/temporary/loginpage.jpg";
 
 const LoginPage = () => {
@@ -8,6 +9,8 @@ const LoginPage = () => {
         <title>Login</title>
       </Helmet>
       {/* HERE PUT YOUR COMPONENTS  */}
+
+      <LoginForm />
 
       {/* YOU CAN DELETE CODE BELOW LATER */}
       <ul>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Notiflix from "notiflix";
 
-import { ReactComponent as WalletLogo } from "../../assets/icons/logo-mobile.svg";
+import { ReactComponent as WalletLogoMobile } from "../../assets/icons/logo-mobile.svg";
+import { ReactComponent as WalletLogo } from "../../assets/icons/logo.svg";
 import { ReactComponent as EmailIcon } from "../../assets/icons/email.svg";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
 import { ReactComponent as AccountBoxIcon } from "../../assets/icons/account_box.svg";
@@ -17,9 +19,11 @@ import {
   StyledWrapper,
   StyledForm,
   StyledInput,
-  StyledButton,
   StyledIcon,
   StyledLogo,
+  StyledLogoMobile,
+  StyledButtons,
+  StyledButton,
   StyledButtonIcon,
 } from "./RegisterForm.styled";
 
@@ -46,6 +50,8 @@ const ProgressBar = ({ value }) => {
 };
 
 export const RegisterForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [progressValue, setProgressValue] = useState(0);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -90,9 +96,16 @@ export const RegisterForm = () => {
     setProgressValue(matchPercentage);
   }, [formik.values.password, formik.values.confirmPassword, formik.values]);
 
+  const loginButton = () => {
+    navigate("/login");
+  };
+
   return (
     <StyledWrapper>
       <StyledForm onSubmit={formik.handleSubmit}>
+        <StyledLogoMobile>
+          <WalletLogoMobile />
+        </StyledLogoMobile>
         <StyledLogo>
           <WalletLogo />
         </StyledLogo>
@@ -166,26 +179,26 @@ export const RegisterForm = () => {
             value={formik.values.name}
           />
         </StyledInputContainer>
+        <StyledButtons>
+          <StyledButton
+            type="submit"
+            active={location.pathname === "/register"}
+            onClick={() => {
+              formik.handleSubmit();
+              const errors = Object.values(formik.errors);
+              if (errors.length > 0) {
+                const errorMessage = errors
+                  .map((error) => `<br /> ${error}`)
+                  .join();
+                Notiflix.Notify.failure("<br />" + errorMessage);
+              }
+            }}
+          >
+            REGISTER
+          </StyledButton>
 
-        <StyledButton
-          type="submit"
-          onClick={() => {
-            formik.handleSubmit();
-            const errors = Object.values(formik.errors);
-            if (errors.length > 0) {
-              const errorMessage = errors
-                .map((error) => `<br /> ${error}`)
-                .join();
-              Notiflix.Notify.failure("<br />" + errorMessage);
-            }
-          }}
-        >
-          REGISTER
-        </StyledButton>
-
-        <StyledButton type="button" onClick={() => console.log("HA HA HA")}>
-          LOG IN
-        </StyledButton>
+          <StyledButton onClick={loginButton}>LOG IN</StyledButton>
+        </StyledButtons>
       </StyledForm>
     </StyledWrapper>
   );
