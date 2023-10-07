@@ -16,22 +16,14 @@ import {
   SelectStylesMedium,
   SelectStylesLarge,
 } from "./Table.styled";
+import { months, years, amountFormatter } from "../../utils/formatUtils";
 // import { useState } from "react";
 import Select from "react-select";
 
 export const Table = ({ options }) => {
   // const [selectedMonth, setSelectedMonth] = useState("march");
   // const [selectedYear, setSelectedYear] = useState("2023");
-
-  const months = [
-    { value: "january", label: "January" },
-    { value: "february", label: "February" },
-    { value: "march", label: "March" },
-  ];
-  const years = [
-    { value: "2022", label: "2022" },
-    { value: "2023", label: "2023" },
-  ];
+  const amount = 3000;
 
   return (
     <TableContainer>
@@ -49,14 +41,14 @@ export const Table = ({ options }) => {
                 <Select
                   // value={selectedMonth}
                   // onChange={(e) => setSelectedMonth(e.target.value)}
-                  options={months}
+                  options={months()}
                   styles={SelectStylesSmall}
                   placeholder={"Month"}
                 ></Select>
                 <Select
                   // value={selectedYear}
                   // onChange={(e) => setSelectedYear(e.target.value)}
-                  options={years}
+                  options={years()}
                   styles={SelectStylesSmall}
                   placeholder={"Year"}
                 ></Select>
@@ -67,14 +59,14 @@ export const Table = ({ options }) => {
                 <Select
                   // value={selectedMonth}
                   // onChange={(e) => setSelectedMonth(e.target.value)}
-                  options={months}
+                  options={months()}
                   styles={SelectStylesMedium}
                   placeholder={"Month"}
                 ></Select>
                 <Select
                   // value={selectedYear}
                   // onChange={(e) => setSelectedYear(e.target.value)}
-                  options={years}
+                  options={years()}
                   styles={SelectStylesMedium}
                   placeholder={"Year"}
                 ></Select>
@@ -85,14 +77,14 @@ export const Table = ({ options }) => {
                 <Select
                   // value={selectedMonth}
                   // onChange={(e) => setSelectedMonth(e.target.value)}
-                  options={months}
+                  options={months()}
                   styles={SelectStylesLarge}
                   placeholder={"Month"}
                 ></Select>
                 <Select
                   // value={selectedYear}
                   // onChange={(e) => setSelectedYear(e.target.value)}
-                  options={years}
+                  options={years()}
                   styles={SelectStylesLarge}
                   placeholder={"Year"}
                 ></Select>
@@ -114,18 +106,22 @@ export const Table = ({ options }) => {
                 style={{ backgroundColor: `${option.color}` }}
               ></ColorIcon>
               <Category>{option.label}</Category>
-              <Amount>3000</Amount>
+              <Amount>{amountFormatter(amount)}</Amount>
             </ListItem>
           ))}
         </List>
         <Sum>
           <Expenses>
             <span>Expenses:</span>{" "}
-            <span style={{ color: `var(--brand-accent)` }}>1000</span>
+            <span style={{ color: `var(--brand-accent)` }}>
+              {amountFormatter(1000)}
+            </span>
           </Expenses>
           <Income>
             <span>Income:</span>{" "}
-            <span style={{ color: `var(--brand-secondary)` }}>30000</span>
+            <span style={{ color: `var(--brand-secondary)` }}>
+              {amountFormatter(30000)}
+            </span>
           </Income>
         </Sum>
       </StyledTable>
