@@ -3,6 +3,7 @@ import Joi from "joi";
 const emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
 const userAddSchema = Joi.object({
+  username: Joi.string().required(),
   email: Joi.string().email().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
   token: Joi.string().default(""),
