@@ -20,7 +20,8 @@ export const ModalLogout = () => {
   };
 
   return (
-    <ModalOverlay>
+    <>
+      {isModalLogoutOpen && <ModalOverlay visible={true} />}
       <Modal
         isOpen={isModalLogoutOpen}
         onRequestClose={handleClose}
@@ -32,6 +33,6 @@ export const ModalLogout = () => {
           <ButtonCancel onClick={handleClose}>Cancel</ButtonCancel>
         </ButtonContainer>
       </Modal>
-    </ModalOverlay>
+    </>
   );
 };
