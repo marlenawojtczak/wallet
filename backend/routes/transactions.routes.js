@@ -8,6 +8,7 @@ import {
   updateTransaction,
   deleteTransaction,
   getCategoriesTotals,
+  getFilteredCategoriesTotals,
 } from "../controllers/transactions.controller.js";
 
 export const transactionsRouter = Router();
@@ -42,4 +43,10 @@ transactionsRouter.get(
   "/categories",
   tryCatchWrapper(authenticateUser),
   tryCatchWrapper(getCategoriesTotals)
+);
+
+transactionsRouter.get(
+  "/categories/:year/:month",
+  tryCatchWrapper(authenticateUser),
+  tryCatchWrapper(getFilteredCategoriesTotals)
 );
