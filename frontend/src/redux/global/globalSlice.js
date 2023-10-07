@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { openModalLogoutAction, closeModalLogoutAction } from "./operations";
 
 const initialState = {
   isModalLogoutOpen: false,
@@ -8,9 +7,13 @@ const initialState = {
 const globalSlice = createSlice({
   name: "global",
   initialState,
-  extraReducers: {
-    openModalLogout: openModalLogoutAction,
-    closeModalLogout: closeModalLogoutAction,
+  reducers: {
+    openModalLogout: (state) => {
+      state.isModalLogoutOpen = true;
+    },
+    closeModalLogout: (state) => {
+      state.isModalLogoutOpen = false;
+    },
   },
 });
 

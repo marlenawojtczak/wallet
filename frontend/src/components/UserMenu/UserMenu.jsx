@@ -3,16 +3,15 @@ import { ReactComponent as ExitIcon } from "../../assets/icons/exit.svg";
 import { selectUserName } from "../../redux/session/selectors";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { openModalLogout } from "../../redux/global/globalSlice";
 
 export const UserMenu = () => {
   // autentykacja ???
-  const [isModalLogoutOpen, setIsModalLogoutOpen] = useState(false);
   const userName = useSelector(selectUserName);
 
   const dispatch = useDispatch();
   const openModal = () => {
-    dispatch(setIsModalLogoutOpen(true));
+    dispatch(openModalLogout());
   };
 
   return (
