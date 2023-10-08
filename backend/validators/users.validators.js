@@ -6,7 +6,6 @@ const userAddSchema = Joi.object({
   username: Joi.string().required(),
   email: Joi.string().email().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
-  token: Joi.string().default(""),
 });
 
 const userLoginSchema = Joi.object({

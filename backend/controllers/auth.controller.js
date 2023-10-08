@@ -1,6 +1,5 @@
-import jwt from "jsonwebtoken";
 import User from "../models/users.model.js";
-import { JWT_SECRET } from "../config/config.js";
+import { generateTokens } from "../utils/generateTokens.js";
 
 export const singup = async (req, res, next) => {
   const body = req.body;
@@ -18,9 +17,13 @@ export const singup = async (req, res, next) => {
     ...body,
   });
 
+  const { accessToken, refreshToken } = generateTokens(newUser._id);
+
   return res.status(201).send({
     email,
     id: newUser._id,
+    accessToken,
+    refreshToken,
   });
 };
 
@@ -49,19 +52,14 @@ export const signin = async (req, res, next) => {
     });
   }
 
-  const body = {
-    email: user.email,
-    _id: user._id,
-  };
+  const { accessToken, refreshToken } = generateTokens(user._id);
 
-  const validityPeroid = "1h";
-  const token = jwt.sign(body, JWT_SECRET, { expiresIn: validityPeroid });
-
-  await User.findByIdAndUpdate(user._id, { token });
+  await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
   res.status(200).send({
     message: "Login successful",
-    token,
+    accessToken,
+    refreshToken,
     user: {
       email: user.email,
     },
