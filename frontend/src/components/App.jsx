@@ -1,6 +1,8 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { SharedLayout } from "../components";
+import { PrivateRoute } from "../routes/PrivateRoute";
+import { RestrictedRoute } from "../routes/RestrictedRoute";
 // import { ProtectedRoute } from "../helpers/ProtectedRoute";
 // import { ToastContainer } from "react-toastify";
 // import { ModalLogout } from "./ModalLogout";
@@ -62,6 +64,38 @@ export const App = () => {
       </AnimatePresence> */}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute component={Register} redirectTo="/login" />
+            }
+          />
+          <Route
+            path="/login"
+            element={<RestrictedRoute component={Login} redirectTo="/home" />}
+          />
+
+          <Route
+            path="/home"
+            element={<PrivateRoute component={Home} redirectTo="/login" />}
+          />
+          <Route
+            path="/statistics"
+            element={
+              <PrivateRoute component={Statistics} redirectTo="/login" />
+            }
+          />
+          <Route
+            path="/currency"
+            element={<PrivateRoute component={Currency} redirectTo="/login" />}
+          />
+
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </Suspense>
+
+      {/* <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -70,14 +104,14 @@ export const App = () => {
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/currency" element={<Currency />} />
           </Route>
-          {/* <Route path="*" element={<Navigate to="/login" />} /> */}
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
-        {/* <ToastContainer
+        <ToastContainer
           position="top-center"
           autoClose={2500}
           pauseOnHover={false}
-        /> */}
-      </Suspense>
+        />
+      </Suspense> */}
     </>
   );
 };
