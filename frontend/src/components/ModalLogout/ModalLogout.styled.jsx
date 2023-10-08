@@ -9,7 +9,7 @@ export const ModalOverlay = styled.div`
 
 export const Modal = styled(ReactModal)`
   padding: 15px 45px;
-  border-radius: 25%;
+  border-radius: 30px;
   background-color: var(--bg-light);
   left: 50%;
   top: 50%;
@@ -42,7 +42,7 @@ export const ButtonConfirm = styled.button`
   line-height: normal;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  border-radius: 20px;
+  border-radius: 30px;
   border: none;
   padding: 13px 13px;
   color: var(--bg-light);
@@ -72,7 +72,7 @@ export const ButtonCancel = styled.button`
   letter-spacing: 1.8px;
   text-transform: uppercase;
   border: 1px solid var(--brand-primary);
-  border-radius: 20px;
+  border-radius: 30px;
   padding: 13px 13px;
   color: var(--brand-primary);
   background-color: var(--font-light);
