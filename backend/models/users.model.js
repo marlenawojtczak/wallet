@@ -21,6 +21,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    accessToken: {
+      type: String,
+      default: "",
+    },
+    refreshToken: {
+      type: String,
+      default: "",
+    },
     balance: {
       type: Number,
       default: 0,

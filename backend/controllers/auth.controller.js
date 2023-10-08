@@ -17,13 +17,9 @@ export const singup = async (req, res, next) => {
     ...body,
   });
 
-  const { accessToken, refreshToken } = generateTokens(newUser._id);
-
   return res.status(201).send({
     email,
     id: newUser._id,
-    accessToken,
-    refreshToken,
   });
 };
 
@@ -69,7 +65,7 @@ export const signin = async (req, res, next) => {
 export const signout = async (req, res, next) => {
   const { _id } = req.user;
 
-  await User.findByIdAndUpdate(_id, { token: "" });
+  await User.findByIdAndUpdate(_id, { accessToken: "", refreshToken: "" });
 
   res.status(204).end();
 };
