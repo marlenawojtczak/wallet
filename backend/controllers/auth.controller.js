@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/users.model.js";
+import Session from "../models/session.model.js";
+import { generateTokens } from "../utils/generateTokens.js";
 import { JWT_SECRET } from "../config/config.js";
 
 export const singup = async (req, res, next) => {
@@ -49,29 +51,80 @@ export const signin = async (req, res, next) => {
     });
   }
 
-  const body = {
-    email: user.email,
-    _id: user._id,
-  };
+  const newSession = await Session.create({
+    uid: user._id,
+  });
 
-  const validityPeroid = "1h";
-  const token = jwt.sign(body, JWT_SECRET, { expiresIn: validityPeroid });
+  const { accessToken, refreshToken } = generateTokens(
+    user._id,
+    newSession._id
+  );
 
-  await User.findByIdAndUpdate(user._id, { token });
+  await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
   res.status(200).send({
     message: "Login successful",
-    token,
-    user: {
+    accessToken,
+    refreshToken,
+    sid: newSession._id,
+    userData: {
       email: user.email,
+      id: user._id,
     },
   });
 };
 
 export const signout = async (req, res, next) => {
-  const { _id } = req.user;
+  const currentSession = req.session;
+  await Session.deleteOne({ _id: currentSession._id });
+  return res.status(204).end();
+};
 
-  await User.findByIdAndUpdate(_id, { token: "" });
+export const refreshTokens = async (req, res, next) => {
+  const authorizationHeader = req.get("Authorization");
 
-  res.status(204).end();
+  if (authorizationHeader) {
+    const activeSession = await Session.findById(req.body.sid);
+    const reqRefreshToken = authorizationHeader.replace("Bearer ", "");
+    const sessionDetail = jwt.verify(reqRefreshToken, JWT_SECRET);
+
+    if (!activeSession) {
+      return res.status(404).send({ message: "Invalid session" });
+    }
+
+    if (sessionDetail.sid !== req.body.sid) {
+      await Session.findByIdAndDelete(req.body.sid);
+      return res.status(401).send({ message: "Unauthorized" });
+    }
+
+    const user = await User.findById(sessionDetail.uid);
+    const session = await Session.findById(sessionDetail.sid);
+
+    if (!user) {
+      return res.status(404).send({ message: "Invalid user" });
+    }
+
+    if (!session) {
+      await Session.findByIdAndDelete(sessionDetail.sid);
+      return res.status(404).send({ message: "Invalid session" });
+    }
+
+    const newSession = await Session.create({
+      uid: user._id,
+    });
+
+    const { accessToken, refreshToken } = generateTokens(
+      user._id,
+      newSession._id
+    );
+
+    await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
+
+    return res.status(200).send({
+      accessToken,
+      refreshToken,
+      newSid: newSession._id,
+    });
+  }
+  return res.status(400).send({ message: "No token provided" });
 };
