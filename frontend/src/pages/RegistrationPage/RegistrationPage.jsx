@@ -9,9 +9,8 @@ const RegistrationPage = () => {
         <title>Registration</title>
       </Helmet>
       {/* HERE PUT YOUR COMPONENTS  */}
-      <div style={{ width: "320px", margin: "50px 200px" }}>
-        <RegisterForm />
-      </div>
+
+      <RegisterForm />
 
       {/* YOU CAN DELETE CODE BELOW LATER */}
       <ul>

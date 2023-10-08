@@ -1,20 +1,27 @@
 import styled from "styled-components";
+import ReactModal from "react-modal";
 
-export const ModalWrapper = styled.div`
-  padding: 25px 10px;
-  border-radius: 25%;
-  border-color: var(----brand-primary);
-  max-width: 319px;
-  position: absolute;
+export const ModalOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+`;
+
+export const Modal = styled(ReactModal)`
+  padding: 15px 45px;
+  border-radius: 30px;
+  background-color: var(--bg-light);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 1;
 `;
 
 export const Text = styled.span`
   font-size: 17px;
   font-family: "Circe";
-  color: var(--brand-logout);
+  color: var(--brand-primary);
   display: block;
   text-align: center;
   padding-top: 15px;
@@ -35,7 +42,7 @@ export const ButtonConfirm = styled.button`
   line-height: normal;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  border-radius: 20px;
+  border-radius: 30px;
   border: none;
   padding: 13px 13px;
   color: var(--bg-light);
@@ -65,9 +72,9 @@ export const ButtonCancel = styled.button`
   letter-spacing: 1.8px;
   text-transform: uppercase;
   border: 1px solid var(--brand-primary);
-  border-radius: 20px;
+  border-radius: 30px;
   padding: 13px 13px;
-  color: #4a56e2;
+  color: var(--brand-primary);
   background-color: var(--font-light);
   transition: all 150ms ease;
   cursor: pointer;

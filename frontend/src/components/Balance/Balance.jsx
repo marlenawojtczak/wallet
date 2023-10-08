@@ -3,6 +3,7 @@ import {
   BalanceHeader,
   BalanceContent,
 } from "./Balance.styled";
+import { amountFormatter } from "../../utils/formatUtils";
 
 export const Balance = () => {
   const balance = "100999";
@@ -15,7 +16,7 @@ export const Balance = () => {
           <span style={{ fontWeight: 400, fontFamily: "Circe", fontSize: 30 }}>
             ₴
           </span>{" "}
-          {balance}
+          {amountFormatter(balance)}
         </BalanceContent>
       </BalanceElement>
     </>
