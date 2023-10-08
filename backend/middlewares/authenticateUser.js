@@ -1,20 +1,34 @@
-import User from "../models/users.model.js";
 import jwt from "jsonwebtoken";
+import User from "../models/users.model.js";
+import Session from "../models/session.model.js";
 import { JWT_SECRET } from "../config/config.js";
 
 export const authenticateUser = async (req, res, next) => {
-  const authorization = req.headers.authorization;
-  if (!authorization) {
-    return res.status(401).send({
-      message: "Not authorized",
-    });
-  }
+  const authorizationHeader = req.get("Authorization");
 
-  req.token = authorization.split(" ")[1];
+  if (authorizationHeader) {
+    const accessToken = req.header("Authorization").split(" ")[1];
+    const userDetails = jwt.verify(accessToken, JWT_SECRET);
 
-  const userDetailsFromToken = jwt.verify(req.token, JWT_SECRET);
-  const user = await User.findById(userDetailsFromToken._id);
+    if (!accessToken) {
+      return res.status(401).send({
+        message: "Not authorized",
+      });
+    }
 
-  req.user = user;
-  next();
+    const user = await User.findById(userDetails.uid);
+    const session = await Session.findById(userDetails.sid);
+
+    if (!user) {
+      return res.status(404).send({ message: "Invalid user" });
+    }
+
+    if (!session) {
+      return res.status(404).send({ message: "Invalid session" });
+    }
+
+    req.user = user;
+    req.session = session;
+    next();
+  } else return res.status(400).send({ message: "No token provided" });
 };

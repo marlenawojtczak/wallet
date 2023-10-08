@@ -2,7 +2,12 @@ import { Router } from "express";
 import { tryCatchWrapper } from "../middlewares/tryCatchWrapper.js";
 import { authenticateUser } from "../middlewares/authenticateUser.js";
 import { validateUser, validateLogin } from "../validators/users.validators.js";
-import { singup, signin, signout } from "../controllers/auth.controller.js";
+import {
+  singup,
+  signin,
+  signout,
+  refreshTokens,
+} from "../controllers/auth.controller.js";
 
 export const authRouter = Router();
 
@@ -15,3 +20,5 @@ authRouter.post(
   tryCatchWrapper(authenticateUser),
   tryCatchWrapper(signout)
 );
+
+authRouter.post("/refresh", tryCatchWrapper(refreshTokens));
