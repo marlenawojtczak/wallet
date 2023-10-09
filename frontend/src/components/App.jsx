@@ -64,17 +64,17 @@ export const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route element={<BackgroundImage />}>
-           <Route
-            path="/register"
-            element={
-              <RestrictedRoute component={Register} redirectTo="/login" />
-            }
-          />
-          <Route
-            path="/login"
-            element={<RestrictedRoute component={Login} redirectTo="/home" />}
-          />
-         </Route>
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute component={Register} redirectTo="/login" />
+              }
+            />
+            <Route
+              path="/login"
+              element={<RestrictedRoute component={Login} redirectTo="/home" />}
+            />
+          </Route>
           <Route element={<SharedLayout />}>
             <Route
               path="/home"
