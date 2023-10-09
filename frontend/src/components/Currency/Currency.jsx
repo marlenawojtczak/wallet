@@ -25,7 +25,9 @@ export const Currency = () => {
           </TableHead>
           <ImageWrapper>
             <TableBody>
-              <img src={img} alt="mountains" />
+              <TableNextRows>
+                <img src={img} alt="mountains" />
+              </TableNextRows>
               <TableNextRows>
                 <td>USD</td>
                 <td>27.55</td>
