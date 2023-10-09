@@ -10,19 +10,19 @@
   "servers": [{ "url": "http://localhost:3000" }],
   "tags": [
     {
-      "name": "Auth"
+      "name": "Authentication"
     },
     {
-      "name": "User"
+      "name": "Users"
     },
     {
-      "name": "Transaction"
+      "name": "Transactions"
     }
   ],
   "paths": {
     "/api/auth/sign-up": {
       "post": {
-        "tags": ["Auth"],
+        "tags": ["Authentication"],
         "summary": "User registration",
         "parameters": [],
         "requestBody": {
@@ -60,7 +60,7 @@
     },
     "/api/auth/sign-in": {
       "post": {
-        "tags": ["Auth"],
+        "tags": ["Authentication"],
         "summary": "User authentication",
         "parameters": [],
         "requestBody": {
@@ -98,7 +98,7 @@
     },
     "/api/auth/sign-out": {
       "post": {
-        "tags": ["Auth"],
+        "tags": ["Authentication"],
         "summary": "Logout",
         "security": [{ "Bearer": [] }],
         "parameters": [],
@@ -124,7 +124,7 @@
     },
     "/api/auth/refresh": {
       "post": {
-        "tags": ["Auth"],
+        "tags": ["Authentication"],
         "summary": "Get new pair of tokens (use Bearer {refreshToken} instead of accessToken)",
         "security": [{ "Bearer": [] }],
         "parameters": [],
@@ -167,8 +167,8 @@
     },
     "/api/users/current": {
       "get": {
-        "tags": ["User"],
-        "summary": "Get all your info",
+        "tags": ["Users"],
+        "summary": "Get user info",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
@@ -188,6 +188,79 @@
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions/": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get user transactions",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTransactions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Add an trasanction",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "requestBody": {
+          "description": "Income object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewTransaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body) / No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
             "content": {}
           }
         }
@@ -331,6 +404,177 @@
             "example": 0
           }
         }
+      },
+      "UserTransactions": {
+        "type": "object",
+        "properties": {
+          "incomes": {
+            "type": "array",
+            "description": "Array of user incomes",
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Income id",
+                  "example": "507f1f77bcf86cd799439011"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Income date",
+                  "example": "2020-12-31"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["Income", "Expense"],
+                  "example": "Income"
+                },
+                "category": {
+                  "type": "string",
+                  "enum": [
+                    "Income",
+                    "Main expenses",
+                    "Products",
+                    "Car",
+                    "Self care",
+                    "Child care",
+                    "Household products",
+                    "Education",
+                    "Leisure",
+                    "Other expenses",
+                    "Entertainment"
+                  ],
+                  "example": "Products"
+                },
+                "comment": {
+                  "type": "string",
+                  "description": "Comment for transactions",
+                  "example": "Salary"
+                },
+                "amount": {
+                  "type": "integer",
+                  "description": "Transactions amount",
+                  "example": 100
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "User's id",
+                  "example": "507f1f77bcf86cd799439011"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TransactionRequest": {
+        "type": "object",
+        "required": ["date", "type", "category", "amount"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "example": "2020-12-31"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["Income", "Expense"],
+            "description": "Transaction type",
+            "example": "Income"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Income",
+              "Main expenses",
+              "Products",
+              "Car",
+              "Self care",
+              "Child care",
+              "Household products",
+              "Education",
+              "Leisure",
+              "Other expenses",
+              "Entertainment"
+            ],
+            "description": "Transaction category",
+            "example": "Products"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Transaction amount",
+            "example": 100
+          }
+        }
+      },
+      "NewTransaction": {
+        "type": "object",
+        "properties": {
+          "newBalance": {
+            "type": "integer",
+            "description": "User's new balance",
+            "example": 100
+          },
+          "transaction": {
+            "type": "object",
+            "description": "New transaction info",
+            "properties": {
+              "date": {
+                "type": "string",
+                "description": "Transaction date",
+                "example": "2020-12-31"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["Income", "Expense"],
+                "description": "Transaction type",
+                "example": "Income"
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "Income",
+                  "Main expenses",
+                  "Products",
+                  "Car",
+                  "Self care",
+                  "Child care",
+                  "Household products",
+                  "Education",
+                  "Leisure",
+                  "Other expenses",
+                  "Entertainment"
+                ],
+                "description": "Transaction category",
+                "example": "Products"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment for transactions",
+                "example": "Salary"
+              },
+              "amount": {
+                "type": "integer",
+                "description": "Income amount",
+                "example": 100
+              },
+              "owner": {
+                "type": "string",
+                "description": "User's id",
+                "example": "507f1f77bcf86cd799439011"
+              },
+              "_id": {
+                "type": "string",
+                "description": "Income id",
+                "example": "507f1f77bcf86cd799439011"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }
