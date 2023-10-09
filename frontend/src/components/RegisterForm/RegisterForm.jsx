@@ -85,14 +85,18 @@ export const RegisterForm = () => {
       return;
     }
 
+    const minLength = Math.min(password.length, confirmPassword.length);
     let matchCount = 0;
-    for (let i = 0; i < password.length; i++) {
+    for (let i = 0; i < minLength; i++) {
       if (password[i] === confirmPassword[i]) {
         matchCount++;
+      } else {
+        break;
       }
     }
 
-    const matchPercentage = (matchCount / password.length) * 100;
+    const matchPercentage =
+      (matchCount / Math.max(password.length, confirmPassword.length)) * 100;
     setProgressValue(matchPercentage);
   }, [formik.values.password, formik.values.confirmPassword, formik.values]);
 
@@ -160,7 +164,7 @@ export const RegisterForm = () => {
             type="button"
             onClick={handleToggleConfirmPasswordVisibility}
           >
-            {passwordVisible ? <EyeOpenIcon /> : <EyeCloseIcon />}
+            {confirmPasswordVisible ? <EyeOpenIcon /> : <EyeCloseIcon />}
           </StyledButtonIcon>
         </StyledInputContainerExtra>
 
@@ -190,7 +194,16 @@ export const RegisterForm = () => {
                 const errorMessage = errors
                   .map((error) => `<br /> ${error}`)
                   .join();
-                Notiflix.Notify.failure("<br />" + errorMessage);
+                Notiflix.Notify.failure("<br />" + errorMessage, {
+                  width: "300px",
+                  position: "center-top",
+                  distance: "18px",
+                  svgSize: "120px",
+                  timeout: 3000,
+                  borderRadius: "20px",
+                  fontFamily: "Poppins",
+                  fontSize: "20px",
+                });
               }
             }}
           >

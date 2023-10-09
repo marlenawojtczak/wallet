@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { SharedLayout } from "../components";
+import { SharedLayout, BackgroundImage } from "../components";
+
 // import { ProtectedRoute } from "../helpers/ProtectedRoute";
 // import { ToastContainer } from "react-toastify";
 // import { ModalLogout } from "./ModalLogout";
@@ -62,9 +63,11 @@ export const App = () => {
       </AnimatePresence> */}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<BackgroundImage />}>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />{" "}
+          </Route>
           <Route element={<SharedLayout />}>
             <Route path="/home" element={<Home />} />
             <Route path="/statistics" element={<Statistics />} />

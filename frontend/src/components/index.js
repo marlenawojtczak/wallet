@@ -1,4 +1,5 @@
 export * from "./Balance";
+export * from "./BackgroundImage";
 export * from "./ButtonAddTransactions";
 export * from "./Currency";
 export * from "./DiagramTab";

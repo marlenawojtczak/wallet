@@ -1,21 +1,46 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+        transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+     transform: scale(1);
+  }
+`;
+
+const showIn = keyframes`
+  0% {
+ transform: scale(0.8);
+  }
+  100% {
+transform: scale(1.02);
+  }
+`;
 
 export const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 107px 20px;
+  animation: ${fadeIn} 500ms ease-in;
 
   @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 533px;
     border-radius: 20px;
-    width: 533px;
     background-color: var(--font-light);
+    margin: 0;
   }
 `;
 export const StyledForm = styled.div`
   width: 100%;
-  margin: 107px 20px;
 
   @media screen and (min-width: 768px) {
-    margin: 40px 60px 62px;
+    margin: 40px 60px;
   }
 `;
 export const StyledLogoMobile = styled.div`
@@ -61,6 +86,7 @@ export const StyledButtons = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  height: 140px;
   @media screen and (min-width: 768px) {
     margin-top: 2px;
   }
@@ -108,4 +134,10 @@ export const StyledButton = styled.div`
 export const StyledButtonIcon = styled.div`
   background-color: white;
   padding-right: 10px;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    border: none;
+    animation: ${showIn} 400ms ease-in;
+  }
 `;
