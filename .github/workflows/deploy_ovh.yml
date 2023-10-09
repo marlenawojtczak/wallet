@@ -2,7 +2,7 @@ name: ci
 
 on:
   push:
-    branches: [feat/wojtczak/docker-stack]
+    branches: [main]
 
 jobs:
   build_and_push:
