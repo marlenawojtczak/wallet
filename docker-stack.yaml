@@ -22,8 +22,6 @@ services:
       - /etc/letsencrypt/ssl/wallet.dupawklamerkach.pl/:/etc/nginx/ssl/wallet.dupawklamerkach.pl/
   backend:
     image: platyna100/wallet-backend:stack
-    # ports:
-    #   - 3000:3000
     secrets:
       - JWT_ACCESS_EXPIRE_TIME
       - JWT_REFRESH_EXPIRE_TIME
