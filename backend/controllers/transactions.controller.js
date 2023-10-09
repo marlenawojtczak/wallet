@@ -1,4 +1,5 @@
 import Transaction from "../models/transactions.model.js";
+import User from "../models/users.model.js";
 import { transactionsCategory } from "../utils/constants.js";
 
 export const addTransaction = async (req, res, next) => {
@@ -45,7 +46,7 @@ export const deleteTransaction = async (req, res, next) => {
 };
 
 export const getCategoriesTotals = async (req, res, next) => {
-  const { _id: owner } = req.user;
+  const { _id: owner, _id } = req.user;
 
   const totalIncomeResult = await Transaction.aggregate([
     {
@@ -94,6 +95,8 @@ export const getCategoriesTotals = async (req, res, next) => {
   const totalExpense = totalExpenseResult[0]?.totalExpense || 0;
 
   const totalBalance = totalIncome - totalExpense;
+
+  await User.findByIdAndUpdate(_id, { balance: totalBalance });
 
   const result = await Transaction.aggregate([
     {
