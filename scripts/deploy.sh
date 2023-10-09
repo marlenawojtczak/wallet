@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 
-docker rm $(docker ps -aq) --force
-sleep 10
-docker run -d -p 4000:4000 platyna100/wallet-frontend
-docker ps
+docker stack rm wallet
+docker stack deploy -c docker-stack.yml wallet --prune --with-registry-auth
