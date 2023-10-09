@@ -7,7 +7,6 @@ const RegistrationPage = () => {
       <Helmet>
         <title>Registration</title>
       </Helmet>
-
       <RegisterForm />
     </>
   );

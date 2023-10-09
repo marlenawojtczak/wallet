@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { SharedLayout } from "../components";
+import { SharedLayout, BackgroundImage } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { ToastContainer } from "react-toastify";
@@ -61,20 +61,20 @@ export const App = () => {
           </motion.div>
         )}
       </AnimatePresence> */}
-
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute component={Register} redirectTo="/login" />
-            }
-          />
-          <Route
-            path="/login"
-            element={<RestrictedRoute component={Login} redirectTo="/home" />}
-          />
-
+          <Route element={<BackgroundImage />}>
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute component={Register} redirectTo="/login" />
+              }
+            />
+            <Route
+              path="/login"
+              element={<RestrictedRoute component={Login} redirectTo="/home" />}
+            />
+          </Route>
           <Route element={<SharedLayout />}>
             <Route
               path="/home"

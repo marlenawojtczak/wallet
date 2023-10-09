@@ -8,6 +8,7 @@
   /* Background colors */
   --bg-light: #ffffff;
   --bg-accent: #e7eaf2;
+  --bg-accent-modified: rgba(255, 255, 255, 0.4);
   --bg-primary: #c5baff;
   --bg-secondary: #ffd8d0;
   --bg-gray: #dcdcdf;

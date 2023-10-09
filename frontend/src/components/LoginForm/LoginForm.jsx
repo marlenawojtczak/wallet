@@ -132,7 +132,16 @@ export const LoginForm = () => {
                 const errorMessage = errors
                   .map((error) => `<br /> ${error}`)
                   .join();
-                Notiflix.Notify.failure("<br />" + errorMessage);
+                Notiflix.Notify.failure("<br />" + errorMessage, {
+                  width: "300px",
+                  position: "center-top",
+                  distance: "18px",
+                  svgSize: "120px",
+                  timeout: 3000,
+                  borderRadius: "20px",
+                  fontFamily: "Poppins",
+                  fontSize: "20px",
+                });
               }
             }}
           >
