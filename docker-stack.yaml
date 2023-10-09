@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 secrets:
   JWT_ACCESS_EXPIRE_TIME:
@@ -19,8 +19,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /etc/letsencrypt/live/wallet.dupawklamerkach.pl/fullchain.pem:/etc/nginx/ssl/fullchain.pem
-      - /etc/letsencrypt/live/wallet.dupawklamerkach.pl/privkey.pem:/etc/nginx/ssl/privkey.pem
+      - /etc/letsencrypt/ssl/fullchain.pem:/etc/nginx/ssl/fullchain.pem
+      - /etc/letsencrypt/ssl/privkey.pem:/etc/nginx/ssl/privkey.pem
 
   backend:
     image: platyna100/wallet-backend:stack
