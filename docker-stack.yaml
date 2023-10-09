@@ -20,8 +20,6 @@ services:
       - 443:443
     volumes:
       - /etc/letsencrypt/ssl/wallet.dupawklamerkach.pl/:/etc/nginx/ssl/wallet.dupawklamerkach.pl/
-      - /etc/letsencrypt/ssl/api.wallet.dupawklamerkach.pl/:/etc/nginx/ssl/api.wallet.dupawklamerkach.pl/
-
   backend:
     image: platyna100/wallet-backend:stack
     ports:
