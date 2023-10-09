@@ -230,7 +230,7 @@
         "security": [{ "Bearer": [] }],
         "parameters": [],
         "requestBody": {
-          "description": "Income object",
+          "description": "Transaction object",
           "required": true,
           "content": {
             "application/json": {
@@ -253,6 +253,137 @@
           },
           "400": {
             "description": "Bad request (invalid request body) / No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions/{transactionId}": {
+      "patch": {
+        "tags": ["Transactions"],
+        "summary": "Update transaction",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "requestBody": {
+          "description": "Transaction object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body) / No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Transactions"],
+        "summary": "Delete transaction",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions/categories": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get all transactions summary",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions/categories/{year}/{month}": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get transactions summary for peroid",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided",
             "content": {}
           },
           "401": {
@@ -508,11 +639,6 @@
       "NewTransaction": {
         "type": "object",
         "properties": {
-          "newBalance": {
-            "type": "integer",
-            "description": "User's new balance",
-            "example": 100
-          },
           "transaction": {
             "type": "object",
             "description": "New transaction info",
@@ -565,6 +691,50 @@
                 "type": "string",
                 "description": "Income id",
                 "example": "507f1f77bcf86cd799439011"
+              }
+            }
+          }
+        }
+      },
+      "CategoriesResponse": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "object",
+            "description": "Categories info",
+            "properties": {
+              "totalIncome": {
+                "type": "integer",
+                "description": "Total income",
+                "example": 100
+              },
+              "totalExpense": {
+                "type": "integer",
+                "description": "Total expense",
+                "example": 100
+              },
+              "totalBalance": {
+                "type": "integer",
+                "description": "Total balance",
+                "example": 100
+              },
+              "totals": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "string",
+                      "description": "Category name",
+                      "example": "Products"
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "Total amount",
+                      "example": 100
+                    }
+                  }
+                }
               }
             }
           }

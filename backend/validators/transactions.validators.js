@@ -11,7 +11,6 @@ const transactionAddSchema = Joi.object({
     .required(),
   comment: Joi.string().optional(),
   amount: Joi.number().required(),
-  balanceAfter: Joi.number().optional(),
   owner: Joi.ref("user"),
   versionKey: false,
   timestamp: true,
