@@ -6,7 +6,7 @@ import { JWT_SECRET } from "../config/config.js";
 
 export const singup = async (req, res, next) => {
   const body = req.body;
-  const { email } = body;
+  const { email, username } = body;
 
   const user = await User.findOne({ email });
 
@@ -22,6 +22,7 @@ export const singup = async (req, res, next) => {
 
   return res.status(201).send({
     email,
+    username,
     id: newUser._id,
   });
 };
@@ -68,8 +69,10 @@ export const signin = async (req, res, next) => {
     refreshToken,
     sid: newSession._id,
     userData: {
-      email: user.email,
       id: user._id,
+      username: user.username,
+      email: user.email,
+      balance: user.balance,
     },
   });
 };
@@ -123,7 +126,8 @@ export const refreshTokens = async (req, res, next) => {
     return res.status(200).send({
       accessToken,
       refreshToken,
-      newSid: newSession._id,
+      sid: newSession._id,
+      uid: user._id,
     });
   }
   return res.status(400).send({ message: "No token provided" });
