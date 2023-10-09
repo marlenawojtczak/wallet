@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://wallet.dupawklamerkach.pl",
+  baseURL: "https://wallet.dupawklamerkach.pl",
 });
 
 const setAuthHeader = (token) => {
