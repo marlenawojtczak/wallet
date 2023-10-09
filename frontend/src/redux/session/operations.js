@@ -1,3 +1,4 @@
+import { setToken } from "./sessionSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -32,6 +33,7 @@ export const signIn = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.token);
+      thunkAPI.dispatch(setToken(res.data.token));
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -45,28 +47,29 @@ export const signOut = createAsyncThunk(
     try {
       await api.post("/api/auth/sign-out");
       clearAuthHeader();
+      thunkAPI.dispatch(setToken(null));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// export const refreshUser = createAsyncThunk(
-//   "auth/refresh",
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistedToken = state.auth.token;
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
 
-//     if (persistedToken === null) {
-//       return thunkAPI.rejectWithValue("Unable to fetch user");
-//     }
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
+    }
 
-//     try {
-//       setAuthHeader(persistedToken);
-//       const res = await axios.get("/users/current");
-//       return res.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+    try {
+      setAuthHeader(persistedToken);
+      const res = await axios.get("/users/current");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

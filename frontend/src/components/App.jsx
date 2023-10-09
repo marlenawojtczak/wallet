@@ -3,13 +3,12 @@ import { lazy, Suspense } from "react";
 import { SharedLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
-// import { ProtectedRoute } from "../helpers/ProtectedRoute";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 // import { ModalLogout } from "./ModalLogout";
 // import { ModalAddTransaction } from "./ModalAddTransaction";
 // import { ModalEditTransaction } from "./ModalEditTransaction";
-import "react-toastify/dist/ReactToastify.css";
-import { useSelector } from "react-redux";
 // import { motion, AnimatePresence } from "framer-motion";
 // import Media from "react-media";
 
@@ -62,6 +61,7 @@ export const App = () => {
           </motion.div>
         )}
       </AnimatePresence> */}
+
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route
@@ -75,34 +75,23 @@ export const App = () => {
             element={<RestrictedRoute component={Login} redirectTo="/home" />}
           />
 
-          <Route
-            path="/home"
-            element={<PrivateRoute component={Home} redirectTo="/login" />}
-          />
-          <Route
-            path="/statistics"
-            element={
-              <PrivateRoute component={Statistics} redirectTo="/login" />
-            }
-          />
-          <Route
-            path="/currency"
-            element={<PrivateRoute component={Currency} redirectTo="/login" />}
-          />
-
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </Suspense>
-
-      {/* <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route element={<SharedLayout />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/currency" element={<Currency />} />
+            <Route
+              path="/home"
+              element={<PrivateRoute component={Home} redirectTo="/login" />}
+            />
+            <Route
+              path="/statistics"
+              element={
+                <PrivateRoute component={Statistics} redirectTo="/login" />
+              }
+            />
+            <Route
+              path="/currency"
+              element={
+                <PrivateRoute component={Currency} redirectTo="/login" />
+              }
+            />
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
@@ -111,7 +100,7 @@ export const App = () => {
           autoClose={2500}
           pauseOnHover={false}
         />
-      </Suspense> */}
+      </Suspense>
     </>
   );
 };
