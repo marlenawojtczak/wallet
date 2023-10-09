@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
 import Media from "react-media";
 import { useState } from "react";
-import img from "../../assets/temporary/homepage.jpg";
 import { Wrapper } from "../../components/HomeTab/HomeTab.styled";
 import { Balance } from "../../components/Balance";
 import { Currency } from "../../components/Currency";
@@ -41,8 +40,6 @@ const HomePage = () => {
         <ButtonAddTransactions onClick={handleOpenModal} />
         <ModalAddTransaction isOpen={modalOpen} onClose={handleCloseModal} />
       </Wrapper>
-
-      <img src={img} alt="Homepage" />
     </>
   );
 };
