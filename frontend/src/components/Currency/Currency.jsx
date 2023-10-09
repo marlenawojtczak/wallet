@@ -5,7 +5,7 @@ import {
   TableHead,
   TableFirstRow,
   TableBody,
-  ImageWrapper,
+  TableSecondRow,
   TableNextRows,
 } from "./Currency.styled";
 
@@ -23,23 +23,21 @@ export const Currency = () => {
               <th>Sale</th>
             </TableFirstRow>
           </TableHead>
-          <ImageWrapper>
-            <TableBody>
-              <TableNextRows>
-                <img src={img} alt="mountains" />
-              </TableNextRows>
-              <TableNextRows>
-                <td>USD</td>
-                <td>27.55</td>
-                <td>27.65</td>
-              </TableNextRows>
-              <TableNextRows>
-                <td>EUR</td>
-                <td>30.00</td>
-                <td>30.10</td>
-              </TableNextRows>
-            </TableBody>
-          </ImageWrapper>
+          <TableBody>
+            <TableSecondRow>
+              <img src={img} alt="mountains" />
+            </TableSecondRow>
+            <TableNextRows>
+              <td>USD</td>
+              <td>27.55</td>
+              <td>27.65</td>
+            </TableNextRows>
+            <TableNextRows>
+              <td>EUR</td>
+              <td>30.00</td>
+              <td>30.10</td>
+            </TableNextRows>
+          </TableBody>
         </Table>
       </TableContainer>
     </TableWrapper>

@@ -57,21 +57,6 @@ export const TableFirstRow = styled.tr`
   width: 100%;
 `;
 
-export const ImageWrapper = styled.div`
-  img {
-    padding-top: 12px;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-
-    @media screen and (min-width: 1280px) {
-      padding-top: 50px;
-    }
-  }
-`;
-
 export const TableBody = styled.tbody`
   background-color: var(--nav-active);
   display: flex;
@@ -89,6 +74,29 @@ export const TableBody = styled.tbody`
   }
   @media screen and (min-width: 1280px) {
     padding: 20px 61px 179px 58px;
+  }
+`;
+
+export const TableSecondRow = styled.tr`
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    max-width: 336px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 393px;
+  }
+  img {
+    position: absolute;
+    max-width: 100%;
+    right: 0;
+    bottom: 0;
+
+    @media screen and (min-width: 768px) and (max-width: 1279px) {
+      left: 0;
+      width: 336px;
+    }
+    @media screen and (min-width: 1280px) {
+      width: 393px;
+    }
   }
 `;
 
