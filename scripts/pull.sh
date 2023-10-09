@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-docker pull platyna100/wallet-frontend
-sleep 1
+for image in $(cat docker-stack.yaml | envsubst | grep "image:" | awk '{ print $2 }'); do
+    echo "Pull image $image"
+    docker pull ${image}
+done

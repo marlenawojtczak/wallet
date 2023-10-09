@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Notiflix from "notiflix";
+import { useDispatch, useSelector } from "react-redux";
+import { signUp } from "../../redux/session/operations";
+import { selectRegistrationError } from "../../redux/session/selectors";
 
 import { ReactComponent as WalletLogoMobile } from "../../assets/icons/logo-mobile.svg";
 import { ReactComponent as WalletLogo } from "../../assets/icons/logo.svg";
@@ -50,6 +53,8 @@ const ProgressBar = ({ value }) => {
 };
 
 export const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const registrationError = useSelector(selectRegistrationError);
   const navigate = useNavigate();
   const location = useLocation();
   const [progressValue, setProgressValue] = useState(0);
@@ -72,8 +77,21 @@ export const RegisterForm = () => {
       name: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        await dispatch(
+          signUp({
+            email: values.email,
+            password: values.password,
+            username: values.name,
+          })
+        );
+        navigate("/login");
+      } catch (error) {
+        Notiflix.Notify.failure(
+          registrationError || "Error during registration"
+        );
+      }
     },
   });
 
@@ -106,7 +124,7 @@ export const RegisterForm = () => {
 
   return (
     <StyledWrapper>
-      <StyledForm onSubmit={formik.handleSubmit}>
+      <StyledForm>
         <StyledLogoMobile>
           <WalletLogoMobile />
         </StyledLogoMobile>

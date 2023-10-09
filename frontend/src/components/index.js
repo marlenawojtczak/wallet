@@ -16,3 +16,4 @@ export * from "./Table";
 export * from "./UserMenu";
 export * from "./Navigation";
 export * from "./SharedLayout";
+export * from "./SwitchButton";

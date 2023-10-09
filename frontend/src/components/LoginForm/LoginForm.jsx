@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Notiflix from "notiflix";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/session/selectors";
+import { signIn } from "../../redux/session/operations";
 
 import { ReactComponent as WalletLogoMobile } from "../../assets/icons/logo-mobile.svg";
 import { ReactComponent as WalletLogo } from "../../assets/icons/logo.svg";
@@ -35,6 +38,9 @@ const validationSchema = Yup.object().shape({
 });
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   const navigate = useNavigate();
   const location = useLocation();
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -49,10 +55,22 @@ export const LoginForm = () => {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const result = await dispatch(signIn(values)).unwrap();
+        console.log("Sign in result:", result);
+      } catch (error) {
+        console.log("Sign in error:", error.message);
+        Notiflix.Notify.failure(error.message);
+      }
     },
   });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/home");
+    }
+  }, [isLoggedIn, navigate]);
 
   const registerButton = () => {
     navigate("/register");
@@ -101,11 +119,13 @@ export const LoginForm = () => {
             {passwordVisible ? <EyeOpenIcon /> : <EyeCloseIcon />}
           </StyledButtonIcon>
         </StyledInputContainer>
+
         <StyledButtons>
           <StyledButton
             type="submit"
             active={location.pathname === "/login"}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               formik.handleSubmit();
               const errors = Object.values(formik.errors);
               if (errors.length > 0) {

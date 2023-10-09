@@ -26,9 +26,6 @@ const transactionSchema = new Schema(
       type: Number,
       required: true,
     },
-    balanceAfter: {
-      type: Number,
-    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",

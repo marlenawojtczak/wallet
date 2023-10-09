@@ -1,44 +1,84 @@
 import {
-  ModalWrapper,
   ModalContent,
+  ValueInput,
+  CommentInput,
+  StyledDateTime,
+  ModalHeader,
+  StyledCategoryInput,
+  AddButton,
+  CancelButton,
   CloseButton,
+  CalendarIcon,
+  ModalBackground,
+  SectionWrapper,
+  ModalWrapper,
 } from "./ModalAddTransaction.styled";
-import { Switch, FormControlLabel } from "@mui/material";
+
 import { useState } from "react";
-import Select from "react-select";
+
+import "react-datetime/css/react-datetime.css";
+import { SwitchButton } from "../SwitchButton/SwitchButton";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const [checked, setChecked] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
 
   const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+    { value: "main expenses", label: "Main expenses" },
+    { value: "products", label: "Products" },
+    { value: "car", label: "Car" },
+    { value: "self care", label: "Self care" },
+    { value: "child care", label: "Child care" },
+    { value: "household products", label: "Household products" },
+    { value: "education", label: "Education" },
+    { value: "leisure", label: "Leisure" },
+    { value: "other expenses", label: "Other expenses" },
   ];
 
   return (
     <>
-      <ModalWrapper isOpen={isOpen}>
-        <ModalContent>
-          <p>Add transaction</p>
-          <FormControlLabel
-            control={<Switch checked={checked} onChange={handleChange} />}
-            label={checked ? "Expense" : "Income"}
-          />
-          <Select
-            placeholder="Select a category"
-            defaultValue={selectedOption}
-            onChange={setSelectedOption}
-            options={options}
-          />
-          <CloseButton onClick={onClose} />
+      <ModalBackground isOpen={isOpen} onClick={onClose}>
+        <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
+          <ModalWrapper>
+            <CloseButton onClick={onClose} />
+            <ModalHeader>Add transaction</ModalHeader>
+
+            <SwitchButton checked={checked} onChange={handleChange} />
+
+            {checked ? (
+              <StyledCategoryInput
+                placeholder="Select a category"
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={options}
+              />
+            ) : (
+              <></>
+            )}
+            <SectionWrapper>
+              <ValueInput />
+
+              <StyledDateTime
+                value={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                dateFormat="DD.MM.YYYY"
+                timeFormat={false}
+              />
+              <CalendarIcon />
+            </SectionWrapper>
+
+            <CommentInput placeholder="Comment" />
+
+            <AddButton>Add</AddButton>
+            <CancelButton onClick={onClose}>Cancel</CancelButton>
+          </ModalWrapper>
         </ModalContent>
-      </ModalWrapper>
+      </ModalBackground>
     </>
   );
 };

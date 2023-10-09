@@ -1,0 +1,30 @@
+version: "3.8"
+
+secrets:
+  JWT_ACCESS_EXPIRE_TIME:
+    external: true
+  JWT_REFRESH_EXPIRE_TIME:
+    external: true
+  JWT_SECRET:
+    external: true
+  MONGODB_URI:
+    external: true
+  PORT:
+    external: true
+
+services:
+  frontend:
+    image: platyna100/wallet-frontend:stack
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/letsencrypt/ssl/wallet.dupawklamerkach.pl/:/etc/nginx/ssl/wallet.dupawklamerkach.pl/
+  backend:
+    image: platyna100/wallet-backend:stack
+    secrets:
+      - JWT_ACCESS_EXPIRE_TIME
+      - JWT_REFRESH_EXPIRE_TIME
+      - JWT_SECRET
+      - MONGODB_URI
+      - PORT

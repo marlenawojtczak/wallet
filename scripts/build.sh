@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
-docker build -t wallet-frontend -f frontend/Dockerfile frontend
-sleep 1
+for folder in services/*; do
+    if [[ -f ${folder}/Dockerfile ]]; then
+        container=$(basename "${folder}")
+
+        docker build -t wallet-"${container}" -f "${folder}"/Dockerfile .
+    fi
+done
