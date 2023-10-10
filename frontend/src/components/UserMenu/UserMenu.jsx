@@ -4,10 +4,12 @@ import { selectUserName } from "../../redux/session/selectors";
 
 import { useDispatch, useSelector } from "react-redux";
 import { openModalLogout } from "../../redux/global/globalSlice";
+import { useAuth } from "../../hooks/useAuth";
 
 export const UserMenu = () => {
   // autentykacja ???
-  const userName = useSelector(selectUserName);
+  // const user = useSelector(selectUserName);
+  const { user } = useAuth();
 
   const dispatch = useDispatch();
   const openModal = () => {
@@ -16,7 +18,7 @@ export const UserMenu = () => {
 
   return (
     <Wrapper>
-      <UserName>{userName}</UserName>
+      <UserName>Welcome, {user?.username}</UserName>
       <Button type="button" onClick={openModal}>
         <ExitIcon></ExitIcon>
         <ButtonText>Exit</ButtonText>
