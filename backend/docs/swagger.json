@@ -403,6 +403,7 @@
       "RegistrationRequest": {
         "type": "object",
         "required": ["username", "email", "password"],
+        "description": "Registration's object",
         "properties": {
           "username": {
             "type": "string",
@@ -425,27 +426,34 @@
       },
       "RegistrationResponse": {
         "type": "object",
+        "description": "User's info",
         "properties": {
-          "email": {
+          "id": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "User's id",
+            "example": "651fe19ae031c72980a0e120"
           },
           "username": {
             "type": "string",
             "description": "User's username",
             "example": "user"
           },
-          "id": {
+          "email": {
             "type": "string",
-            "description": "User's id",
-            "example": "651fe19ae031c72980a0e120"
+            "description": "User's email",
+            "format": "email"
+          },
+          "balance": {
+            "type": "integer",
+            "description": "User's balance",
+            "example": 0
           }
         }
       },
       "LoginRequest": {
         "required": ["email", "password"],
         "type": "object",
+        "description": "Login's object",
         "properties": {
           "email": {
             "type": "string",
@@ -464,23 +472,9 @@
       "LoginResponse": {
         "type": "object",
         "properties": {
-          "accessToken": {
-            "type": "string",
-            "description": "Session's access token (needed for all requests)",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg2NTEwNX0.k0M6kbGPP-S-QhGJanXCdZJUhiPbGVlv5etExeN4EMs"
-          },
-          "refreshToken": {
-            "type": "string",
-            "description": "Session's refresh token (needed for /auth/refresh)",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg0NzEwNX0.vi0TOSg954_awAgEM6oBFq1kcOWQMdClfmduay1IO4o"
-          },
-          "sid": {
-            "type": "string",
-            "description": "Session's id (needed for /auth/refresh)",
-            "example": "6523d994da34596df76f6cba"
-          },
-          "userData": {
+          "user": {
             "type": "object",
+            "description": "User's info",
             "properties": {
               "id": {
                 "type": "string",
@@ -501,6 +495,32 @@
                 "type": "integer",
                 "description": "User's balance",
                 "example": 0
+              },
+              "accessToken": {
+                "type": "string",
+                "description": "Session's access token (needed for all requests)",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg2NTEwNX0.k0M6kbGPP-S-QhGJanXCdZJUhiPbGVlv5etExeN4EMs"
+              },
+              "refreshToken": {
+                "type": "string",
+                "description": "Session's refresh token (needed for /auth/refresh)",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg0NzEwNX0.vi0TOSg954_awAgEM6oBFq1kcOWQMdClfmduay1IO4o"
+              }
+            }
+          },
+          "session": {
+            "type": "object",
+            "description": "Session's info",
+            "properties": {
+              "sid": {
+                "type": "string",
+                "description": "Session's id",
+                "example": "6523d994da34596df76f6cba"
+              },
+              "uid": {
+                "type": "string",
+                "description": "User's id",
+                "example": "651fe19ae031c72980a0e120"
               }
             }
           }
@@ -508,6 +528,7 @@
       },
       "RefreshTokensRequest": {
         "type": "object",
+        "description": "Refresh tokens request",
         "properties": {
           "sid": {
             "type": "string",
@@ -518,31 +539,49 @@
       },
       "RefreshTokensResponse": {
         "type": "object",
+        "description": "User's info tokens",
         "properties": {
-          "accessToken": {
-            "type": "string",
-            "description": "Access token",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg2NTEwNX0.k0M6kbGPP-S-QhGJanXCdZJUhiPbGVlv5etExeN4EMs"
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "User's id",
+                "example": "651fe19ae031c72980a0e120"
+              },
+              "accessToken": {
+                "type": "string",
+                "description": "Access token",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg2NTEwNX0.k0M6kbGPP-S-QhGJanXCdZJUhiPbGVlv5etExeN4EMs"
+              },
+              "refreshToken": {
+                "type": "string",
+                "description": "Refresh token",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg0NzEwNX0.vi0TOSg954_awAgEM6oBFq1kcOWQMdClfmduay1IO4o"
+              }
+            }
           },
-          "refreshToken": {
-            "type": "string",
-            "description": "Refresh token",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg0NzEwNX0.vi0TOSg954_awAgEM6oBFq1kcOWQMdClfmduay1IO4o"
-          },
-          "sid": {
-            "type": "string",
-            "description": "New session's id",
-            "example": "6523d994da34596df76f6cba"
-          },
-          "uid": {
-            "type": "string",
-            "description": "User's id",
-            "example": "651fe19ae031c72980a0e120"
+          "session": {
+            "type": "object",
+            "description": "Session's info",
+            "properties": {
+              "sid": {
+                "type": "string",
+                "description": "Session's id",
+                "example": "6523d994da34596df76f6cba"
+              },
+              "uid": {
+                "type": "string",
+                "description": "User's id",
+                "example": "651fe19ae031c72980a0e120"
+              }
+            }
           }
         }
       },
       "GetUserInfo": {
         "type": "object",
+        "description": "User's info",
         "properties": {
           "id": {
             "type": "string",
@@ -579,24 +618,26 @@
       "UserTransactions": {
         "type": "object",
         "properties": {
-          "incomes": {
+          "transactions": {
             "type": "array",
-            "description": "Array of user incomes",
+            "description": "User's transactions",
             "items": {
+              "type": "object",
               "properties": {
-                "_id": {
+                "id": {
                   "type": "string",
                   "description": "Income id",
                   "example": "507f1f77bcf86cd799439011"
                 },
                 "date": {
                   "type": "string",
-                  "description": "Income date",
+                  "description": "Transaction date",
                   "example": "2020-12-31"
                 },
                 "type": {
                   "type": "string",
                   "enum": ["Income", "Expense"],
+                  "description": "Transaction type",
                   "example": "Income"
                 },
                 "category": {
@@ -614,6 +655,7 @@
                     "Other expenses",
                     "Entertainment"
                   ],
+                  "description": "Transaction category",
                   "example": "Products"
                 },
                 "comment": {
@@ -623,7 +665,7 @@
                 },
                 "amount": {
                   "type": "integer",
-                  "description": "Transactions amount",
+                  "description": "Income amount",
                   "example": 100
                 },
                 "owner": {
@@ -639,6 +681,7 @@
       "TransactionRequest": {
         "type": "object",
         "required": ["date", "type", "category", "amount"],
+        "description": "Transaction object",
         "properties": {
           "date": {
             "type": "string",
@@ -678,10 +721,10 @@
       },
       "NewTransaction": {
         "type": "object",
+        "description": "New transaction info",
         "properties": {
           "transaction": {
             "type": "object",
-            "description": "New transaction info",
             "properties": {
               "date": {
                 "type": "string",
@@ -727,7 +770,7 @@
                 "description": "User's id",
                 "example": "507f1f77bcf86cd799439011"
               },
-              "_id": {
+              "id": {
                 "type": "string",
                 "description": "Income id",
                 "example": "507f1f77bcf86cd799439011"
@@ -738,10 +781,10 @@
       },
       "CategoriesResponse": {
         "type": "object",
+        "description": "Categories info",
         "properties": {
           "categories": {
             "type": "object",
-            "description": "Categories info",
             "properties": {
               "totalIncome": {
                 "type": "integer",
@@ -779,12 +822,12 @@
             }
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer"
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "http",
+          "scheme": "bearer"
+        }
       }
     }
   }
