@@ -4,9 +4,11 @@ import {
   BalanceContent,
 } from "./Balance.styled";
 import { amountFormatter } from "../../utils/formatUtils";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Balance = () => {
-  const balance = "100999";
+  const { user } = useAuth();
+  const balance = user.balance;
 
   return (
     <>
