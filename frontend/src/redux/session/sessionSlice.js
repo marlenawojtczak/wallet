@@ -12,7 +12,7 @@ export const sessionSlice = createSlice({
   },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload.userData;
+      state.user = action.payload;
       state.isLoggedIn = !!action.payload;
     },
     setToken: (state, action) => {
@@ -25,7 +25,7 @@ export const sessionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(signIn.fulfilled, (state, action) => {
-        state.user = action.payload.userData;
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -35,7 +35,7 @@ export const sessionSlice = createSlice({
         state.isLoggedIn = false;
       })
       .addCase(signUp.fulfilled, (state, action) => {
-        state.user = action.payload.userData;
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.error = null;
