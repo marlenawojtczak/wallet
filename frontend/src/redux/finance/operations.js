@@ -16,8 +16,6 @@ export const fetchTotals = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-
-      console.log("RESPONSE DATA:", response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
