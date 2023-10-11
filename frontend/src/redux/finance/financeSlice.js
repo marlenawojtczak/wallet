@@ -18,7 +18,13 @@ export const financeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTotals.fulfilled, (state, action) => {
-      state = action.payload;
+      return {
+        ...state,
+        totalIncome: action.payload.totalIncome,
+        totalExpense: action.payload.totalExpense,
+        totalBalance: action.payload.totalBalance,
+        totals: action.payload.totals,
+      };
     });
   },
 });

@@ -17,13 +17,27 @@ import {
   SelectStylesLarge,
 } from "./Table.styled";
 import { months, years, amountFormatter } from "../../utils/formatUtils";
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectTotalIncome,
+  selectTotalExpenses,
+} from "../../redux/finance/selectors";
+import { fetchTotals } from "../../redux/finance/operations";
+import { getColor } from "../../utils/helperFunctions";
 
 export const Table = ({ options }) => {
   // const [selectedMonth, setSelectedMonth] = useState("march");
   // const [selectedYear, setSelectedYear] = useState("2023");
-  const amount = 3000;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTotals());
+  }, []);
+
+  const totalIncome = useSelector(selectTotalIncome);
+  const totalExpenses = useSelector(selectTotalExpenses);
 
   return (
     <TableContainer>
@@ -103,10 +117,10 @@ export const Table = ({ options }) => {
           {options.map((option, index) => (
             <ListItem key={index}>
               <ColorIcon
-                style={{ backgroundColor: `${option.color}` }}
+                style={{ backgroundColor: getColor(option.category) }}
               ></ColorIcon>
-              <Category>{option.label}</Category>
-              <Amount>{amountFormatter(amount)}</Amount>
+              <Category>{option.category}</Category>
+              <Amount>{amountFormatter(option.total)}</Amount>
             </ListItem>
           ))}
         </List>
@@ -114,13 +128,13 @@ export const Table = ({ options }) => {
           <Expenses>
             <span>Expenses:</span>{" "}
             <span style={{ color: `var(--brand-accent)` }}>
-              {amountFormatter(1000)}
+              {amountFormatter(totalExpenses)}
             </span>
           </Expenses>
           <Income>
             <span>Income:</span>{" "}
             <span style={{ color: `var(--brand-secondary)` }}>
-              {amountFormatter(30000)}
+              {amountFormatter(totalIncome)}
             </span>
           </Income>
         </Sum>

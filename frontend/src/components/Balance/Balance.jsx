@@ -4,11 +4,12 @@ import {
   BalanceContent,
 } from "./Balance.styled";
 import { amountFormatter } from "../../utils/formatUtils";
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
+import { selectTotalBalance } from "../../redux/finance/selectors";
+import { useSelector, useDispatch } from "react-redux";
 
 export const Balance = () => {
-  const { user } = useAuth();
-  const balance = user.balance;
+  const totalBalance = useSelector(selectTotalBalance);
 
   return (
     <>
@@ -18,7 +19,7 @@ export const Balance = () => {
           <span style={{ fontWeight: 400, fontFamily: "Circe", fontSize: 30 }}>
             ₴
           </span>{" "}
-          {amountFormatter(balance)}
+          {amountFormatter(totalBalance)}
         </BalanceContent>
       </BalanceElement>
     </>
