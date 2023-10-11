@@ -1,4 +1,4 @@
-import { DiagramTab } from "../../components/DiagramTab";
+import { DiagramTab } from "../../components";
 import { Helmet } from "react-helmet";
 
 const StatisticsPage = () => {
@@ -7,7 +7,6 @@ const StatisticsPage = () => {
       <Helmet>
         <title>Statistics</title>
       </Helmet>
-
       <DiagramTab />
     </>
   );

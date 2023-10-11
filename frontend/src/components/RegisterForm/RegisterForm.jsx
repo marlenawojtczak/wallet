@@ -89,7 +89,17 @@ export const RegisterForm = () => {
         navigate("/login");
       } catch (error) {
         Notiflix.Notify.failure(
-          registrationError || "Error during registration"
+          registrationError || "Error during registration",
+          {
+            width: "300px",
+            position: "center-top",
+            distance: "18px",
+            svgSize: "120px",
+            timeout: 3000,
+            borderRadius: "20px",
+            fontFamily: "Poppins",
+            fontSize: "20px",
+          }
         );
       }
     },

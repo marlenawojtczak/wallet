@@ -1,34 +1,36 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+const showIn = keyframes`
+  0% {
+    opacity: 0;}
+
+  100% {
+    opacity: 1;
+}
+`;
 
 export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 20px;
-  min-width: 280px;
+  animation: ${showIn} 500ms linear;
+  height: 100vh;
 
   @media screen and (min-width: 768px) {
-    min-width: 336px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    padding-top: 65px;
-    min-width: 395px;
+    width: 100%;
   }
 `;
 
 export const StyledTable = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
 `;
 
 export const List = styled.ul`
-  margin: 0;
   list-style: none;
-  padding: 0;
-  height: 100%;
-  max-height: 470px;
+  max-height: 35vh;
   overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px inset,
+    rgba(0, 0, 0, 0.5) 0px -2px 2px, rgba(0, 0, 0, 0.2) 0px 1px 1px inset;
 `;
 
 export const ListItem = styled.li`
@@ -40,7 +42,7 @@ export const ListItem = styled.li`
   font-weight: 400;
   line-height: 18px;
   padding: 14px 20px;
-  margin: 0 20px;
+
   box-shadow: 0px 1px 0px var(--bg-gray);
 
   @media screen and (min-width: 768px) {
@@ -52,6 +54,7 @@ export const ColorIcon = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 2px;
+  z-index: -1;
 `;
 export const Category = styled.p`
   padding-left: 16px;
@@ -89,18 +92,17 @@ export const Income = styled.div`
 export const TableHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  font-family: "Circe";
+  font-family: Circe;
   font-size: 18px;
+  font-style: normal;
   font-weight: 700;
-  margin: 0 20px;
-  padding: 0 20px;
+  line-height: normal;
   background-color: var(--bg-light);
-  height: 58px;
   border-radius: 30px;
-  align-items: center;
+  padding: 15px 20px;
+  margin-bottom: 20px;
 
   @media screen and (min-width: 768px) {
-    margin: 0;
   }
 `;
 
@@ -112,8 +114,10 @@ export const TableSelectors = styled.div`
   margin-top: 32px;
 
   @media screen and (min-width: 768px) {
+    display: flex;
     flex-direction: row;
-    gap: 16px;
+    /* justify-content: space-evenly; */
+    width: 100%;
   }
 
   @media screen and (min-width: 1280px) {
@@ -131,7 +135,7 @@ export const SelectStylesSmall = {
     height: 50,
     backgroundColor: "transparent",
     cursor: "pointer",
-    margin: "0 20px 0 20px",
+
     padding: "0 20px 0 20px",
     border: "1px solid var(--font-dark)",
     "&:hover": {
@@ -194,6 +198,7 @@ export const SelectStylesMedium = {
   }),
   control: (styles) => ({
     ...styles,
+
     borderRadius: 30,
     height: 50,
     backgroundColor: "transparent",
@@ -203,7 +208,7 @@ export const SelectStylesMedium = {
     "&:hover": {
       color: "var(--font-dark)",
     },
-    width: 160,
+    // width: 160,
   }),
   indicatorSeparator: () => ({ display: "none" }),
   valueContainer: (styles) => ({
@@ -234,7 +239,7 @@ export const SelectStylesMedium = {
     boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
     borderRadius: 20,
     overflow: "hidden",
-    width: 160,
+    // width: 160,
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {

@@ -122,6 +122,7 @@ export const StyledButton = styled.div`
     border: none;
     color: var(--font-light);
     background: var(--bg-btn-focus);
+
     box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 4px, rgba(0, 0, 0, 0.3) 3px 3px 4px,
       rgba(0, 0, 0, 0.2) -5px -4px 0px inset;
     transform: scale(1.005);
