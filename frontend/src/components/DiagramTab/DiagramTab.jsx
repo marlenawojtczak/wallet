@@ -1,25 +1,28 @@
 import { DiagramTable } from "./DiagramTab.styled";
 import { Table } from "../Table";
 import { ChartContainer } from "../Chart";
-
-const options = [
-  { label: "Main expenses", color: "var(--expenses)" },
-  { label: "Products", color: "var(--products)" },
-  { label: "Car", color: "var(--car)" },
-  { label: "Self care", color: "var(--self)" },
-  { label: "Child care", color: "var(--child)" },
-  { label: "Household products", color: "var(--house)" },
-  { label: "Education", color: "var(--education)" },
-  { label: "Leisure", color: "var(--leisure)" },
-  { label: "Other expenses", color: "var(--other)" },
-];
+import { useSelector, useDispatch } from "react-redux";
+import { selectTotals } from "../../redux/finance/selectors";
+import { fetchTotals } from "../../redux/finance/operations";
+import { useState, useEffect } from "react";
 
 export const DiagramTab = () => {
+  const totals = useSelector(selectTotals);
+
+  const filteredTotals = totals
+    .filter((item) => item.total !== 0)
+    .filter((item) => item.category !== "Income");
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTotals());
+  }, []);
+
   return (
     <>
       <DiagramTable>
-        <ChartContainer />
-        <Table options={options} />
+        <ChartContainer data={filteredTotals} />
+        <Table options={filteredTotals} />
       </DiagramTable>
     </>
   );

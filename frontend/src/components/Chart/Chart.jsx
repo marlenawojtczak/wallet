@@ -1,32 +1,43 @@
-import { StyledChart, InsideText, ChartHeader } from "./Chart.styled";
+import {
+  StyledChart,
+  InsideText,
+  ChartHeader,
+  WrapperDoughnut,
+} from "./Chart.styled";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import { amountFormatter } from "../../utils/formatUtils";
+import { selectTotalBalance } from "../../redux/finance/selectors";
+import { useSelector, useDispatch } from "react-redux";
+import { selectTotals } from "../../redux/finance/selectors";
+import { getColor } from "../../utils/helperFunctions";
+import { useState, useEffect } from "react";
+import { fetchTotals } from "../../redux/finance/operations";
 
 Chart.register(CategoryScale);
 
 export const ChartContainer = () => {
-  const data = [
-    { label: "Main expenses", color: "#fed057", value: "3000" },
-    { label: "Products", color: "#ffd8d0", value: "3000" },
-    { label: "Car", color: "#fd9498", value: "3000" },
-    { label: "Self care", color: "#c5baff", value: "3000" },
-    { label: "Child care", color: "#6e78e8", value: "3000" },
-    { label: "Household products", color: "#4a56e2", value: "3000" },
-    { label: "Education", color: "#81e1ff", value: "3000" },
-    { label: "Leisure", color: "#24cca7", value: "3000" },
-    { label: "Other expenses", color: "#00ad84", value: "3000" },
-  ];
-  const balance = "100999";
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTotals());
+  }, []);
+
+  const totals = useSelector(selectTotals);
+
+  const filteredTotals = totals
+    .filter((item) => item.total !== 0)
+    .filter((item) => item.category !== "Income");
+
+  const totalBalance = useSelector(selectTotalBalance);
 
   const chartData = {
-    labels: data.map((row) => row.label),
+    labels: filteredTotals.map((row) => row.category),
     datasets: [
       {
         label: "Statistics",
-        data: data.map((row) => row.value),
-        backgroundColor: data.map((row) => row.color),
+        data: filteredTotals.map((row) => row.total),
+        backgroundColor: filteredTotals.map((row) => getColor(row.category)),
         borderWidth: 0,
         weight: 1,
       },
@@ -47,8 +58,10 @@ export const ChartContainer = () => {
     <>
       <StyledChart>
         <ChartHeader>Statistics</ChartHeader>
-        <Doughnut data={chartData} options={options} />
-        <InsideText>₴ {amountFormatter(balance)}</InsideText>
+        <WrapperDoughnut>
+          <Doughnut data={chartData} options={options} />
+          <InsideText>₴ {amountFormatter(totalBalance)}</InsideText>
+        </WrapperDoughnut>
       </StyledChart>
     </>
   );
