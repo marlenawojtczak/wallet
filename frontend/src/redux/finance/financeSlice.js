@@ -11,6 +11,11 @@ const initialState = {
 export const financeSlice = createSlice({
   name: "finance",
   initialState,
+  reducers: {
+    resetFinance: () => {
+      return { ...initialState };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchTotals.fulfilled, (state, action) => {
       state = action.payload;
@@ -18,4 +23,5 @@ export const financeSlice = createSlice({
   },
 });
 
+export const { resetFinance } = financeSlice.actions;
 export const financeReducer = financeSlice.reducer;

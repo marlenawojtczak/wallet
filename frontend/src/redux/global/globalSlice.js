@@ -14,8 +14,12 @@ const globalSlice = createSlice({
     closeModalLogout: (state) => {
       state.isModalLogoutOpen = false;
     },
+    resetGlobal: () => {
+      return { ...initialState };
+    },
   },
 });
 
-export const { openModalLogout, closeModalLogout } = globalSlice.actions;
+export const { openModalLogout, closeModalLogout, resetGlobal } =
+  globalSlice.actions;
 export const globalReducer = globalSlice.reducer;

@@ -1,6 +1,13 @@
-import { setToken } from "./sessionSlice";
+import { setToken, resetSession } from "./sessionSlice";
+import { resetFinance } from "../../redux/finance/financeSlice";
+import {
+  resetGlobal,
+  closeModalLogout,
+} from "../../redux/global/globalSlice.js";
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
@@ -19,7 +26,7 @@ export const signUp = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await api.post("/api/auth/sign-up", credentials);
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.user.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -32,8 +39,8 @@ export const signIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
-      setAuthHeader(res.data.token);
-      thunkAPI.dispatch(setToken(res.data.token));
+      setAuthHeader(res.data.user.accessToken);
+      thunkAPI.dispatch(setToken(res.data.user.accessToken));
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -43,13 +50,26 @@ export const signIn = createAsyncThunk(
 
 export const signOut = createAsyncThunk(
   "session/signOut",
-  async (_, thunkAPI) => {
+  async (token, { dispatch }) => {
+    // console.log("singout token", token);
     try {
-      await api.post("/api/auth/sign-out");
+      await api.post(
+        "/api/auth/sign-out",
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // console.log("signOut successful");
+      dispatch(resetSession());
+      // console.log("resetSession");
+      dispatch(resetGlobal());
+      // console.log("resetGlobal");
+      dispatch(resetFinance());
+      // console.log("resetFinance");
       clearAuthHeader();
-      thunkAPI.dispatch(setToken(null));
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      toast.error("Oops something went wrong during logout.");
+      dispatch(closeModalLogout());
+      throw error;
     }
   }
 );
