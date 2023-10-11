@@ -17,13 +17,25 @@ import {
   SelectStylesLarge,
 } from "./Table.styled";
 import { months, years, amountFormatter } from "../../utils/formatUtils";
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
+import { useSelector, useDispatch } from "react-redux";
+import { selectTotalIncome } from "../../redux/finance/selectors";
+import { fetchTotals } from "../../redux/finance/operations";
 
 export const Table = ({ options }) => {
   // const [selectedMonth, setSelectedMonth] = useState("march");
   // const [selectedYear, setSelectedYear] = useState("2023");
   const amount = 3000;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTotals());
+  }, []);
+
+  const totalIncome = useSelector(selectTotalIncome);
+  console.log("TOTAL INCOME:", totalIncome);
 
   return (
     <TableContainer>
