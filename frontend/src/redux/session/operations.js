@@ -40,6 +40,7 @@ export const signIn = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.user.accessToken);
+      localStorage.setItem("accessToken", res.data.user.accessToken);
       thunkAPI.dispatch(setToken(res.data.user.accessToken));
       return res.data;
     } catch (error) {
@@ -75,10 +76,10 @@ export const signOut = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+  "session/refreshUser",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
+    const persistedToken = state.user.accessToken;
 
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
@@ -86,10 +87,25 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get("/users/current");
+      const res = await api.get("api/users/current");
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+// export const refreshUser = createAsyncThunk(
+//   "user/refreshUser",
+//   async (refreshToken, thunkAPI) => {
+//     try {
+//       const response = await api.post("/api/auth/refresh", {
+//         refreshToken,
+//       });
+//       const newAccessToken = response.data.accessToken;
+//       return newAccessToken;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue("Token refresh error", error.message);
+//     }
+//   }
+// );
