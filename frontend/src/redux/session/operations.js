@@ -14,11 +14,11 @@ const api = axios.create({
 });
 
 const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  api.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
+  api.defaults.headers.common.Authorization = "";
 };
 
 export const signUp = createAsyncThunk(
@@ -40,7 +40,6 @@ export const signIn = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.user.accessToken);
-      localStorage.setItem("accessToken", res.data.user.accessToken);
       thunkAPI.dispatch(setToken(res.data.user.accessToken));
       return res.data;
     } catch (error) {
@@ -52,20 +51,15 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
   "session/signOut",
   async (token, { dispatch }) => {
-    // console.log("singout token", token);
     try {
       await api.post(
         "/api/auth/sign-out",
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      // console.log("signOut successful");
       dispatch(resetSession());
-      // console.log("resetSession");
       dispatch(resetGlobal());
-      // console.log("resetGlobal");
       dispatch(resetFinance());
-      // console.log("resetFinance");
       clearAuthHeader();
     } catch (error) {
       toast.error("Oops something went wrong during logout.");
@@ -80,11 +74,9 @@ export const refreshUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.user.accessToken;
-
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
-
     try {
       setAuthHeader(persistedToken);
       const res = await api.get("api/users/current");
@@ -94,18 +86,3 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-
-// export const refreshUser = createAsyncThunk(
-//   "user/refreshUser",
-//   async (refreshToken, thunkAPI) => {
-//     try {
-//       const response = await api.post("/api/auth/refresh", {
-//         refreshToken,
-//       });
-//       const newAccessToken = response.data.accessToken;
-//       return newAccessToken;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue("Token refresh error", error.message);
-//     }
-//   }
-// );

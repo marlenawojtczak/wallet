@@ -5,7 +5,5 @@ export const selectRegistrationError = (state) => state.session.error;
 export const selectAccesssToken = (state) => state.session.user.accessToken;
 export const selectToken = (state) => {
   const token = state.session.token;
-  // console.log("Token:", token);
   return token;
 };
-
