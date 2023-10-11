@@ -29,4 +29,5 @@ export const financeSlice = createSlice({
   },
 });
 
+export const { resetFinance } = financeSlice.actions;
 export const financeReducer = financeSlice.reducer;
