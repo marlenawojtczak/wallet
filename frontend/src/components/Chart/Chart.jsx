@@ -1,9 +1,4 @@
-import {
-  StyledChart,
-  InsideText,
-  ChartHeader,
-  WrapperDoughnut,
-} from "./Chart.styled";
+import { StyledChart, InsideText, ChartHeader } from "./Chart.styled";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
@@ -15,7 +10,38 @@ import { getColor } from "../../utils/helperFunctions";
 import { useState, useEffect } from "react";
 import { fetchTotals } from "../../redux/finance/operations";
 
+const plugin = {
+  id: "emptyDoughnut",
+  afterDraw(chart, args, options) {
+    const { datasets } = chart.data;
+    const { color, width, radiusDecrease } = options;
+    let hasData = false;
+
+    for (let i = 0; i < datasets.length; i += 1) {
+      const dataset = datasets[i];
+      hasData |= dataset.data.length > 0;
+    }
+
+    if (!hasData) {
+      const {
+        chartArea: { left, top, right, bottom },
+        ctx,
+      } = chart;
+      const centerX = (left + right) / 2;
+      const centerY = (top + bottom) / 2;
+      const r = Math.min(right - left, bottom - top) / 2;
+
+      ctx.beginPath();
+      ctx.lineWidth = width || 2;
+      ctx.strokeStyle = color || "rgba(255, 128, 0, 0.5)";
+      ctx.arc(centerX, centerY, r - radiusDecrease || 0, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+  },
+};
+
 Chart.register(CategoryScale);
+Chart.register(plugin);
 
 export const ChartContainer = () => {
   const dispatch = useDispatch();
@@ -45,11 +71,16 @@ export const ChartContainer = () => {
   };
 
   const options = {
-    cutout: "75%",
+    cutout: "70%",
     maintainAspectRatio: true,
     plugins: {
       legend: {
         display: false,
+      },
+      emptyDoughnut: {
+        color: "#fff",
+        width: 42,
+        radiusDecrease: 22,
       },
     },
   };
@@ -58,10 +89,8 @@ export const ChartContainer = () => {
     <>
       <StyledChart>
         <ChartHeader>Statistics</ChartHeader>
-        <WrapperDoughnut>
-          <Doughnut data={chartData} options={options} />
-          <InsideText>₴ {amountFormatter(totalBalance)}</InsideText>
-        </WrapperDoughnut>
+        <Doughnut data={chartData} options={options} />
+        <InsideText>₴ {amountFormatter(totalBalance)}</InsideText>
       </StyledChart>
     </>
   );
