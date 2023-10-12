@@ -15,14 +15,32 @@ import {
 } from "./ModalAddTransaction.styled";
 
 import { useState } from "react";
-
+import { useFormik } from "formik";
+import { Notiflix } from "notiflix";
+import moment from "moment";
+// import * as Yup from "yup";
+import { useDispatch } from "react-redux";
 import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
+import { addTransaction } from "../../redux/finance/operations";
+
+// const validationSchema = Yup.object().shape({
+//   name: Yup.string().required("First name is required"),
+//   email: Yup.string()
+//     .email("Invalid email address")
+//     .required("Email is required"),
+//   password: Yup.string()
+//     .min(6, "Password must be at least 6 characters")
+//     .max(12, "Password must be at most 12 characters")
+//     .required("Password is required"),
+//   confirmPassword: Yup.string()
+//     .oneOf([Yup.ref("password"), null], "Passwords must match")
+//     .required("Confirm Password is required"),
+// });
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleChange = () => {
     setChecked((prev) => !prev);
@@ -40,6 +58,40 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     { value: "other expenses", label: "Other expenses" },
   ];
 
+  const formik = useFormik({
+    initialValues: {
+      category: "",
+      value: "",
+      date: moment(new Date()).format("DD.MM.YYYY"),
+      comment: "",
+    },
+    // validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      try {
+        await dispatch(
+          addTransaction({
+            category: values.category,
+            value: values.value,
+            date: values.date,
+            comment: values.comment,
+          })
+        );
+        console.log("Test");
+      } catch (error) {
+        Notiflix.Notify.failure("Cannot add transaction");
+      }
+    },
+  });
+
+  const handleCategoryChange = (selectedOption) => {
+    if (!checked) {
+      formik.setFieldValue("category", selectedOption.label);
+    } else {
+      formik.setFieldValue("category", "");
+    }
+  };
+
+  console.log(formik.values);
   return (
     <>
       <ModalBackground isOpen={isOpen} onClick={onClose}>
@@ -48,33 +100,57 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             <CloseButton onClick={onClose} />
             <ModalHeader>Add transaction</ModalHeader>
 
-            <SwitchButton checked={checked} onChange={handleChange} />
+            <SwitchButton checked={!checked} onChange={handleChange} />
 
-            {checked ? (
+            {!checked ? (
               <StyledCategoryInput
+                name="category"
                 placeholder="Select a category"
-                defaultValue={selectedOption}
-                onChange={setSelectedOption}
+                value={options.find(
+                  (option) => option.value === formik.values.category
+                )}
+                onChange={handleCategoryChange}
+                onBlur={formik.handleBlur}
                 options={options}
               />
             ) : (
               <></>
             )}
             <SectionWrapper>
-              <ValueInput />
+              <ValueInput
+                name="value"
+                placeholder="0.00"
+                onChange={formik.handleChange}
+                value={formik.values.value}
+              />
 
               <StyledDateTime
-                value={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
+                name="date"
+                value={formik.values.date}
+                onChange={(date) =>
+                  formik.setFieldValue(
+                    "date",
+                    moment(date, "DD.MM.YYYY").format("DD.MM.YYYY")
+                  )
+                }
+                onBlur={formik.handleBlur}
                 dateFormat="DD.MM.YYYY"
                 timeFormat={false}
+                closeOnSelect={true}
               />
               <CalendarIcon />
             </SectionWrapper>
 
-            <CommentInput placeholder="Comment" />
+            <CommentInput
+              name="comment"
+              placeholder="Comment"
+              onChange={formik.handleChange}
+              value={formik.values.comment}
+            />
 
-            <AddButton>Add</AddButton>
+            <AddButton type="submit" onClick={formik.handleSubmit}>
+              Add
+            </AddButton>
             <CancelButton onClick={onClose}>Cancel</CancelButton>
           </ModalWrapper>
         </ModalContent>

@@ -51,12 +51,12 @@ export const ModalContent = styled.div`
 
   @media screen and (min-width: 769px) and (max-width: 1279px) {
     width: 540px;
-    height: ${(props) => (props.isHidden ? "603px" : "508px")};
+    height: ${(props) => (props.isHidden ? "508px" : "603px")};
   }
 
   @media screen and (min-width: 1280px) {
     width: 540px;
-    height: ${(props) => (props.isHidden ? "603px" : "508px")};
+    height: ${(props) => (props.isHidden ? "508px" : "603px")};
   }
 `;
 

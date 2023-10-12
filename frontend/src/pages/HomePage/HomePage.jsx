@@ -1,25 +1,32 @@
 import { Helmet } from "react-helmet";
 // import Media from "react-media";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Wrapper } from "../../components/HomeTab/HomeTab.styled";
 // import { Balance } from "../../components/Balance";
 // import { Currency } from "../../components/Currency";
 import { HomeTab } from "../../components/HomeTab";
 import { ButtonAddTransactions } from "../../components/ButtonAddTransactions";
 import { ModalAddTransaction } from "../../components/ModalAddTransaction";
+import {
+  openModalAddTransaction,
+  closeModalAddTransaction,
+} from "../../redux/global/globalSlice";
+import { selectIsModalAddTransactionOpen } from "../../redux/global/selectors";
 
 const HomePage = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const isOpen = useSelector(selectIsModalAddTransactionOpen);
 
   const handleOpenModal = () => {
-    setModalOpen(true);
+    dispatch(openModalAddTransaction());
   };
 
   const handleCloseModal = () => {
-    setModalOpen(false);
+    dispatch(closeModalAddTransaction());
   };
 
-  if (modalOpen) {
+  if (isOpen) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
@@ -38,7 +45,7 @@ const HomePage = () => {
         {/* <Currency /> */}
         <HomeTab />
         <ButtonAddTransactions onClick={handleOpenModal} />
-        <ModalAddTransaction isOpen={modalOpen} onClose={handleCloseModal} />
+        <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
       </Wrapper>
     </>
   );

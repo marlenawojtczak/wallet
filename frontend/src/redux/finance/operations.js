@@ -43,3 +43,23 @@ export const fetchTotalsByDate = createAsyncThunk(
     }
   }
 );
+
+export const addTransaction = createAsyncThunk(
+  "finance/addTransaction",
+  async (credentials, thunkAPI) => {
+    const accessToken = selectAccesssToken(thunkAPI.getState());
+    console.log("accesToken", accessToken);
+    try {
+      const res = await api.post("/api/transactions", {
+        credentials,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
