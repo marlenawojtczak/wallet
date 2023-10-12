@@ -22,3 +22,24 @@ export const fetchTotals = createAsyncThunk(
     }
   }
 );
+
+export const fetchTotalsByDate = createAsyncThunk(
+  "finance/fetchTotalsByDate",
+  async ({ month, year }, thunkAPI) => {
+    const accessToken = selectAccesssToken(thunkAPI.getState());
+    try {
+      const response = await api.get(
+        `/api/transactions/categories/${year}/${month}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

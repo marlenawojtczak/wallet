@@ -24,17 +24,22 @@ import {
   selectTotalIncome,
   selectTotalExpenses,
 } from "../../redux/finance/selectors";
-import { fetchTotals } from "../../redux/finance/operations";
+import { fetchTotals, fetchTotalsByDate } from "../../redux/finance/operations";
 import { getColor } from "../../utils/helperFunctions";
 
 export const Table = ({ options }) => {
-  // const [selectedMonth, setSelectedMonth] = useState("march");
-  // const [selectedYear, setSelectedYear] = useState("2023");
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchTotals());
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
+  }, [dispatch, selectedMonth, selectedYear]);
 
   const totalIncome = useSelector(selectTotalIncome);
   const totalExpenses = useSelector(selectTotalExpenses);
@@ -53,15 +58,13 @@ export const Table = ({ options }) => {
             {matches.small && (
               <>
                 <Select
-                  // value={selectedMonth}
-                  // onChange={(e) => setSelectedMonth(e.target.value)}
+                  onChange={(e) => setSelectedMonth(e.value)}
                   options={months()}
                   styles={SelectStylesSmall}
                   placeholder={"Month"}
                 ></Select>
                 <Select
-                  // value={selectedYear}
-                  // onChange={(e) => setSelectedYear(e.target.value)}
+                  onChange={(e) => setSelectedYear(e.value)}
                   options={years()}
                   styles={SelectStylesSmall}
                   placeholder={"Year"}
@@ -71,15 +74,13 @@ export const Table = ({ options }) => {
             {matches.medium && (
               <>
                 <Select
-                  // value={selectedMonth}
-                  // onChange={(e) => setSelectedMonth(e.target.value)}
+                  onChange={(e) => setSelectedMonth(e.value)}
                   options={months()}
                   styles={SelectStylesMedium}
                   placeholder={"Month"}
                 ></Select>
                 <Select
-                  // value={selectedYear}
-                  // onChange={(e) => setSelectedYear(e.target.value)}
+                  onChange={(e) => setSelectedYear(e.value)}
                   options={years()}
                   styles={SelectStylesMedium}
                   placeholder={"Year"}
@@ -89,15 +90,13 @@ export const Table = ({ options }) => {
             {matches.large && (
               <>
                 <Select
-                  // value={selectedMonth}
-                  // onChange={(e) => setSelectedMonth(e.target.value)}
+                  onChange={(e) => setSelectedMonth(e.value)}
                   options={months()}
                   styles={SelectStylesLarge}
                   placeholder={"Month"}
                 ></Select>
                 <Select
-                  // value={selectedYear}
-                  // onChange={(e) => setSelectedYear(e.target.value)}
+                  onChange={(e) => setSelectedYear(e.value)}
                   options={years()}
                   styles={SelectStylesLarge}
                   placeholder={"Year"}
