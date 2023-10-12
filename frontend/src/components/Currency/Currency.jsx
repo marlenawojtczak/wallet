@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const currency_API_URL = "http://api.nbp.pl/api/exchangerates/rates/c/";
+const currency_API_URL = "https://api.nbp.pl/api/exchangerates/rates/c/";
 
 async function fetchCurrency(currencyCode) {
   try {
