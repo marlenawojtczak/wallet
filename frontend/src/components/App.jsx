@@ -1,8 +1,9 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { SharedLayout, AccessLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
+import { useAuth } from "../hooks/useAuth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { useSelector } from "react-redux";
@@ -11,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 // import { ModalEditTransaction } from "./ModalEditTransaction";
 // import { motion, AnimatePresence } from "framer-motion";
 // import Media from "react-media";
-
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -22,6 +22,12 @@ const Statistics = lazy(() => import("../pages/StatisticsPage/StatisticsPage"));
 const Currency = lazy(() => import("../pages/CurrencyPage/CurrencyPage"));
 
 export const App = () => {
+  const { getCurrentUser } = useAuth();
+
+  useEffect(() => {
+    getCurrentUser();
+  }, [getCurrentUser]);
+
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
