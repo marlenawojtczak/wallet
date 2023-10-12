@@ -14,11 +14,11 @@ const api = axios.create({
 });
 
 const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  api.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
+  api.defaults.headers.common.Authorization = "";
 };
 
 export const signUp = createAsyncThunk(
@@ -51,20 +51,15 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
   "session/signOut",
   async (token, { dispatch }) => {
-    // console.log("singout token", token);
     try {
       await api.post(
         "/api/auth/sign-out",
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      // console.log("signOut successful");
       dispatch(resetSession());
-      // console.log("resetSession");
       dispatch(resetGlobal());
-      // console.log("resetGlobal");
       dispatch(resetFinance());
-      // console.log("resetFinance");
       clearAuthHeader();
     } catch (error) {
       toast.error("Oops something went wrong during logout.");
@@ -75,18 +70,16 @@ export const signOut = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+  "session/refreshUser",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
+    const persistedToken = state.user.accessToken;
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
-
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get("/users/current");
+      const res = await api.get("api/users/current");
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -14,15 +14,11 @@ export const sessionSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      // console.log("setUser action dispatched with payload:", action.payload);
       state.user = action.payload;
       state.isLoggedIn = !!action.payload;
     },
     setToken: (state, action) => {
-      // console.log("State before update:", state);
-      // console.log("setToken action dispatched with payload:", action.payload);
       state.token = action.payload;
-      // console.log("State after update:", state);
     },
     setRefreshing: (state, action) => {
       state.isRefreshing = action.payload;
@@ -33,28 +29,48 @@ export const sessionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      .addCase(signUp.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signUp.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.user.accessToken;
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(signUp.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(signIn.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(signIn.fulfilled, (state, action) => {
-        // console.log(
-        //   "signIn fulfilled with action.payload.user:",
-        //   action.payload.user
-        // );
         state.user = action.payload.user;
         state.token = action.payload.user.accessToken;
         state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(signIn.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(signOut.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(signOut.fulfilled, (state) => {
         state.user = null;
         state.token = null;
         state.isLoggedIn = false;
-      })
-      .addCase(signUp.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.accessToken;
-        state.isLoggedIn = true;
+        state.isLoading = false;
         state.error = null;
       })
-      .addCase(signUp.rejected, (state, action) => {
-        state.error = action.payload;
+      .addCase(signOut.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
       });
   },
 });
