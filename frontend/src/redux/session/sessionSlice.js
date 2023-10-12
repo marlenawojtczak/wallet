@@ -29,24 +29,48 @@ export const sessionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signIn.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.user.accessToken;
-        state.isLoggedIn = true;
-      })
-      .addCase(signOut.fulfilled, (state) => {
-        state.user = null;
-        state.token = null;
-        state.isLoggedIn = false;
+
+      .addCase(signUp.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.user.accessToken;
         state.isLoggedIn = false;
+        state.isLoading = false;
         state.error = null;
       })
       .addCase(signUp.rejected, (state, action) => {
-        state.error = action.payload;
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(signIn.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signIn.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.user.accessToken;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(signIn.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(signOut.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signOut.fulfilled, (state) => {
+        state.user = null;
+        state.token = null;
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(signOut.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
       });
   },
 });
