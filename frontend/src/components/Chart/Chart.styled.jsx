@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const StyledChart = styled.div`
-  width: 280px;
-  margin: auto;
-  padding: 0 20px;
   position: relative;
 
   @media screen and (min-width: 768px) {
@@ -12,6 +9,7 @@ export const StyledChart = styled.div`
     height: 100%;
     padding: 0;
     margin: 0 0 auto auto;
+    width: 100%;
   }
   @media screen and (min-width: 1280px) {
     width: 288px;

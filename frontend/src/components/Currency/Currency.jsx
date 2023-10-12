@@ -3,13 +3,9 @@ import {
   TableContainer,
   Table,
   TableHead,
-  TableFirstRow,
   TableBody,
-  TableSecondRow,
   TableNextRows,
 } from "./Currency.styled";
-
-import img from "../../assets/images/mountains.png";
 
 export const Currency = () => {
   return (
@@ -17,16 +13,11 @@ export const Currency = () => {
       <TableContainer>
         <Table>
           <TableHead>
-            <TableFirstRow>
-              <th>Currency</th>
-              <th>Purchase</th>
-              <th>Sale</th>
-            </TableFirstRow>
+            <th>Currency</th>
+            <th>Purchase</th>
+            <th>Sale</th>
           </TableHead>
           <TableBody>
-            <TableSecondRow>
-              <img src={img} alt="mountains" />
-            </TableSecondRow>
             <TableNextRows>
               <td>USD</td>
               <td>27.55</td>

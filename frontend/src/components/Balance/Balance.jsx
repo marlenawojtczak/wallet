@@ -2,6 +2,7 @@ import {
   BalanceElement,
   BalanceHeader,
   BalanceContent,
+  Cash,
 } from "./Balance.styled";
 import { amountFormatter } from "../../utils/formatUtils";
 // import { useAuth } from "../../hooks/useAuth";
@@ -16,6 +17,8 @@ export const Balance = () => {
       <BalanceElement>
         <BalanceHeader>your balance</BalanceHeader>
         <BalanceContent>
+          <Cash>₴</Cash>
+          {amountFormatter(balance)}
           <span style={{ fontWeight: 400, fontFamily: "Circe", fontSize: 30 }}>
             ₴
           </span>{" "}

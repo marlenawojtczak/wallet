@@ -15,9 +15,9 @@ import {
   Photo,
   MobileLogo,
   Image,
-} from "./BackgroundImage.styled";
+} from "./AccessLayout.styled";
 
-export const BackgroundImage = () => {
+export const AccessLayout = () => {
   const location = useLocation();
 
   const getPhoto = () => {

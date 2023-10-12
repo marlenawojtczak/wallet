@@ -169,7 +169,7 @@ export const RightContent = styled.div`
     height: 100vh;
     flex: 1.4;
     align-items: center;
-    background-color: var(--bg-accent-modified);
+    backdrop-filter: blur(40px);
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   }
 `;

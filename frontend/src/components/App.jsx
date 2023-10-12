@@ -1,10 +1,17 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { SharedLayout, BackgroundImage } from "../components";
+import { SharedLayout, AccessLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import { useSelector } from "react-redux";
+// import { ModalLogout } from "./ModalLogout";
+// import { ModalAddTransaction } from "./ModalAddTransaction";
+// import { ModalEditTransaction } from "./ModalEditTransaction";
+// import { motion, AnimatePresence } from "framer-motion";
+// import Media from "react-media";
+
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -19,7 +26,7 @@ export const App = () => {
     <>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route element={<BackgroundImage />}>
+          <Route element={<AccessLayout />}>
             <Route
               path="/register"
               element={

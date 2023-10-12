@@ -2,7 +2,6 @@ import { ReactComponent as HomeIcon } from "../../assets/icons/home-mobile.svg";
 import { ReactComponent as StatisticsIcon } from "../../assets/icons/statistics-mobile.svg";
 import { ReactComponent as CurrencyIcon } from "../../assets/icons/currency-mobile.svg";
 import {
-  NavWrapper,
   NavList,
   Link,
   NavName,
@@ -11,26 +10,24 @@ import {
 
 export const Navigation = () => {
   return (
-    <NavWrapper>
-      <NavList>
-        <li>
-          <Link to="/">
-            <HomeIcon></HomeIcon>
-            <NavName>Home</NavName>
-          </Link>
-        </li>
-        <li>
-          <Link to="/statistics">
-            <StatisticsIcon></StatisticsIcon>
-            <NavName>Statistics</NavName>
-          </Link>
-        </li>
-        <ListElementCurrency>
-          <Link to="/currency">
-            <CurrencyIcon></CurrencyIcon>
-          </Link>
-        </ListElementCurrency>
-      </NavList>
-    </NavWrapper>
+    <NavList>
+      <li>
+        <Link to="/home">
+          <HomeIcon />
+          <NavName>Home</NavName>
+        </Link>
+      </li>
+      <li>
+        <Link to="/statistics">
+          <StatisticsIcon />
+          <NavName>Statistics</NavName>
+        </Link>
+      </li>
+      <ListElementCurrency>
+        <Link to="/currency">
+          <CurrencyIcon />
+        </Link>
+      </ListElementCurrency>
+    </NavList>
   );
 };
