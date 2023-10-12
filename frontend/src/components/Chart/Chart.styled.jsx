@@ -4,11 +4,12 @@ export const StyledChart = styled.div`
   width: 280px;
   margin: auto;
   padding: 0 20px;
-  /* position: relative; */
+  position: relative;
 
   @media screen and (min-width: 768px) {
     margin-top: 0;
     width: 336px;
+    height: 100%;
     padding: 0;
     margin: 0 0 auto auto;
   }
@@ -17,16 +18,12 @@ export const StyledChart = styled.div`
   }
 `;
 
-export const WrapperDoughnut = styled.div`
-  position: relative;
-`;
-
 export const InsideText = styled.p`
   color: var(--font-dark);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 50%);
   font-family: "Circe";
   font-size: 18px;
   font-weight: 700;
