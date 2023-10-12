@@ -6,7 +6,7 @@ import { JWT_SECRET } from "../config/config.js";
 
 export const singup = async (req, res, next) => {
   const body = req.body;
-  const { email, username } = body;
+  const { email } = body;
 
   const user = await User.findOne({ email });
 
@@ -21,9 +21,13 @@ export const singup = async (req, res, next) => {
   });
 
   return res.status(201).send({
-    email,
-    username,
-    id: newUser._id,
+    message: "Register successful",
+    user: {
+      id: newUser._id,
+      username: newUser.username,
+      email: newUser.email,
+      balance: newUser.balance,
+    },
   });
 };
 
@@ -65,14 +69,17 @@ export const signin = async (req, res, next) => {
 
   res.status(200).send({
     message: "Login successful",
-    accessToken,
-    refreshToken,
-    sid: newSession._id,
-    userData: {
+    user: {
       id: user._id,
       username: user.username,
       email: user.email,
       balance: user.balance,
+      accessToken,
+      refreshToken,
+    },
+    session: {
+      sid: newSession._id,
+      uid: newSession.uid,
     },
   });
 };
@@ -124,10 +131,16 @@ export const refreshTokens = async (req, res, next) => {
     await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
     return res.status(200).send({
-      accessToken,
-      refreshToken,
-      sid: newSession._id,
-      uid: user._id,
+      message: "Token refreshed",
+      user: {
+        id: user._id,
+        accessToken,
+        refreshToken,
+      },
+      session: {
+        sid: newSession._id,
+        uid: newSession.uid,
+      },
     });
   }
   return res.status(400).send({ message: "No token provided" });

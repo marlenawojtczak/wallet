@@ -3,30 +3,67 @@ import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import { amountFormatter } from "../../utils/formatUtils";
+import { selectTotalBalance } from "../../redux/finance/selectors";
+import { useSelector, useDispatch } from "react-redux";
+import { selectTotals } from "../../redux/finance/selectors";
+import { getColor } from "../../utils/helperFunctions";
+import { useState, useEffect } from "react";
+import { fetchTotals } from "../../redux/finance/operations";
+
+const plugin = {
+  id: "emptyDoughnut",
+  afterDraw(chart, args, options) {
+    const { datasets } = chart.data;
+    const { color, width, radiusDecrease } = options;
+    let hasData = false;
+
+    for (let i = 0; i < datasets.length; i += 1) {
+      const dataset = datasets[i];
+      hasData |= dataset.data.length > 0;
+    }
+
+    if (!hasData) {
+      const {
+        chartArea: { left, top, right, bottom },
+        ctx,
+      } = chart;
+      const centerX = (left + right) / 2;
+      const centerY = (top + bottom) / 2;
+      const r = Math.min(right - left, bottom - top) / 2;
+
+      ctx.beginPath();
+      ctx.lineWidth = width || 2;
+      ctx.strokeStyle = color || "rgba(255, 128, 0, 0.5)";
+      ctx.arc(centerX, centerY, r - radiusDecrease || 0, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+  },
+};
 
 Chart.register(CategoryScale);
+Chart.register(plugin);
 
 export const ChartContainer = () => {
-  const data = [
-    { label: "Main expenses", color: "#fed057", value: "3000" },
-    { label: "Products", color: "#ffd8d0", value: "3000" },
-    { label: "Car", color: "#fd9498", value: "3000" },
-    { label: "Self care", color: "#c5baff", value: "3000" },
-    { label: "Child care", color: "#6e78e8", value: "3000" },
-    { label: "Household products", color: "#4a56e2", value: "3000" },
-    { label: "Education", color: "#81e1ff", value: "3000" },
-    { label: "Leisure", color: "#24cca7", value: "3000" },
-    { label: "Other expenses", color: "#00ad84", value: "3000" },
-  ];
-  const balance = "100999";
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTotals());
+  }, []);
+
+  const totals = useSelector(selectTotals);
+
+  const filteredTotals = totals
+    .filter((item) => item.total !== 0)
+    .filter((item) => item.category !== "Income");
+
+  const totalBalance = useSelector(selectTotalBalance);
 
   const chartData = {
-    labels: data.map((row) => row.label),
+    labels: filteredTotals.map((row) => row.category),
     datasets: [
       {
         label: "Statistics",
-        data: data.map((row) => row.value),
-        backgroundColor: data.map((row) => row.color),
+        data: filteredTotals.map((row) => row.total),
+        backgroundColor: filteredTotals.map((row) => getColor(row.category)),
         borderWidth: 0,
         weight: 1,
       },
@@ -34,11 +71,16 @@ export const ChartContainer = () => {
   };
 
   const options = {
-    cutout: "75%",
+    cutout: "70%",
     maintainAspectRatio: true,
     plugins: {
       legend: {
         display: false,
+      },
+      emptyDoughnut: {
+        color: "#fff",
+        width: 42,
+        radiusDecrease: 22,
       },
     },
   };
@@ -48,7 +90,7 @@ export const ChartContainer = () => {
       <StyledChart>
         <ChartHeader>Statistics</ChartHeader>
         <Doughnut data={chartData} options={options} />
-        <InsideText>₴ {amountFormatter(balance)}</InsideText>
+        <InsideText>₴ {amountFormatter(totalBalance)}</InsideText>
       </StyledChart>
     </>
   );

@@ -6,6 +6,7 @@ export const StyledChart = styled.div`
   @media screen and (min-width: 768px) {
     margin-top: 0;
     width: 336px;
+    height: 100%;
     padding: 0;
     margin: 0 0 auto auto;
     width: 100%;

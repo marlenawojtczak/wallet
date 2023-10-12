@@ -1,15 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchTotals } from "./operations";
 
 const initialState = {
-  user: {
-    name: "",
-  },
+  totalIncome: 0,
+  totalExpense: 0,
+  totalBalance: 0,
+  totals: [],
 };
 
-const financeSlice = createSlice({
+export const financeSlice = createSlice({
   name: "finance",
   initialState,
-  extraReducers: {},
+  reducers: {
+    resetFinance: () => {
+      return { ...initialState };
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTotals.fulfilled, (state, action) => {
+      return {
+        ...state,
+        totalIncome: action.payload.totalIncome,
+        totalExpense: action.payload.totalExpense,
+        totalBalance: action.payload.totalBalance,
+        totals: action.payload.totals,
+      };
+    });
+  },
 });
 
+export const { resetFinance } = financeSlice.actions;
 export const financeReducer = financeSlice.reducer;
