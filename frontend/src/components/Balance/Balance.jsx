@@ -18,7 +18,7 @@ export const Balance = () => {
         <BalanceHeader>your balance</BalanceHeader>
         <BalanceContent>
           <Cash>₴</Cash>
-          {amountFormatter(balance)}
+          {/* {amountFormatter(balance)} */}
           <span style={{ fontWeight: 400, fontFamily: "Circe", fontSize: 30 }}>
             ₴
           </span>{" "}

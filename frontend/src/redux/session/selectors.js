@@ -6,3 +6,4 @@ export const selectToken = (state) => {
   const token = state.session.token;
   return token;
 };
+export const selectRegistrationError = (state) => state.session.error;
