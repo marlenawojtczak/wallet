@@ -8,68 +8,27 @@ const showIn = keyframes`
 }
 `;
 
-// export const Home = styled.div`
-// @media screen and (max-width: 768px) {
-//   height: 282px;
-//   border: 2px solid red;
-//   margin: 32px 20px 0;
-//   border-radius: 10px;
-//   text-align: center
-
-// }
-// @media screen and (min-width: 769px) and (max-width: 1279px) {
-//   height: 58px;
-//   width: 704px;
-//   border: 2px solid orange;
-//   margin: 20px auto;
-//   border-radius: 30px;
-//   text-align: center
-// }
-// @media screen and (min-width: 1280px) {
-//   width: 715px;
-//   height: 58px;
-//   border: 2px solid blue;
-//   border-radius: 30px;
-//   position: absolute;
-//   right: 16px;
-//   top: 126px;
-// `;
-
 export const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     height: 568px;
-    border: 2px solid black;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     position: relative;
   }
   @media screen and (min-width: 769px) and (max-width: 1279px) {
     height: 1024px;
-    border: 2px solid orange;
     margin: 0 auto;
   }
   @media screen and (min-width: 1280px) {
     height: 720px;
-    border: 2px solid blue;
     margin: 0 auto;
   }
 `;
 
 export const TableContainer = styled.div`
   margin: 0 20px;
-
-  text-align: center;
-  border-left: 5px solid var(--brand-accent);
-
-  // @media screen and (min-width: 769px) and (max-width: 1279px) {
-  //   min-width: 336px;
-  // }
-
-  // @media screen and (min-width: 1280px) {
-  //   padding-top: 65px;
-  //   min-width: 395px;
-  // }
 `;
 
 export const TableHeader = styled.div`
@@ -79,15 +38,7 @@ export const TableHeader = styled.div`
   font-weight: 700;
   background-color: var(--bg-light);
   align-items: center;
-
-  // @media screen and (min-width: 769px) and (max-width: 1279px) {
-  //   min-width: 336px;
-  // }
-
-  // @media screen and (min-width: 1280px) {
-  //   padding-top: 65px;
-  //   min-width: 395px;
-  // }
+  padding-left: 20px;
 `;
 
 export const List = styled.ul`
@@ -97,6 +48,8 @@ export const List = styled.ul`
   height: 100%;
   max-height: 470px;
   overflow-y: auto;
+  margin-bottom: 8px;
+  border-radius: 10px;
 `;
 
 export const ListItem = styled.tr`
@@ -109,12 +62,25 @@ export const ListItem = styled.tr`
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-  padding: 0 20px;
   box-shadow: 0px 1px 0px var(--bg-gray);
+  border-left-width: 5px;
+  border-left-style: solid;
+  background-color: var(--bg-light);
+  border-bottom: 1px solid var(--bg-gray);
+`;
 
-  @media screen and (min-width: 768px) {
-    margin: 0;
-  }
+export const ListItemValue = styled.tr`
+  display: flex;
+  justify-content: space-between;
+  height: 47px;
+  align-items: center;
+  font-family: "Circe";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  padding: 0;
+  padding-right: 20px;
 `;
 
 export const ItemValue = styled.p`
@@ -129,6 +95,22 @@ export const StyledTable = styled.div`
 `;
 
 export const MainListItem = styled.li``;
+
+export const EditText = styled.span`
+  font-family: Circe;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.28px;
+  padding: 0;
+  margin: 0;
+  padding-left: 5px;
+  &:hover {
+    cursor: pointer;
+    color: var(--brand-accent);
+  }
+`;
 
 /////////////
 
@@ -160,7 +142,6 @@ export const TableHeaderBig = styled.thead`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
   border-radius: 30px 30px 0 0;
   background-color: var(--bg-light);
 `;
@@ -173,7 +154,6 @@ export const HeaderCell = styled.th`
 export const ListBig = styled.tbody`
   display: flex;
   flex-direction: column;
-
   padding: 12px 20px 52px;
   font-family: Circe;
   font-size: 16px;
@@ -221,6 +201,7 @@ export const DeleteButton = styled.button`
 export const Button = styled.button`
   border-color: transparent;
   background-color: transparent;
+  padding: 0;
   &:hover {
     cursor: pointer;
   }
