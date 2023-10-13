@@ -2,32 +2,38 @@ import styled from "styled-components";
 
 export const StyledChart = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
 
   @media screen and (min-width: 768px) {
-    margin-top: 0;
-    width: 336px;
-    height: 100%;
-    padding: 0;
-    margin: 0 0 auto auto;
-    width: 100%;
+    margin-bottom: 0px;
   }
-  @media screen and (min-width: 1280px) {
-    width: 288px;
+`;
+
+export const WrapperDonat = styled.div`
+  width: 280px;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  @media screen and (min-width: 768px) {
+    width: 336px;
+    height: 336px;
   }
 `;
 
 export const InsideText = styled.p`
   color: var(--font-dark);
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, 50%);
   font-family: "Circe";
   font-size: 18px;
   font-weight: 700;
-
   @media screen and (min-width: 768px) {
-    padding-top: 6px;
+    top: 42%;
   }
 `;
 
@@ -37,11 +43,9 @@ export const ChartHeader = styled.p`
   font-size: 30px;
   font-weight: 400;
   margin-bottom: 8px;
+  color: var(--font-dark);
 
   @media screen and (min-width: 768px) {
-    margin-bottom: 20px;
-  }
-  @media screen and (min-width: 1280px) {
     margin-bottom: 20px;
   }
 `;

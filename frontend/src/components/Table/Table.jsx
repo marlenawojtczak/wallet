@@ -1,5 +1,7 @@
 import Media from "react-media";
 import {
+  WrapperMonth,
+  WrapperYear,
   TableContainer,
   StyledTable,
   List,
@@ -73,34 +75,42 @@ export const Table = ({ options }) => {
             )}
             {matches.medium && (
               <>
-                <Select
-                  onChange={(e) => setSelectedMonth(e.value)}
-                  options={months()}
-                  styles={SelectStylesMedium}
-                  placeholder={"Month"}
-                ></Select>
-                <Select
-                  onChange={(e) => setSelectedYear(e.value)}
-                  options={years()}
-                  styles={SelectStylesMedium}
-                  placeholder={"Year"}
-                ></Select>
+                <WrapperMonth>
+                  <Select
+                    onChange={(e) => setSelectedMonth(e.value)}
+                    options={months()}
+                    styles={SelectStylesMedium}
+                    placeholder={"Month"}
+                  ></Select>
+                </WrapperMonth>
+                <WrapperYear>
+                  <Select
+                    onChange={(e) => setSelectedYear(e.value)}
+                    options={years()}
+                    styles={SelectStylesMedium}
+                    placeholder={"Year"}
+                  ></Select>
+                </WrapperYear>
               </>
             )}
             {matches.large && (
               <>
-                <Select
-                  onChange={(e) => setSelectedMonth(e.value)}
-                  options={months()}
-                  styles={SelectStylesLarge}
-                  placeholder={"Month"}
-                ></Select>
-                <Select
-                  onChange={(e) => setSelectedYear(e.value)}
-                  options={years()}
-                  styles={SelectStylesLarge}
-                  placeholder={"Year"}
-                ></Select>
+                <WrapperMonth>
+                  <Select
+                    onChange={(e) => setSelectedMonth(e.value)}
+                    options={months()}
+                    styles={SelectStylesLarge}
+                    placeholder={"Month"}
+                  ></Select>
+                </WrapperMonth>
+                <WrapperYear>
+                  <Select
+                    onChange={(e) => setSelectedYear(e.value)}
+                    options={years()}
+                    styles={SelectStylesLarge}
+                    placeholder={"Year"}
+                  ></Select>
+                </WrapperYear>
               </>
             )}
           </TableSelectors>
@@ -125,13 +135,13 @@ export const Table = ({ options }) => {
         </List>
         <Sum>
           <Expenses>
-            <span>Expenses:</span>{" "}
+            <span>Expenses:</span>
             <span style={{ color: `var(--brand-accent)` }}>
               {amountFormatter(totalExpenses)}
             </span>
           </Expenses>
           <Income>
-            <span>Income:</span>{" "}
+            <span>Income:</span>
             <span style={{ color: `var(--brand-secondary)` }}>
               {amountFormatter(totalIncome)}
             </span>

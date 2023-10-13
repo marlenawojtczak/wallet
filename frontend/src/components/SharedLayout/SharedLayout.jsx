@@ -21,8 +21,7 @@ import {
 
 import {
   BackgroundContainer,
-  // BackgroundElipseBlue,
-  // BackgroundElipsePink,
+  Filter,
   Wrapper,
   WrapperNav,
   BalanceNav,
@@ -34,31 +33,30 @@ import {
 
 export const SharedLayout = () => {
   return (
-    <div>
+    <>
       <Header />
       <BackgroundContainer>
-        {/* <BackgroundElipseBlue /> */}
-        {/* <BackgroundElipsePink /> */}
-
-        <Wrapper>
-          <WrapperLeftAndUpSite>
-            <WrapperNavBal>
-              <WrapperNav>
-                <Navigation />
-              </WrapperNav>
-              <BalanceNav>
-                <Balance />
-              </BalanceNav>
-            </WrapperNavBal>
-            <CurrencyNav>
-              <Currency />
-            </CurrencyNav>
-          </WrapperLeftAndUpSite>
-          <WrapperRightAndDownSite>
-            <Outlet />
-          </WrapperRightAndDownSite>
-        </Wrapper>
+        <Filter>
+          <Wrapper>
+            <WrapperLeftAndUpSite>
+              <WrapperNavBal>
+                <WrapperNav>
+                  <Navigation />
+                </WrapperNav>
+                <BalanceNav>
+                  <Balance />
+                </BalanceNav>
+              </WrapperNavBal>
+              <CurrencyNav>
+                <Currency />
+              </CurrencyNav>
+            </WrapperLeftAndUpSite>
+            <WrapperRightAndDownSite>
+              <Outlet />
+            </WrapperRightAndDownSite>
+          </Wrapper>
+        </Filter>
       </BackgroundContainer>
-    </div>
+    </>
   );
 };

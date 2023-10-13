@@ -1,4 +1,9 @@
-import { StyledChart, InsideText, ChartHeader } from "./Chart.styled";
+import {
+  StyledChart,
+  InsideText,
+  ChartHeader,
+  WrapperDonat,
+} from "./Chart.styled";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
@@ -87,9 +92,11 @@ export const ChartContainer = () => {
 
   return (
     <>
+      <ChartHeader>Statistics</ChartHeader>
       <StyledChart>
-        <ChartHeader>Statistics</ChartHeader>
-        <Doughnut data={chartData} options={options} />
+        <WrapperDonat>
+          <Doughnut data={chartData} options={options} />
+        </WrapperDonat>
         <InsideText>₴ {amountFormatter(totalBalance)}</InsideText>
       </StyledChart>
     </>
