@@ -45,29 +45,27 @@ export const fetchTotalsByDate = createAsyncThunk(
   }
 );
 
-
 export const fetchTransactions = createAsyncThunk(
   "finance/fetchTransactions",
   async (_, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get("/api/transactions", {
-    headers: {
+        headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-     return response.data;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-        
 export const addTransaction = createAsyncThunk(
   "finance/addTransaction",
   async (credentials, thunkAPI) => {
-    const accessToken = selectAccesssToken(thunkAPI.getState());
+    const accessToken = selectAccessToken(thunkAPI.getState());
     console.log("accesToken", accessToken);
     try {
       const res = await api.post("/api/transactions", {
@@ -76,7 +74,7 @@ export const addTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-       return res.data;
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
