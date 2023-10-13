@@ -20,6 +20,7 @@ const loaderpulse = keyframes`
 
 export const LoaderContainer = styled.div`
   /* background-color: var(--bg-modal-overlay); */
+  background-color: transparent;
   height: 100%;
   width: 100%;
   position: fixed;

@@ -1,5 +1,22 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
+import { ReactComponent as LogoIcon } from "../../assets/icons/wallet.svg";
+
+const rotateAnimation = keyframes`
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+`;
+
+export const RotatingLogoIcon = styled(LogoIcon)`
+  animation: ${rotateAnimation} 3000ms cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+`;
 
 export const Link = styled(NavLink)`
   text-decoration: none;

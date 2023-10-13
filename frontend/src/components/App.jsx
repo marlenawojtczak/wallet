@@ -28,6 +28,15 @@ const Login = lazy(() => import("../pages/LoginPage/LoginPage"));
 const Statistics = lazy(() => import("../pages/StatisticsPage/StatisticsPage"));
 const Currency = lazy(() => import("../pages/CurrencyPage/CurrencyPage"));
 
+if (typeof window !== "undefined") {
+  import("../pages/HomePage/HomePage");
+  import("../pages/RegistrationPage/RegistrationPage");
+  import("../pages/LoginPage/LoginPage");
+  import("../pages/StatisticsPage/StatisticsPage");
+  import("../pages/CurrencyPage/CurrencyPage");
+  // ... reszta komponentów ...
+}
+
 export const App = () => {
   // const [theme, themeToggler, mountedComponent] = useDarkMode();
   // const themeMode = theme === "light" ? lightTheme : darkTheme;
