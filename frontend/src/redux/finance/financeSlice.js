@@ -11,6 +11,10 @@ const initialState = {
   totalBalance: 0,
   totals: [],
   transactions: [],
+  category: "",
+  value: "",
+  date: "",
+  comment: "",
 };
 
 export const financeSlice = createSlice({
@@ -47,6 +51,16 @@ export const financeSlice = createSlice({
           transactions: action.payload.transactions,
         };
       });
+
+    // .addCase(addTransaction.fulfilled, (state, action) => {
+    //   return {
+    //     ...state,
+    //     category: action.payload.category,
+    //     value: action.payload.value,
+    //     date: action.payload.date,
+    //     comment: action.payload.comment,
+    //   };
+    // });
   },
 });
 

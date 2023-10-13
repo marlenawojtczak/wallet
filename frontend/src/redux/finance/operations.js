@@ -45,18 +45,38 @@ export const fetchTotalsByDate = createAsyncThunk(
   }
 );
 
+
 export const fetchTransactions = createAsyncThunk(
   "finance/fetchTransactions",
   async (_, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
-      const response = await api.get(`/api/transactions`, {
+      const response = await api.get("/api/transactions", {
+    headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+     return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+        
+export const addTransaction = createAsyncThunk(
+  "finance/addTransaction",
+  async (credentials, thunkAPI) => {
+    const accessToken = selectAccesssToken(thunkAPI.getState());
+    console.log("accesToken", accessToken);
+    try {
+      const res = await api.post("/api/transactions", {
+        credentials,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("Test", response.data);
-      return response.data;
+       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
