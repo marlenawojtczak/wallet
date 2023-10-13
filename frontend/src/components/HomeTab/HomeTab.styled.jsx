@@ -217,3 +217,14 @@ export const DeleteButton = styled.button`
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
   }
 `;
+
+export const Button = styled.button`
+  border-color: transparent;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover svg path#Icon {
+    fill: var(--brand-accent);
+  }
+`;

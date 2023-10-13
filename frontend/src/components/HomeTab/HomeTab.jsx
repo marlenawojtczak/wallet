@@ -12,8 +12,8 @@ import {
   HeaderCell,
   DataCell,
   DeleteButton,
+  Button,
 } from "./HomeTab.styled";
-
 import {
   fetchTransactions,
   deleteTransaction,
@@ -27,13 +27,9 @@ import {
   typeFormatter,
   amountColorFormatter,
 } from "../../utils/formatUtils";
+import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 
 export const HomeTab = () => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchTransactions());
-  // }, []);
-
   const fetchedTransactions = useSelector(selectTransactions);
   // console.log(fetchedTransactions);
 
@@ -41,6 +37,10 @@ export const HomeTab = () => {
   useEffect(() => {
     dispatch(fetchTransactions());
   }, [fetchedTransactions]);
+
+  // const openModal = () => {
+  //   dispatch(openModalEdit());
+  // };
 
   const options = [
     { header: "Date", value: "Today" },
@@ -91,7 +91,12 @@ export const HomeTab = () => {
                   >
                     {amountFormatter(option.amount)}
                   </DataCell>
-                  <DataCell style={{ width: 14 }}>E</DataCell>
+                  <DataCell style={{ width: 14 }}>
+                    {/* <Button type="button" onClick={openModal}> */}
+                    <Button type="button">
+                      <EditIcon></EditIcon>
+                    </Button>
+                  </DataCell>
                   <DataCell style={{ width: 67 }}>
                     <DeleteButton
                       type="submit"
