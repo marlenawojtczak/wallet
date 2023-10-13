@@ -7,6 +7,7 @@ import {
   Table,
   List,
   ListItem,
+  ListItemValue,
   ListBig,
   TableNextRowsBig,
   HeaderCell,
@@ -14,6 +15,7 @@ import {
   DeleteButton,
   Button,
   StyledTable,
+  EditText,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -44,17 +46,38 @@ export const HomeTab = () => {
   //   dispatch(openModalEdit());
   // };
 
-  const options = [
-    { header: "Date", value: "Today" },
-    { header: "Type", value: "I'm blu da bu di bi da" },
-    { header: "Category", value: "Dogos w kanapce" },
-    { header: "Comment", value: "Makarena" },
-    { header: "Sum", value: "14000" },
-  ];
-
   const TransactionsDeleteHandler = (id) => {
     dispatch(deleteTransaction(id));
   };
+
+  const transformedTableTransactions = fetchedTransactions.map(
+    (item, index) => {
+      const deleteBtn = (
+        <DeleteButton
+          type="submit"
+          onClick={() => TransactionsDeleteHandler(item._id)}
+        >
+          Delete
+        </DeleteButton>
+      );
+
+      const editBtn = (
+        <Button type="button">
+          <EditIcon></EditIcon>
+          <EditText>Edit</EditText>
+        </Button>
+      );
+
+      return [
+        { header: "Date", value: dateFormatter(item.date) },
+        { header: "Type", value: item.type },
+        { header: "Category", value: item.category },
+        { header: "Comment", value: item.comment },
+        { header: "Sum", value: amountFormatter(item.amount.toString()) },
+        { header: deleteBtn, value: editBtn },
+      ];
+    }
+  );
 
   return (
     <>
@@ -132,14 +155,25 @@ export const HomeTab = () => {
             {matches.small && (
               <TableContainer>
                 <StyledTable>
-                  <List options={options}>
-                    {options.map((option, index) => (
-                      <ListItem key={index}>
-                        <TableHeader>{option.header}</TableHeader>
-                        <ListItem>{option.value}</ListItem>
-                      </ListItem>
-                    ))}
-                  </List>
+                  {transformedTableTransactions.map((item, rowIndex) => {
+                    const type = item[1].value;
+
+                    return (
+                      <List key={rowIndex}>
+                        {item.map((option, columnIndex) => (
+                          <ListItem
+                            key={columnIndex}
+                            style={{
+                              borderLeftColor: amountColorFormatter(type),
+                            }}
+                          >
+                            <TableHeader>{option.header}</TableHeader>
+                            <ListItemValue>{option.value}</ListItemValue>
+                          </ListItem>
+                        ))}
+                      </List>
+                    );
+                  })}
                 </StyledTable>
               </TableContainer>
             )}
