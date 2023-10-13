@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+const showIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+100% {
+    opacity: 1;
+}
+`;
 
 // export const Home = styled.div`
 // @media screen and (max-width: 768px) {
@@ -50,7 +58,7 @@ export const Wrapper = styled.div`
 
 export const TableContainer = styled.div`
   margin: 0 20px;
-  border-radius: 10px;
+
   text-align: center;
   border-left: 5px solid var(--brand-accent);
 
@@ -91,7 +99,7 @@ export const List = styled.ul`
   overflow-y: auto;
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.tr`
   display: flex;
   justify-content: space-between;
   height: 47px;
@@ -118,4 +126,105 @@ export const StyledTable = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+export const MainListItem = styled.li``;
+
+/////////////
+
+export const TableWrapper = styled.div`
+  height: 100vh;
+  animation: ${showIn} 500ms linear;
+  width: 100%;
+`;
+
+export const TableContainerBig = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  margin-top: 10px;
+`;
+
+export const Table = styled.table`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TableHeaderBig = styled.thead`
+  display: flex;
+  padding: 12px 20px;
+  gap: 20px;
+  justify-content: space-between;
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  border-radius: 30px 30px 0 0;
+  background-color: var(--bg-light);
+`;
+
+export const HeaderCell = styled.th`
+  text-align: left;
+  width: 14%;
+`;
+
+export const ListBig = styled.tbody`
+  display: flex;
+  flex-direction: column;
+
+  padding: 12px 20px 52px;
+  font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
+export const TableNextRowsBig = styled.tr`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0 14px 0;
+  justify-content: space-between;
+  box-shadow: 0px 1px 0px var(--bg-gray);
+`;
+export const DataCell = styled.td`
+  text-align: left;
+  width: 14%;
+`;
+export const DeleteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 67px;
+  font-size: 14px;
+  font-style: normal;
+  font-family: Circe;
+  font-weight: 400;
+  line-height: normal;
+
+  border: none;
+  border-radius: 18px;
+  padding: 4px 0;
+  color: var(--bg-light);
+  background-color: var(--brand-secondary);
+  cursor: pointer;
+  margin: auto;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+export const Button = styled.button`
+  border-color: transparent;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover svg path#Icon {
+    fill: var(--brand-accent);
+  }
 `;

@@ -3,6 +3,8 @@ import {
   fetchTotals,
   fetchTotalsByDate,
   fetchTransactions,
+  deleteTransaction,
+  updateTransaction,
 } from "./operations";
 
 const initialState = {
@@ -11,8 +13,9 @@ const initialState = {
   totalBalance: 0,
   totals: [],
   transactions: [],
+  type: "",
   category: "",
-  value: "",
+  amount: "",
   date: "",
   comment: "",
 };
@@ -48,7 +51,22 @@ export const financeSlice = createSlice({
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         return {
           ...state,
-          transactions: action.payload.transactions,
+          transactions: action.payload,
+        };
+      })
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        return {
+          ...state,
+        };
+      })
+      .addCase(updateTransaction.fulfilled, (state, action) => {
+        return {
+          ...state,
+          date: action.payload.date,
+          type: action.payload.type,
+          category: action.payload.category,
+          comment: action.payload.comment,
+          amount: action.payload.amount,
         };
       });
 

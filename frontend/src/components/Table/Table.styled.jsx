@@ -101,6 +101,7 @@ export const TableHeader = styled.div`
   border-radius: 30px;
   padding: 15px 20px;
   margin-bottom: 20px;
+  padding-right: 130px;
 
   @media screen and (min-width: 768px) {
   }
