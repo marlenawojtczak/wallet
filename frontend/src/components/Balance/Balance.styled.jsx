@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const showIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+100% {
+    opacity: 1;
+}
+`;
 
 export const BalanceElement = styled.div`
   display: flex;
@@ -7,9 +16,12 @@ export const BalanceElement = styled.div`
   border-radius: 30px;
   background-color: var(--bg-light);
   width: 100%;
+  width: calc(100% - 64px);
+  animation: ${showIn} 500ms linear;
 
   @media screen and (min-width: 768px) {
     padding: 8px 40px;
+    width: calc(100% - 80px);
   }
 `;
 export const BalanceHeader = styled.p`
@@ -21,14 +33,13 @@ export const BalanceHeader = styled.p`
   text-transform: uppercase;
   color: var(--font-grey);
 `;
-export const Cash = styled.p`
-  font-family: Poppins;
+export const Cash = styled.span`
+  font-family: "Circe";
   font-size: 30px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   color: var(--font-dark);
 `;
+
 export const BalanceContent = styled.p`
   display: flex;
   gap: 8px;

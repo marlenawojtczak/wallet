@@ -1,12 +1,20 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
-import { SharedLayout, AccessLayout } from "../components";
+import {
+  SharedLayout,
+  AccessLayout,
+  ModalLogout,
+  ModalAddTransaction,
+  ModalEditTransaction,
+} from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { useAuth } from "../hooks/useAuth";
 import { Loader } from "../components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion, AnimatePresence } from "framer-motion";
+import { useSelector } from "react-redux";
 // import { ThemeProvider } from "styled-components";
 // import { GlobalStyles } from "../components/darkMode/globalStyles";
 // import { lightTheme, darkTheme } from "../components/darkMode/Themes";
@@ -27,15 +35,6 @@ const Register = lazy(() =>
 const Login = lazy(() => import("../pages/LoginPage/LoginPage"));
 const Statistics = lazy(() => import("../pages/StatisticsPage/StatisticsPage"));
 const Currency = lazy(() => import("../pages/CurrencyPage/CurrencyPage"));
-
-if (typeof window !== "undefined") {
-  import("../pages/HomePage/HomePage");
-  import("../pages/RegistrationPage/RegistrationPage");
-  import("../pages/LoginPage/LoginPage");
-  import("../pages/StatisticsPage/StatisticsPage");
-  import("../pages/CurrencyPage/CurrencyPage");
-  // ... reszta komponentów ...
-}
 
 export const App = () => {
   // const [theme, themeToggler, mountedComponent] = useDarkMode();

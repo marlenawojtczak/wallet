@@ -7,6 +7,7 @@ import {
   Balance,
   Currency,
 } from "../../components";
+import { useSpring, animated } from "react-spring";
 
 // export const SharedLayout = () => {
 //   return (
@@ -32,6 +33,10 @@ import {
 } from "./SharedLayout.styled";
 
 export const SharedLayout = () => {
+  const springAnimation = useSpring({
+    from: { opacity: 0, transform: "translateY(-20%)" },
+    to: { opacity: 1, transform: "translateY(0%)" },
+  });
   return (
     <>
       <Header />
@@ -40,9 +45,11 @@ export const SharedLayout = () => {
           <Wrapper>
             <WrapperLeftAndUpSite>
               <WrapperNavBal>
-                <WrapperNav>
-                  <Navigation />
-                </WrapperNav>
+                <animated.div style={springAnimation}>
+                  <WrapperNav>
+                    <Navigation />
+                  </WrapperNav>
+                </animated.div>
                 <BalanceNav>
                   <Balance />
                 </BalanceNav>

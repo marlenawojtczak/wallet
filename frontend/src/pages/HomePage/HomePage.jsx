@@ -13,6 +13,8 @@ import {
   closeModalAddTransaction,
 } from "../../redux/global/globalSlice";
 import { selectIsModalAddTransactionOpen } from "../../redux/global/selectors";
+import Media from "react-media";
+import { Balance, Currency } from "../../components";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -44,6 +46,18 @@ const HomePage = () => {
         </Media> */}
         {/* <Currency /> */}
         <HomeTab />
+        <Media query={{ maxWidth: 767 }}>
+          {(matches) =>
+            matches ? (
+              <Balance />
+            ) : (
+              <>
+                <Balance />
+                <Currency />
+              </>
+            )
+          }
+        </Media>
         <ButtonAddTransactions onClick={handleOpenModal} />
         <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
       </Wrapper>

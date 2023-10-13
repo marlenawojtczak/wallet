@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import { Currency } from "../../components/Currency/Currency";
+import { Balance } from "../../components";
 
 const CurrencyPage = () => {
   return (
@@ -7,6 +8,7 @@ const CurrencyPage = () => {
       <Helmet>
         <title>Currency</title>
       </Helmet>
+
       <Currency />
     </>
   );
