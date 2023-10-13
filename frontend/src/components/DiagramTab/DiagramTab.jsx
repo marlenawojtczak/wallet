@@ -1,4 +1,4 @@
-import { DiagramTable } from "./DiagramTab.styled";
+import { DiagramTable, WrapperDonat, WrapperTable } from "./DiagramTab.styled";
 import { Table } from "../Table";
 import { ChartContainer } from "../Chart";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,8 +21,12 @@ export const DiagramTab = () => {
   return (
     <>
       <DiagramTable>
-        <ChartContainer data={filteredTotals} />
-        <Table options={filteredTotals} />
+        <WrapperDonat>
+          <ChartContainer data={filteredTotals} />
+        </WrapperDonat>
+        <WrapperTable>
+          <Table options={filteredTotals} />
+        </WrapperTable>
       </DiagramTable>
     </>
   );

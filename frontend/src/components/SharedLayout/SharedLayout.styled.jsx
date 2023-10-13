@@ -6,45 +6,18 @@ export const BackgroundContainer = styled.div`
   background-color: var(--bg-accent);
 
   @media screen and (min-width: 768px) {
-    /* background-image: url(${backgroundElipseBlue});
-    background-repeat: no-repeat;
-    background-position: left bottom; */
-
-    /* position: relative; */
+    position: relative;
+    background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
+    background-repeat: no-repeat, no-repeat;
+    background-position: right -25vw top, left bottom;
   }
   @media screen and (min-width: 1280px) {
-    /* padding: 0;
-    justify-content: center; */
+    background-position: right top, left bottom;
   }
 `;
 
-export const BackgroundElipseBlue = styled.div`
-  @media screen and (min-width: 768px) {
-    /* position: absolute; */
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-image: url(${backgroundElipseBlue});
-    background-repeat: no-repeat;
-    background-position: left bottom;
-  }
-`;
-
-export const BackgroundElipsePink = styled.div`
-  @media screen and (min-width: 768px) {
-    /* position: absolute; */
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-image: url(${backgroundElipsePink});
-    background-repeat: no-repeat;
-    background-position: left -80% top;
-  }
-  @media screen and (min-width: 1280px) {
-    background-position: right -100% top;
-  }
+export const Filter = styled.div`
+  backdrop-filter: blur(40px);
 `;
 
 export const Wrapper = styled.div`
@@ -53,13 +26,14 @@ export const Wrapper = styled.div`
   padding-top: 30px;
   margin: 0 20px;
 
-  backdrop-filter: blur(40px);
-
   @media screen and (min-width: 768px) {
     display: flex;
     margin: 0 32px;
   }
   @media screen and (min-width: 1280px) {
+    padding-top: 0;
+    margin: 0 20px;
+    flex-direction: row;
   }
 `;
 
@@ -68,6 +42,18 @@ export const WrapperNavBal = styled.div`
     flex: 1;
   }
   @media screen and (min-width: 1280px) {
+    flex: 0;
+  }
+`;
+
+export const CurrencyNav = styled.div`
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex: 1;
+  }
+  @media screen and (min-width: 1280px) {
+    flex: 0;
   }
 `;
 
@@ -78,14 +64,30 @@ export const WrapperLeftAndUpSite = styled.div`
     margin-bottom: 20px;
   }
   @media screen and (min-width: 1280px) {
+    flex-direction: column;
+    flex: 30%;
+    padding-top: 40px;
+    margin-bottom: 0px;
+    padding-right: 60px;
+    border-right-style: solid;
+    border-right-color: #e7e5f2;
+    border-right-width: 1px;
+    filter: drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.6))
+      drop-shadow(-1px 0px 0px rgba(0, 0, 0, 0.05));
   }
 `;
 
 export const WrapperRightAndDownSite = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   @media screen and (min-width: 768px) {
-    display: flex;
   }
   @media screen and (min-width: 1280px) {
+    padding-top: 40px;
+    padding-left: 60px;
+    flex: 60%;
   }
 `;
 
@@ -110,16 +112,3 @@ export const BalanceNav = styled.div`
   @media screen and (min-width: 1280px) {
   }
 `;
-
-export const CurrencyNav = styled.div`
-  display: none;
-  @media screen and (min-width: 768px) {
-    display: flex;
-    flex: 1;
-    width: 100%;
-  }
-`;
-
-export const LeftSite = styled.div``;
-
-export const RightSite = styled.div``;

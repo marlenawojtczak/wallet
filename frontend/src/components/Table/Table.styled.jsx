@@ -111,17 +111,31 @@ export const TableSelectors = styled.div`
   flex-direction: column;
   gap: 20px;
   margin-bottom: 20px;
-  margin-top: 32px;
 
   @media screen and (min-width: 768px) {
-    display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
-    width: 100%;
+    margin-top: 32px;
   }
 
   @media screen and (min-width: 1280px) {
     gap: 32px;
+  }
+`;
+
+export const WrapperMonth = styled.div`
+  @media screen and (min-width: 768px) {
+    flex: 1;
+  }
+
+  @media screen and (min-width: 1280px) {
+  }
+`;
+export const WrapperYear = styled.div`
+  @media screen and (min-width: 768px) {
+    flex: 1;
+  }
+
+  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -208,7 +222,7 @@ export const SelectStylesMedium = {
     "&:hover": {
       color: "var(--font-dark)",
     },
-    // width: 160,
+    // width: "100%",
   }),
   indicatorSeparator: () => ({ display: "none" }),
   valueContainer: (styles) => ({
@@ -239,7 +253,6 @@ export const SelectStylesMedium = {
     boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
     borderRadius: 20,
     overflow: "hidden",
-    // width: 160,
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
@@ -276,7 +289,7 @@ export const SelectStylesLarge = {
     "&:hover": {
       color: "var(--font-dark)",
     },
-    width: 181,
+    // width: 181,
   }),
   indicatorSeparator: () => ({ display: "none" }),
   valueContainer: (styles) => ({

@@ -76,9 +76,30 @@ export const LoginForm = () => {
     navigate("/register");
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      formik.handleSubmit();
+      const errors = Object.values(formik.errors);
+      if (errors.length > 0) {
+        const errorMessage = errors.map((error) => `<br /> ${error}`).join();
+        Notiflix.Notify.failure("<br />" + errorMessage, {
+          width: "300px",
+          position: "center-top",
+          distance: "18px",
+          svgSize: "120px",
+          timeout: 3000,
+          borderRadius: "20px",
+          fontFamily: "Poppins",
+          fontSize: "20px",
+        });
+      }
+    }
+  };
+
   return (
     <StyledWrapper>
-      <StyledForm onSubmit={formik.handleSubmit}>
+      <StyledForm onKeyPress={handleKeyPress}>
         <StyledLogoMobile>
           <WalletLogoMobile />
         </StyledLogoMobile>
@@ -124,26 +145,7 @@ export const LoginForm = () => {
           <StyledButton
             type="submit"
             active={location.pathname === "/login"}
-            onClick={(e) => {
-              e.preventDefault();
-              formik.handleSubmit();
-              const errors = Object.values(formik.errors);
-              if (errors.length > 0) {
-                const errorMessage = errors
-                  .map((error) => `<br /> ${error}`)
-                  .join();
-                Notiflix.Notify.failure("<br />" + errorMessage, {
-                  width: "300px",
-                  position: "center-top",
-                  distance: "18px",
-                  svgSize: "120px",
-                  timeout: 3000,
-                  borderRadius: "20px",
-                  fontFamily: "Poppins",
-                  fontSize: "20px",
-                });
-              }
-            }}
+            onClick={formik.handleSubmit}
           >
             LOG IN
           </StyledButton>
@@ -154,3 +156,82 @@ export const LoginForm = () => {
     </StyledWrapper>
   );
 };
+
+//   return (
+//     <StyledWrapper>
+//       <StyledForm onSubmit={formik.handleSubmit}>
+//         <StyledLogoMobile>
+//           <WalletLogoMobile />
+//         </StyledLogoMobile>
+//         <StyledLogo>
+//           <WalletLogo />
+//         </StyledLogo>
+
+//         <StyledInputContainer>
+//           <StyledIcon>
+//             <EmailIcon />
+//           </StyledIcon>
+//           <StyledInput
+//             name="email"
+//             type="email"
+//             placeholder="E-mail"
+//             onChange={formik.handleChange}
+//             onBlur={formik.handleBlur}
+//             value={formik.values.email}
+//           />
+//         </StyledInputContainer>
+
+//         <StyledInputContainer>
+//           <StyledIcon>
+//             <LockIcon />
+//           </StyledIcon>
+//           <StyledInput
+//             name="password"
+//             type={passwordVisible ? "text" : "password"}
+//             placeholder="Password"
+//             onChange={formik.handleChange}
+//             onBlur={formik.handleBlur}
+//             value={formik.values.password}
+//           />
+//           <StyledButtonIcon
+//             type="button"
+//             onClick={handleTogglePasswordVisibility}
+//           >
+//             {passwordVisible ? <EyeOpenIcon /> : <EyeCloseIcon />}
+//           </StyledButtonIcon>
+//         </StyledInputContainer>
+
+//         <StyledButtons>
+//           <StyledButton
+//             type="submit"
+//             active={location.pathname === "/login"}
+//             onClick={(e) => {
+//               e.preventDefault();
+//               formik.handleSubmit();
+//               const errors = Object.values(formik.errors);
+//               if (errors.length > 0) {
+//                 const errorMessage = errors
+//                   .map((error) => `<br /> ${error}`)
+//                   .join();
+//                 Notiflix.Notify.failure("<br />" + errorMessage, {
+//                   width: "300px",
+//                   position: "center-top",
+//                   distance: "18px",
+//                   svgSize: "120px",
+//                   timeout: 3000,
+//                   borderRadius: "20px",
+//                   fontFamily: "Poppins",
+//                   fontSize: "20px",
+//                 });
+//               }
+//             }}
+//           >
+//             LOG IN
+//           </StyledButton>
+
+//           <StyledButton onClick={registerButton}>REGISTER</StyledButton>
+//         </StyledButtons>
+//       </StyledForm>
+//     </StyledWrapper>
+//   );
+// };

@@ -34,49 +34,78 @@ const showBack = keyframes`
  }
 `;
 
+const fadeIn = keyframes`
+  0% {
+    transform: translateX(300%);
+    opacity: 0;
+  }
+100% {
+ opacity: 1;
+    transform: translateX(0%);
+  }
+`;
+
+const fadeInPc = keyframes`
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+100% {
+ opacity: 1;
+    transform: translateX(20%);
+  }
+`;
+
+export const ManWithBasket = styled.img`
+  @media screen and (min-width: 768px) {
+    opacity: 0;
+    animation: ${fadeIn} 1s ease-in-out forwards;
+    position: absolute;
+    top: 12%;
+    left: 30%;
+    width: 20%;
+  }
+  @media screen and (min-width: 1280px) {
+    animation: ${fadeInPc} 1s ease-in-out forwards;
+    top: 31%;
+    left: 14vw;
+    width: 13vw;
+  }
+`;
+
+export const WomanWithMobile = styled.img`
+  @media screen and (min-width: 768px) {
+    opacity: 0;
+    animation: ${fadeIn} 1s ease-in-out forwards;
+    position: absolute;
+    top: 12%;
+    left: 38%;
+    width: 10%;
+  }
+  @media screen and (min-width: 1280px) {
+    animation: ${fadeInPc} 1s ease-in-out forwards;
+    top: 30%;
+    left: 22vw;
+    width: 7vw;
+  }
+`;
+
 export const BackgroundContainer = styled.div`
   @media screen and (min-width: 768px) {
+    position: relative;
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-accent);
     height: 100vh;
-    position: relative;
     padding: 60px 118px;
+    background-color: var(--bg-accent);
+    background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
+    background-repeat: no-repeat, no-repeat;
+    background-position: right -25vw top, left bottom;
   }
   @media screen and (min-width: 1280px) {
     padding: 0;
     justify-content: center;
-  }
-`;
-
-export const BackgroundElipseBlue = styled.div`
-  background-image: none;
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-image: url(${backgroundElipseBlue});
-    background-repeat: no-repeat;
-    background-position: left bottom;
-  }
-`;
-
-export const BackgroundElipsePink = styled.div`
-  background-image: none;
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-image: url(${backgroundElipsePink});
-    background-repeat: no-repeat;
-    background-position: right -80% top;
-  }
-  @media screen and (min-width: 1280px) {
-    background-position: right -10% top;
+    background-position: right top, left bottom;
   }
 `;
 

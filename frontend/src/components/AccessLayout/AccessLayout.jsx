@@ -1,12 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom";
-import man from "../../assets/images/man.png";
-import woman from "../../assets/images/woman.png";
+import { useState, useEffect } from "react";
+import manBackground from "../../assets/images/mobileMan.png";
+import womanBackground from "../../assets/images/mobileWoman.png";
 import logoMobile from "../../assets/images/logoMobile.png";
 
 import {
   BackgroundContainer,
-  BackgroundElipseBlue,
-  BackgroundElipsePink,
   Wrapper,
   LogoWrapper,
   Info,
@@ -15,28 +14,53 @@ import {
   Photo,
   MobileLogo,
   Image,
+  ManWithBasket,
+  WomanWithMobile,
 } from "./AccessLayout.styled";
+
+import goMan from "../../assets/images/manOnly.png";
+import goWoman from "../../assets/images/womanOnly.png";
 
 export const AccessLayout = () => {
   const location = useLocation();
 
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowImage(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const getPhoto = () => {
     if (location.pathname === "/login") {
-      return man;
+      return manBackground;
     } else if (location.pathname === "/register") {
-      return woman;
+      return womanBackground;
     } else {
-      return man;
+      return manBackground;
     }
   };
+
   return (
     <BackgroundContainer>
-      <BackgroundElipseBlue />
-      <BackgroundElipsePink />
       <Wrapper>
         <LogoWrapper>
           <PhotoWrapper>
             <Photo src={getPhoto()} alt="Shopping" />
+            {showImage && (
+              <ManWithBasket
+                src={location.pathname === "/login" ? goMan : {}}
+                alt=""
+              />
+            )}
+            {showImage && (
+              <WomanWithMobile
+                src={location.pathname === "/register" ? goWoman : {}}
+                alt=""
+              />
+            )}
           </PhotoWrapper>
           <Info>Finance App</Info>
         </LogoWrapper>
