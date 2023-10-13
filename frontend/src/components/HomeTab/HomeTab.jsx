@@ -13,6 +13,9 @@ import {
   Sum,
 } from "../Table/Table.styled";
 import { Home } from "./HomeTab.styled";
+import { fetchTransactions } from "../../redux/finance/operations";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const options = [
   { header: "Date", value: "Today" },
@@ -23,6 +26,11 @@ const options = [
 ];
 
 export const HomeTab = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, []);
+
   return (
     <>
       {/* <Home> */}
