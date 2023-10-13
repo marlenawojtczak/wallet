@@ -7,3 +7,4 @@ export const selectToken = (state) => {
   return token;
 };
 export const selectRegistrationError = (state) => state.session.error;
+export const selectAccesssToken = (state) => state.session.user.accessToken;
