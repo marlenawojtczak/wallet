@@ -4,6 +4,7 @@ import { SharedLayout, AccessLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { useAuth } from "../hooks/useAuth";
+import { Loader } from "../components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { ThemeProvider } from "styled-components";
@@ -42,7 +43,8 @@ export const App = () => {
     <>
       {/* <GlobalStyles /> */}
       {/* <Toggle theme={theme} toggleTheme={themeToggler} /> */}
-      <Suspense fallback={<div>Loading...</div>}>
+
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<AccessLayout />}>
             <Route

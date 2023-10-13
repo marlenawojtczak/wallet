@@ -1,14 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  isLoading: false,
   isModalLogoutOpen: false,
   isModalAddTransactionOpen: false,
+  isModalEditTransactionOpen: false,
 };
 
 const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
     openModalLogout: (state) => {
       state.isModalLogoutOpen = true;
     },
@@ -28,6 +33,7 @@ const globalSlice = createSlice({
 });
 
 export const {
+  setIsLoading,
   openModalLogout,
   closeModalLogout,
   openModalAddTransaction,
