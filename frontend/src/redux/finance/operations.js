@@ -80,3 +80,39 @@ export const addTransaction = createAsyncThunk(
     }
   }
 );
+
+export const deleteTransaction = createAsyncThunk(
+  "finance/deleteTransaction",
+  async (id, thunkAPI) => {
+    const accessToken = selectAccessToken(thunkAPI.getState());
+    try {
+      await api.delete(`/api/transactions/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      return `Deleted transaction: ${id}`;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateTransaction = createAsyncThunk(
+  "finance/updateTransaction",
+  async (id, thunkAPI) => {
+    const accessToken = selectAccessToken(thunkAPI.getState());
+    try {
+      const response = await api.patch(`/api/transactions/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
