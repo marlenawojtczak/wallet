@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { selectAccesssToken } from "../session/selectors";
+import { selectAccessToken } from "../session/selectors";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
@@ -9,13 +9,14 @@ const api = axios.create({
 export const fetchTotals = createAsyncThunk(
   "finance/fetchTotals",
   async (_, thunkAPI) => {
-    const accessToken = selectAccesssToken(thunkAPI.getState());
+    const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get("/api/transactions/categories", {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -26,7 +27,7 @@ export const fetchTotals = createAsyncThunk(
 export const fetchTotalsByDate = createAsyncThunk(
   "finance/fetchTotalsByDate",
   async ({ month, year }, thunkAPI) => {
-    const accessToken = selectAccesssToken(thunkAPI.getState());
+    const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get(
         `/api/transactions/categories/${year}/${month}`,
@@ -37,6 +38,24 @@ export const fetchTotalsByDate = createAsyncThunk(
         }
       );
 
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchTransactions = createAsyncThunk(
+  "finance/fetchTransactions",
+  async (_, thunkAPI) => {
+    const accessToken = selectAccessToken(thunkAPI.getState());
+    try {
+      const response = await api.get(`/api/transactions`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log("Test", response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

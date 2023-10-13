@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchTotals, fetchTotalsByDate } from "./operations";
+import {
+  fetchTotals,
+  fetchTotalsByDate,
+  fetchTransactions,
+} from "./operations";
 
 const initialState = {
   totalIncome: 0,
   totalExpense: 0,
   totalBalance: 0,
   totals: [],
+  transactions: [],
 };
 
 export const financeSlice = createSlice({
@@ -34,6 +39,12 @@ export const financeSlice = createSlice({
           totalExpense: action.payload.totalExpense,
           totalBalance: action.payload.totalBalance,
           totals: action.payload.totals,
+        };
+      })
+      .addCase(fetchTransactions.fulfilled, (state, action) => {
+        return {
+          ...state,
+          transactions: action.payload.transactions,
         };
       });
   },
