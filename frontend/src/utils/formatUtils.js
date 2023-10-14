@@ -30,24 +30,14 @@ export const amountFormatter = (amount) => {
   return formattedNumber;
 };
 
-export const dateFormatter = (date) => {
-  const inputDate = new Date(date);
-  const year = inputDate.getFullYear();
-  const month = inputDate.getMonth() + 1;
-  const day = inputDate.getDate();
-
-  const formattedYear = year.toString().slice(2);
-  const formattedMonth = month.toString().padStart(2, "0");
-  const formattedDay = day.toString().padStart(2, "0");
-
-  const formattedDate = `${formattedDay}.${formattedMonth}.${formattedYear}`;
-  return formattedDate;
-};
-
 export const typeFormatter = (type) => {
   return type === "Income" ? "+" : "-";
 };
 
 export const amountColorFormatter = (type) => {
   return type === "Income" ? "var(--brand-secondary)" : "var(--brand-accent)";
+};
+
+export const formatDate = (date) => {
+  return moment(date).format("DD.MM.YYYY");
 };

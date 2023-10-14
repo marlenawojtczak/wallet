@@ -18,6 +18,7 @@ import {
 import {
   fetchTransactions,
   deleteTransaction,
+  fetchTotals,
 } from "../../redux/finance/operations";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,25 +28,24 @@ import {
   dateFormatter,
   typeFormatter,
   amountColorFormatter,
+  formatDate,
 } from "../../utils/formatUtils";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import Media from "react-media";
 
 export const HomeTab = () => {
-  const fetchedTransactions = useSelector(selectTransactions);
-  // console.log(fetchedTransactions);
+  const transactions = useSelector(selectTransactions);
+  const fetchedTransactions = transactions.slice().reverse();
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTransactions());
-  }, [fetchTransactions]);
+  }, []);
 
-  // const openModal = () => {
-  //   dispatch(openModalEdit());
-  // };
-
-  const TransactionsDeleteHandler = (id) => {
-    dispatch(deleteTransaction(id));
+  const TransactionsDeleteHandler = async (id) => {
+    await dispatch(deleteTransaction(id));
+    await dispatch(fetchTransactions());
+    await dispatch(fetchTotals());
   };
 
   const transformedTableTransactions = fetchedTransactions.map(
@@ -67,7 +67,7 @@ export const HomeTab = () => {
       );
 
       return [
-        { header: "Date", value: dateFormatter(item.date) },
+        { header: "Date", value: formatDate(item.date) },
         { header: "Type", value: item.type },
         { header: "Category", value: item.category },
         { header: "Comment", value: item.comment },
@@ -99,8 +99,7 @@ export const HomeTab = () => {
                     <TableHeaderCell></TableHeaderCell>
                     <TableHeaderCell></TableHeaderCell>
                   </TableHead>
-
-                  <TableBody>
+                 <TableBody>
                     {fetchedTransactions.map((option, index) => (
                       <TableNextRows key={index}>
                         <TableCell>{dateFormatter(option.date)}</TableCell>
@@ -126,7 +125,7 @@ export const HomeTab = () => {
                             onClick={() =>
                               TransactionsDeleteHandler(option._id)
                             }
-                          >
+                           >
                             Delete
                           </DeleteButton>
                         </TableCell>
