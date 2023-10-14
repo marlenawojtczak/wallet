@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const transactionSchema = new Schema(
   {
     date: {
-      type: Date,
+      type: String,
       required: true,
     },
     type: {
