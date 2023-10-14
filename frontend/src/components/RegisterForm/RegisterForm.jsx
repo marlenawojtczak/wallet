@@ -207,7 +207,6 @@ export const RegisterForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.confirmPassword}
-            onKeyPress={handleKeyPress}
           />
           <StyledButtonIcon
             type="button"
@@ -236,7 +235,26 @@ export const RegisterForm = () => {
           <StyledButton
             type="submit"
             active={location.pathname === "/register"}
-            onClick={formik.handleSubmit}
+            onClick={(e) => {
+              e.preventDefault();
+              formik.handleSubmit();
+              const errors = Object.values(formik.errors);
+              if (errors.length > 0) {
+                const errorMessage = errors
+                  .map((error) => `<br /> ${error}`)
+                  .join();
+                Notiflix.Notify.failure("<br />" + errorMessage, {
+                  width: "300px",
+                  position: "center-top",
+                  distance: "18px",
+                  svgSize: "120px",
+                  timeout: 3000,
+                  borderRadius: "20px",
+                  fontFamily: "Poppins",
+                  fontSize: "20px",
+                });
+              }
+            }}
           >
             REGISTER
           </StyledButton>

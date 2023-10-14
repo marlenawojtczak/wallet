@@ -145,7 +145,26 @@ export const LoginForm = () => {
           <StyledButton
             type="submit"
             active={location.pathname === "/login"}
-            onClick={formik.handleSubmit}
+            onClick={(e) => {
+              e.preventDefault();
+              formik.handleSubmit();
+              const errors = Object.values(formik.errors);
+              if (errors.length > 0) {
+                const errorMessage = errors
+                  .map((error) => `<br /> ${error}`)
+                  .join();
+                Notiflix.Notify.failure("<br />" + errorMessage, {
+                  width: "300px",
+                  position: "center-top",
+                  distance: "18px",
+                  svgSize: "120px",
+                  timeout: 3000,
+                  borderRadius: "20px",
+                  fontFamily: "Poppins",
+                  fontSize: "20px",
+                });
+              }
+            }}
           >
             LOG IN
           </StyledButton>
@@ -205,26 +224,26 @@ export const LoginForm = () => {
 //           <StyledButton
 //             type="submit"
 //             active={location.pathname === "/login"}
-//             onClick={(e) => {
-//               e.preventDefault();
-//               formik.handleSubmit();
-//               const errors = Object.values(formik.errors);
-//               if (errors.length > 0) {
-//                 const errorMessage = errors
-//                   .map((error) => `<br /> ${error}`)
-//                   .join();
-//                 Notiflix.Notify.failure("<br />" + errorMessage, {
-//                   width: "300px",
-//                   position: "center-top",
-//                   distance: "18px",
-//                   svgSize: "120px",
-//                   timeout: 3000,
-//                   borderRadius: "20px",
-//                   fontFamily: "Poppins",
-//                   fontSize: "20px",
-//                 });
-//               }
-//             }}
+// onClick={(e) => {
+//   e.preventDefault();
+//   formik.handleSubmit();
+//   const errors = Object.values(formik.errors);
+//   if (errors.length > 0) {
+//     const errorMessage = errors
+//       .map((error) => `<br /> ${error}`)
+//       .join();
+//     Notiflix.Notify.failure("<br />" + errorMessage, {
+//       width: "300px",
+//       position: "center-top",
+//       distance: "18px",
+//       svgSize: "120px",
+//       timeout: 3000,
+//       borderRadius: "20px",
+//       fontFamily: "Poppins",
+//       fontSize: "20px",
+//     });
+//   }
+// }}
 //           >
 //             LOG IN
 //           </StyledButton>
