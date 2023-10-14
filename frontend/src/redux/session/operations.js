@@ -3,7 +3,6 @@ import { resetFinance } from "../../redux/finance/financeSlice";
 import {
   resetGlobal,
   closeModalLogout,
-  setIsLoading,
 } from "../../redux/global/globalSlice.js";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -25,14 +24,11 @@ const clearAuthHeader = () => {
 export const signUp = createAsyncThunk(
   "session/signUp",
   async (credentials, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoading(true));
     try {
       const res = await api.post("/api/auth/sign-up", credentials);
       setAuthHeader(res.data.user.accessToken);
-      thunkAPI.dispatch(setIsLoading(false));
       return res.data;
     } catch (error) {
-      // thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -41,15 +37,12 @@ export const signUp = createAsyncThunk(
 export const signIn = createAsyncThunk(
   "session/signIn",
   async (credentials, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoading(true));
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.user.accessToken);
       thunkAPI.dispatch(setToken(res.data.user.accessToken));
-      thunkAPI.dispatch(setIsLoading(false));
       return res.data;
     } catch (error) {
-      // thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -58,7 +51,6 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
   "session/signOut",
   async (token, { dispatch }) => {
-    dispatch(setIsLoading(true));
     try {
       await api.post(
         "/api/auth/sign-out",
@@ -69,9 +61,7 @@ export const signOut = createAsyncThunk(
       dispatch(resetGlobal());
       dispatch(resetFinance());
       clearAuthHeader();
-      dispatch(setIsLoading(false));
     } catch (error) {
-      dispatch(setIsLoading(false));
       toast.error("Oops something went wrong during logout.");
       dispatch(closeModalLogout());
       throw error;
@@ -82,20 +72,16 @@ export const signOut = createAsyncThunk(
 export const currentUser = createAsyncThunk(
   "session/current",
   async (_, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoading(true));
     const state = thunkAPI.getState();
     const persistedToken = state.session.user.accessToken;
     if (!persistedToken) {
-      thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     try {
       setAuthHeader(persistedToken);
       const res = await api.get("api/users/current");
-      thunkAPI.dispatch(setIsLoading(false));
       return res.data;
     } catch (error) {
-      // thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue(error.message);
     }
   }

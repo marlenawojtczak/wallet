@@ -29,10 +29,6 @@ export const sessionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
-      .addCase(signUp.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(signUp.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.user.accessToken;
@@ -44,9 +40,7 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       })
-      .addCase(signIn.pending, (state) => {
-        state.isLoading = true;
-      })
+
       .addCase(signIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.user.accessToken;
@@ -58,9 +52,7 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       })
-      .addCase(signOut.pending, (state) => {
-        state.isLoading = true;
-      })
+
       .addCase(signOut.fulfilled, (state) => {
         state.user = null;
         state.token = null;
@@ -72,9 +64,7 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       })
-      .addCase(currentUser.pending, (state) => {
-        state.isLoading = true;
-      })
+
       .addCase(currentUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isLoggedIn = true;
