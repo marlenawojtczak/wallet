@@ -14,7 +14,7 @@ import {
   ModalWrapper,
 } from "./ModalAddTransaction.styled";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { Notiflix } from "notiflix";
 import moment from "moment";
@@ -22,10 +22,9 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
-import {
-  addTransaction,
-  fetchTransactions,
-} from "../../redux/finance/operations";
+import { addTransaction } from "../../redux/finance/operations";
+import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
+
 // const validationSchema = Yup.object().shape({
 //   name: Yup.string().required("First name is required"),
 //   email: Yup.string()
@@ -79,7 +78,10 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             comment: values.comment,
           })
         );
-        await fetchTransactions();
+          
+        dispatch(fetchTotals());
+        dispatch(fetchTransactions());
+
       } catch (error) {
         Notiflix.Notify.failure("Cannot add transaction");
       }

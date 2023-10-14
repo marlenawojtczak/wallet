@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { selectAccessToken } from "../session/selectors";
-import { setIsLoading } from "../global/globalSlice";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
@@ -10,7 +9,6 @@ const api = axios.create({
 export const fetchTotals = createAsyncThunk(
   "finance/fetchTotals",
   async (_, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get("/api/transactions/categories", {
@@ -18,10 +16,8 @@ export const fetchTotals = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
-      // thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -30,7 +26,6 @@ export const fetchTotals = createAsyncThunk(
 export const fetchTotalsByDate = createAsyncThunk(
   "finance/fetchTotalsByDate",
   async ({ month, year }, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get(
@@ -41,10 +36,8 @@ export const fetchTotalsByDate = createAsyncThunk(
           },
         }
       );
-      // thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
-      // thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -53,7 +46,6 @@ export const fetchTotalsByDate = createAsyncThunk(
 export const fetchTransactions = createAsyncThunk(
   "finance/fetchTransactions",
   async (_, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get("/api/transactions", {
@@ -61,10 +53,8 @@ export const fetchTransactions = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
-      // thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -73,9 +63,7 @@ export const fetchTransactions = createAsyncThunk(
 export const addTransaction = createAsyncThunk(
   "finance/addTransaction",
   async (credentials, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
-
     try {
       console.log("Przed zapytaniem", credentials);
       const res = await api.post("/api/transactions", credentials, {
@@ -83,11 +71,9 @@ export const addTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
       console.log("Po zapytaniu", res.data);
       return res.data;
     } catch (error) {
-      // thunkAPI.dispatch(setIsLoading(false));
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -96,7 +82,6 @@ export const addTransaction = createAsyncThunk(
 export const deleteTransaction = createAsyncThunk(
   "finance/deleteTransaction",
   async (id, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       await api.delete(`/api/transactions/${id}`, {
@@ -104,7 +89,6 @@ export const deleteTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
       return `Deleted transaction: ${id}`;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -115,7 +99,6 @@ export const deleteTransaction = createAsyncThunk(
 export const updateTransaction = createAsyncThunk(
   "finance/updateTransaction",
   async (id, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.patch(`/api/transactions/${id}`, {
@@ -123,7 +106,6 @@ export const updateTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

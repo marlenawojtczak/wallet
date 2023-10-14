@@ -1,24 +1,10 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import { lazy, Suspense, useEffect, useState } from "react";
-import {
-  SharedLayout,
-  AccessLayout,
-  ModalLogout,
-  ModalAddTransaction,
-  ModalEditTransaction,
-} from "../components";
+import { lazy, Suspense, useEffect } from "react";
+import { SharedLayout, AccessLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { useAuth } from "../hooks/useAuth";
 import { Loader } from "../components";
-// import { ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// import { ThemeProvider } from "styled-components";
-// import { GlobalStyles } from "../components/darkMode/globalStyles";
-// import { lightTheme, darkTheme } from "../components/darkMode/Themes";
-// import { useDarkMode } from "../components/darkMode/useDarkMode";
-// import Toggle from "./darkMode/Toggler";
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -29,21 +15,13 @@ const Statistics = lazy(() => import("../pages/StatisticsPage/StatisticsPage"));
 const Currency = lazy(() => import("../pages/CurrencyPage/CurrencyPage"));
 
 export const App = () => {
-  // const [theme, themeToggler, mountedComponent] = useDarkMode();
-  // const themeMode = theme === "light" ? lightTheme : darkTheme;
-
   const { getCurrentUser } = useAuth();
   useEffect(() => {
     getCurrentUser();
   }, []);
 
-  // if (!mountedComponent) return <div />;
   return (
-    // <ThemeProvider theme={themeMode}>
     <>
-      {/* <GlobalStyles /> */}
-      {/* <Toggle theme={theme} toggleTheme={themeToggler} /> */}
-
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<AccessLayout />}>
@@ -80,6 +58,5 @@ export const App = () => {
         </Routes>
       </Suspense>
     </>
-    // </ThemeProvider>
   );
 };
