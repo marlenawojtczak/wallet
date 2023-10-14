@@ -20,6 +20,7 @@ import {
 import {
   fetchTransactions,
   deleteTransaction,
+  fetchTotals,
 } from "../../redux/finance/operations";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -46,6 +47,7 @@ export const HomeTab = () => {
   const TransactionsDeleteHandler = async (id) => {
     await dispatch(deleteTransaction(id));
     await dispatch(fetchTransactions());
+    await dispatch(fetchTotals());
   };
 
   const transformedTableTransactions = fetchedTransactions.map(
