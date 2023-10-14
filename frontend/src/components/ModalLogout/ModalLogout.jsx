@@ -19,7 +19,6 @@ export const ModalLogout = () => {
   const token = useSelector(selectToken);
 
   const handleLogout = () => {
-    // console.log("Token before dispatch:", token);
     dispatch(signOut(token));
   };
 
@@ -34,6 +33,7 @@ export const ModalLogout = () => {
         isOpen={isModalLogoutOpen}
         onRequestClose={handleClose}
         shouldCloseOnOverlayClick={true}
+        style={{ overlay: { backgroundColor: "rgba(150, 150, 150, 0.5)" } }}
       >
         <Text>Are you sure you want to logout?</Text>
         <ButtonContainer>
