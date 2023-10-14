@@ -43,7 +43,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const formik = useFormik({
     initialValues: {
       type: "Expense",
-      category: "",
+      category: "Income",
       amount: "",
       date: new Date(),
       comment: "",
@@ -82,6 +82,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       "type",
       formik.values.type === "Expense" ? "Income" : "Expense"
     );
+    formik.setFieldValue("category", "Income");
   };
 
   return (
@@ -98,7 +99,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
               onChange={handleButtonChange}
             />
 
-            {!checked ? (
+            {formik.values.type === "Expense" ? (
               <StyledCategoryInput
                 name="category"
                 placeholder="Select a category"
@@ -112,6 +113,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             ) : (
               <></>
             )}
+
             <SectionWrapper>
               <ValueInput
                 name="amount"
