@@ -9,7 +9,6 @@ import {
   ListItemValue,
   TableCell,
   TableHeaderCell,
-  td,
   DeleteButton,
   Button,
   StyledTable,
