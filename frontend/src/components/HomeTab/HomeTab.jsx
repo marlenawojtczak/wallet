@@ -40,14 +40,15 @@ export const HomeTab = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTransactions());
-  }, [fetchTransactions]);
+  }, []);
 
   // const openModal = () => {
   //   dispatch(openModalEdit());
   // };
 
-  const TransactionsDeleteHandler = (id) => {
-    dispatch(deleteTransaction(id));
+  const TransactionsDeleteHandler = async (id) => {
+    await dispatch(deleteTransaction(id));
+    await dispatch(fetchTransactions());
   };
 
   const transformedTableTransactions = fetchedTransactions.map(
