@@ -32,14 +32,12 @@ export const changeMonthToNumber = (namedMonth) => {
   return monthNumber;
 };
 
-export const years = () => {
-  const years = [];
-  const dateStart = moment().subtract(10, "y");
-  const dateEnd = moment();
-  while (dateEnd.diff(dateStart, "years") >= 0) {
-    years.push(dateStart.format("YYYY"));
-    dateStart.add(1, "year");
-  }
+export const years = (fetchedTransactions) => {
+  const yearsArray = fetchedTransactions.map((transaction) =>
+    new Date(transaction.date).getFullYear()
+  );
+  const uniqueYearsArray = [...new Set(yearsArray)];
+  const years = uniqueYearsArray.sort((a, b) => b - a);
   const reformattedArray = years.map((year) => ({
     value: year,
     label: year,

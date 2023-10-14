@@ -30,8 +30,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectTotalIncome,
   selectTotalExpenses,
+  selectTransactions,
 } from "../../redux/finance/selectors";
-import { fetchTotals, fetchTotalsByDate } from "../../redux/finance/operations";
+import {
+  fetchTotals,
+  fetchTotalsByDate,
+  fetchTransactions,
+} from "../../redux/finance/operations";
 import { getColor } from "../../utils/helperFunctions";
 
 export const Table = ({ options }) => {
@@ -43,6 +48,12 @@ export const Table = ({ options }) => {
   useEffect(() => {
     dispatch(fetchTotals());
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, []);
+
+  const fetchedTransactions = useSelector(selectTransactions);
 
   useEffect(() => {
     if (selectedMonth && selectedYear) {
@@ -80,7 +91,7 @@ export const Table = ({ options }) => {
                 ></Select>
                 <Select
                   onChange={(e) => setSelectedYear(e.value)}
-                  options={years()}
+                  options={years(fetchedTransactions)}
                   styles={SelectStylesSmall}
                   placeholder={"Year"}
                 ></Select>
@@ -90,7 +101,9 @@ export const Table = ({ options }) => {
               <>
                 <WrapperMonth>
                   <Select
-                    onChange={(e) => setSelectedMonth(e.value)}
+                    onChange={(e) =>
+                      setSelectedMonth(changeMonthToNumber(e.value))
+                    }
                     options={months()}
                     styles={SelectStylesMedium}
                     placeholder={"Month"}
@@ -99,7 +112,7 @@ export const Table = ({ options }) => {
                 <WrapperYear>
                   <Select
                     onChange={(e) => setSelectedYear(e.value)}
-                    options={years()}
+                    options={years(fetchedTransactions)}
                     styles={SelectStylesMedium}
                     placeholder={"Year"}
                   ></Select>
@@ -110,7 +123,9 @@ export const Table = ({ options }) => {
               <>
                 <WrapperMonth>
                   <Select
-                    onChange={(e) => setSelectedMonth(e.value)}
+                    onChange={(e) =>
+                      setSelectedMonth(changeMonthToNumber(e.value))
+                    }
                     options={months()}
                     styles={SelectStylesLarge}
                     placeholder={"Month"}
@@ -119,7 +134,7 @@ export const Table = ({ options }) => {
                 <WrapperYear>
                   <Select
                     onChange={(e) => setSelectedYear(e.value)}
-                    options={years()}
+                    options={years(fetchedTransactions)}
                     styles={SelectStylesLarge}
                     placeholder={"Year"}
                   ></Select>
