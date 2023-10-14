@@ -48,6 +48,7 @@ export const HomeTab = () => {
 
   const TransactionsDeleteHandler = (id) => {
     dispatch(deleteTransaction(id));
+    dispatch(fetchTransactions());
   };
 
   const transformedTableTransactions = fetchedTransactions.map(

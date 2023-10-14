@@ -5,6 +5,7 @@ import {
   fetchTransactions,
   deleteTransaction,
   updateTransaction,
+  addTransaction,
 } from "./operations";
 
 const initialState = {
@@ -68,17 +69,17 @@ export const financeSlice = createSlice({
           comment: action.payload.comment,
           amount: action.payload.amount,
         };
-      });
+      })
 
-    // .addCase(addTransaction.fulfilled, (state, action) => {
-    //   return {
-    //     ...state,
-    //     category: action.payload.category,
-    //     value: action.payload.value,
-    //     date: action.payload.date,
-    //     comment: action.payload.comment,
-    //   };
-    // });
+      .addCase(addTransaction.fulfilled, (state, action) => {
+        return {
+          ...state,
+          category: action.payload.category,
+          value: action.payload.value,
+          date: action.payload.date,
+          comment: action.payload.comment,
+        };
+      });
   },
 });
 

@@ -95,6 +95,7 @@ export const addTransaction = createAsyncThunk(
 export const deleteTransaction = createAsyncThunk(
   "finance/deleteTransaction",
   async (id, thunkAPI) => {
+    thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       await api.delete(`/api/transactions/${id}`, {
@@ -102,7 +103,7 @@ export const deleteTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-
+      thunkAPI.dispatch(setIsLoading(false));
       return `Deleted transaction: ${id}`;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -113,6 +114,7 @@ export const deleteTransaction = createAsyncThunk(
 export const updateTransaction = createAsyncThunk(
   "finance/updateTransaction",
   async (id, thunkAPI) => {
+    thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.patch(`/api/transactions/${id}`, {
@@ -120,7 +122,7 @@ export const updateTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-
+      thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
