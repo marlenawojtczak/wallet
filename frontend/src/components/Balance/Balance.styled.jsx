@@ -15,9 +15,6 @@ export const BalanceElement = styled.div`
   padding: 8px 32px;
   border-radius: 30px;
   background-color: var(--bg-light);
-  width: 100%;
-  width: calc(100% - 96px);
-  margin: 0 auto;
   animation: ${showIn} 500ms linear;
 
   @media screen and (max-width: 767px) {
