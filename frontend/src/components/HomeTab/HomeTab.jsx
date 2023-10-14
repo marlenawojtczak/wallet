@@ -25,7 +25,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectTransactions } from "../../redux/finance/selectors";
 import {
   amountFormatter,
-  dateFormatter,
   typeFormatter,
   amountColorFormatter,
   formatDate,
@@ -99,10 +98,10 @@ export const HomeTab = () => {
                     <TableHeaderCell></TableHeaderCell>
                     <TableHeaderCell></TableHeaderCell>
                   </TableHead>
-                 <TableBody>
+                  <TableBody>
                     {fetchedTransactions.map((option, index) => (
                       <TableNextRows key={index}>
-                        <TableCell>{dateFormatter(option.date)}</TableCell>
+                        <TableCell>{formatDate(option.date)}</TableCell>
                         <TableCell>{typeFormatter(option.type)}</TableCell>
                         <TableCell>{option.category}</TableCell>
                         <TableCell>{option.comment}</TableCell>
@@ -125,7 +124,7 @@ export const HomeTab = () => {
                             onClick={() =>
                               TransactionsDeleteHandler(option._id)
                             }
-                           >
+                          >
                             Delete
                           </DeleteButton>
                         </TableCell>

@@ -118,7 +118,7 @@ export const Table = styled.table`
 
 export const TableHead = styled.thead`
   position: relative;
-  &::before {
+  /* &::before {
     content: "";
     position: absolute;
     top: 0;
@@ -128,7 +128,7 @@ export const TableHead = styled.thead`
     background-color: var(--font-light);
     border-radius: 30px 30px;
     z-index: -1;
-  }
+  } */
 `;
 export const TableBody = styled.tbody`
   font-family: Circe;
