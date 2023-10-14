@@ -82,8 +82,8 @@ export const WrapperRightAndDownSite = styled.div`
   justify-content: center;
 
   @media screen and (min-width: 768px) {
-    /* height: 100vh;
-    position: relative; */
+    /* position: fixed;
+    height: 100vh; */
   }
   @media screen and (min-width: 1280px) {
     padding-top: 40px;
