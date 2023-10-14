@@ -14,7 +14,7 @@ import {
   ModalWrapper,
 } from "./ModalAddTransaction.styled";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import { Notiflix } from "notiflix";
 import moment from "moment";
@@ -22,22 +22,10 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
-import { addTransaction } from "../../redux/finance/operations";
-import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
-
-// const validationSchema = Yup.object().shape({
-//   name: Yup.string().required("First name is required"),
-//   email: Yup.string()
-//     .email("Invalid email address")
-//     .required("Email is required"),
-//   password: Yup.string()
-//     .min(6, "Password must be at least 6 characters")
-//     .max(12, "Password must be at most 12 characters")
-//     .required("Password is required"),
-//   confirmPassword: Yup.string()
-//     .oneOf([Yup.ref("password"), null], "Passwords must match")
-//     .required("Confirm Password is required"),
-// });
+import {
+  addTransaction,
+  fetchTransactions,
+} from "../../redux/finance/operations";
 
 const formatDate = (inputString) =>
   moment(inputString, "DD MM YYYY HH:mm:ss GMTZZ").format("DD-MM-YYYY");
@@ -66,7 +54,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       date: `${formatDate(new Date())}`,
       comment: "",
     },
-    // validationSchema: validationSchema,
+
     onSubmit: async (values) => {
       try {
         await dispatch(
@@ -78,10 +66,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             comment: values.comment,
           })
         );
-          
-        dispatch(fetchTotals());
-        dispatch(fetchTransactions());
-
+        await fetchTransactions();
       } catch (error) {
         Notiflix.Notify.failure("Cannot add transaction");
       }
