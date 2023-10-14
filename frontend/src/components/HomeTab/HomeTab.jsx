@@ -1,21 +1,19 @@
 import {
   TableWrapper,
-  TableContainer,
-  TableContainerBig,
+  TableHead,
   TableHeader,
-  TableHeaderBig,
   Table,
+  TableBody,
   List,
   ListItem,
   ListItemValue,
-  ListBig,
-  TableNextRowsBig,
-  HeaderCell,
-  DataCell,
+  TableCell,
+  TableHeaderCell,
   DeleteButton,
   Button,
   StyledTable,
   EditText,
+  TableNextRows,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -91,91 +89,74 @@ export const HomeTab = () => {
           <>
             {matches.medium && (
               <TableWrapper>
-                <TableContainerBig>
-                  <Table>
-                    <TableHeaderBig>
-                      <HeaderCell style={{ width: 55 }}>Date</HeaderCell>
-                      <HeaderCell style={{ width: 37 }}>Type</HeaderCell>
-                      <HeaderCell style={{ width: 71 }}>Category</HeaderCell>
-                      <HeaderCell style={{ width: 120 }}>Comment</HeaderCell>
-                      <HeaderCell style={{ width: 80, textAlign: "right" }}>
-                        Sum
-                      </HeaderCell>
-                      <HeaderCell style={{ width: 14 }}></HeaderCell>
-                      <HeaderCell style={{ width: 67 }}></HeaderCell>
-                    </TableHeaderBig>
-
-                    <ListBig fetchedTransactions={fetchedTransactions}>
-                      {fetchedTransactions.map((option, index) => (
-                        <TableNextRowsBig key={index}>
-                          <DataCell style={{ width: 55 }}>
-                            {formatDate(option.date)}
-                          </DataCell>
-                          <DataCell style={{ width: 37, textAlign: "center" }}>
-                            {typeFormatter(option.type)}
-                          </DataCell>
-                          <DataCell style={{ width: 71 }}>
-                            {option.category}
-                          </DataCell>
-                          <DataCell style={{ width: 120 }}>
-                            {option.comment}
-                          </DataCell>
-                          <DataCell
-                            style={{
-                              width: 80,
-                              textAlign: "right",
-                              color: amountColorFormatter(option.type),
-                            }}
-                          >
-                            {amountFormatter(option.amount)}
-                          </DataCell>
-                          <DataCell style={{ width: 14 }}>
-                            {/* <Button type="button" onClick={openModal}> */}
-                            <Button type="button">
-                              <EditIcon></EditIcon>
-                            </Button>
-                          </DataCell>
-                          <DataCell style={{ width: 67 }}>
-                            <DeleteButton
-                              type="submit"
-                              onClick={() =>
-                                TransactionsDeleteHandler(option._id)
-                              }
-                            >
-                              Delete
-                            </DeleteButton>
-                          </DataCell>
-                        </TableNextRowsBig>
-                      ))}
-                    </ListBig>
-                  </Table>
-                </TableContainerBig>
+                <Table>
+                  <TableHead>
+                    <TableHeaderCell>Date</TableHeaderCell>
+                    <TableHeaderCell>Type</TableHeaderCell>
+                    <TableHeaderCell>Category</TableHeaderCell>
+                    <TableHeaderCell>Comment</TableHeaderCell>
+                    <TableHeaderCell>Sum</TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                  </TableHead>
+                 <TableBody>
+                    {fetchedTransactions.map((option, index) => (
+                      <TableNextRows key={index}>
+                        <TableCell>{dateFormatter(option.date)}</TableCell>
+                        <TableCell>{typeFormatter(option.type)}</TableCell>
+                        <TableCell>{option.category}</TableCell>
+                        <TableCell>{option.comment}</TableCell>
+                        <TableCell
+                          style={{
+                            color: amountColorFormatter(option.type),
+                          }}
+                        >
+                          {amountFormatter(option.amount)}
+                        </TableCell>
+                        <TableCell>
+                          {/* <Button type="button" onClick={openModal}> */}
+                          <Button type="button">
+                            <EditIcon></EditIcon>
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <DeleteButton
+                            type="submit"
+                            onClick={() =>
+                              TransactionsDeleteHandler(option._id)
+                            }
+                           >
+                            Delete
+                          </DeleteButton>
+                        </TableCell>
+                      </TableNextRows>
+                    ))}
+                  </TableBody>
+                </Table>
               </TableWrapper>
             )}
             {matches.small && (
-              <TableContainer>
-                <StyledTable>
-                  {transformedTableTransactions.map((item, rowIndex) => {
-                    const type = item[1].value;
+              <StyledTable>
+                {transformedTableTransactions.map((item, rowIndex) => {
+                  const type = item[1].value;
 
-                    return (
-                      <List key={rowIndex}>
-                        {item.map((option, columnIndex) => (
-                          <ListItem
-                            key={columnIndex}
-                            style={{
-                              borderLeftColor: amountColorFormatter(type),
-                            }}
-                          >
-                            <TableHeader>{option.header}</TableHeader>
-                            <ListItemValue>{option.value}</ListItemValue>
-                          </ListItem>
-                        ))}
-                      </List>
-                    );
-                  })}
-                </StyledTable>
-              </TableContainer>
+                  return (
+                    <List key={rowIndex}>
+                      {item.map((option, columnIndex) => (
+                        <ListItem
+                          key={columnIndex}
+                          style={{
+                            borderLeftColor: amountColorFormatter(type),
+                          }}
+                        >
+                          <TableHeader>{option.header}</TableHeader>
+                          <ListItemValue>{option.value}</ListItemValue>
+                        </ListItem>
+                      ))}
+                    </List>
+                  );
+                })}
+              </StyledTable>
             )}
           </>
         )}

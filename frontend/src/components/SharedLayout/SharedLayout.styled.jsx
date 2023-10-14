@@ -6,7 +6,6 @@ export const BackgroundContainer = styled.div`
   background-color: var(--bg-accent);
 
   @media screen and (min-width: 768px) {
-    position: relative;
     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
     background-repeat: no-repeat, no-repeat;
     background-position: right -25vw top, left bottom;

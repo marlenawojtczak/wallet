@@ -153,6 +153,19 @@ export const StyledProgressBar = styled.div`
   div {
     width: ${(props) => props.value}%;
     height: 100%;
-    background-color: green;
+    border-radius: 10px;
+    background-color: ${(props) => {
+      if (props.value < 99) {
+        const redValue = 255;
+        const greenValue = Math.floor((props.value / 99) * 200);
+        const blueValue = Math.floor((props.value / 99) * 200);
+        return `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+      } else {
+        return "green";
+      }
+    }};
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 4px, rgba(0, 0, 0, 0.3) 5px 4px 4px,
+      rgba(0, 0, 0, 0.2) -5px -4px 0px inset;
+    transform: scale(1.02);
   }
 `;

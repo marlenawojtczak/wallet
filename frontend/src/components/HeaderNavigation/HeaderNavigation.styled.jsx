@@ -15,7 +15,7 @@ const rotateAnimation = keyframes`
 `;
 
 export const RotatingLogoIcon = styled(LogoIcon)`
-  animation: ${rotateAnimation} 3000ms cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  animation: ${rotateAnimation} 10s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 `;
 
 export const Link = styled(NavLink)`
