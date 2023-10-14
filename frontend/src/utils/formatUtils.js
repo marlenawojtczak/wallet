@@ -9,6 +9,29 @@ export const months = () => {
   return reformattedArray;
 };
 
+export const changeMonthToNumber = (namedMonth) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const monthNumber = (months.indexOf(namedMonth) + 1)
+    .toString()
+    .padStart(2, "0");
+
+  return monthNumber;
+};
+
 export const years = () => {
   const years = [];
   const dateStart = moment().subtract(10, "y");

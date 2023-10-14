@@ -29,8 +29,8 @@ export const List = styled.ul`
   max-height: 35vh;
   overflow-y: auto;
   border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px inset,
-    rgba(0, 0, 0, 0.5) 0px -2px 2px, rgba(0, 0, 0, 0.2) 0px 1px 1px inset;
+  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px inset,
+    rgba(0, 0, 0, 0.5) 0px -2px 2px, rgba(0, 0, 0, 0.2) 0px 1px 1px inset; */
 `;
 
 export const ListItem = styled.li`
@@ -101,7 +101,7 @@ export const TableHeader = styled.div`
   border-radius: 30px;
   padding: 15px 20px;
   margin-bottom: 20px;
-  padding-right: 130px;
+  /* padding-right: 130px; */
 
   @media screen and (min-width: 768px) {
   }

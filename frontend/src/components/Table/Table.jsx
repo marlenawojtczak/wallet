@@ -18,7 +18,12 @@ import {
   SelectStylesMedium,
   SelectStylesLarge,
 } from "./Table.styled";
-import { months, years, amountFormatter } from "../../utils/formatUtils";
+import {
+  months,
+  years,
+  amountFormatter,
+  changeMonthToNumber,
+} from "../../utils/formatUtils";
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import { useSelector, useDispatch } from "react-redux";
@@ -40,11 +45,17 @@ export const Table = ({ options }) => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
+    if (selectedMonth && selectedYear) {
+      dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
+    }
   }, [dispatch, selectedMonth, selectedYear]);
 
   const totalIncome = useSelector(selectTotalIncome);
   const totalExpenses = useSelector(selectTotalExpenses);
+
+  // const monthChangeHandler = (e) => {
+  //   return changeMonthToNumber(setSelectedMonth(e.value))
+  // }
 
   return (
     <TableContainer>
@@ -60,7 +71,9 @@ export const Table = ({ options }) => {
             {matches.small && (
               <>
                 <Select
-                  onChange={(e) => setSelectedMonth(e.value)}
+                  onChange={(e) =>
+                    setSelectedMonth(changeMonthToNumber(e.value))
+                  }
                   options={months()}
                   styles={SelectStylesSmall}
                   placeholder={"Month"}
