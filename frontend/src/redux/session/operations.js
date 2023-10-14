@@ -92,7 +92,7 @@ export const currentUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await api.get("api/users/current");
-      // thunkAPI.dispatch(setIsLoading(false));
+      thunkAPI.dispatch(setIsLoading(false));
       return res.data;
     } catch (error) {
       // thunkAPI.dispatch(setIsLoading(false));
