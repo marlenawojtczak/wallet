@@ -161,7 +161,7 @@ export const StyledProgressBar = styled.div`
         const blueValue = Math.floor((props.value / 99) * 200);
         return `rgb(${redValue}, ${greenValue}, ${blueValue})`;
       } else {
-        return "green";
+        return "var(--bg-btn-focus)";
       }
     }};
     box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 4px, rgba(0, 0, 0, 0.3) 5px 4px 4px,

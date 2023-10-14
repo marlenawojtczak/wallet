@@ -101,6 +101,7 @@ export const HomeTab = () => {
                   <TableBody>
                     {fetchedTransactions.map((option, index) => (
                       <TableNextRows key={index}>
+                        <TableCell></TableCell>
                         <TableCell>{formatDate(option.date)}</TableCell>
                         <TableCell>{typeFormatter(option.type)}</TableCell>
                         <TableCell>{option.category}</TableCell>

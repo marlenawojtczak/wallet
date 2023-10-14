@@ -78,28 +78,27 @@ export const RegisterForm = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        await dispatch(
+        const result = await dispatch(
           signUp({
             email: values.email,
             password: values.password,
             username: values.name,
           })
-        );
+        ).unwrap();
+        console.log("Sign up result:", result);
         navigate("/login");
       } catch (error) {
-        Notiflix.Notify.failure(
-          registrationError || "Error during registration",
-          {
-            width: "300px",
-            position: "center-top",
-            distance: "18px",
-            svgSize: "120px",
-            timeout: 3000,
-            borderRadius: "20px",
-            fontFamily: "Poppins",
-            fontSize: "20px",
-          }
-        );
+        console.log("Sign up error:", error);
+        Notiflix.Notify.failure("<br />" + error, {
+          width: "300px",
+          position: "center-top",
+          distance: "18px",
+          svgSize: "120px",
+          timeout: 2500,
+          borderRadius: "20px",
+          fontFamily: "Poppins",
+          fontSize: "20px",
+        });
       }
     },
   });
@@ -143,7 +142,7 @@ export const RegisterForm = () => {
           position: "center-top",
           distance: "18px",
           svgSize: "120px",
-          timeout: 3000,
+          timeout: 2500,
           borderRadius: "20px",
           fontFamily: "Poppins",
           fontSize: "20px",
@@ -248,7 +247,7 @@ export const RegisterForm = () => {
                   position: "center-top",
                   distance: "18px",
                   svgSize: "120px",
-                  timeout: 3000,
+                  timeout: 2500,
                   borderRadius: "20px",
                   fontFamily: "Poppins",
                   fontSize: "20px",

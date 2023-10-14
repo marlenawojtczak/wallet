@@ -9,15 +9,6 @@ const showIn = keyframes`
 }
 `;
 
-export const Wrapper = styled.div`
-  @media screen and (max-width: 768px) {
-  }
-  @media screen and (min-width: 769px) and (max-width: 1279px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
-`;
-
 export const TableHeader = styled.div`
   display: flex;
   font-family: "Circe";
@@ -32,7 +23,7 @@ export const List = styled.ul`
   margin: 0;
   list-style: none;
   padding: 0;
-  height: 100%;
+
   max-height: 470px;
   overflow-y: auto;
   margin-bottom: 8px;
@@ -79,6 +70,8 @@ export const StyledTable = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
+  animation: ${showIn} 500ms linear;
 `;
 
 export const MainListItem = styled.li``;
@@ -104,7 +97,6 @@ export const EditText = styled.span`
 export const TableWrapper = styled.div`
   height: 100vh;
   animation: ${showIn} 500ms linear;
-  position: relative;
 
   @media screen and (min-width: 1280px) {
     margin-top: 10px;
@@ -117,18 +109,21 @@ export const Table = styled.table`
 `;
 
 export const TableHead = styled.thead`
+  text-align: left;
+
   position: relative;
-  /* &::before {
+  &::before {
     content: "";
     position: absolute;
+
     top: 0;
-    left: 0;
+    left: 20;
     width: 100%;
     height: 52px;
     background-color: var(--font-light);
     border-radius: 30px 30px;
     z-index: -1;
-  } */
+  }
 `;
 export const TableBody = styled.tbody`
   font-family: Circe;
@@ -136,7 +131,7 @@ export const TableBody = styled.tbody`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  text-align: center;
+  text-align: left;
 `;
 export const TableHeaderCell = styled.th`
   font-family: Circe;
@@ -144,7 +139,7 @@ export const TableHeaderCell = styled.th`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding: 14px 0;
+  padding: 14px 5px;
 `;
 
 export const TableNextRows = styled.tr`
@@ -155,7 +150,7 @@ export const TableNextRows = styled.tr`
 `;
 
 export const TableCell = styled.td`
-  padding: 14px 0;
+  padding: 14px 5px;
 `;
 
 export const DeleteButton = styled.button`

@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HomeTab } from "../../components/HomeTab";
+import { Wrapper, X } from "./HomePage.styled";
 import { ButtonAddTransactions } from "../../components/ButtonAddTransactions";
 import { ModalAddTransaction } from "../../components/ModalAddTransaction";
 import {
@@ -32,15 +33,19 @@ const HomePage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Home</title>
-      </Helmet>
-      <Media query={{ maxWidth: 767 }}>
-        {(matches) => (matches ? <Balance /> : <></>)}
-      </Media>
-      <HomeTab />
-      <ButtonAddTransactions onClick={handleOpenModal} />
-      <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
+      <Wrapper>
+        <Helmet>
+          <title>Home</title>
+        </Helmet>
+        <Media query={{ maxWidth: 767 }}>
+          {(matches) => (matches ? <Balance /> : <></>)}
+        </Media>
+        <HomeTab />
+        <X>
+          <ButtonAddTransactions onClick={handleOpenModal} />
+        </X>
+        <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
+      </Wrapper>
     </>
   );
 };
