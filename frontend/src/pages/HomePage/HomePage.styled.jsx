@@ -1,22 +1,17 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 
-// export const Wrapper = styled.div`
-//   @media screen and (max-width: 768px) {
-//     height: 568px;
-//     border: 2px solid black;
-//     margin: 0 auto;
-//     display: flex;
-//     flex-direction: column;
-//     position: relative;
-//   }
-//   @media screen and (min-width: 769px) and (max-width: 1279px) {
-//     height: 1024px;
-//     border: 2px solid orange;
-//     margin: 0 auto;
-//   }
-//   @media screen and (min-width: 1280px) {
-//     height: 720px;
-//     border: 2px solid blue;
-//     margin: 0 auto;
-//   }
-// `;
+export const Wrapper = styled.div`
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (min-width: 769px) and (max-width: 1279px) {
+  }
+  @media screen and (min-width: 1280px) {
+  }
+`;
+
+export const X = styled.div`
+  position: sticky;
+  bottom: 20px;
+  left: 30px;
+  z-index: 9999;
+`;
