@@ -1,8 +1,33 @@
 import moment from "moment";
 
-export const months = () => {
-  const months = moment.months();
-  const reformattedArray = months.map((month) => ({
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const months = (fetchedTransactions, selectedYear) => {
+  const monthsInYear = Array(12).fill(false);
+
+  fetchedTransactions.forEach((transaction) => {
+    const transactionYear = new Date(transaction.date).getFullYear();
+    if (transactionYear === selectedYear) {
+      const month = new Date(transaction.date).getMonth();
+      monthsInYear[month] = true;
+    }
+  });
+
+  const result = monthNames.filter((month, index) => monthsInYear[index]);
+  const reformattedArray = result.map((month) => ({
     value: month,
     label: month,
   }));
@@ -10,22 +35,7 @@ export const months = () => {
 };
 
 export const changeMonthToNumber = (namedMonth) => {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const monthNumber = (months.indexOf(namedMonth) + 1)
+  const monthNumber = (monthNames.indexOf(namedMonth) + 1)
     .toString()
     .padStart(2, "0");
 

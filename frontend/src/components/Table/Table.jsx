@@ -42,6 +42,7 @@ import { getColor } from "../../utils/helperFunctions";
 export const Table = ({ options }) => {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
+  const fetchedTransactions = useSelector(selectTransactions);
 
   const dispatch = useDispatch();
 
@@ -53,7 +54,11 @@ export const Table = ({ options }) => {
     dispatch(fetchTransactions());
   }, []);
 
-  const fetchedTransactions = useSelector(selectTransactions);
+  const getMonths = () => {
+    if (selectedYear) {
+      return months(fetchedTransactions, selectedYear);
+    }
+  };
 
   useEffect(() => {
     if (selectedMonth && selectedYear) {
@@ -63,10 +68,6 @@ export const Table = ({ options }) => {
 
   const totalIncome = useSelector(selectTotalIncome);
   const totalExpenses = useSelector(selectTotalExpenses);
-
-  // const monthChangeHandler = (e) => {
-  //   return changeMonthToNumber(setSelectedMonth(e.value))
-  // }
 
   return (
     <TableContainer>
@@ -85,7 +86,7 @@ export const Table = ({ options }) => {
                   onChange={(e) =>
                     setSelectedMonth(changeMonthToNumber(e.value))
                   }
-                  options={months()}
+                  options={getMonths()}
                   styles={SelectStylesSmall}
                   placeholder={"Month"}
                 ></Select>
@@ -104,7 +105,7 @@ export const Table = ({ options }) => {
                     onChange={(e) =>
                       setSelectedMonth(changeMonthToNumber(e.value))
                     }
-                    options={months()}
+                    options={getMonths()}
                     styles={SelectStylesMedium}
                     placeholder={"Month"}
                   ></Select>
@@ -126,7 +127,7 @@ export const Table = ({ options }) => {
                     onChange={(e) =>
                       setSelectedMonth(changeMonthToNumber(e.value))
                     }
-                    options={months()}
+                    options={getMonths()}
                     styles={SelectStylesLarge}
                     placeholder={"Month"}
                   ></Select>
