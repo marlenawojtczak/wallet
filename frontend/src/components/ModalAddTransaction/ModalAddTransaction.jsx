@@ -42,10 +42,6 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
 
-  const handleChange = () => {
-    setChecked((prev) => !prev);
-  };
-
   const options = [
     { value: "main expenses", label: "Main expenses" },
     { value: "products", label: "Products" },
@@ -60,9 +56,10 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
 
   const formik = useFormik({
     initialValues: {
+      type: "Expense",
       category: "",
-      value: "",
-      date: moment(new Date()).format("DD.MM.YYYY"),
+      amount: "",
+      date: moment(new Date()).format("DD-MM-YYYY"),
       comment: "",
     },
     // validationSchema: validationSchema,
@@ -70,8 +67,9 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       try {
         await dispatch(
           addTransaction({
+            type: values.type,
             category: values.category,
-            value: values.value,
+            amount: values.amount,
             date: values.date,
             comment: values.comment,
           })
@@ -91,7 +89,13 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     }
   };
 
-  console.log(formik.values);
+  const handleButtonChange = (e) => {
+    formik.setFieldValue(
+      "type",
+      formik.values.type === "Expense" ? "Income" : "Expense"
+    );
+  };
+
   return (
     <>
       <ModalBackground isOpen={isOpen} onClick={onClose}>
@@ -100,7 +104,11 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             <CloseButton onClick={onClose} />
             <ModalHeader>Add transaction</ModalHeader>
 
-            <SwitchButton checked={!checked} onChange={handleChange} />
+            <SwitchButton
+              name="type"
+              checked={formik.values.type === "Expense"}
+              onChange={handleButtonChange}
+            />
 
             {!checked ? (
               <StyledCategoryInput
@@ -118,10 +126,10 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             )}
             <SectionWrapper>
               <ValueInput
-                name="value"
+                name="amount"
                 placeholder="0.00"
                 onChange={formik.handleChange}
-                value={formik.values.value}
+                amount={formik.values.amount}
               />
 
               <StyledDateTime
@@ -130,11 +138,11 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                 onChange={(date) =>
                   formik.setFieldValue(
                     "date",
-                    moment(date, "DD.MM.YYYY").format("DD.MM.YYYY")
+                    moment(date, "DD-MM-YYYY").format("DD-MM-YYYY")
                   )
                 }
                 onBlur={formik.handleBlur}
-                dateFormat="DD.MM.YYYY"
+                dateFormat="DD-MM-YYYY"
                 timeFormat={false}
                 closeOnSelect={true}
               />
