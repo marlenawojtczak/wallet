@@ -2,7 +2,7 @@ import Joi from "joi";
 import { transactionsType, transactionsCategory } from "../utils/constants.js";
 
 const transactionAddSchema = Joi.object({
-  date: Joi.date().required(),
+  // date: Joi.string().required(),
   type: Joi.string()
     .valid(...transactionsType)
     .required(),
