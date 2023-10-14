@@ -29,11 +29,9 @@ import {
   dateFormatter,
   typeFormatter,
   amountColorFormatter,
-  formatDate,
 } from "../../utils/formatUtils";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import Media from "react-media";
-import moment from "moment";
 
 export const HomeTab = () => {
   const fetchedTransactions = useSelector(selectTransactions);
@@ -72,7 +70,7 @@ export const HomeTab = () => {
       );
 
       return [
-        { header: "Date", value: formatDate(item.date) },
+        { header: "Date", value: dateFormatter(item.date) },
         { header: "Type", value: item.type },
         { header: "Category", value: item.category },
         { header: "Comment", value: item.comment },
@@ -112,7 +110,7 @@ export const HomeTab = () => {
                       {fetchedTransactions.map((option, index) => (
                         <TableNextRowsBig key={index}>
                           <DataCell style={{ width: 55 }}>
-                            {formatDate(option.date)}
+                            {dateFormatter(option.date)}
                           </DataCell>
                           <DataCell style={{ width: 37, textAlign: "center" }}>
                             {typeFormatter(option.type)}
