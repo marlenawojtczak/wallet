@@ -3,8 +3,8 @@ import ReactModal from "react-modal";
 
 export const ModalOverlay = styled.div`
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  /* inset: 0; */
+  background-color: var(--bg-modal-overlay);
 `;
 
 export const Modal = styled(ReactModal)`

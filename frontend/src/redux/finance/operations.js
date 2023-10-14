@@ -10,7 +10,7 @@ const api = axios.create({
 export const fetchTotals = createAsyncThunk(
   "finance/fetchTotals",
   async (_, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
+    thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get("/api/transactions/categories", {
@@ -18,7 +18,7 @@ export const fetchTotals = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
+      thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
       // thunkAPI.dispatch(setIsLoading(false));
@@ -30,7 +30,7 @@ export const fetchTotals = createAsyncThunk(
 export const fetchTotalsByDate = createAsyncThunk(
   "finance/fetchTotalsByDate",
   async ({ month, year }, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
+    thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get(
@@ -41,7 +41,7 @@ export const fetchTotalsByDate = createAsyncThunk(
           },
         }
       );
-      // thunkAPI.dispatch(setIsLoading(false));
+      thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
       // thunkAPI.dispatch(setIsLoading(false));
@@ -53,7 +53,7 @@ export const fetchTotalsByDate = createAsyncThunk(
 export const fetchTransactions = createAsyncThunk(
   "finance/fetchTransactions",
   async (_, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
+    thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     try {
       const response = await api.get("/api/transactions", {
@@ -61,7 +61,7 @@ export const fetchTransactions = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
+      thunkAPI.dispatch(setIsLoading(false));
       return response.data;
     } catch (error) {
       // thunkAPI.dispatch(setIsLoading(false));
@@ -73,7 +73,7 @@ export const fetchTransactions = createAsyncThunk(
 export const addTransaction = createAsyncThunk(
   "finance/addTransaction",
   async (credentials, thunkAPI) => {
-    // thunkAPI.dispatch(setIsLoading(true));
+    thunkAPI.dispatch(setIsLoading(true));
     const accessToken = selectAccessToken(thunkAPI.getState());
     console.log("accesToken", accessToken);
     try {
@@ -83,7 +83,7 @@ export const addTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // thunkAPI.dispatch(setIsLoading(false));
+      thunkAPI.dispatch(setIsLoading(false));
       return res.data;
     } catch (error) {
       // thunkAPI.dispatch(setIsLoading(false));

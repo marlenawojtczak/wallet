@@ -1,16 +1,26 @@
 import { Helmet } from "react-helmet";
 import { Currency } from "../../components/Currency/Currency";
-import { Balance } from "../../components";
+import Media from "react-media";
+import { useNavigate } from "react-router-dom";
 
 const CurrencyPage = () => {
-  return (
-    <>
-      <Helmet>
-        <title>Currency</title>
-      </Helmet>
+  const navigate = useNavigate();
 
-      <Currency />
-    </>
+  return (
+    <Media query="(max-width: 767px)">
+      {(matches) =>
+        matches ? (
+          <>
+            <Helmet>
+              <title>Currency</title>
+            </Helmet>
+            <Currency />
+          </>
+        ) : (
+          <>{navigate("/home")}</>
+        )
+      }
+    </Media>
   );
 };
 

@@ -40,7 +40,7 @@ export const HomeTab = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTransactions());
-  }, [fetchedTransactions]);
+  }, [fetchTransactions]);
 
   // const openModal = () => {
   //   dispatch(openModalEdit());

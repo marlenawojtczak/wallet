@@ -16,14 +16,20 @@ export const BalanceElement = styled.div`
   border-radius: 30px;
   background-color: var(--bg-light);
   width: 100%;
-  width: calc(100% - 64px);
+  width: calc(100% - 96px);
+  margin: 0 auto;
   animation: ${showIn} 500ms linear;
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: 20px;
+  }
 
   @media screen and (min-width: 768px) {
     padding: 8px 40px;
     width: calc(100% - 80px);
   }
 `;
+
 export const BalanceHeader = styled.p`
   font-family: Circe;
   font-size: 12px;

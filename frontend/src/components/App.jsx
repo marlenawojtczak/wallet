@@ -11,22 +11,14 @@ import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { useAuth } from "../hooks/useAuth";
 import { Loader } from "../components";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { motion, AnimatePresence } from "framer-motion";
-import { useSelector } from "react-redux";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
 // import { ThemeProvider } from "styled-components";
 // import { GlobalStyles } from "../components/darkMode/globalStyles";
 // import { lightTheme, darkTheme } from "../components/darkMode/Themes";
 // import { useDarkMode } from "../components/darkMode/useDarkMode";
 // import Toggle from "./darkMode/Toggler";
-
-// import { useSelector } from "react-redux";
-// import { ModalLogout } from "./ModalLogout";
-// import { ModalAddTransaction } from "./ModalAddTransaction";
-// import { ModalEditTransaction } from "./ModalEditTransaction";
-// import { motion, AnimatePresence } from "framer-motion";
-// import Media from "react-media";
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -86,11 +78,6 @@ export const App = () => {
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
-        <ToastContainer
-          position="top-center"
-          autoClose={2500}
-          pauseOnHover={false}
-        />
       </Suspense>
     </>
     // </ThemeProvider>
