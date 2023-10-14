@@ -1,10 +1,7 @@
 import { Helmet } from "react-helmet";
-// import Media from "react-media";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Wrapper } from "../../components/HomeTab/HomeTab.styled";
-// import { Balance } from "../../components/Balance";
-// import { Currency } from "../../components/Currency";
 import { HomeTab } from "../../components/HomeTab";
 import { ButtonAddTransactions } from "../../components/ButtonAddTransactions";
 import { ModalAddTransaction } from "../../components/ModalAddTransaction";
@@ -13,6 +10,8 @@ import {
   closeModalAddTransaction,
 } from "../../redux/global/globalSlice";
 import { selectIsModalAddTransactionOpen } from "../../redux/global/selectors";
+import Media from "react-media";
+import { Balance } from "../../components";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -33,21 +32,18 @@ const HomePage = () => {
   }
 
   return (
-    <>
-      <Wrapper>
-        <Helmet>
-          <title>Home</title>
-        </Helmet>
-        {/* <Balance /> */}
-        {/* <Media query={{ maxWidth: 767 }}>
-          {(matches) => (matches ? <></> : <Currency />)}
-        </Media> */}
-        {/* <Currency /> */}
-        <HomeTab />
-        <ButtonAddTransactions onClick={handleOpenModal} />
-        <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
+
+      <Media query={{ maxWidth: 767 }}>
+        {(matches) => (matches ? <Balance /> : <></>)}
+      </Media>
+      <HomeTab />
+      <ButtonAddTransactions onClick={handleOpenModal} />
+      <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
+    </Wrapper>
   );
 };
 

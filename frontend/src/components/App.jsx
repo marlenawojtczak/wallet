@@ -1,23 +1,24 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
-import { SharedLayout, AccessLayout } from "../components";
+import {
+  SharedLayout,
+  AccessLayout,
+  ModalLogout,
+  ModalAddTransaction,
+  ModalEditTransaction,
+} from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { useAuth } from "../hooks/useAuth";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Loader } from "../components";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
 // import { ThemeProvider } from "styled-components";
 // import { GlobalStyles } from "../components/darkMode/globalStyles";
 // import { lightTheme, darkTheme } from "../components/darkMode/Themes";
 // import { useDarkMode } from "../components/darkMode/useDarkMode";
 // import Toggle from "./darkMode/Toggler";
-
-// import { useSelector } from "react-redux";
-// import { ModalLogout } from "./ModalLogout";
-// import { ModalAddTransaction } from "./ModalAddTransaction";
-// import { ModalEditTransaction } from "./ModalEditTransaction";
-// import { motion, AnimatePresence } from "framer-motion";
-// import Media from "react-media";
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -42,7 +43,8 @@ export const App = () => {
     <>
       {/* <GlobalStyles /> */}
       {/* <Toggle theme={theme} toggleTheme={themeToggler} /> */}
-      <Suspense fallback={<div>Loading...</div>}>
+
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<AccessLayout />}>
             <Route
@@ -76,11 +78,6 @@ export const App = () => {
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
-        <ToastContainer
-          position="top-center"
-          autoClose={2500}
-          pauseOnHover={false}
-        />
       </Suspense>
     </>
     // </ThemeProvider>

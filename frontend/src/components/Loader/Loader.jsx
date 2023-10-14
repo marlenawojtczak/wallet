@@ -1,9 +1,21 @@
-import { Example } from "./Loader.styled";
+import {
+  LoaderContainer,
+  LoaderIcon,
+  LoaderImage,
+  LoaderContent,
+} from "./Loader.styled";
+import { ReactComponent as WalletIcon } from "../../assets/icons/wallet.svg";
 
 export const Loader = () => {
   return (
-    <>
-      <Example>Loader</Example>
-    </>
+    <LoaderContainer>
+      <LoaderContent>
+        <LoaderIcon>
+          <LoaderImage>
+            <WalletIcon />
+          </LoaderImage>
+        </LoaderIcon>
+      </LoaderContent>
+    </LoaderContainer>
   );
 };

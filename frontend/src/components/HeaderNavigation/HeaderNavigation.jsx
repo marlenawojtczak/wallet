@@ -1,12 +1,17 @@
-import { Link, Wrapper, LogoTitle } from "./HeaderNavigation.styled";
-import { ReactComponent as LogoIcon } from "../../assets/icons/wallet.svg";
+import {
+  Link,
+  Wrapper,
+  LogoTitle,
+  RotatingLogoIcon,
+} from "./HeaderNavigation.styled";
+// import { ReactComponent as LogoIcon } from "../../assets/icons/wallet.svg";
 
 export const HeaderNavigation = () => {
   return (
     <nav>
-      <Link to="/">
+      <Link to="/home">
         <Wrapper>
-          <LogoIcon></LogoIcon>
+          <RotatingLogoIcon></RotatingLogoIcon>
           <LogoTitle>Wallet</LogoTitle>
         </Wrapper>
       </Link>
