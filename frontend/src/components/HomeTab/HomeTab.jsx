@@ -34,8 +34,8 @@ import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import Media from "react-media";
 
 export const HomeTab = () => {
-  const fetchedTransactions = useSelector(selectTransactions);
-  // console.log(fetchedTransactions);
+  const transactions = useSelector(selectTransactions);
+  const fetchedTransactions = transactions.slice().reverse();
 
   const dispatch = useDispatch();
   useEffect(() => {
