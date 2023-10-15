@@ -31,6 +31,7 @@ import {
 } from "../../utils/formatUtils";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import Media from "react-media";
+import Notiflix from "notiflix";
 
 export const HomeTab = () => {
   const transactions = useSelector(selectTransactions);
@@ -45,6 +46,7 @@ export const HomeTab = () => {
     await dispatch(deleteTransaction(id));
     await dispatch(fetchTransactions());
     await dispatch(fetchTotals());
+    Notiflix.Notify.info("Transaction removed from your list");
   };
 
   const transformedTableTransactions = fetchedTransactions.map(
