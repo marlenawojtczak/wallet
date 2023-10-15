@@ -78,19 +78,33 @@ export const addTransaction = createAsyncThunk(
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      console.log("Przed zapytaniem", credentials);
       const res = await api.post("/api/transactions", credentials, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("Po zapytaniu", res.data);
       Notiflix.Notify.success("Successs! Transaction added to your list", {
         width: "300px",
+        position: "center-top",
+        distance: "18px",
+        svgSize: "120px",
+        timeout: 2200,
+        borderRadius: "20px",
+        fontFamily: "Poppins",
+        fontSize: "16px",
       });
       return res.data;
     } catch (error) {
-      Notiflix.Notify.failure("Cannot add transaction");
+      Notiflix.Notify.failure("Cannot add transaction", {
+        width: "300px",
+        position: "center-top",
+        distance: "18px",
+        svgSize: "120px",
+        timeout: 2200,
+        borderRadius: "20px",
+        fontFamily: "Poppins",
+        fontSize: "16px",
+      });
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(closeLoading());
@@ -108,6 +122,16 @@ export const deleteTransaction = createAsyncThunk(
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+      });
+      Notiflix.Notify.info("Transaction removed from your list", {
+        width: "300px",
+        position: "center-top",
+        distance: "18px",
+        svgSize: "120px",
+        timeout: 2200,
+        borderRadius: "20px",
+        fontFamily: "Poppins",
+        fontSize: "16px",
       });
       return `Deleted transaction: ${id}`;
     } catch (error) {
