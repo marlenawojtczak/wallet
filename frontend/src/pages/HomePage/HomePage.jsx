@@ -2,8 +2,9 @@ import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HomeTab } from "../../components/HomeTab";
-import { Wrapper, X } from "./HomePage.styled";
+import { Wrapper, X, Y } from "./HomePage.styled";
 import { ButtonAddTransactions } from "../../components/ButtonAddTransactions";
+import { ButtonScroll } from "../../components/ButtonScroll/ButtonScroll";
 import { ModalAddTransaction } from "../../components/ModalAddTransaction";
 import {
   openModalAddTransaction,
@@ -25,6 +26,13 @@ const HomePage = () => {
     dispatch(closeModalAddTransaction());
   };
 
+  const handleScroll = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   if (isOpen) {
     document.body.style.overflow = "hidden";
   } else {
@@ -44,6 +52,9 @@ const HomePage = () => {
         <X>
           <ButtonAddTransactions onClick={handleOpenModal} />
         </X>
+        <Y>
+          <ButtonScroll onClick={handleScroll} />
+        </Y>
         <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
       </Wrapper>
     </>
