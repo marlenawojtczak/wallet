@@ -7,7 +7,7 @@ import {
   Modal,
 } from "./ModalLogout.styled";
 import { selectIsModalLogoutOpen } from "../../redux/global/selectors";
-import { selectToken } from "../../redux/session/selectors";
+import { selectSession } from "../../redux/session/selectors";
 import { closeModalLogout } from "../../redux/global/globalSlice.js";
 import { signOut } from "../../redux/session/operations";
 
@@ -16,10 +16,11 @@ import { useDispatch, useSelector } from "react-redux";
 export const ModalLogout = () => {
   const dispatch = useDispatch();
   const isModalLogoutOpen = useSelector(selectIsModalLogoutOpen);
-  const token = useSelector(selectToken);
+  const session = useSelector(selectSession);
+  const sessionId = session?.sid;
 
   const handleLogout = () => {
-    dispatch(signOut(token));
+    dispatch(signOut(sessionId));
   };
 
   const handleClose = () => {

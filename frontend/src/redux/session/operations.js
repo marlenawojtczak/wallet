@@ -56,26 +56,52 @@ export const signIn = createAsyncThunk(
   }
 );
 
+// export const signOut = createAsyncThunk(
+//   "session/signOut",
+//   async (token, { dispatch }) => {
+//     dispatch(openLoading());
+//     try {
+//       await api.post(
+//         "/api/auth/sign-out",
+//         {},
+//         { headers: { Authorization: `Bearer ${token}` } }
+//       );
+//       dispatch(resetSession());
+//       dispatch(resetGlobal());
+//       dispatch(resetFinance());
+//       clearAuthHeader();
+//     } catch (error) {
+//       toast.error("Oops something went wrong during logout.");
+//       dispatch(closeModalLogout());
+//       throw error;
+//     } finally {
+//       dispatch(closeLoading());
+//     }
+//   }
+// );
+
 export const signOut = createAsyncThunk(
   "session/signOut",
-  async (token, { dispatch }) => {
-    dispatch(openLoading());
+  async (credentials, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const accessToken = state.session.user.accessToken;
+    thunkAPI.dispatch(openLoading());
     try {
       await api.post(
         "/api/auth/sign-out",
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        { _id: credentials },
+        setAuthHeader(accessToken)
       );
-      dispatch(resetSession());
-      dispatch(resetGlobal());
-      dispatch(resetFinance());
+      thunkAPI.dispatch(resetSession());
+      thunkAPI.dispatch(resetGlobal());
+      thunkAPI.dispatch(resetFinance());
       clearAuthHeader();
     } catch (error) {
       toast.error("Oops something went wrong during logout.");
-      dispatch(closeModalLogout());
+      thunkAPI.dispatch(closeModalLogout());
       throw error;
     } finally {
-      dispatch(closeLoading());
+      thunkAPI.dispatch(closeLoading());
     }
   }
 );
@@ -97,6 +123,24 @@ export const currentUser = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(closeLoading());
+    }
+  }
+);
+
+export const refreshAuthTokens = createAsyncThunk(
+  "session/refresh",
+  async (credentials, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.session.user.refreshToken;
+    if (!persistedToken) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
+    }
+    try {
+      const res = await api.post("api/auth/refresh", { sid: credentials });
+      setAuthHeader(res.data.user.accessToken);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
