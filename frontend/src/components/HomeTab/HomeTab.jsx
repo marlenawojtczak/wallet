@@ -14,6 +14,7 @@ import {
   StyledTable,
   EditText,
   TableNextRows,
+  TableBodyContainer,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -90,51 +91,53 @@ export const HomeTab = () => {
           <>
             {matches.medium && (
               <TableWrapper>
-                <Table>
-                  <TableHead>
-                    <TableHeaderCell>Date</TableHeaderCell>
-                    <TableHeaderCell>Type</TableHeaderCell>
-                    <TableHeaderCell>Category</TableHeaderCell>
-                    <TableHeaderCell>Comment</TableHeaderCell>
-                    <TableHeaderCell>Sum</TableHeaderCell>
-                    <TableHeaderCell></TableHeaderCell>
-                    <TableHeaderCell></TableHeaderCell>
-                  </TableHead>
-                  <TableBody>
-                    {fetchedTransactions.map((option, index) => (
-                      <TableNextRows key={index}>
-                        <TableCell></TableCell>
-                        <TableCell>{formatDate(option.date)}</TableCell>
-                        <TableCell>{typeFormatter(option.type)}</TableCell>
-                        <TableCell>{option.category}</TableCell>
-                        <TableCell>{option.comment}</TableCell>
-                        <TableCell
-                          style={{
-                            color: amountColorFormatter(option.type),
-                          }}
-                        >
-                          {amountFormatter(option.amount)}
-                        </TableCell>
-                        <TableCell>
-                          {/* <Button type="button" onClick={openModal}> */}
-                          <Button type="button">
-                            <EditIcon></EditIcon>
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <DeleteButton
-                            type="submit"
-                            onClick={() =>
-                              TransactionsDeleteHandler(option._id)
-                            }
+                <TableBodyContainer>
+                  <Table>
+                    <TableHead>
+                      <TableHeaderCell>Date</TableHeaderCell>
+                      <TableHeaderCell>Type</TableHeaderCell>
+                      <TableHeaderCell>Category</TableHeaderCell>
+                      <TableHeaderCell>Comment</TableHeaderCell>
+                      <TableHeaderCell>Sum</TableHeaderCell>
+                      <TableHeaderCell></TableHeaderCell>
+                      <TableHeaderCell></TableHeaderCell>
+                    </TableHead>
+                    <TableBody>
+                      {fetchedTransactions.map((option, index) => (
+                        <TableNextRows key={index}>
+                          <TableCell></TableCell>
+                          <TableCell>{formatDate(option.date)}</TableCell>
+                          <TableCell>{typeFormatter(option.type)}</TableCell>
+                          <TableCell>{option.category}</TableCell>
+                          <TableCell>{option.comment}</TableCell>
+                          <TableCell
+                            style={{
+                              color: amountColorFormatter(option.type),
+                            }}
                           >
-                            Delete
-                          </DeleteButton>
-                        </TableCell>
-                      </TableNextRows>
-                    ))}
-                  </TableBody>
-                </Table>
+                            {amountFormatter(option.amount)}
+                          </TableCell>
+                          <TableCell>
+                            {/* <Button type="button" onClick={openModal}> */}
+                            <Button type="button">
+                              <EditIcon></EditIcon>
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <DeleteButton
+                              type="submit"
+                              onClick={() =>
+                                TransactionsDeleteHandler(option._id)
+                              }
+                            >
+                              Delete
+                            </DeleteButton>
+                          </TableCell>
+                        </TableNextRows>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableBodyContainer>
               </TableWrapper>
             )}
             {matches.small && (

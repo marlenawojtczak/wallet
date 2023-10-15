@@ -96,6 +96,7 @@ export const EditText = styled.span`
 
 export const TableWrapper = styled.div`
   height: 100vh;
+  margin: 0;
   animation: ${showIn} 500ms linear;
 
   @media screen and (min-width: 1280px) {
@@ -110,8 +111,9 @@ export const Table = styled.table`
 
 export const TableHead = styled.thead`
   text-align: left;
+  position: sticky;
+  top: 0px;
 
-  position: relative;
   &::before {
     content: "";
     position: absolute;
@@ -133,6 +135,17 @@ export const TableBody = styled.tbody`
   line-height: normal;
   text-align: left;
 `;
+
+export const TableBodyContainer = styled.div`
+  height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+
+  ::-webkit-scrollbar {
+    width: 30px;
+  }
+`;
+
 export const TableHeaderCell = styled.th`
   font-family: Circe;
   font-size: 18px;
