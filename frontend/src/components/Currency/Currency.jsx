@@ -5,6 +5,8 @@ import {
   TableHead,
   TableBody,
   TableNextRows,
+  TableHeaderCell,
+  TableCell,
 } from "./Currency.styled";
 import { Loader } from "../Loader/Loader";
 
@@ -53,18 +55,16 @@ export const Currency = () => {
       <TableContainer>
         <Table>
           <TableHead>
-            {/* <TableNextRows> */}
-            <th>Currency</th>
-            <th>Purchase</th>
-            <th>Sale</th>
-            {/* </TableNextRows> */}
+            <TableHeaderCell>Currency</TableHeaderCell>
+            <TableHeaderCell>Purchase</TableHeaderCell>
+            <TableHeaderCell>Sale</TableHeaderCell>
           </TableHead>
           <TableBody>
             {exchangeRate.map((item, index) => (
               <TableNextRows key={index}>
-                <td>{item.code}</td>
-                <td>{item.rates[0].ask.toFixed(2)}</td>
-                <td>{item.rates[0].bid.toFixed(2)}</td>
+                <TableCell>{item.code}</TableCell>
+                <TableCell>{item.rates[0].ask.toFixed(2)}</TableCell>
+                <TableCell>{item.rates[0].bid.toFixed(2)}</TableCell>
               </TableNextRows>
             ))}
           </TableBody>

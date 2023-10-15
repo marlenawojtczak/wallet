@@ -9,36 +9,3 @@ export const ButtonAddTransactions = ({ onClick }) => {
     </Button>
   );
 };
-
-// import React, { useState } from "react";
-// import {
-//   StyledButton,
-//   AddText,
-//   PlusElement,
-// } from "./ButtonAddTransactions.styled";
-
-// export const ButtonAddTransactions = ({ onClick }) => {
-//   const [showAdd, setShowAdd] = useState(false);
-
-//   const handleMouseEnter = () => {
-//     setShowAdd(true);
-//   };
-
-//   const handleMouseLeave = () => {
-//     setShowAdd(false);
-//   };
-
-//   return (
-//     <StyledButton
-//       onMouseEnter={handleMouseEnter}
-//       onMouseLeave={handleMouseLeave}
-//       onClick={onClick}
-//     >
-//       {showAdd ? (
-//         <AddText>Add Transaction</AddText>
-//       ) : (
-//         <PlusElement>+</PlusElement>
-//       )}
-//     </StyledButton>
-//   );
-// };
