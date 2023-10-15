@@ -63,9 +63,6 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
 
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
-        Notiflix.Notify.success("Successs! Transaction added to your list", {
-          width: "300px",
-        });
       } catch (error) {
         Notiflix.Notify.failure("Cannot add transaction");
       }
