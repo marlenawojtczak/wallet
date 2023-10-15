@@ -22,9 +22,16 @@ import {
   fetchTransactions,
   deleteTransaction,
   fetchTotals,
+  updateTransaction,
 } from "../../redux/finance/operations";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  openModalEditTransaction,
+  closeModalEditTransaction,
+} from "../../redux/global/globalSlice";
+import { ModalEditTransaction } from "../../components/ModalEditTransaction";
+import { selectIsModalEditTransactionOpen } from "../../redux/global/selectors";
 import { selectTransactions } from "../../redux/finance/selectors";
 import {
   amountFormatter,
@@ -37,10 +44,26 @@ import Media from "react-media";
 import Notiflix from "notiflix";
 
 export const HomeTab = () => {
+  const dispatch = useDispatch();
+  const isOpen = useSelector(selectIsModalEditTransactionOpen);
+
+  const handleOpenModal = () => {
+    dispatch(openModalEditTransaction());
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModalEditTransaction());
+  };
+
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
   const transactions = useSelector(selectTransactions);
   const fetchedTransactions = transactions.slice().reverse();
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTransactions());
   }, []);
@@ -73,7 +96,7 @@ export const HomeTab = () => {
       );
 
       const editBtn = (
-        <Button type="button">
+        <Button type="button" onClick={handleOpenModal}>
           <EditIcon></EditIcon>
           <EditText>Edit</EditText>
         </Button>
@@ -142,7 +165,11 @@ export const HomeTab = () => {
                           </TableCell>
                           <TableCell>
                             {/* <Button type="button" onClick={openModal}> */}
-                            <Button type="button">
+                            <Button
+                              type="button"
+                              onClick={handleOpenModal}
+                              option={option}
+                            >
                               <EditIcon></EditIcon>
                             </Button>
                           </TableCell>
@@ -202,6 +229,7 @@ export const HomeTab = () => {
           </>
         )}
       </Media>
+      <ModalEditTransaction isOpen={isOpen} onClose={handleCloseModal} />
     </>
   );
 };
