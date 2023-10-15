@@ -57,7 +57,7 @@ export const years = (fetchedTransactions) => {
 
 export const amountFormatter = (amount) => {
   const num = Number(amount).toFixed(2);
-  const formattedNumber = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  const formattedNumber = num.toString().replace(/[^\d.]/g, "");
   return formattedNumber;
 };
 
