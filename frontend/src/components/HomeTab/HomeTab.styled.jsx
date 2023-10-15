@@ -153,7 +153,7 @@ export const TableCell = styled.td`
 `;
 
 export const TableCellType = styled.td`
-  text-align: center;
+  padding-left: 45px;
 `;
 
 export const DeleteButton = styled.button`
