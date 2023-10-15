@@ -16,7 +16,7 @@ import {
 
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Notiflix } from "notiflix";
+import Notiflix from "notiflix";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import "react-datetime/css/react-datetime.css";
@@ -63,6 +63,9 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
 
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
+        Notiflix.Notify.success("Successs! Transaction added to your list", {
+          width: "300px",
+        });
       } catch (error) {
         Notiflix.Notify.failure("Cannot add transaction");
       }
