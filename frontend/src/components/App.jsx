@@ -5,6 +5,7 @@ import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { useAuth } from "../hooks/useAuth";
 import { Loader } from "../components";
+import { TokenRefresher } from "./TokenRefresher";
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -57,6 +58,7 @@ export const App = () => {
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Suspense>
+      <TokenRefresher />
     </>
   );
 };

@@ -102,6 +102,17 @@
         "summary": "Logout",
         "security": [{ "Bearer": [] }],
         "parameters": [],
+        "requestBody": {
+          "description": "Session's id (sid field after authentication)",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignOutRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "204": {
             "description": "Successful operation",
@@ -523,6 +534,17 @@
                 "example": "651fe19ae031c72980a0e120"
               }
             }
+          }
+        }
+      },
+      "SignOutRequest": {
+        "type": "object",
+        "description": "Sign out request",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Session's ('sid' field after authentication)",
+            "example": "6523d994da34596df76f6cba"
           }
         }
       },

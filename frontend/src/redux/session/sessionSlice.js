@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signIn, signOut, signUp, currentUser } from "./operations.js";
+import {
+  signIn,
+  signOut,
+  signUp,
+  currentUser,
+  refreshAuthTokens,
+} from "./operations.js";
 
 const initialState = {
   user: null,
+  session: null,
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -15,6 +22,7 @@ export const sessionSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
+      state.session = action.payload;
       state.isLoggedIn = !!action.payload;
     },
     setToken: (state, action) => {
@@ -29,6 +37,10 @@ export const sessionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      .addCase(signUp.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(signUp.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.user.accessToken;
@@ -40,9 +52,12 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       })
-
+      .addCase(signIn.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(signIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        state.session = action.payload.session;
         state.token = action.payload.user.accessToken;
         state.isLoggedIn = true;
         state.isLoading = false;
@@ -52,9 +67,12 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       })
-
+      .addCase(signOut.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(signOut.fulfilled, (state) => {
         state.user = null;
+        state.session = null;
         state.token = null;
         state.isLoggedIn = false;
         state.isLoading = false;
@@ -64,14 +82,31 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       })
-
+      .addCase(currentUser.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(currentUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        state.session = action.payload.session;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
       })
       .addCase(currentUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(refreshAuthTokens.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshAuthTokens.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.session = action.payload.session;
+        state.token = action.payload.user.accessToken;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(refreshAuthTokens.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       });
