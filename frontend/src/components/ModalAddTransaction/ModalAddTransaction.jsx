@@ -18,7 +18,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import Notiflix from "notiflix";
 import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
