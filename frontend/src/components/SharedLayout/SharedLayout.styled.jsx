@@ -4,8 +4,7 @@ import backgroundElipsePink from "../../assets/images/ellipsePink.png";
 
 export const BackgroundContainer = styled.div`
   background-color: var(--bg-accent);
-  height: 100vh;
-
+  height: 100%;
   @media screen and (min-width: 768px) {
     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
     background-repeat: no-repeat, no-repeat;
@@ -57,6 +56,11 @@ export const CurrencyNav = styled.div`
   }
 `;
 
+export const StickyContainer = styled.div`
+  position: sticky;
+  top: 0;
+`;
+
 export const WrapperLeftAndUpSite = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
@@ -64,6 +68,7 @@ export const WrapperLeftAndUpSite = styled.div`
     margin-bottom: 20px;
   }
   @media screen and (min-width: 1280px) {
+    position: static;
     flex-direction: column;
     flex: 30%;
     padding-top: 40px;

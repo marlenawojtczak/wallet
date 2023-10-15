@@ -14,6 +14,7 @@ import {
   StyledTable,
   EditText,
   TableNextRows,
+  TableBodyContainer,
   TableCellType,
   Message,
   Plus,
@@ -102,6 +103,7 @@ export const HomeTab = () => {
           <>
             {matches.medium && (
               <TableWrapper>
+                <TableBodyContainer>
                 <Table>
                   <TableHead>
                     <TableHeaderCell>Date</TableHeaderCell>
@@ -112,7 +114,6 @@ export const HomeTab = () => {
                     <TableHeaderCell></TableHeaderCell>
                     <TableHeaderCell></TableHeaderCell>
                   </TableHead>
-
                   <TableBody>
                     {fetchedTransactions.length === 0 ? (
                       <tr>
@@ -131,6 +132,7 @@ export const HomeTab = () => {
                           <TableCellType>
                             {typeFormatter(option.type)}
                           </TableCellType>
+
                           <TableCell>{option.category}</TableCell>
                           <TableCell>{option.comment}</TableCell>
                           <TableCell
@@ -157,10 +159,10 @@ export const HomeTab = () => {
                             </DeleteButton>
                           </TableCell>
                         </TableNextRows>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableBodyContainer>
               </TableWrapper>
             )}
             {matches.small && (

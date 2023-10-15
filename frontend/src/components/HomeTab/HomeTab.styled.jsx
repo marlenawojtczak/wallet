@@ -96,8 +96,24 @@ export const EditText = styled.span`
 
 export const TableWrapper = styled.div`
   height: 100vh;
+  margin: 0;
   animation: ${showIn} 500ms linear;
-  position: relative;
+
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 10px;
+  }
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+export const TableHead = styled.thead`
+  text-align: left;
+  position: sticky;
+  top: 0px;
   &::before {
     content: "";
     position: absolute;
@@ -124,6 +140,15 @@ export const TableHead = styled.thead`
   text-align: left;
 `;
 
+export const TableBodyContainer = styled.div`
+  height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+  ::-webkit-scrollbar {
+    width: 30px;
+  }
+`;
+
 export const TableHeaderCell = styled.th`
   font-family: Circe;
   font-size: 18px;
@@ -133,7 +158,14 @@ export const TableHeaderCell = styled.th`
   padding: 14px 30px;
 `;
 
-export const TableBody = styled.tbody``;
+export const TableBody = styled.tbody`
+font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  `;
 
 export const TableNextRows = styled.tr`
   border-bottom: 1px solid var(--border-transactions);

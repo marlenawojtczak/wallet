@@ -30,6 +30,7 @@ import {
   WrapperLeftAndUpSite,
   WrapperRightAndDownSite,
   WrapperNavBal,
+  StickyContainer,
 } from "./SharedLayout.styled";
 
 export const SharedLayout = () => {
@@ -58,6 +59,7 @@ export const SharedLayout = () => {
                 <Currency />
               </CurrencyNav>
             </WrapperLeftAndUpSite>
+
             <WrapperRightAndDownSite>
               <Outlet />
             </WrapperRightAndDownSite>
