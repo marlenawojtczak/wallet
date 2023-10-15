@@ -72,16 +72,6 @@ export const HomeTab = () => {
     await dispatch(deleteTransaction(id));
     await dispatch(fetchTransactions());
     await dispatch(fetchTotals());
-    Notiflix.Notify.info("Transaction removed from your list", {
-      width: "300px",
-      position: "center-top",
-      distance: "18px",
-      svgSize: "120px",
-      timeout: 2200,
-      borderRadius: "20px",
-      fontFamily: "Poppins",
-      fontSize: "16px",
-    });
   };
 
   const transformedTableTransactions = fetchedTransactions.map(

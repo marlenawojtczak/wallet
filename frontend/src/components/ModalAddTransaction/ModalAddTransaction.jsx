@@ -16,7 +16,6 @@ import {
 
 import { useState } from "react";
 import { useFormik } from "formik";
-import Notiflix from "notiflix";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import "react-datetime/css/react-datetime.css";
@@ -79,27 +78,8 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
         dispatch(setComment(values.comment));
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
-        Notiflix.Notify.success("Successs! Transaction added to your list", {
-          width: "300px",
-          position: "center-top",
-          distance: "18px",
-          svgSize: "120px",
-          timeout: 2200,
-          borderRadius: "20px",
-          fontFamily: "Poppins",
-          fontSize: "16px",
-        });
       } catch (error) {
-        Notiflix.Notify.failure("Cannot add transaction", {
-          width: "300px",
-          position: "center-top",
-          distance: "18px",
-          svgSize: "120px",
-          timeout: 2200,
-          borderRadius: "20px",
-          fontFamily: "Poppins",
-          fontSize: "16px",
-        });
+        return console.log(error.message);
       }
     },
   });
