@@ -6,6 +6,8 @@ import {
   TableBody,
   TableNextRows,
 } from "./Currency.styled";
+import { Loader } from "../Loader/Loader";
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -24,22 +26,22 @@ async function fetchCurrency(currencyCode) {
 
 export const Currency = () => {
   const [exchangeRate, setExchangeRate] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      //loader()
       try {
         const currenciesToFetch = ["EUR", "USD"];
         const currencyPromises = currenciesToFetch.map((currencyCode) =>
           fetchCurrency(currencyCode)
         );
         const currencyData = await Promise.all(currencyPromises);
-        console.log("currencyData", currencyData);
-        // removeLoader()
 
         setExchangeRate(currencyData);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -47,6 +49,7 @@ export const Currency = () => {
 
   return (
     <TableWrapper>
+      {loading && <Loader />}
       <TableContainer>
         <Table>
           <TableHead>
