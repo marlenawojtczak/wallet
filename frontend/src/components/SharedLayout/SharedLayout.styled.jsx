@@ -5,7 +5,6 @@ import backgroundElipsePink from "../../assets/images/ellipsePink.png";
 export const BackgroundContainer = styled.div`
   background-color: var(--bg-accent);
   height: 100%;
-
   @media screen and (min-width: 768px) {
     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
     background-repeat: no-repeat, no-repeat;

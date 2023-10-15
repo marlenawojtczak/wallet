@@ -5,7 +5,11 @@ import {
   TableHead,
   TableBody,
   TableNextRows,
+  TableHeaderCell,
+  TableCell,
 } from "./Currency.styled";
+import { Loader } from "../Loader/Loader";
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -24,22 +28,22 @@ async function fetchCurrency(currencyCode) {
 
 export const Currency = () => {
   const [exchangeRate, setExchangeRate] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      //loader()
       try {
         const currenciesToFetch = ["EUR", "USD"];
         const currencyPromises = currenciesToFetch.map((currencyCode) =>
           fetchCurrency(currencyCode)
         );
         const currencyData = await Promise.all(currencyPromises);
-        console.log("currencyData", currencyData);
-        // removeLoader()
 
         setExchangeRate(currencyData);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -47,21 +51,20 @@ export const Currency = () => {
 
   return (
     <TableWrapper>
+      {loading && <Loader />}
       <TableContainer>
         <Table>
           <TableHead>
-            {/* <TableNextRows> */}
-            <th>Currency</th>
-            <th>Purchase</th>
-            <th>Sale</th>
-            {/* </TableNextRows> */}
+            <TableHeaderCell>Currency</TableHeaderCell>
+            <TableHeaderCell>Purchase</TableHeaderCell>
+            <TableHeaderCell>Sale</TableHeaderCell>
           </TableHead>
           <TableBody>
             {exchangeRate.map((item, index) => (
               <TableNextRows key={index}>
-                <td>{item.code}</td>
-                <td>{item.rates[0].ask.toFixed(2)}</td>
-                <td>{item.rates[0].bid.toFixed(2)}</td>
+                <TableCell>{item.code}</TableCell>
+                <TableCell>{item.rates[0].ask.toFixed(2)}</TableCell>
+                <TableCell>{item.rates[0].bid.toFixed(2)}</TableCell>
               </TableNextRows>
             ))}
           </TableBody>

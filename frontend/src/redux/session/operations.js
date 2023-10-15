@@ -3,6 +3,8 @@ import { resetFinance } from "../../redux/finance/financeSlice";
 import {
   resetGlobal,
   closeModalLogout,
+  openLoading,
+  closeLoading,
 } from "../../redux/global/globalSlice.js";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -24,12 +26,15 @@ const clearAuthHeader = () => {
 export const signUp = createAsyncThunk(
   "session/signUp",
   async (credentials, thunkAPI) => {
+    thunkAPI.dispatch(openLoading());
     try {
       const res = await api.post("/api/auth/sign-up", credentials);
       setAuthHeader(res.data.user.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(closeLoading());
     }
   }
 );
@@ -37,6 +42,7 @@ export const signUp = createAsyncThunk(
 export const signIn = createAsyncThunk(
   "session/signIn",
   async (credentials, thunkAPI) => {
+    thunkAPI.dispatch(openLoading());
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.user.accessToken);
@@ -44,6 +50,8 @@ export const signIn = createAsyncThunk(
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(closeLoading());
     }
   }
 );
@@ -51,6 +59,7 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
   "session/signOut",
   async (token, { dispatch }) => {
+    dispatch(openLoading());
     try {
       await api.post(
         "/api/auth/sign-out",
@@ -65,6 +74,8 @@ export const signOut = createAsyncThunk(
       toast.error("Oops something went wrong during logout.");
       dispatch(closeModalLogout());
       throw error;
+    } finally {
+      dispatch(closeLoading());
     }
   }
 );
@@ -77,12 +88,15 @@ export const currentUser = createAsyncThunk(
     if (!persistedToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
+    thunkAPI.dispatch(openLoading());
     try {
       setAuthHeader(persistedToken);
       const res = await api.get("api/users/current");
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(closeLoading());
     }
   }
 );

@@ -99,6 +99,7 @@ export const TableWrapper = styled.div`
   margin: 0;
   animation: ${showIn} 500ms linear;
 
+
   @media screen and (min-width: 1280px) {
     margin-top: 10px;
   }
@@ -113,26 +114,29 @@ export const TableHead = styled.thead`
   text-align: left;
   position: sticky;
   top: 0px;
-
   &::before {
     content: "";
     position: absolute;
-
     top: 0;
-    left: 20;
+    left: 0;
     width: 100%;
     height: 52px;
     background-color: var(--font-light);
     border-radius: 30px 30px;
     z-index: -1;
   }
+  @media screen and (min-width: 1280px) {
+  }
 `;
-export const TableBody = styled.tbody`
-  font-family: Circe;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+export const TableHead = styled.thead`
+  padding: 0;
+  margin: 0;
   text-align: left;
 `;
 
@@ -140,7 +144,6 @@ export const TableBodyContainer = styled.div`
   height: 100vh;
   overflow-y: auto;
   width: 100%;
-
   ::-webkit-scrollbar {
     width: 30px;
   }
@@ -152,8 +155,17 @@ export const TableHeaderCell = styled.th`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding: 14px 5px;
+  padding: 14px 30px;
 `;
+
+export const TableBody = styled.tbody`
+font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  `;
 
 export const TableNextRows = styled.tr`
   border-bottom: 1px solid var(--border-transactions);
@@ -163,7 +175,17 @@ export const TableNextRows = styled.tr`
 `;
 
 export const TableCell = styled.td`
-  padding: 14px 5px;
+  padding: 14px 30px;
+  font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+`;
+
+export const TableCellType = styled.td`
+  padding-left: 45px;
 `;
 
 export const DeleteButton = styled.button`
@@ -171,6 +193,7 @@ export const DeleteButton = styled.button`
   justify-content: center;
   text-align: center;
   width: 67px;
+
   font-size: 14px;
   font-style: normal;
   font-family: Circe;
@@ -201,4 +224,22 @@ export const Button = styled.button`
   &:hover svg path#Icon {
     fill: var(--brand-accent);
   }
+`;
+
+export const Message = styled.p`
+  text-align: center;
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 14px 0 110px 0;
+`;
+export const Plus = styled.span`
+  display: inline-block;
+  color: var(--bg-light);
+  background-color: var(--brand-secondary);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
 `;

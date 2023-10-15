@@ -15,6 +15,9 @@ import {
   EditText,
   TableNextRows,
   TableBodyContainer,
+  TableCellType,
+  Message,
+  Plus,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -47,7 +50,16 @@ export const HomeTab = () => {
     await dispatch(deleteTransaction(id));
     await dispatch(fetchTransactions());
     await dispatch(fetchTotals());
-    Notiflix.Notify.info("Transaction removed from your list");
+    Notiflix.Notify.info("Transaction removed from your list", {
+      width: "300px",
+      position: "center-top",
+      distance: "18px",
+      svgSize: "120px",
+      timeout: 2200,
+      borderRadius: "20px",
+      fontFamily: "Poppins",
+      fontSize: "16px",
+    });
   };
 
   const transformedTableTransactions = fetchedTransactions.map(
@@ -92,22 +104,35 @@ export const HomeTab = () => {
             {matches.medium && (
               <TableWrapper>
                 <TableBodyContainer>
-                  <Table>
-                    <TableHead>
-                      <TableHeaderCell>Date</TableHeaderCell>
-                      <TableHeaderCell>Type</TableHeaderCell>
-                      <TableHeaderCell>Category</TableHeaderCell>
-                      <TableHeaderCell>Comment</TableHeaderCell>
-                      <TableHeaderCell>Sum</TableHeaderCell>
-                      <TableHeaderCell></TableHeaderCell>
-                      <TableHeaderCell></TableHeaderCell>
-                    </TableHead>
-                    <TableBody>
-                      {fetchedTransactions.map((option, index) => (
+                <Table>
+                  <TableHead>
+                    <TableHeaderCell>Date</TableHeaderCell>
+                    <TableHeaderCell>Type</TableHeaderCell>
+                    <TableHeaderCell>Category</TableHeaderCell>
+                    <TableHeaderCell>Comment</TableHeaderCell>
+                    <TableHeaderCell>Sum</TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                  </TableHead>
+                  <TableBody>
+                    {fetchedTransactions.length === 0 ? (
+                      <tr>
+                        <td colSpan="7">
+                          <Message>
+                            There are no transactions. You can add one with the
+                            plus button <Plus>+</Plus> in the right bottom
+                            corner.
+                          </Message>
+                        </td>
+                      </tr>
+                    ) : (
+                      fetchedTransactions.map((option, index) => (
                         <TableNextRows key={index}>
-                          <TableCell></TableCell>
                           <TableCell>{formatDate(option.date)}</TableCell>
-                          <TableCell>{typeFormatter(option.type)}</TableCell>
+                          <TableCellType>
+                            {typeFormatter(option.type)}
+                          </TableCellType>
+
                           <TableCell>{option.category}</TableCell>
                           <TableCell>{option.comment}</TableCell>
                           <TableCell
@@ -142,25 +167,38 @@ export const HomeTab = () => {
             )}
             {matches.small && (
               <StyledTable>
-                {transformedTableTransactions.map((item, rowIndex) => {
-                  const type = item[1].value;
+                {fetchedTransactions.length === 0 ? (
+                  <tr>
+                    {" "}
+                    <td colSpan="7">
+                      {" "}
+                      <Message>
+                        There are no transactions. You can add one with the plus
+                        button <Plus>+</Plus> in the right bottom corner.
+                      </Message>
+                    </td>
+                  </tr>
+                ) : (
+                  transformedTableTransactions.map((item, rowIndex) => {
+                    const type = item[1].value;
 
-                  return (
-                    <List key={rowIndex}>
-                      {item.map((option, columnIndex) => (
-                        <ListItem
-                          key={columnIndex}
-                          style={{
-                            borderLeftColor: amountColorFormatter(type),
-                          }}
-                        >
-                          <TableHeader>{option.header}</TableHeader>
-                          <ListItemValue>{option.value}</ListItemValue>
-                        </ListItem>
-                      ))}
-                    </List>
-                  );
-                })}
+                    return (
+                      <List key={rowIndex}>
+                        {item.map((option, columnIndex) => (
+                          <ListItem
+                            key={columnIndex}
+                            style={{
+                              borderLeftColor: amountColorFormatter(type),
+                            }}
+                          >
+                            <TableHeader>{option.header}</TableHeader>
+                            <ListItemValue>{option.value}</ListItemValue>
+                          </ListItem>
+                        ))}
+                      </List>
+                    );
+                  })
+                )}
               </StyledTable>
             )}
           </>
