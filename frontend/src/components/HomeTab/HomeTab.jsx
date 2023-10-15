@@ -15,6 +15,8 @@ import {
   EditText,
   TableNextRows,
   TableCellType,
+  Message,
+  Plus,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -112,64 +114,92 @@ export const HomeTab = () => {
                   </TableHead>
 
                   <TableBody>
-                    {fetchedTransactions.map((option, index) => (
-                      <TableNextRows key={index}>
-                        <TableCell>{formatDate(option.date)}</TableCell>
-                        <TableCellType>
+                   {fetchedTransactions.length === 0 ? (
+                      <tr>
+                        {" "}
+                        <td colSpan="7">
+                          {" "}
+                          <Message>
+                            There are no transactions. You can add one with the
+                            plus button <Plus>+</Plus> in the right bottom
+                            corner.
+                          </Message>
+                        </td>
+                      </tr>
+                    ) : (
+                      fetchedTransactions.map((option, index) => (
+                        <TableNextRows key={index}>
+                          <TableCell></TableCell>
+                          <TableCell>{formatDate(option.date)}</TableCell>
+                          <TableCellType>
                           {typeFormatter(option.type)}
                         </TableCellType>
-                        <TableCell>{option.category}</TableCell>
-                        <TableCell>{option.comment}</TableCell>
-                        <TableCell
-                          style={{
-                            color: amountColorFormatter(option.type),
-                          }}
-                        >
-                          {amountFormatter(option.amount)}
-                        </TableCell>
-                        <TableCell>
-                          {/* <Button type="button" onClick={openModal}> */}
-                          <Button type="button">
-                            <EditIcon></EditIcon>
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <DeleteButton
-                            type="submit"
-                            onClick={() =>
-                              TransactionsDeleteHandler(option._id)
-                            }
+                           <TableCell>{option.category}</TableCell>
+                          <TableCell>{option.comment}</TableCell>
+                          <TableCell
+                            style={{
+                              color: amountColorFormatter(option.type),
+                            }}
                           >
-                            Delete
-                          </DeleteButton>
-                        </TableCell>
-                      </TableNextRows>
-                    ))}
+                            {amountFormatter(option.amount)}
+                          </TableCell>
+                          <TableCell>
+                            {/* <Button type="button" onClick={openModal}> */}
+                            <Button type="button">
+                              <EditIcon></EditIcon>
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <DeleteButton
+                              type="submit"
+                              onClick={() =>
+                                TransactionsDeleteHandler(option._id)
+                              }
+                            >
+                              Delete
+                            </DeleteButton>
+                          </TableCell>
+                        </TableNextRows>
+                      ))
+                    )}
                   </TableBody>
                 </Table>
               </TableWrapper>
             )}
             {matches.small && (
               <StyledTable>
-                {transformedTableTransactions.map((item, rowIndex) => {
-                  const type = item[1].value;
+                {fetchedTransactions.length === 0 ? (
+                  <tr>
+                    {" "}
+                    <td colSpan="7">
+                      {" "}
+                      <Message>
+                        There are no transactions. You can add one with the plus
+                        button <Plus>+</Plus> in the right bottom corner.
+                      </Message>
+                    </td>
+                  </tr>
+                ) : (
+                  transformedTableTransactions.map((item, rowIndex) => {
+                    const type = item[1].value;
 
-                  return (
-                    <List key={rowIndex}>
-                      {item.map((option, columnIndex) => (
-                        <ListItem
-                          key={columnIndex}
-                          style={{
-                            borderLeftColor: amountColorFormatter(type),
-                          }}
-                        >
-                          <TableHeader>{option.header}</TableHeader>
-                          <ListItemValue>{option.value}</ListItemValue>
-                        </ListItem>
-                      ))}
-                    </List>
-                  );
-                })}
+                    return (
+                      <List key={rowIndex}>
+                        {item.map((option, columnIndex) => (
+                          <ListItem
+                            key={columnIndex}
+                            style={{
+                              borderLeftColor: amountColorFormatter(type),
+                            }}
+                          >
+                            <TableHeader>{option.header}</TableHeader>
+                            <ListItemValue>{option.value}</ListItemValue>
+                          </ListItem>
+                        ))}
+                      </List>
+                    );
+                  })
+                )}
               </StyledTable>
             )}
           </>

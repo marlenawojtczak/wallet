@@ -193,3 +193,21 @@ export const Button = styled.button`
     fill: var(--brand-accent);
   }
 `;
+
+export const Message = styled.p`
+  text-align: center;
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 14px 0 110px 0;
+`;
+export const Plus = styled.span`
+  display: inline-block;
+  color: var(--bg-light);
+  background-color: var(--brand-secondary);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+`;
