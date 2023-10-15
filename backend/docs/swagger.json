@@ -583,35 +583,56 @@
         "type": "object",
         "description": "User's info",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "User's id",
-            "example": "651fe19ae031c72980a0e120"
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "User's id",
+                "example": "651fe19ae031c72980a0e120"
+              },
+              "username": {
+                "type": "string",
+                "description": "User's username",
+                "example": "user"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "example": "user@email.com"
+              },
+              "accessToken": {
+                "type": "string",
+                "description": "Session's access token (needed for all requests)",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg2NTEwNX0.k0M6kbGPP-S-QhGJanXCdZJUhiPbGVlv5etExeN4EMs"
+              },
+              "refreshToken": {
+                "type": "string",
+                "description": "Session's refresh token (needed for /auth/refresh)",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg0NzEwNX0.vi0TOSg954_awAgEM6oBFq1kcOWQMdClfmduay1IO4o"
+              },
+              "balance": {
+                "type": "integer",
+                "description": "User's balance",
+                "example": 0
+              }
+            }
           },
-          "username": {
-            "type": "string",
-            "description": "User's username",
-            "example": "user"
-          },
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "example": "user@email.com"
-          },
-          "accessToken": {
-            "type": "string",
-            "description": "Session's access token (needed for all requests)",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg2NTEwNX0.k0M6kbGPP-S-QhGJanXCdZJUhiPbGVlv5etExeN4EMs"
-          },
-          "refreshToken": {
-            "type": "string",
-            "description": "Session's refresh token (needed for /auth/refresh)",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg0NzEwNX0.vi0TOSg954_awAgEM6oBFq1kcOWQMdClfmduay1IO4o"
-          },
-          "balance": {
-            "type": "integer",
-            "description": "User's balance",
-            "example": 0
+          "session": {
+            "type": "object",
+            "description": "Session's info",
+            "properties": {
+              "sid": {
+                "type": "string",
+                "description": "Session's id",
+                "example": "6523d994da34596df76f6cba"
+              },
+              "uid": {
+                "type": "string",
+                "description": "User's id",
+                "example": "651fe19ae031c72980a0e120"
+              }
+            }
           }
         }
       },
@@ -822,12 +843,12 @@
             }
           }
         }
-      },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer"
-        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }

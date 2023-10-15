@@ -1,5 +1,5 @@
 export const currentUser = (req, res, next) => {
-  const user = req.user;
+  const { user, session } = req;
   return res.status(200).send({
     user: {
       id: user?._id,
@@ -8,6 +8,10 @@ export const currentUser = (req, res, next) => {
       accessToken: user?.accessToken,
       refreshToken: user?.refreshToken,
       balance: user?.balance,
+    },
+    session: {
+      sid: session?._id,
+      uid: session?.uid,
     },
   });
 };
