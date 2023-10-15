@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { selectAccessToken } from "../session/selectors";
 import { openLoading, closeLoading } from "../../redux/global/globalSlice";
+import Notiflix from "notiflix";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
@@ -84,8 +85,12 @@ export const addTransaction = createAsyncThunk(
         },
       });
       console.log("Po zapytaniu", res.data);
+      Notiflix.Notify.success("Successs! Transaction added to your list", {
+        width: "300px",
+      });
       return res.data;
     } catch (error) {
+      Notiflix.Notify.failure("Cannot add transaction");
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(closeLoading());
