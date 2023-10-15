@@ -19,6 +19,7 @@ const initialState = {
   amount: "",
   date: "",
   comment: "",
+  addedTransaction: null,
 };
 
 export const financeSlice = createSlice({
@@ -27,6 +28,21 @@ export const financeSlice = createSlice({
   reducers: {
     resetFinance: () => {
       return { ...initialState };
+    },
+    setType: (state, action) => {
+      state.type = action.payload;
+    },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    setAmount: (state, action) => {
+      state.amount = action.payload;
+    },
+    setDate: (state, action) => {
+      state.date = action.payload;
+    },
+    setComment: (state, action) => {
+      state.comment = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -78,10 +94,18 @@ export const financeSlice = createSlice({
           value: action.payload.value,
           date: action.payload.date,
           comment: action.payload.comment,
+          addedTransaction: action.payload,
         };
       });
   },
 });
 
-export const { resetFinance } = financeSlice.actions;
+export const {
+  resetFinance,
+  setType,
+  setCategory,
+  setAmount,
+  setDate,
+  setComment,
+} = financeSlice.actions;
 export const financeReducer = financeSlice.reducer;
