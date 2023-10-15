@@ -12,8 +12,7 @@ export const ModalBackground = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  align-items: center;
-  justify-content: center;
+  padding-top: 60px;
 
   @media screen and (min-width: 769px) and (max-width: 1279px) {
     background: var(--bg-modal-overlay);
@@ -28,7 +27,11 @@ export const ModalWrapper = styled.div`
   padding: 20px 40px;
   margin: 0 auto;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 769px) and (max-width: 1279px) {
+    padding: 40px 80px;
+  }
+
+  @media screen and (min-width: 1280px) {
     padding: 40px 80px;
   }
 `;
@@ -39,22 +42,21 @@ export const SectionWrapper = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  position: sticky;
+  position: relative;
   background-color: #fefefe;
-  top: 0;
+  width: 100vw;
   height: 100vh;
   margin: 0 auto;
   border-radius: 20px;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 769px) and (max-width: 1279px) {
     width: 540px;
     height: ${(props) => (props.isHidden ? "508px" : "603px")};
-    position: fixed;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
   }
-  
+
+  @media screen and (min-width: 1280px) {
+    width: 540px;
+    height: ${(props) => (props.isHidden ? "508px" : "603px")};
   }
 `;
 
