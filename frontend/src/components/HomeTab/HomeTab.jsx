@@ -14,6 +14,7 @@ import {
   StyledTable,
   EditText,
   TableNextRows,
+  TableCellType,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -46,7 +47,16 @@ export const HomeTab = () => {
     await dispatch(deleteTransaction(id));
     await dispatch(fetchTransactions());
     await dispatch(fetchTotals());
-    Notiflix.Notify.info("Transaction removed from your list");
+    Notiflix.Notify.info("Transaction removed from your list", {
+      width: "300px",
+      position: "center-top",
+      distance: "18px",
+      svgSize: "120px",
+      timeout: 2500,
+      borderRadius: "20px",
+      fontFamily: "Poppins",
+      fontSize: "20px",
+    });
   };
 
   const transformedTableTransactions = fetchedTransactions.map(
@@ -100,12 +110,14 @@ export const HomeTab = () => {
                     <TableHeaderCell></TableHeaderCell>
                     <TableHeaderCell></TableHeaderCell>
                   </TableHead>
+
                   <TableBody>
                     {fetchedTransactions.map((option, index) => (
                       <TableNextRows key={index}>
-                        <TableCell></TableCell>
                         <TableCell>{formatDate(option.date)}</TableCell>
-                        <TableCell>{typeFormatter(option.type)}</TableCell>
+                        <TableCellType>
+                          {typeFormatter(option.type)}
+                        </TableCellType>
                         <TableCell>{option.category}</TableCell>
                         <TableCell>{option.comment}</TableCell>
                         <TableCell
