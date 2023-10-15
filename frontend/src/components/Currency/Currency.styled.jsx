@@ -11,15 +11,8 @@ const showIn = keyframes`
 `;
 
 export const TableWrapper = styled.div`
-  height: 100vh;
   animation: ${showIn} 500ms linear;
   width: 100%;
-
-  @media screen and (min-width: 768px) {
-    height: auto;
-  }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const TableContainer = styled.div`
@@ -41,30 +34,22 @@ export const TableContainer = styled.div`
 export const Table = styled.table`
   display: flex;
   flex-direction: column;
-
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const TableHead = styled.thead`
   display: flex;
   padding: 12px 20px;
   justify-content: space-between;
+  border-radius: 30px 30px 0 0;
+  background-color: rgba(255, 255, 255, 0.2);
+`;
+export const TableHeaderCell = styled.th`
   font-family: Circe;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   color: var(--font-light);
-  border-radius: 30px 30px 0 0;
-  background-color: rgba(255, 255, 255, 0.2);
-
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const TableBody = styled.tbody`
@@ -72,25 +57,18 @@ export const TableBody = styled.tbody`
   flex-direction: column;
   gap: 12px;
   padding: 12px 20px 52px;
+`;
+
+export const TableNextRows = styled.tr`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const TableCell = styled.tr`
   font-family: Circe;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   color: var(--font-light);
-
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
-`;
-
-export const TableNextRows = styled.tr`
-  display: flex;
-  justify-content: space-between;
-
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
 `;
