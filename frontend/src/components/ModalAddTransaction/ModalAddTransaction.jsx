@@ -68,10 +68,10 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
           position: "center-top",
           distance: "18px",
           svgSize: "120px",
-          timeout: 2500,
+          timeout: 2200,
           borderRadius: "20px",
           fontFamily: "Poppins",
-          fontSize: "20px",
+          fontSize: "16px",
         });
       } catch (error) {
         Notiflix.Notify.failure("Cannot add transaction", {
@@ -79,10 +79,10 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
           position: "center-top",
           distance: "18px",
           svgSize: "120px",
-          timeout: 2500,
+          timeout: 2200,
           borderRadius: "20px",
           fontFamily: "Poppins",
-          fontSize: "20px",
+          fontSize: "16px",
         });
       }
     },

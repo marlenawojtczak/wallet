@@ -54,10 +54,10 @@ export const HomeTab = () => {
       position: "center-top",
       distance: "18px",
       svgSize: "120px",
-      timeout: 2500,
+      timeout: 2200,
       borderRadius: "20px",
       fontFamily: "Poppins",
-      fontSize: "20px",
+      fontSize: "16px",
     });
   };
 
@@ -114,11 +114,9 @@ export const HomeTab = () => {
                   </TableHead>
 
                   <TableBody>
-                   {fetchedTransactions.length === 0 ? (
+                    {fetchedTransactions.length === 0 ? (
                       <tr>
-                        {" "}
                         <td colSpan="7">
-                          {" "}
                           <Message>
                             There are no transactions. You can add one with the
                             plus button <Plus>+</Plus> in the right bottom
@@ -129,12 +127,11 @@ export const HomeTab = () => {
                     ) : (
                       fetchedTransactions.map((option, index) => (
                         <TableNextRows key={index}>
-                          <TableCell></TableCell>
                           <TableCell>{formatDate(option.date)}</TableCell>
                           <TableCellType>
-                          {typeFormatter(option.type)}
-                        </TableCellType>
-                           <TableCell>{option.category}</TableCell>
+                            {typeFormatter(option.type)}
+                          </TableCellType>
+                          <TableCell>{option.category}</TableCell>
                           <TableCell>{option.comment}</TableCell>
                           <TableCell
                             style={{
