@@ -32,6 +32,12 @@ const globalSlice = createSlice({
     closeLoading: (state) => {
       state.closeLoading = false;
     },
+    openModalEditTransaction: (state) => {
+      state.isModalEditTransactionOpen = true;
+    },
+    closeModalEditTransaction: (state) => {
+      state.isModalEditTransactionOpen = false;
+    },
   },
 });
 
@@ -42,6 +48,8 @@ export const {
   closeModalAddTransaction,
   openLoading,
   closeLoading,
+  openModalEditTransaction,
+  closeModalEditTransaction,
   resetGlobal,
 } = globalSlice.actions;
 export const globalReducer = globalSlice.reducer;

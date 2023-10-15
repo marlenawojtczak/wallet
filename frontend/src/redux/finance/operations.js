@@ -142,17 +142,44 @@ export const deleteTransaction = createAsyncThunk(
   }
 );
 
+// export const updateTransaction = createAsyncThunk(
+//   "finance/updateTransaction",
+//   async (transactionData, thunkAPI) => {
+//     const { id, ...dataToUpdate } = transactionData;
+//     const accessToken = selectAccessToken(thunkAPI.getState());
+//     try {
+//       console.log("Przed zapytaniem", id);
+//       const response = await api.patch(
+//         `/api/transactions/${id}`,
+//         dataToUpdate,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       );
+//       console.log("Po zapytaniu", response.data);
+//       return response.data;
+//     } catch (error) {
+//       console.log("Błąd zapytania", error);
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
 export const updateTransaction = createAsyncThunk(
   "finance/updateTransaction",
   async (id, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
+      console.log("Przed zapytaniem", id);
       const response = await api.patch(`/api/transactions/${id}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log("Po zapytaniu", response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

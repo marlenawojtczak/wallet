@@ -17,13 +17,24 @@ import {
 import { useState } from "react";
 import { useFormik } from "formik";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
 import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
+import {
+  setType,
+  setCategory,
+  setAmount,
+  setDate,
+  setComment,
+} from "../../redux/finance/financeSlice";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
+  const addedTransaction = useSelector(
+    (state) => state.finance.addedTransaction
+  );
+
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
 
@@ -40,7 +51,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   ];
 
   const formik = useFormik({
-    initialValues: {
+    initialValues: addedTransaction || {
       type: "Expense",
       category: "Income",
       amount: "",
@@ -60,6 +71,11 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
           })
         );
 
+        dispatch(setType(values.type));
+        dispatch(setCategory(values.category));
+        dispatch(setAmount(values.amount));
+        dispatch(setDate(values.date));
+        dispatch(setComment(values.comment));
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
       } catch (error) {
@@ -71,8 +87,10 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const handleCategoryChange = (selectedOption) => {
     if (!checked) {
       formik.setFieldValue("category", selectedOption.label);
+      dispatch(setCategory(selectedOption.label));
     } else {
       formik.setFieldValue("category", "");
+      dispatch(setCategory(""));
     }
   };
 
