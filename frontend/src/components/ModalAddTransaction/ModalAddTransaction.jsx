@@ -63,8 +63,27 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
 
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
+        Notiflix.Notify.success("Successs! Transaction added to your list", {
+          width: "300px",
+          position: "center-top",
+          distance: "18px",
+          svgSize: "120px",
+          timeout: 2500,
+          borderRadius: "20px",
+          fontFamily: "Poppins",
+          fontSize: "20px",
+        });
       } catch (error) {
-        Notiflix.Notify.failure("Cannot add transaction");
+        Notiflix.Notify.failure("Cannot add transaction", {
+          width: "300px",
+          position: "center-top",
+          distance: "18px",
+          svgSize: "120px",
+          timeout: 2500,
+          borderRadius: "20px",
+          fontFamily: "Poppins",
+          fontSize: "20px",
+        });
       }
     },
   });

@@ -97,9 +97,19 @@ export const EditText = styled.span`
 export const TableWrapper = styled.div`
   height: 100vh;
   animation: ${showIn} 500ms linear;
-
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 52px;
+    background-color: var(--font-light);
+    border-radius: 30px 30px;
+    z-index: -1;
+  }
   @media screen and (min-width: 1280px) {
-    margin-top: 10px;
   }
 `;
 
@@ -109,38 +119,21 @@ export const Table = styled.table`
 `;
 
 export const TableHead = styled.thead`
-  text-align: left;
-
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-
-    top: 0;
-    left: 20;
-    width: 100%;
-    height: 52px;
-    background-color: var(--font-light);
-    border-radius: 30px 30px;
-    z-index: -1;
-  }
-`;
-export const TableBody = styled.tbody`
-  font-family: Circe;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  padding: 0;
+  margin: 0;
   text-align: left;
 `;
+
 export const TableHeaderCell = styled.th`
   font-family: Circe;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding: 14px 5px;
+  padding: 14px 30px;
 `;
+
+export const TableBody = styled.tbody``;
 
 export const TableNextRows = styled.tr`
   border-bottom: 1px solid var(--border-transactions);
@@ -150,7 +143,17 @@ export const TableNextRows = styled.tr`
 `;
 
 export const TableCell = styled.td`
-  padding: 14px 5px;
+  padding: 14px 30px;
+  font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+`;
+
+export const TableCellType = styled.td`
+  text-align: center;
 `;
 
 export const DeleteButton = styled.button`
@@ -158,6 +161,7 @@ export const DeleteButton = styled.button`
   justify-content: center;
   text-align: center;
   width: 67px;
+
   font-size: 14px;
   font-style: normal;
   font-family: Circe;
