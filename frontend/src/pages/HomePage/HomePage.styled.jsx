@@ -18,6 +18,5 @@ export const X = styled.div`
 export const Y = styled.div`
   position: sticky;
   bottom: 20px;
-  /* left: 30px; */
   z-index: 9999;
 `;
