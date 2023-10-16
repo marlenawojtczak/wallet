@@ -97,13 +97,6 @@ export const EditText = styled.span`
 export const TableWrapper = styled.div`
   height: 100vh;
   animation: ${showIn} 500ms linear;
-  @media screen and (min-width: 1280px) {
-    margin-top: 10px;
-  }
-`;
-
-export const TableHead = styled.thead`
-  text-align: left;
   position: relative;
   &::before {
     content: "";
@@ -125,13 +118,19 @@ export const Table = styled.table`
   border-collapse: collapse;
 `;
 
+export const TableHead = styled.thead`
+  padding: 0;
+  margin: 0;
+  text-align: left;
+`;
+
 export const TableHeaderCell = styled.th`
   font-family: Circe;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding: 14px 5px;
+  padding: 14px 30px;
 `;
 
 export const TableBody = styled.tbody``;
@@ -144,7 +143,7 @@ export const TableNextRows = styled.tr`
 `;
 
 export const TableCell = styled.td`
-  padding: 14px 5px;
+  padding: 14px 30px;
   font-family: Circe;
   font-size: 16px;
   font-style: normal;
@@ -154,7 +153,7 @@ export const TableCell = styled.td`
 `;
 
 export const TableCellType = styled.td`
-  padding-left: 45px;
+  text-align: center;
 `;
 
 export const DeleteButton = styled.button`

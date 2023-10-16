@@ -14,7 +14,7 @@ import {
   StyledTable,
   EditText,
   TableNextRows,
-  // TableCellType,
+  TableCellType,
   Message,
   Plus,
 } from "./HomeTab.styled";
@@ -140,11 +140,10 @@ export const HomeTab = () => {
                     ) : (
                       fetchedTransactions.map((option, index) => (
                         <TableNextRows key={index}>
-                          <TableCell></TableCell>
                           <TableCell>{formatDate(option.date)}</TableCell>
-                          {/* <TableCellType> */}
-                          {typeFormatter(option.type)}
-                          {/* </TableCellType> */}
+                          <TableCellType>
+                            {typeFormatter(option.type)}
+                          </TableCellType>
                           <TableCell>{option.category}</TableCell>
                           <TableCell>{option.comment}</TableCell>
                           <TableCell
