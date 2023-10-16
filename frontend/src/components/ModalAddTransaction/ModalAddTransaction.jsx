@@ -12,6 +12,7 @@ import {
   ModalBackground,
   SectionWrapper,
   ModalWrapper,
+  ModalPosition,
 } from "./ModalAddTransaction.styled";
 
 import { useState } from "react";
@@ -104,70 +105,78 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <ModalBackground isOpen={isOpen} onClick={onClose}>
-        <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
-          <ModalWrapper>
-            <CloseButton onClick={onClose} />
-            <ModalHeader>Add transaction</ModalHeader>
+      <ModalPosition>
+        <ModalBackground
+          onRequestClose={onClose}
+          shouldCloseOnOverlayClick={true}
+          style={{ overlay: { backgroundColor: "var(--bg-modal-overlay)" } }}
+          isOpen={isOpen}
+          // onClick={onClose}
+        >
+          <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
+            <ModalWrapper>
+              <CloseButton onClick={onClose} />
+              <ModalHeader>Add transaction</ModalHeader>
 
-            <SwitchButton
-              name="type"
-              checked={formik.values.type === "Expense"}
-              onChange={handleButtonChange}
-            />
-
-            {formik.values.type === "Expense" ? (
-              <StyledCategoryInput
-                name="category"
-                placeholder="Select a category"
-                value={options.find(
-                  (option) => option.value === formik.values.category
-                )}
-                onChange={handleCategoryChange}
-                onBlur={formik.handleBlur}
-                options={options}
+              <SwitchButton
+                name="type"
+                checked={formik.values.type === "Expense"}
+                onChange={handleButtonChange}
               />
-            ) : (
-              <></>
-            )}
 
-            <SectionWrapper>
-              <ValueInput
-                name="amount"
-                placeholder="0.00"
+              {formik.values.type === "Expense" ? (
+                <StyledCategoryInput
+                  name="category"
+                  placeholder="Select a category"
+                  value={options.find(
+                    (option) => option.value === formik.values.category
+                  )}
+                  onChange={handleCategoryChange}
+                  onBlur={formik.handleBlur}
+                  options={options}
+                />
+              ) : (
+                <></>
+              )}
+
+              <SectionWrapper>
+                <ValueInput
+                  name="amount"
+                  placeholder="0.00"
+                  onChange={formik.handleChange}
+                  amount={formik.values.amount}
+                />
+
+                <StyledDateTime
+                  name="date"
+                  value={formik.values.date}
+                  onChange={(date) =>
+                    formik.setFieldValue("date", moment(date).toDate())
+                  }
+                  onBlur={formik.handleBlur}
+                  dateFormat="DD-MM-YYYY"
+                  timeFormat={false}
+                  closeOnSelect={true}
+                />
+                <CalendarIcon />
+              </SectionWrapper>
+
+              <CommentInput
+                name="comment"
+                placeholder="Comment"
                 onChange={formik.handleChange}
-                amount={formik.values.amount}
+                value={formik.values.comment}
               />
 
-              <StyledDateTime
-                name="date"
-                value={formik.values.date}
-                onChange={(date) =>
-                  formik.setFieldValue("date", moment(date).toDate())
-                }
-                onBlur={formik.handleBlur}
-                dateFormat="DD-MM-YYYY"
-                timeFormat={false}
-                closeOnSelect={true}
-              />
-              <CalendarIcon />
-            </SectionWrapper>
+              <AddButton type="button" onClick={formik.handleSubmit}>
+                Add
+              </AddButton>
 
-            <CommentInput
-              name="comment"
-              placeholder="Comment"
-              onChange={formik.handleChange}
-              value={formik.values.comment}
-            />
-
-            <AddButton type="button" onClick={formik.handleSubmit}>
-              Add
-            </AddButton>
-
-            <CancelButton onClick={onClose}>Cancel</CancelButton>
-          </ModalWrapper>
-        </ModalContent>
-      </ModalBackground>
+              <CancelButton onClick={onClose}>Cancel</CancelButton>
+            </ModalWrapper>
+          </ModalContent>
+        </ModalBackground>
+      </ModalPosition>
     </>
   );
 };

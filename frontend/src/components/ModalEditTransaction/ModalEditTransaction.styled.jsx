@@ -3,21 +3,23 @@ import Datetime from "react-datetime";
 import Select from "react-select";
 import { ReactComponent as Exit } from "../../assets/icons/close.svg";
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
+import ReactModal from "react-modal";
 
-export const ModalBackground = styled.div`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
+export const ModalPosition = styled.div`
   position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  padding-top: 60px;
+`;
 
+export const ModalBackground = styled(ReactModal)`
+  display: ${(props) => (props.isOpen ? "block" : "none")};
+  border-radius: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 1;
   @media screen and (min-width: 769px) and (max-width: 1279px) {
     background: var(--bg-modal-overlay);
   }
-
   @media screen and (min-width: 1280px) {
     background: var(--bg-modal-overlay);
   }
@@ -86,7 +88,7 @@ export const ModalHeader = styled.div`
 `;
 
 export const StyledCategoryInput = styled(Select)`
-  margin: 0 0 42px 0;
+  margin: 0 0 85px 0;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -181,47 +183,23 @@ export const CloseButton = styled(Exit)`
   cursor: pointer;
 `;
 
-// export const ModalContent = styled.div`
-//   position: relative;
-//   background-color: #fefefe;
-//   width: 80%; // Aby modal był nieco szerszy i dostosowany do zdjęcia
-//   max-width: 540px; // Maksymalna szerokość
-//   margin: 5% auto; // Wycentrowanie modala w pionie
-//   border-radius: 20px;
-//   overflow: hidden; // Żeby przycisk zamykania był wewnątrz modala
-//   padding: 20px 40px; // Dodatkowe wcięcia wewnątrz modala
-// `;
-
-// export const ModalHeader = styled.div`
-//   display: flex;
-//   height: 40px; // Ujednolicona wysokość
-//   justify-content: space-between; // Rozdzielenie tytułu i przycisku zamykania
-//   align-items: center; // Wycentrowanie elementów w pionie
-//   color: #000;
-//   text-align: center;
-//   font-family: Poppins;
-//   font-size: 24px;
-//   font-style: normal;
-//   font-weight: 400;
-//   line-height: normal;
-// `;
-
-// export const CloseButton = styled(Exit)`
-//   width: 20px; // Trochę większy przycisk zamykania
-//   height: 20px;
-//   cursor: pointer;
-// `;
-
-// // Dla przycisków SAVE i CANCEL:
-// export const AddButton = styled.button`
-//   width: 140px; // Mniejsza szerokość
-//   margin-right: 10px; // Odstęp między przyciskami
-//   // ... reszta stylów bez zmian
-// `;
-
-// export const CancelButton = styled(AddButton)`
-//   border: 1px solid var(--brand-primary);
-//   color: var(--brand-primary);
-//   background-color: var(--bg-light);
-//   margin-right: 0; // Aby nie było dodatkowego odstępu po prawej stronie
-// `;
+export const TransactionType = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  margin: 30px 0;
+  span {
+    margin: 0 5px;
+  }
+  .income {
+    color: ${(props) =>
+      props.type === "Income" ? "var(--brand-secondary)" : "var(--font-grey)"};
+    cursor: pointer;
+  }
+  .expense {
+    color: ${(props) =>
+      props.type === "Expense" ? "var(--brand-accent)" : "var(--font-grey)"};
+    cursor: pointer;
+  }
+`;
