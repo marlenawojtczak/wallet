@@ -4,6 +4,8 @@ import "./fonts.css";
 import "./vars.css";
 
 export const GlobalStyles = createGlobalStyle`
+
+
  
   body {
     font-family: 'Poppins', sans-serif;
@@ -11,6 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+   
   
   }
 
