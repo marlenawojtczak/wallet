@@ -12,6 +12,8 @@ import {
   ModalBackground,
   SectionWrapper,
   ModalWrapper,
+  TransactionType,
+  ModalPosition,
 } from "./ModalEditTransaction.styled";
 
 import { useState } from "react";
@@ -20,7 +22,6 @@ import { Notiflix } from "notiflix";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import "react-datetime/css/react-datetime.css";
-import { SwitchButton } from "../SwitchButton/SwitchButton";
 import {
   fetchTotals,
   fetchTransactions,
@@ -90,84 +91,85 @@ export const ModalEditTransaction = ({
     );
   };
 
-  // const TransactionsUpdateHandler = async () => {
-  //   if (!transactionToEdit) return;
-  //   await dispatch(updateTransaction(transactionToEdit.id, formik.values));
-  //   await dispatch(fetchTransactions());
-  //   await dispatch(fetchTotals());
-  //   Notiflix.Notify.info("Transaction updated successfully!");
-  // };
-
   return (
     <>
-      <ModalBackground isOpen={isOpen} onClick={onClose}>
-        <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
-          <ModalWrapper>
-            <CloseButton onClick={onClose} />
-            <ModalHeader>Edit transaction</ModalHeader>
+      <ModalPosition>
+        <ModalBackground
+          onRequestClose={onClose}
+          shouldCloseOnOverlayClick={true}
+          style={{ overlay: { backgroundColor: "var(--bg-modal-overlay)" } }}
+          isOpen={isOpen}
+          // onClick={onClose}
+        >
+          <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
+            <ModalWrapper>
+              <CloseButton onClick={onClose} />
+              <ModalHeader>Edit transaction</ModalHeader>
 
-            <SwitchButton
-              name="type"
-              checked={formik.values.type === "Expense"}
-              onChange={handleButtonChange}
-            />
+              <TransactionType type={formik.values.type}>
+                <span
+                  className="income"
+                  onClick={() => formik.setFieldValue("type", "Income")}
+                >
+                  Income
+                </span>
+                <span>/</span>
+                <span
+                  className="expense"
+                  onClick={() => formik.setFieldValue("type", "Expense")}
+                >
+                  Expense
+                </span>
+              </TransactionType>
 
-            {!checked ? (
-              <StyledCategoryInput
-                name="category"
-                placeholder="Select a category"
-                value={options.find(
-                  (option) => option.value === formik.values.category
-                )}
-                onChange={handleCategoryChange}
-                onBlur={formik.handleBlur}
-                options={options}
-              />
-            ) : (
-              <></>
-            )}
-            <SectionWrapper>
-              <ValueInput
-                name="amount"
-                placeholder="0.00"
+              {!checked ? (
+                <StyledCategoryInput
+                  name="category"
+                  placeholder="Select a category"
+                  value={options.find(
+                    (option) => option.value === formik.values.category
+                  )}
+                  onChange={handleCategoryChange}
+                  onBlur={formik.handleBlur}
+                  options={options}
+                />
+              ) : (
+                <></>
+              )}
+              <SectionWrapper>
+                <ValueInput
+                  name="amount"
+                  placeholder="0.00"
+                  onChange={formik.handleChange}
+                  amount={formik.values.amount}
+                />
+                <StyledDateTime
+                  name="date"
+                  value={formik.values.date}
+                  onChange={(date) =>
+                    formik.setFieldValue("date", moment(date).toDate())
+                  }
+                  onBlur={formik.handleBlur}
+                  dateFormat="DD-MM-YYYY"
+                  timeFormat={false}
+                  closeOnSelect={true}
+                />
+                <CalendarIcon />
+              </SectionWrapper>
+              <CommentInput
+                name="comment"
+                placeholder="Comment"
                 onChange={formik.handleChange}
-                amount={formik.values.amount}
+                value={formik.values.comment}
               />
-
-              <StyledDateTime
-                name="date"
-                value={formik.values.date}
-                onChange={(date) =>
-                  formik.setFieldValue("date", moment(date).toDate())
-                }
-                onBlur={formik.handleBlur}
-                dateFormat="DD-MM-YYYY"
-                timeFormat={false}
-                closeOnSelect={true}
-              />
-              <CalendarIcon />
-            </SectionWrapper>
-
-            <CommentInput
-              name="comment"
-              placeholder="Comment"
-              onChange={formik.handleChange}
-              value={formik.values.comment}
-            />
-
-            <AddButton type="button" onClick={formik.handleSubmit}>
-              {/* <AddButton
-              type="button"
-              onClick={() => {
-                formik.handleSubmit();
-              }}
-            > */}
-              Save
-            </AddButton>
-            <CancelButton onClick={onClose}>Cancel</CancelButton>
-          </ModalWrapper>
-        </ModalContent>
-      </ModalBackground>
+              <AddButton type="button" onClick={formik.handleSubmit}>
+                Save
+              </AddButton>
+              <CancelButton onClick={onClose}>Cancel</CancelButton>
+            </ModalWrapper>
+          </ModalContent>
+        </ModalBackground>
+      </ModalPosition>
     </>
   );
 };

@@ -3,21 +3,23 @@ import Datetime from "react-datetime";
 import Select from "react-select";
 import { ReactComponent as Exit } from "../../assets/icons/close.svg";
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
+import ReactModal from "react-modal";
 
-export const ModalBackground = styled.div`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
+export const ModalPosition = styled.div`
   position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  padding-top: 60px;
+`;
 
+export const ModalBackground = styled(ReactModal)`
+  display: ${(props) => (props.isOpen ? "block" : "none")};
+  border-radius: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 1;
   @media screen and (min-width: 769px) and (max-width: 1279px) {
     background: var(--bg-modal-overlay);
   }
-
   @media screen and (min-width: 1280px) {
     background: var(--bg-modal-overlay);
   }
