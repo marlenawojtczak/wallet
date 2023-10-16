@@ -14,7 +14,8 @@ import {
   StyledTable,
   EditText,
   TableNextRows,
-  // TableCellType,
+  TableCellType,
+  TableHeaderCellNone,
   Message,
   Plus,
 } from "./HomeTab.styled";
@@ -122,29 +123,28 @@ export const HomeTab = () => {
                     <TableHeaderCell>Category</TableHeaderCell>
                     <TableHeaderCell>Comment</TableHeaderCell>
                     <TableHeaderCell>Sum</TableHeaderCell>
-                    <TableHeaderCell></TableHeaderCell>
-                    <TableHeaderCell></TableHeaderCell>
+                    <TableHeaderCellNone></TableHeaderCellNone>
+                    <TableHeaderCellNone></TableHeaderCellNone>
                   </TableHead>
 
                   <TableBody>
                     {fetchedTransactions.length === 0 ? (
-                      <tr>
-                        <td colSpan="7">
+                      <TableNextRows>
+                        <TableCell colSpan="7">
                           <Message>
                             There are no transactions. You can add one with the
                             plus button <Plus>+</Plus> in the right bottom
                             corner.
                           </Message>
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableNextRows>
                     ) : (
                       fetchedTransactions.map((option, index) => (
                         <TableNextRows key={index}>
-                          <TableCell></TableCell>
                           <TableCell>{formatDate(option.date)}</TableCell>
-                          {/* <TableCellType> */}
-                          {typeFormatter(option.type)}
-                          {/* </TableCellType> */}
+                          <TableCellType>
+                            {typeFormatter(option.type)}
+                          </TableCellType>
                           <TableCell>{option.category}</TableCell>
                           <TableCell>{option.comment}</TableCell>
                           <TableCell
