@@ -13,6 +13,11 @@ import {
   SectionWrapper,
   ModalWrapper,
   ModalPosition,
+  SectionDate,
+  SectionInput,
+  SectionDateWrapper,
+  SectionContainer,
+  ButtonWrapper,
 } from "./ModalAddTransaction.styled";
 
 import { useState } from "react";
@@ -30,6 +35,8 @@ import {
   setDate,
   setComment,
 } from "../../redux/finance/financeSlice";
+
+import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const addedTransaction = useSelector(
@@ -140,39 +147,47 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
               )}
 
               <SectionWrapper>
-                <ValueInput
-                  name="amount"
-                  placeholder="0.00"
+                <SectionContainer>
+                  <SectionInput>
+                    <ValueInput
+                      name="amount"
+                      placeholder="0.00"
+                      onChange={formik.handleChange}
+                      amount={formik.values.amount}
+                    />
+                  </SectionInput>
+                  <SectionDateWrapper>
+                    <StyledDateTime
+                      name="date"
+                      value={formik.values.date}
+                      onChange={(date) =>
+                        formik.setFieldValue("date", moment(date).toDate())
+                      }
+                      onBlur={formik.handleBlur}
+                      dateFormat="DD-MM-YYYY"
+                      timeFormat={false}
+                      closeOnSelect={true}
+                    />
+
+                    <SectionDate>
+                      <DateRange />
+                    </SectionDate>
+                  </SectionDateWrapper>
+                </SectionContainer>
+
+                <CommentInput
+                  name="comment"
+                  placeholder="Comment"
                   onChange={formik.handleChange}
-                  amount={formik.values.amount}
+                  value={formik.values.comment}
                 />
-
-                <StyledDateTime
-                  name="date"
-                  value={formik.values.date}
-                  onChange={(date) =>
-                    formik.setFieldValue("date", moment(date).toDate())
-                  }
-                  onBlur={formik.handleBlur}
-                  dateFormat="DD-MM-YYYY"
-                  timeFormat={false}
-                  closeOnSelect={true}
-                />
-                <CalendarIcon />
               </SectionWrapper>
-
-              <CommentInput
-                name="comment"
-                placeholder="Comment"
-                onChange={formik.handleChange}
-                value={formik.values.comment}
-              />
-
-              <AddButton type="button" onClick={formik.handleSubmit}>
-                Add
-              </AddButton>
-
-              <CancelButton onClick={onClose}>Cancel</CancelButton>
+              <ButtonWrapper>
+                <AddButton type="button" onClick={formik.handleSubmit}>
+                  Add
+                </AddButton>
+                <CancelButton onClick={onClose}>Cancel</CancelButton>
+              </ButtonWrapper>
             </ModalWrapper>
           </ModalContent>
         </ModalBackground>
