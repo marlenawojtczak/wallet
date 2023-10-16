@@ -56,30 +56,6 @@ export const signIn = createAsyncThunk(
   }
 );
 
-// export const signOut = createAsyncThunk(
-//   "session/signOut",
-//   async (token, { dispatch }) => {
-//     dispatch(openLoading());
-//     try {
-//       await api.post(
-//         "/api/auth/sign-out",
-//         {},
-//         { headers: { Authorization: `Bearer ${token}` } }
-//       );
-//       dispatch(resetSession());
-//       dispatch(resetGlobal());
-//       dispatch(resetFinance());
-//       clearAuthHeader();
-//     } catch (error) {
-//       toast.error("Oops something went wrong during logout.");
-//       dispatch(closeModalLogout());
-//       throw error;
-//     } finally {
-//       dispatch(closeLoading());
-//     }
-//   }
-// );
-
 export const signOut = createAsyncThunk(
   "session/signOut",
   async (credentials, thunkAPI) => {
