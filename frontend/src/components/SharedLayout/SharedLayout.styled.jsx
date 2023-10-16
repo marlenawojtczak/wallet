@@ -7,6 +7,7 @@ export const BackgroundContainer = styled.div`
   height: 100vh;
 
   @media screen and (min-width: 768px) {
+    height: 100%;
     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
     background-repeat: no-repeat, no-repeat;
     background-position: right -25vw top, left bottom;

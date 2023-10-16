@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const X = styled.div`
   position: sticky;
-  bottom: 20px;
+  bottom: 0px;
   left: 30px;
   z-index: 9999;
 `;

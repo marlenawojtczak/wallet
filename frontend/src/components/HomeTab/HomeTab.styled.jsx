@@ -70,7 +70,7 @@ export const StyledTable = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
+  /* height: 100vh; */
   animation: ${showIn} 500ms linear;
 `;
 
@@ -96,6 +96,8 @@ export const EditText = styled.span`
 
 export const TableWrapper = styled.div`
   height: 100vh;
+  padding: 14px 30px;
+
   animation: ${showIn} 500ms linear;
   position: relative;
   &::before {
@@ -130,7 +132,10 @@ export const TableHeaderCell = styled.th`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding: 14px 30px;
+`;
+
+export const TableHeaderCellNone = styled.th`
+  width: 5%;
 `;
 
 export const TableBody = styled.tbody``;
@@ -143,7 +148,7 @@ export const TableNextRows = styled.tr`
 `;
 
 export const TableCell = styled.td`
-  padding: 14px 30px;
+  padding-top: 20px;
   font-family: Circe;
   font-size: 16px;
   font-style: normal;
@@ -153,13 +158,13 @@ export const TableCell = styled.td`
 `;
 
 export const TableCellType = styled.td`
-  padding-left: 45px;
+  text-align: center;
 `;
 
 export const DeleteButton = styled.button`
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
   width: 67px;
 
   font-size: 14px;
