@@ -7,7 +7,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:3000" }],
+  "servers": [{ "url": "https://wallet.dupawklamerkach.pl" }],
   "tags": [
     {
       "name": "Authentication"
@@ -300,7 +300,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoriesResponse"
+                  "$ref": "#/components/schemas/NewTransaction"
                 }
               }
             }
