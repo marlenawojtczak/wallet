@@ -70,7 +70,6 @@ export const StyledTable = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* height: 100vh; */
   animation: ${showIn} 500ms linear;
 `;
 
@@ -158,7 +157,8 @@ export const TableCell = styled.td`
 `;
 
 export const TableCellType = styled.td`
-  text-align: center;
+  padding-top: 20px;
+  padding-left: 14px;
 `;
 
 export const DeleteButton = styled.button`
