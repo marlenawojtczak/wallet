@@ -1,4 +1,3 @@
-import { setToken, resetSession } from "./sessionSlice";
 import { resetFinance } from "../../redux/finance/financeSlice";
 import {
   resetGlobal,
@@ -46,7 +45,6 @@ export const signIn = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.user.accessToken);
-      thunkAPI.dispatch(setToken(res.data.user.accessToken));
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -68,7 +66,6 @@ export const signOut = createAsyncThunk(
         { _id: credentials },
         setAuthHeader(accessToken)
       );
-      thunkAPI.dispatch(resetSession());
       thunkAPI.dispatch(resetGlobal());
       thunkAPI.dispatch(resetFinance());
       clearAuthHeader();
