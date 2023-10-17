@@ -29,10 +29,10 @@ const handleFulfilled = (state, { payload }) => {
   state.error = null;
 };
 
-const handleRejected = (state, { payload }) => {
+const handleRejected = (state, { error }) => {
   state.isLoading = false;
   state.isRefreshing = false;
-  state.error = payload.message;
+  state.error = error.message;
 };
 
 const handleRefresh = (state) => {
