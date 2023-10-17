@@ -1,4 +1,5 @@
 import { resetFinance } from "../../redux/finance/financeSlice";
+import { selectAccessToken } from "../../redux/session/selectors";
 import {
   resetGlobal,
   closeModalLogout,
@@ -57,8 +58,7 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
   "session/signOut",
   async (credentials, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const accessToken = state.session.user.accessToken;
+    const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
       await api.post(
@@ -82,14 +82,13 @@ export const signOut = createAsyncThunk(
 export const currentUser = createAsyncThunk(
   "session/current",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.session.user.accessToken;
-    if (!persistedToken) {
+    const accessToken = selectAccessToken(thunkAPI.getState());
+    if (!accessToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     thunkAPI.dispatch(openLoading());
     try {
-      setAuthHeader(persistedToken);
+      setAuthHeader(accessToken);
       const res = await api.get("api/users/current");
       return res.data;
     } catch (error) {
@@ -103,9 +102,8 @@ export const currentUser = createAsyncThunk(
 export const refreshAuthTokens = createAsyncThunk(
   "session/refresh",
   async (credentials, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.session.user.refreshToken;
-    if (!persistedToken) {
+    const accessToken = selectAccessToken(thunkAPI.getState());
+    if (!accessToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     try {
