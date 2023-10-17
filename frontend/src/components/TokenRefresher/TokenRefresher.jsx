@@ -15,7 +15,7 @@ export const TokenRefresher = () => {
   const sessionId = useSelector(selectSessionId);
 
   useEffect(() => {
-    const refreshInterval = 10000;
+    const refreshInterval = 840000;
 
     const refreshTokensIfNecessary = () => {
       if (!refreshToken || !sessionId) {
