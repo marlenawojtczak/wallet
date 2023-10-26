@@ -34,10 +34,9 @@ export const Currency = () => {
     const fetchData = async () => {
       try {
         const currenciesToFetch = ["EUR", "USD"];
-        const currencyPromises = currenciesToFetch.map((currencyCode) =>
-          fetchCurrency(currencyCode)
+        const currencyData = await Promise.all(
+          currenciesToFetch.map((currencyCode) => fetchCurrency(currencyCode))
         );
-        const currencyData = await Promise.all(currencyPromises);
 
         setExchangeRate(currencyData);
       } catch (error) {
