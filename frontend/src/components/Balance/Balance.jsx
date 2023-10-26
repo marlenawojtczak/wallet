@@ -5,7 +5,6 @@ import {
   Cash,
 } from "./Balance.styled";
 import { amountFormatter } from "../../utils/formatUtils";
-// import { useAuth } from "../../hooks/useAuth";
 import { selectTotalBalance } from "../../redux/finance/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTotals } from "../../redux/finance/operations";
@@ -23,7 +22,7 @@ export const Balance = () => {
       <BalanceElement>
         <BalanceHeader>your balance</BalanceHeader>
         <BalanceContent>
-          <Cash>₴</Cash>
+          <Cash>PLN</Cash>
           {amountFormatter(totalBalance)}
         </BalanceContent>
       </BalanceElement>
