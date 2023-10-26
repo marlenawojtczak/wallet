@@ -37,7 +37,7 @@ export const BalanceHeader = styled.p`
   color: var(--font-grey);
 `;
 export const Cash = styled.span`
-  font-family: "Circe";
+  font-family: "Poppins";
   font-size: 30px;
   font-weight: 400;
   color: var(--font-dark);
