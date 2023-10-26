@@ -8,7 +8,6 @@ import {
   Currency,
 } from "../../components";
 import { useSpring, animated } from "react-spring";
-import Media from "react-media";
 
 // export const SharedLayout = () => {
 //   return (
