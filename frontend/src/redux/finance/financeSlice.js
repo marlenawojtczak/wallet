@@ -44,6 +44,9 @@ export const financeSlice = createSlice({
     setComment: (state, action) => {
       state.comment = action.payload;
     },
+    resetAddedTransaction: (state) => {
+      state.addedTransaction = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -102,6 +105,7 @@ export const financeSlice = createSlice({
 
 export const {
   resetFinance,
+  resetAddedTransaction,
   setType,
   setCategory,
   setAmount,

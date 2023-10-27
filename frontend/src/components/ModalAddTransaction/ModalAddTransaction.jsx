@@ -6,9 +6,7 @@ import {
   ModalHeader,
   StyledCategoryInput,
   AddButton,
-  CancelButton,
   CloseButton,
-  CalendarIcon,
   ModalBackground,
   SectionWrapper,
   ModalWrapper,
@@ -34,14 +32,17 @@ import {
   setAmount,
   setDate,
   setComment,
+  resetFinance,
+  resetAddedTransaction,
 } from "../../redux/finance/financeSlice";
+import Notiflix from "notiflix";
 
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
-  const addedTransaction = useSelector(
-    (state) => state.finance.addedTransaction
-  );
+  // const addedTransaction = useSelector(
+  //   (state) => state.finance.addedTransaction
+  // );
 
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
@@ -58,14 +59,16 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     { value: "other expenses", label: "Other expenses" },
   ];
 
+  const INITIAL_VALUES = {
+    type: "Expense",
+    category: "Income",
+    amount: "",
+    date: new Date(),
+    comment: "",
+  };
+
   const formik = useFormik({
-    initialValues: addedTransaction || {
-      type: "Expense",
-      category: "Income",
-      amount: "",
-      date: new Date(),
-      comment: "",
-    },
+    initialValues: INITIAL_VALUES,
 
     onSubmit: async (values) => {
       try {
@@ -78,7 +81,6 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             comment: values.comment,
           })
         );
-
         dispatch(setType(values.type));
         dispatch(setCategory(values.category));
         dispatch(setAmount(values.amount));
@@ -86,6 +88,11 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
         dispatch(setComment(values.comment));
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
+
+        onClose();
+        formik.resetForm();
+        dispatch(resetFinance());
+        dispatch(resetAddedTransaction());
       } catch (error) {
         return console.log(error.message);
       }
@@ -110,6 +117,44 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     formik.setFieldValue("category", "Income");
   };
 
+  const notify = (message) => {
+    Notiflix.Notify.failure(message, {
+      width: "300px",
+      position: "center-top",
+      distance: "18px",
+      svgSize: "120px",
+      timeout: 2200,
+      borderRadius: "20px",
+      fontFamily: "Poppins",
+      fontSize: "16px",
+    });
+  };
+
+  const handleAddClick = () => {
+    if (
+      formik.values.type === "Expense" &&
+      formik.values.category === "Income" &&
+      !formik.values.amount
+    ) {
+      notify("Please choose a category and amount");
+      return;
+    } else if (
+      formik.values.type === "Expense" &&
+      formik.values.category === "Income"
+    ) {
+      notify("Please select a category");
+      return;
+    } else if (!formik.values.amount) {
+      notify("Please enter the amount");
+      return;
+    }
+    if (!/^\d+(\.\d{1,2})?$/.test(formik.values.amount)) {
+      notify("Please type only numbers");
+      return;
+    }
+    formik.handleSubmit();
+  };
+
   return (
     <>
       <ModalPosition>
@@ -118,34 +163,32 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
           shouldCloseOnOverlayClick={true}
           style={{ overlay: { backgroundColor: "var(--bg-modal-overlay)" } }}
           isOpen={isOpen}
-          // onClick={onClose}
         >
           <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
             <ModalWrapper>
               <CloseButton onClick={onClose} />
               <ModalHeader>Add transaction</ModalHeader>
-
               <SwitchButton
                 name="type"
                 checked={formik.values.type === "Expense"}
                 onChange={handleButtonChange}
               />
-
               {formik.values.type === "Expense" ? (
-                <StyledCategoryInput
-                  name="category"
-                  placeholder="Select a category"
-                  value={options.find(
-                    (option) => option.value === formik.values.category
-                  )}
-                  onChange={handleCategoryChange}
-                  onBlur={formik.handleBlur}
-                  options={options}
-                />
+                <>
+                  <StyledCategoryInput
+                    name="category"
+                    placeholder="Select a category"
+                    value={options.find(
+                      (option) => option.value === formik.values.category
+                    )}
+                    onChange={handleCategoryChange}
+                    onBlur={formik.handleBlur}
+                    options={options}
+                  />
+                </>
               ) : (
                 <></>
               )}
-
               <SectionWrapper>
                 <SectionContainer>
                   <SectionInput>
@@ -168,13 +211,11 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                       timeFormat={false}
                       closeOnSelect={true}
                     />
-
                     <SectionDate>
                       <DateRange />
                     </SectionDate>
                   </SectionDateWrapper>
                 </SectionContainer>
-
                 <CommentInput
                   name="comment"
                   placeholder="Comment"
@@ -183,10 +224,9 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                 />
               </SectionWrapper>
               <ButtonWrapper>
-                <AddButton type="button" onClick={formik.handleSubmit}>
+                <AddButton type="button" onClick={handleAddClick}>
                   Add
                 </AddButton>
-                <CancelButton onClick={onClose}>Cancel</CancelButton>
               </ButtonWrapper>
             </ModalWrapper>
           </ModalContent>
