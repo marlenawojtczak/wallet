@@ -89,13 +89,13 @@ export const signOut = createAsyncThunk(
 export const currentUser = createAsyncThunk(
   "session/current",
   async (_, thunkAPI) => {
-    const accessToken = selectAccessToken(thunkAPI.getState());
-    if (!accessToken) {
+    const refreshToken = selectRefreshToken(thunkAPI.getState());
+    if (!refreshToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     thunkAPI.dispatch(openLoading());
     try {
-      setAuthHeader(accessToken);
+      setAuthHeader(refreshToken);
       const res = await api.get("api/users/current");
       return res.data;
     } catch (error) {
