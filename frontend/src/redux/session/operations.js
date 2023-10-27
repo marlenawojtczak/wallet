@@ -1,5 +1,8 @@
 import { resetFinance } from "../../redux/finance/financeSlice";
-import { selectAccessToken } from "../../redux/session/selectors";
+import {
+  selectAccessToken,
+  selectRefreshToken,
+} from "../../redux/session/selectors";
 import {
   resetGlobal,
   closeModalLogout,
@@ -12,7 +15,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: "https://wallet.dupawklamerkach.pl",
+  baseURL: "http://localhost:3000",
 });
 
 const setAuthHeader = (token) => {
@@ -102,13 +105,12 @@ export const currentUser = createAsyncThunk(
 export const refreshAuthTokens = createAsyncThunk(
   "session/refresh",
   async (credentials, thunkAPI) => {
-    const accessToken = selectAccessToken(thunkAPI.getState());
-    if (!accessToken) {
+    const refreshToken = selectRefreshToken(thunkAPI.getState());
+    if (!refreshToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     try {
       const res = await api.post("api/auth/refresh", { sid: credentials });
-      setAuthHeader(res.data.user.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
