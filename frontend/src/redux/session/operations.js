@@ -22,6 +22,10 @@ const setAuthHeader = (token) => {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
+const replaceAuthHeader = (token) => {
+  api.defaults.headers.common.Authorization = token;
+};
+
 const clearAuthHeader = () => {
   api.defaults.headers.common.Authorization = "";
 };
@@ -111,6 +115,9 @@ export const refreshAuthTokens = createAsyncThunk(
     }
     try {
       const res = await api.post("api/auth/refresh", { sid: credentials });
+      console.log(res.data.user.accessToken);
+      replaceAuthHeader(res.data.user.accessToken);
+      console.log(res.data);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

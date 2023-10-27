@@ -92,6 +92,7 @@ export const signout = async (req, res, next) => {
 
 export const refreshTokens = async (req, res, next) => {
   const authorizationHeader = req.get("Authorization");
+  console.log(authorizationHeader);
 
   if (authorizationHeader) {
     const activeSession = await Session.findById(req.body.sid);
@@ -108,9 +109,7 @@ export const refreshTokens = async (req, res, next) => {
     }
 
     const user = await User.findById(sessionDetail.uid);
-    console.log(user);
     const session = await Session.findById(sessionDetail.sid);
-    console.log(session);
 
     if (!user) {
       return res.status(404).send({ message: "Invalid user" });
@@ -130,6 +129,8 @@ export const refreshTokens = async (req, res, next) => {
       newSession._id
     );
 
+    console.log(accessToken, refreshToken);
+
     await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
     return res.status(200).send({
@@ -137,10 +138,10 @@ export const refreshTokens = async (req, res, next) => {
       user: {
         id: user?._id,
         username: user?.username,
-        email: user?.email,
-        accessToken: user?.accessToken,
-        refreshToken: user?.refreshToken,
-        balance: user?.balance,
+        email: User?.email,
+        balance: User?.balance,
+        accessToken,
+        refreshToken,
       },
       session: {
         sid: newSession._id,
