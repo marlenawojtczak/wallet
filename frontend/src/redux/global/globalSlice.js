@@ -32,8 +32,9 @@ const globalSlice = createSlice({
     closeLoading: (state) => {
       state.closeLoading = false;
     },
-    openModalEditTransaction: (state) => {
-      state.isModalEditTransactionOpen = true;
+    openModalEditTransaction: (state, action) => {
+      state.isModalEditTransactionOpen = action.payload;
+      console.log("action.payload", action.payload);
     },
     closeModalEditTransaction: (state) => {
       state.isModalEditTransactionOpen = false;
