@@ -11,26 +11,19 @@ import { refreshAuthTokens } from "../../redux/session/operations";
 export const TokenRefresher = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
-  console.log("TokenRefresher: accessToken", accessToken);
   const refreshToken = useSelector(selectRefreshToken);
-  console.log("TokenRefresher: refreshToken", refreshToken);
   const sessionId = useSelector(selectSessionId);
 
   useEffect(() => {
-    const refreshInterval = 1000;
+    const refreshInterval = 840000;
 
     const refreshTokensIfNecessary = () => {
       if (!refreshToken || !sessionId) {
         return;
       }
-
       const decodedAccessToken = jwtDecode(accessToken);
-      const expirationTime = decodedAccessToken.exp - 20;
+      const expirationTime = decodedAccessToken.exp - 60;
       const currentTime = Math.floor(Date.now() / 1000);
-
-      console.log("TokenRefresher: expirationTime", expirationTime);
-      console.log("TokenRefresher: currentTime", currentTime);
-
       if (currentTime >= expirationTime) {
         dispatch(refreshAuthTokens(sessionId, refreshToken));
       }

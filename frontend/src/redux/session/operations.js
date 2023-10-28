@@ -15,7 +15,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://wallet.dupawklamerkach.pl",
 });
 
 const setAuthHeader = (token) => {
@@ -115,9 +115,7 @@ export const refreshAuthTokens = createAsyncThunk(
     }
     try {
       const res = await api.post("api/auth/refresh", { sid: credentials });
-      console.log(res.data.user.accessToken);
       replaceAuthHeader(res.data.user.accessToken);
-      console.log(res.data);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -38,12 +38,9 @@ const getTransaction = (transactions, id) => {
 
 export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(false);
+  const [checked] = useState(false);
   const transactions = useSelector(selectTransactions);
-  console.log("transactions", transactions);
-
   const transaction = getTransaction(transactions, id);
-  console.log("transaction", transaction);
 
   const options = [
     { value: "main expenses", label: "Main expenses" },
@@ -103,13 +100,6 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
       formik.setFieldValue("category", "");
     }
   };
-
-  // const handleButtonChange = (e) => {
-  //   formik.setFieldValue(
-  //     "type",
-  //     formik.values.type === "Expense" ? "Income" : "Expense"
-  //   );
-  // };
 
   return (
     <>

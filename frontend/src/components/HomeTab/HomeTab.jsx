@@ -23,9 +23,8 @@ import {
   fetchTransactions,
   deleteTransaction,
   fetchTotals,
-  updateTransaction,
 } from "../../redux/finance/operations";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   openModalEditTransaction,
@@ -42,7 +41,6 @@ import {
 } from "../../utils/formatUtils";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import Media from "react-media";
-import Notiflix from "notiflix";
 
 export const HomeTab = () => {
   const dispatch = useDispatch();

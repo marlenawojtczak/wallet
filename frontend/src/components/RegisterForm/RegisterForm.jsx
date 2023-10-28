@@ -3,9 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Notiflix from "notiflix";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/session/operations";
-import { selectRegistrationError } from "../../redux/session/selectors";
 import { ReactComponent as WalletLogoMobile } from "../../assets/icons/logo-mobile.svg";
 import { ReactComponent as WalletLogo } from "../../assets/icons/logo.svg";
 import { ReactComponent as EmailIcon } from "../../assets/icons/email.svg";
@@ -53,7 +52,6 @@ const ProgressBar = ({ value }) => {
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
-  const registrationError = useSelector(selectRegistrationError);
   const navigate = useNavigate();
   const location = useLocation();
   const [progressValue, setProgressValue] = useState(0);
@@ -78,17 +76,15 @@ export const RegisterForm = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const result = await dispatch(
+        await dispatch(
           signUp({
             email: values.email,
             password: values.password,
             username: values.name,
           })
         ).unwrap();
-        console.log("Sign up result:", result);
         navigate("/login");
       } catch (error) {
-        console.log("Sign up error:", error);
         Notiflix.Notify.failure("<br />" + error, {
           width: "300px",
           position: "center-top",

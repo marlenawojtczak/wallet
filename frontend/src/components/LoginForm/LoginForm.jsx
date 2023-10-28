@@ -57,8 +57,7 @@ export const LoginForm = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const result = await dispatch(signIn(values)).unwrap();
-        console.log("Sign in result:", result);
+        await dispatch(signIn(values)).unwrap();
       } catch (error) {
         Notiflix.Notify.failure("<br />" + error, {
           width: "300px",
