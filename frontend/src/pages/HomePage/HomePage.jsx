@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HomeTab } from "../../components/HomeTab";
-import { Wrapper, X, Y } from "./HomePage.styled";
+import { Wrapper, X, Y, BalanceNav } from "./HomePage.styled";
 import { ButtonAddTransactions } from "../../components/ButtonAddTransactions";
 import { ButtonScroll } from "../../components/ButtonScroll/ButtonScroll";
 import { ModalAddTransaction } from "../../components/ModalAddTransaction";
@@ -45,9 +45,10 @@ const HomePage = () => {
         <Helmet>
           <title>Home</title>
         </Helmet>
-        <Media query={{ maxWidth: 767 }}>
-          {(matches) => (matches ? <Balance /> : <></>)}
-        </Media>
+        <BalanceNav>
+          <Balance />
+        </BalanceNav>
+
         <HomeTab />
         <X>
           <ButtonAddTransactions onClick={handleOpenModal} />

@@ -27,14 +27,23 @@ import {
   fetchTransactions,
   updateTransaction,
 } from "../../redux/finance/operations";
+import { selectTransactions } from "../../redux/finance/selectors";
 
-export const ModalEditTransaction = ({
-  isOpen,
-  onClose,
-  transactionToEdit,
-}) => {
+const getTransaction = (transactions, id) => {
+  const transaction = transactions.find(
+    (transaction) => transaction._id === id
+  );
+  return transaction;
+};
+
+export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
+  const transactions = useSelector(selectTransactions);
+  console.log("transactions", transactions);
+
+  const transaction = getTransaction(transactions, id);
+  console.log("transaction", transaction);
 
   const options = [
     { value: "main expenses", label: "Main expenses" },
@@ -49,25 +58,36 @@ export const ModalEditTransaction = ({
   ];
 
   const formik = useFormik({
-    initialValues: transactionToEdit || {
+    initialValues: { ...transaction } || {
       type: "Expense",
       category: "",
       amount: "",
       date: new Date(),
       comment: "",
     },
-
+    onChange: (values) => {
+      formik.setValues({
+        ...values,
+      });
+    },
     onSubmit: async (values) => {
-      try {
-        if (transactionToEdit) {
-          await dispatch(
-            updateTransaction({
-              id: transactionToEdit.id,
-              ...values,
-            })
-          );
-        }
+      const formattedDate = moment(values.date).format(
+        "YYYY-MM-DDTHH:mm:ss.SSSZ"
+      );
 
+      try {
+        dispatch(
+          updateTransaction({
+            id,
+            values: {
+              type: values.type,
+              category: values.category,
+              amount: values.amount,
+              date: formattedDate,
+              comment: values.comment,
+            },
+          })
+        );
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
       } catch (error) {
@@ -84,12 +104,12 @@ export const ModalEditTransaction = ({
     }
   };
 
-  const handleButtonChange = (e) => {
-    formik.setFieldValue(
-      "type",
-      formik.values.type === "Expense" ? "Income" : "Expense"
-    );
-  };
+  // const handleButtonChange = (e) => {
+  //   formik.setFieldValue(
+  //     "type",
+  //     formik.values.type === "Expense" ? "Income" : "Expense"
+  //   );
+  // };
 
   return (
     <>
@@ -99,7 +119,6 @@ export const ModalEditTransaction = ({
           shouldCloseOnOverlayClick={true}
           style={{ overlay: { backgroundColor: "var(--bg-modal-overlay)" } }}
           isOpen={isOpen}
-          // onClick={onClose}
         >
           <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
             <ModalWrapper>
@@ -141,7 +160,7 @@ export const ModalEditTransaction = ({
                   name="amount"
                   placeholder="0.00"
                   onChange={formik.handleChange}
-                  amount={formik.values.amount}
+                  value={formik.values.amount}
                 />
                 <StyledDateTime
                   name="date"

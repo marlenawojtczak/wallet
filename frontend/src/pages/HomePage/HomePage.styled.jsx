@@ -20,3 +20,11 @@ export const Y = styled.div`
   bottom: 20px;
   z-index: 9999;
 `;
+
+export const BalanceNav = styled.div`
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  @media screen and (min-width: 1280px) {
+  }
+`;

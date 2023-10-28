@@ -47,9 +47,10 @@ import Notiflix from "notiflix";
 export const HomeTab = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(selectIsModalEditTransactionOpen);
+  const id = useSelector(selectIsModalEditTransactionOpen);
 
-  const handleOpenModal = () => {
-    dispatch(openModalEditTransaction());
+  const handleOpenModal = (id) => {
+    dispatch(openModalEditTransaction(id));
   };
 
   const handleCloseModal = () => {
@@ -87,7 +88,7 @@ export const HomeTab = () => {
       );
 
       const editBtn = (
-        <Button type="button" onClick={handleOpenModal}>
+        <Button type="button" onClick={() => handleOpenModal(item._id)}>
           <EditIcon></EditIcon>
           <EditText>Edit</EditText>
         </Button>
@@ -155,10 +156,9 @@ export const HomeTab = () => {
                             {amountFormatter(option.amount)}
                           </TableCell>
                           <TableCell>
-                            {/* <Button type="button" onClick={openModal}> */}
                             <Button
                               type="button"
-                              onClick={handleOpenModal}
+                              onClick={() => handleOpenModal(option._id)}
                               option={option}
                             >
                               <EditIcon></EditIcon>
@@ -220,7 +220,11 @@ export const HomeTab = () => {
           </>
         )}
       </Media>
-      <ModalEditTransaction isOpen={isOpen} onClose={handleCloseModal} />
+      <ModalEditTransaction
+        isOpen={isOpen}
+        onClose={handleCloseModal}
+        id={id}
+      />
     </>
   );
 };

@@ -8,6 +8,19 @@ const api = axios.create({
   baseURL: "http://localhost:3000",
 });
 
+export const editTransactionAction = (state, action) => {
+  const { id, updatedTransaction } = action.payload;
+  const index = state.transactions.findIndex(
+    (transaction) => transaction._id === id
+  );
+  if (index !== -1) {
+    state.transactions[index] = {
+      ...state.transactions[index],
+      ...updatedTransaction,
+    };
+  }
+};
+
 export const fetchTotals = createAsyncThunk(
   "finance/fetchTotals",
   async (_, thunkAPI) => {
@@ -142,45 +155,22 @@ export const deleteTransaction = createAsyncThunk(
   }
 );
 
-// export const updateTransaction = createAsyncThunk(
-//   "finance/updateTransaction",
-//   async (transactionData, thunkAPI) => {
-//     const { id, ...dataToUpdate } = transactionData;
-//     const accessToken = selectAccessToken(thunkAPI.getState());
-//     try {
-//       console.log("Przed zapytaniem", id);
-//       const response = await api.patch(
-//         `/api/transactions/${id}`,
-//         dataToUpdate,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${accessToken}`,
-//           },
-//         }
-//       );
-//       console.log("Po zapytaniu", response.data);
-//       return response.data;
-//     } catch (error) {
-//       console.log("Błąd zapytania", error);
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 export const updateTransaction = createAsyncThunk(
   "finance/updateTransaction",
-  async (id, thunkAPI) => {
+  async ({ id, values }, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      console.log("Przed zapytaniem", id);
-      const response = await api.patch(`/api/transactions/${id}`, {
+      console.log("Przed zapytaniem id", id);
+      console.log("Przed zapytaniem data", values);
+      const response = await api.patch(`/api/transactions/${id}`, values, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("Po zapytaniu", response.data);
-      return response.data;
+      console.log("Po zapytaniu id", id);
+      console.log("Po zapytaniu data", response.data);
+      return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     } finally {

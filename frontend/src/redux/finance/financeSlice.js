@@ -6,6 +6,7 @@ import {
   deleteTransaction,
   updateTransaction,
   addTransaction,
+  editTransactionAction,
 } from "./operations";
 
 const initialState = {
@@ -44,6 +45,10 @@ export const financeSlice = createSlice({
     setComment: (state, action) => {
       state.comment = action.payload;
     },
+    resetAddedTransaction: (state) => {
+      state.addedTransaction = null;
+    },
+    editTransaction: editTransactionAction,
   },
   extraReducers: (builder) => {
     builder
@@ -77,16 +82,9 @@ export const financeSlice = createSlice({
         };
       })
       .addCase(updateTransaction.fulfilled, (state, action) => {
-        return {
-          ...state,
-          date: action.payload.date,
-          type: action.payload.type,
-          category: action.payload.category,
-          comment: action.payload.comment,
-          amount: action.payload.amount,
-        };
+        editTransactionAction(state, action);
+        // do dodania logika aktualizacji Balance
       })
-
       .addCase(addTransaction.fulfilled, (state, action) => {
         return {
           ...state,
@@ -102,10 +100,12 @@ export const financeSlice = createSlice({
 
 export const {
   resetFinance,
+  resetAddedTransaction,
   setType,
   setCategory,
   setAmount,
   setDate,
   setComment,
+  editTransaction,
 } = financeSlice.actions;
 export const financeReducer = financeSlice.reducer;

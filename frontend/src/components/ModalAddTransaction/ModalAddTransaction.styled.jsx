@@ -213,3 +213,9 @@ export const CloseButton = styled(Exit)`
   right: 20px;
   cursor: pointer;
 `;
+
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+`;
