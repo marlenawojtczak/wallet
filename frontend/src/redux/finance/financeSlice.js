@@ -5,7 +5,7 @@ import {
   fetchTransactions,
   deleteTransaction,
   updateTransaction,
-  addTransaction,
+  // addTransaction,
   editTransactionAction,
 } from "./operations";
 
@@ -15,11 +15,11 @@ const initialState = {
   totalBalance: 0,
   totals: [],
   transactions: [],
-  type: "",
+  // type: "",
   category: "",
-  amount: "",
-  date: "",
-  comment: "",
+  // amount: "",
+  // date: "",
+  // comment: "",
   addedTransaction: null,
 };
 
@@ -30,21 +30,21 @@ export const financeSlice = createSlice({
     resetFinance: () => {
       return { ...initialState };
     },
-    setType: (state, action) => {
-      state.type = action.payload;
-    },
+    // setType: (state, action) => {
+    //   state.type = action.payload;
+    // },
     setCategory: (state, action) => {
       state.category = action.payload;
     },
-    setAmount: (state, action) => {
-      state.amount = action.payload;
-    },
+    // setAmount: (state, action) => {
+    //   state.amount = action.payload;
+    // },
     setDate: (state, action) => {
       state.date = action.payload;
     },
-    setComment: (state, action) => {
-      state.comment = action.payload;
-    },
+    // setComment: (state, action) => {
+    //   state.comment = action.payload;
+    // },
     resetAddedTransaction: (state) => {
       state.addedTransaction = null;
     },
@@ -70,10 +70,16 @@ export const financeSlice = createSlice({
           totals: action.payload.totals,
         };
       })
-      .addCase(fetchTransactions.fulfilled, (state, action) => {
+      // .addCase(fetchTransactions.fulfilled, (state, action) => {
+      //   return {
+      //     ...state,
+      //     transactions: action.payload,
+      //   };
+      // })
+      .addCase(fetchTransactions.fulfilled, (state, { payload }) => {
         return {
           ...state,
-          transactions: action.payload,
+          transactions: payload,
         };
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
@@ -84,17 +90,17 @@ export const financeSlice = createSlice({
       .addCase(updateTransaction.fulfilled, (state, action) => {
         editTransactionAction(state, action);
         // do dodania logika aktualizacji Balance
-      })
-      .addCase(addTransaction.fulfilled, (state, action) => {
-        return {
-          ...state,
-          category: action.payload.category,
-          value: action.payload.value,
-          date: action.payload.date,
-          comment: action.payload.comment,
-          addedTransaction: action.payload,
-        };
       });
+    // .addCase(addTransaction.fulfilled, (state, action) => {
+    //   return {
+    //     ...state,
+    //     category: action.payload.category,
+    //     value: action.payload.value,
+    //     date: action.payload.date,
+    //     comment: action.payload.comment,
+    //     addedTransaction: action.payload,
+    //   };
+    // });
   },
 });
 

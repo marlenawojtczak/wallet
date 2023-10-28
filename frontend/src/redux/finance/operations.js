@@ -8,6 +8,10 @@ const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
 });
 
+const setAuthHeader = (token) => {
+  api.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 export const editTransactionAction = (state, action) => {
   const { id, updatedTransaction } = action.payload;
   const index = state.transactions.findIndex(
@@ -49,11 +53,7 @@ export const fetchTotalsByDate = createAsyncThunk(
     try {
       const response = await api.get(
         `/api/transactions/categories/${year}/${month}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        setAuthHeader(accessToken)
       );
       return response.data;
     } catch (error) {
@@ -70,11 +70,10 @@ export const fetchTransactions = createAsyncThunk(
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      const response = await api.get("/api/transactions", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await api.get(
+        "/api/transactions",
+        setAuthHeader(accessToken)
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -90,11 +89,11 @@ export const addTransaction = createAsyncThunk(
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      const res = await api.post("/api/transactions", credentials, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const res = await api.post(
+        "/api/transactions",
+        credentials,
+        setAuthHeader(accessToken)
+      );
       Notiflix.Notify.success("Successs! Transaction added to your list", {
         width: "300px",
         position: "center-top",
@@ -130,11 +129,7 @@ export const deleteTransaction = createAsyncThunk(
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      await api.delete(`/api/transactions/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await api.delete(`/api/transactions/${id}`, setAuthHeader(accessToken));
       Notiflix.Notify.info("Transaction removed from your list", {
         width: "300px",
         position: "center-top",
@@ -160,11 +155,11 @@ export const updateTransaction = createAsyncThunk(
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      const response = await api.patch(`/api/transactions/${id}`, values, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await api.patch(
+        `/api/transactions/${id}`,
+        values,
+        setAuthHeader(accessToken)
+      );
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
