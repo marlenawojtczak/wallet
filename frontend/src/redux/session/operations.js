@@ -1,5 +1,8 @@
-import { setToken, resetSession } from "./sessionSlice";
 import { resetFinance } from "../../redux/finance/financeSlice";
+import {
+  selectAccessToken,
+  selectRefreshToken,
+} from "../../redux/session/selectors";
 import {
   resetGlobal,
   closeModalLogout,
@@ -17,6 +20,10 @@ const api = axios.create({
 
 const setAuthHeader = (token) => {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const replaceAuthHeader = (token) => {
+  api.defaults.headers.common.Authorization = token;
 };
 
 const clearAuthHeader = () => {
@@ -46,7 +53,6 @@ export const signIn = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.user.accessToken);
-      thunkAPI.dispatch(setToken(res.data.user.accessToken));
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -59,8 +65,7 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
   "session/signOut",
   async (credentials, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const accessToken = state.session.user.accessToken;
+    const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
       await api.post(
@@ -68,7 +73,6 @@ export const signOut = createAsyncThunk(
         { _id: credentials },
         setAuthHeader(accessToken)
       );
-      thunkAPI.dispatch(resetSession());
       thunkAPI.dispatch(resetGlobal());
       thunkAPI.dispatch(resetFinance());
       clearAuthHeader();
@@ -85,14 +89,13 @@ export const signOut = createAsyncThunk(
 export const currentUser = createAsyncThunk(
   "session/current",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.session.user.accessToken;
-    if (!persistedToken) {
-         return thunkAPI.rejectWithValue("Unable to fetch user");
+    const refreshToken = selectRefreshToken(thunkAPI.getState());
+    if (!refreshToken) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     thunkAPI.dispatch(openLoading());
     try {
-      setAuthHeader(persistedToken);
+      setAuthHeader(refreshToken);
       const res = await api.get("api/users/current");
       return res.data;
     } catch (error) {
@@ -106,14 +109,13 @@ export const currentUser = createAsyncThunk(
 export const refreshAuthTokens = createAsyncThunk(
   "session/refresh",
   async (credentials, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.session.user.refreshToken;
-    if (!persistedToken) {
+    const refreshToken = selectRefreshToken(thunkAPI.getState());
+    if (!refreshToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     try {
       const res = await api.post("api/auth/refresh", { sid: credentials });
-      setAuthHeader(res.data.user.accessToken);
+      replaceAuthHeader(res.data.user.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

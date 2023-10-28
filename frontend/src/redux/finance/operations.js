@@ -55,7 +55,6 @@ export const fetchTotalsByDate = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -161,15 +160,11 @@ export const updateTransaction = createAsyncThunk(
     const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      console.log("Przed zapytaniem id", id);
-      console.log("Przed zapytaniem data", values);
       const response = await api.patch(`/api/transactions/${id}`, values, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("Po zapytaniu id", id);
-      console.log("Po zapytaniu data", response.data);
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

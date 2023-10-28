@@ -7,7 +7,7 @@ import {
   Modal,
 } from "./ModalLogout.styled";
 import { selectIsModalLogoutOpen } from "../../redux/global/selectors";
-import { selectSession } from "../../redux/session/selectors";
+import { selectSessionId } from "../../redux/session/selectors";
 import { closeModalLogout } from "../../redux/global/globalSlice.js";
 import { signOut } from "../../redux/session/operations";
 
@@ -16,8 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const ModalLogout = () => {
   const dispatch = useDispatch();
   const isModalLogoutOpen = useSelector(selectIsModalLogoutOpen);
-  const session = useSelector(selectSession);
-  const sessionId = session?.sid;
+  const sessionId = useSelector(selectSessionId);
 
   const handleLogout = () => {
     dispatch(signOut(sessionId));

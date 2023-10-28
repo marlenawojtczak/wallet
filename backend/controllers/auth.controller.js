@@ -92,6 +92,7 @@ export const signout = async (req, res, next) => {
 
 export const refreshTokens = async (req, res, next) => {
   const authorizationHeader = req.get("Authorization");
+  console.log(authorizationHeader);
 
   if (authorizationHeader) {
     const activeSession = await Session.findById(req.body.sid);
@@ -128,12 +129,17 @@ export const refreshTokens = async (req, res, next) => {
       newSession._id
     );
 
+    console.log(accessToken, refreshToken);
+
     await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
     return res.status(200).send({
       message: "Token refreshed",
       user: {
-        id: user._id,
+        id: user?._id,
+        username: user?.username,
+        email: User?.email,
+        balance: User?.balance,
         accessToken,
         refreshToken,
       },

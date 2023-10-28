@@ -10,39 +10,30 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import thunkMiddleware from "redux-thunk";
-import { combineReducers } from "redux";
 
 import { globalReducer } from "./global/globalSlice";
 import { sessionReducer } from "./session/sessionSlice";
 import { financeReducer } from "./finance/financeSlice";
-import { signOut } from "./session/operations";
-
-const appReducer = combineReducers({
-  session: sessionReducer,
-  global: globalReducer,
-  finance: financeReducer,
-});
-
-const rootReducer = (state, action) => {
-  if (action.type === `${signOut.fulfilled}`) {
-    state = undefined;
-  }
-
-  return appReducer(state, action);
-};
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["session", "accessToken", "refreshToken"],
+  whitelist: ["user", "session"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: [thunkMiddleware],
+  reducer: {
+    session: persistReducer(persistConfig, sessionReducer),
+    global: globalReducer,
+    finance: financeReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+  devTools: process.env.NODE_ENV === "development",
 });
 
 export const persistor = persistStore(store);

@@ -1,9 +1,11 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { SharedLayout, AccessLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { useAuth } from "../hooks/useAuth";
+import { currentUser } from "../redux/session/operations";
 import { Loader } from "../components";
 import { TokenRefresher } from "./TokenRefresher";
 
@@ -16,12 +18,16 @@ const Statistics = lazy(() => import("../pages/StatisticsPage/StatisticsPage"));
 const Currency = lazy(() => import("../pages/CurrencyPage/CurrencyPage"));
 
 export const App = () => {
-  const { getCurrentUser } = useAuth();
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
-  return (
+  useEffect(() => {
+    dispatch(currentUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
