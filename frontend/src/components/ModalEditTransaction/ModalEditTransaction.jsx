@@ -6,7 +6,6 @@ import {
   ModalHeader,
   StyledCategoryInput,
   AddButton,
-  CancelButton,
   CloseButton,
   CalendarIcon,
   ModalBackground,
@@ -54,20 +53,19 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     { value: "other expenses", label: "Other expenses" },
   ];
 
+  const INITIAL_VALUES = { ...transaction };
+
   const formik = useFormik({
-    initialValues: { ...transaction } || {
-      type: "Expense",
-      category: "",
-      amount: "",
-      date: new Date(),
-      comment: "",
-    },
+    initialValues: INITIAL_VALUES,
+
     onChange: (values) => {
       formik.setValues({
         ...values,
       });
     },
+
     onSubmit: async (values) => {
+      console.log("Submitting values:", values);
       const formattedDate = moment(values.date).format(
         "YYYY-MM-DDTHH:mm:ss.SSSZ"
       );
@@ -174,7 +172,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
               <AddButton type="button" onClick={formik.handleSubmit}>
                 Save
               </AddButton>
-              <CancelButton onClick={onClose}>Cancel</CancelButton>
+              {/* <CancelButton onClick={onClose}>Cancel</CancelButton> */}
             </ModalWrapper>
           </ModalContent>
         </ModalBackground>
