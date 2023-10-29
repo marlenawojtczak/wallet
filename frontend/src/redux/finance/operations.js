@@ -6,6 +6,7 @@ import Notiflix from "notiflix";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
+  // baseURL: "http://localhost:3000",
 });
 
 export const editTransactionAction = (state, action) => {
@@ -165,6 +166,7 @@ export const updateTransaction = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log(response.data);
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
