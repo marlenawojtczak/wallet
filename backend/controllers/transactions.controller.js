@@ -17,19 +17,22 @@ export const getTransactions = async (req, res, next) => {
 
 export const updateTransaction = async (req, res, next) => {
   const { transactionId } = req.params;
-  const { body } = req.body;
+  const { body } = req;
   const { _id: owner } = req.user;
-  const result = await Transaction.findOneAndUpdate(
+  const result = await Transaction.findByIdAndUpdate(
     { _id: transactionId, owner },
-    body,
+    { ...body },
     {
       new: true,
     }
   );
-  if (!result) {
+  if (!transactionId) {
     return res.status(404).send({ message: "Transaction not found" });
   }
-  return res.status(200).send(result);
+  return res.status(200).send({
+    message: "Transaction updated",
+    transaction: result,
+  });
 };
 
 export const deleteTransaction = async (req, res, next) => {
