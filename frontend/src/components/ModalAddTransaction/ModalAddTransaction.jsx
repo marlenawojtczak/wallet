@@ -40,12 +40,8 @@ import Notiflix from "notiflix";
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
-  // const addedTransaction = useSelector(
-  //   (state) => state.finance.addedTransaction
-  // );
-
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(false);
+  const [checked] = useState(false);
 
   const options = [
     { value: "main expenses", label: "Main expenses" },
