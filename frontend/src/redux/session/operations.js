@@ -90,13 +90,13 @@ export const signOut = createAsyncThunk(
 export const currentUser = createAsyncThunk(
   "session/current",
   async (_, thunkAPI) => {
-    const refreshToken = selectRefreshToken(thunkAPI.getState());
-    if (!refreshToken) {
+    const accessToken = selectAccessToken(thunkAPI.getState());
+    if (!accessToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     thunkAPI.dispatch(openLoading());
     try {
-      setAuthHeader(refreshToken);
+      setAuthHeader(accessToken);
       const res = await api.get("api/users/current");
       return res.data;
     } catch (error) {
@@ -115,8 +115,10 @@ export const refreshAuthTokens = createAsyncThunk(
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     try {
+      setAuthHeader(refreshToken);
       const res = await api.post("api/auth/refresh", { sid: credentials });
       replaceAuthHeader(res.data.user.accessToken);
+      await thunkAPI.dispatch(currentUser());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

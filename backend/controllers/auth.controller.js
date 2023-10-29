@@ -92,7 +92,6 @@ export const signout = async (req, res, next) => {
 
 export const refreshTokens = async (req, res, next) => {
   const authorizationHeader = req.get("Authorization");
-  console.log(authorizationHeader);
 
   if (authorizationHeader) {
     const activeSession = await Session.findById(req.body.sid);
@@ -128,8 +127,6 @@ export const refreshTokens = async (req, res, next) => {
       user._id,
       newSession._id
     );
-
-    console.log(accessToken, refreshToken);
 
     await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
