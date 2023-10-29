@@ -21,7 +21,7 @@ import {
 import { useState } from "react";
 import { useFormik } from "formik";
 import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
@@ -40,12 +40,8 @@ import Notiflix from "notiflix";
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
-  // const addedTransaction = useSelector(
-  //   (state) => state.finance.addedTransaction
-  // );
-
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(false);
+  const [checked] = useState(false);
 
   const options = [
     { value: "main expenses", label: "Main expenses" },

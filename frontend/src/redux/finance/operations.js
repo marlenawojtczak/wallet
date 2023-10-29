@@ -5,7 +5,8 @@ import { openLoading, closeLoading } from "../../redux/global/globalSlice";
 import Notiflix from "notiflix";
 
 const api = axios.create({
-  baseURL: "https://wallet.dupawklamerkach.pl",
+  // baseURL: "https://wallet.dupawklamerkach.pl",
+  baseURL: "http://localhost:3000",
 });
 
 const replaceAuthHeader = (token) => {

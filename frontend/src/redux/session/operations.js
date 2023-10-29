@@ -15,7 +15,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: "https://wallet.dupawklamerkach.pl",
+  // baseURL: "https://wallet.dupawklamerkach.pl",
+  baseURL: "http://localhost:3000",
 });
 
 const setAuthHeader = (token) => {
