@@ -41,6 +41,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
   const [checked] = useState(false);
   const transactions = useSelector(selectTransactions);
   const transaction = getTransaction(transactions, id);
+  console.log("transactions:", transactions, "transaction:", transaction);
 
   const options = [
     { value: "main expenses", label: "Main expenses" },
@@ -62,6 +63,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
       date: new Date(),
       comment: "",
     },
+
     onChange: (values) => {
       formik.setValues({
         ...values,
