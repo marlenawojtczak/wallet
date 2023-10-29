@@ -6,7 +6,6 @@ import {
   ModalHeader,
   StyledCategoryInput,
   AddButton,
-  CancelButton,
   CloseButton,
   CalendarIcon,
   ModalBackground,
@@ -55,7 +54,6 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
   ];
 
   const INITIAL_VALUES = { ...transaction };
-  console.log("transaction:", INITIAL_VALUES);
 
   const formik = useFormik({
     initialValues: INITIAL_VALUES,

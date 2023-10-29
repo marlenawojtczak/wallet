@@ -5,13 +5,9 @@ import { openLoading, closeLoading } from "../../redux/global/globalSlice";
 import Notiflix from "notiflix";
 
 const api = axios.create({
-  // baseURL: "https://wallet.dupawklamerkach.pl",
-  baseURL: "http://localhost:3000",
+  baseURL: "https://wallet.dupawklamerkach.pl",
+  // baseURL: "http://localhost:3000",
 });
-
-const replaceAuthHeader = (token) => {
-  api.defaults.headers.common.Authorization = token;
-};
 
 export const editTransactionAction = (state, action) => {
   const { id, updatedTransaction } = action.payload;
@@ -162,10 +158,15 @@ export const deleteTransaction = createAsyncThunk(
 export const updateTransaction = createAsyncThunk(
   "finance/updateTransaction",
   async ({ id, values }, thunkAPI) => {
+    const accessToken = selectAccessToken(thunkAPI.getState());
     thunkAPI.dispatch(openLoading());
     try {
-      const response = await api.patch(`/api/transactions/${id}`, values);
-      replaceAuthHeader(response.data.user.accessToken);
+      const response = await api.patch(`/api/transactions/${id}`, values, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log(response.data);
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
