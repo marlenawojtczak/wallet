@@ -97,7 +97,7 @@ export const ChartContainer = () => {
         <WrapperDonat>
           <Doughnut data={chartData} options={options} />
         </WrapperDonat>
-        <InsideText>₴ {amountFormatter(totalBalance)}</InsideText>
+        <InsideText>PLN {amountFormatter(totalBalance)}</InsideText>
       </StyledChart>
     </>
   );
