@@ -27,11 +27,7 @@ import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
 import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
 import {
-  // setType,
   setCategory,
-  // setAmount,
-  // setDate,
-  // setComment,
   resetFinance,
   resetAddedTransaction,
 } from "../../redux/finance/financeSlice";
@@ -81,34 +77,6 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       dispatch(resetFinance());
       dispatch(resetAddedTransaction());
     },
-
-    // onSubmit: async (values) => {
-    //   try {
-    //     await dispatch(
-    //       addTransaction({
-    //         type: values.type,
-    //         category: values.category,
-    //         amount: values.amount,
-    //         date: values.date,
-    //         comment: values.comment,
-    //       })
-    //     );
-    //     dispatch(setType(values.type));
-    //     dispatch(setCategory(values.category));
-    //     dispatch(setAmount(values.amount));
-    //     dispatch(setDate(values.date));
-    //     dispatch(setComment(values.comment));
-    //     dispatch(fetchTotals());
-    //     dispatch(fetchTransactions());
-
-    //     onClose();
-    //     formik.resetForm();
-    //     dispatch(resetFinance());
-    //     dispatch(resetAddedTransaction());
-    //   } catch (error) {
-    //     return console.log(error.message);
-    //   }
-    // },
   });
 
   const handleCategoryChange = (selectedOption) => {
