@@ -105,6 +105,7 @@ export const addTransaction = createAsyncThunk(
         fontFamily: "Poppins",
         fontSize: "16px",
       });
+
       return res.data;
     } catch (error) {
       Notiflix.Notify.failure("Cannot add transaction", {

@@ -85,6 +85,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
         );
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
+        formik.resetForm();
       } catch (error) {
         Notiflix.Notify.failure("Cannot edit transaction");
       }
@@ -149,10 +150,13 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                   placeholder="0.00"
                   onChange={formik.handleChange}
                   value={formik.values.amount}
+                  defaultValue={INITIAL_VALUES.amount}
                 />
                 <StyledDateTime
                   name="date"
-                  value={formik.values.date}
+                  // value={formik.values.date}
+                  // value={moment(INITIAL_VALUES.date).toDate()}
+                  value={INITIAL_VALUES.date}
                   onChange={(date) =>
                     formik.setFieldValue("date", moment(date).toDate())
                   }
@@ -168,6 +172,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                 placeholder="Comment"
                 onChange={formik.handleChange}
                 value={formik.values.comment}
+                defaultValue={INITIAL_VALUES.comment}
               />
               <AddButton type="button" onClick={formik.handleSubmit}>
                 Save
