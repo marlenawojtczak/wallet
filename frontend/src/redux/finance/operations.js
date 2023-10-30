@@ -6,7 +6,6 @@ import Notiflix from "notiflix";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
-  // baseURL: "http://localhost:3000",
 });
 
 const setAuthHeader = (token) => {
@@ -105,6 +104,7 @@ export const addTransaction = createAsyncThunk(
         fontFamily: "Poppins",
         fontSize: "16px",
       });
+
       return res.data;
     } catch (error) {
       Notiflix.Notify.failure("Cannot add transaction", {
@@ -161,6 +161,16 @@ export const updateTransaction = createAsyncThunk(
         values,
         setAuthHeader(accessToken)
       );
+      Notiflix.Notify.success("Successs! Transaction updated", {
+        width: "300px",
+        position: "center-top",
+        distance: "18px",
+        svgSize: "120px",
+        timeout: 2200,
+        borderRadius: "20px",
+        fontFamily: "Poppins",
+        fontSize: "16px",
+      });
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
