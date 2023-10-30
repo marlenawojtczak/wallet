@@ -40,10 +40,9 @@ import {
 import { getColor } from "../../utils/helperFunctions";
 
 export const Table = ({ options }) => {
-  const fetchedTransactions = useSelector(selectTransactions);
-
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
+  const fetchedTransactions = useSelector(selectTransactions);
 
   const dispatch = useDispatch();
 
