@@ -16,6 +16,7 @@ export const Balance = () => {
     dispatch(fetchTotals());
   }, []);
   const totalBalance = useSelector(selectTotalBalance);
+  console.log("totalBalance", totalBalance);
 
   return (
     <>

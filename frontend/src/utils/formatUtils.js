@@ -56,9 +56,10 @@ export const years = (fetchedTransactions) => {
 };
 
 export const amountFormatter = (amount) => {
-  const num = Number(amount).toFixed(2);
-  const formattedNumber = num.toString().replace(/[^\d.]/g, "");
-  return formattedNumber;
+  return Number(amount).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 };
 
 export const typeFormatter = (type) => {
