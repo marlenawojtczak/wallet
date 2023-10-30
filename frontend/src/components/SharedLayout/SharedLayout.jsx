@@ -1,4 +1,3 @@
-// import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import {
   Header,
@@ -8,17 +7,6 @@ import {
   Currency,
 } from "../../components";
 import { useSpring, animated } from "react-spring";
-
-// export const SharedLayout = () => {
-//   return (
-//     <>
-//       <Header />
-//       <Suspense fallback={<p>Loading...</p>}>
-//         <Outlet />
-//       </Suspense>
-//     </>
-//   );
-// };
 
 import {
   BackgroundContainer,
@@ -30,6 +18,7 @@ import {
   WrapperLeftAndUpSite,
   WrapperRightAndDownSite,
   WrapperNavBal,
+  MaxWrapper,
 } from "./SharedLayout.styled";
 
 export const SharedLayout = () => {
@@ -39,29 +28,31 @@ export const SharedLayout = () => {
   });
   return (
     <>
-      <Header />
       <BackgroundContainer>
         <Filter>
-          <Wrapper>
-            <WrapperLeftAndUpSite>
-              <WrapperNavBal>
-                <animated.div style={springAnimation}>
-                  <WrapperNav>
-                    <Navigation />
-                  </WrapperNav>
-                </animated.div>
-                <BalanceNav>
-                  <Balance />
-                </BalanceNav>
-              </WrapperNavBal>
-              <CurrencyNav>
-                <Currency />
-              </CurrencyNav>
-            </WrapperLeftAndUpSite>
-            <WrapperRightAndDownSite>
-              <Outlet />
-            </WrapperRightAndDownSite>
-          </Wrapper>
+          <MaxWrapper>
+            <Header />
+            <Wrapper>
+              <WrapperLeftAndUpSite>
+                <WrapperNavBal>
+                  <animated.div style={springAnimation}>
+                    <WrapperNav>
+                      <Navigation />
+                    </WrapperNav>
+                  </animated.div>
+                  <BalanceNav>
+                    <Balance />
+                  </BalanceNav>
+                </WrapperNavBal>
+                <CurrencyNav>
+                  <Currency />
+                </CurrencyNav>
+              </WrapperLeftAndUpSite>
+              <WrapperRightAndDownSite>
+                <Outlet />
+              </WrapperRightAndDownSite>
+            </Wrapper>
+          </MaxWrapper>
         </Filter>
       </BackgroundContainer>
     </>

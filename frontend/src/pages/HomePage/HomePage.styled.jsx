@@ -1,30 +1,20 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  @media screen and (max-width: 768px) {
-  }
-  @media screen and (min-width: 769px) and (max-width: 1279px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
-`;
-
-export const X = styled.div`
+export const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: sticky;
-  bottom: 20px;
-  left: 30px;
-  z-index: 9999;
-`;
-export const Y = styled.div`
-  position: sticky;
-  bottom: 20px;
-  z-index: 9999;
-`;
+  bottom: 2%;
+  padding: 20px;
 
-export const BalanceNav = styled.div`
   @media screen and (min-width: 768px) {
-    display: none;
+    padding: 20px 30px;
+    justify-content: flex-end;
+    bottom: 5%;
   }
   @media screen and (min-width: 1280px) {
+    padding: 40px;
+    bottom: 0%;
   }
 `;

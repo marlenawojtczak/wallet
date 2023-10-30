@@ -1,8 +1,6 @@
 import { Helmet } from "react-helmet";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HomeTab } from "../../components/HomeTab";
-import { Wrapper, X, Y, BalanceNav } from "./HomePage.styled";
 import { ButtonAddTransactions } from "../../components/ButtonAddTransactions";
 import { ButtonScroll } from "../../components/ButtonScroll/ButtonScroll";
 import { ModalAddTransaction } from "../../components/ModalAddTransaction";
@@ -13,6 +11,8 @@ import {
 import { selectIsModalAddTransactionOpen } from "../../redux/global/selectors";
 import Media from "react-media";
 import { Balance } from "../../components";
+
+import { ButtonWrapper } from "./HomePage.styled";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -41,23 +41,20 @@ const HomePage = () => {
 
   return (
     <>
-      <Wrapper>
-        <Helmet>
-          <title>Home</title>
-        </Helmet>
-        <BalanceNav>
-          <Balance />
-        </BalanceNav>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
+      <Media query={{ maxWidth: 767 }}>
+        {(matches) => (matches ? <Balance /> : <></>)}
+      </Media>
+      <HomeTab />
 
-        <HomeTab />
-        <X>
-          <ButtonAddTransactions onClick={handleOpenModal} />
-        </X>
-        <Y>
-          <ButtonScroll onClick={handleScroll} />
-        </Y>
-        <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
-      </Wrapper>
+      <ButtonWrapper>
+        <ButtonScroll onClick={handleScroll} />
+        <ButtonAddTransactions onClick={handleOpenModal} />
+      </ButtonWrapper>
+
+      <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
     </>
   );
 };

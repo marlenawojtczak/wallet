@@ -2,9 +2,13 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
   padding: 15px 0 15px;
+  background-color: var(--bg-light);
 
   @media screen and (min-width: 768px) {
     padding: 20px 0 20px;
+  }
+  @media screen and (min-width: 2500px) {
+    border-radius: 30px;
   }
 `;
 
