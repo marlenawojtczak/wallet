@@ -6,22 +6,22 @@ export const Button = styled.button`
   border-radius: 50%;
   background-color: var(--brand-secondary);
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 16px;
   border: none;
   cursor: pointer;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  /* position: sticky;
+  bottom: 30px; */
 
+  box-shadow: 1px 1px 8px;
   &:hover {
-    background-color: var(--brand-logout);
+    transform: scale(1.1);
+    box-shadow: 1px 1px 10px;
   }
 
-  @media screen and (min-width: 769px) {
-    bottom: 20px;
-    right: 30px;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1280px) {
+    bottom: 30px;
+    left: 91%;
   }
 `;

@@ -1,24 +1,41 @@
 import styled from "styled-components";
 import backgroundElipseBlue from "../../assets/images/ellipseBlue.png";
 import backgroundElipsePink from "../../assets/images/ellipsePink.png";
+import { useLocation } from "react-router-dom";
 
 export const BackgroundContainer = styled.div`
   background-color: var(--bg-accent);
   height: 100vh;
 
   @media screen and (min-width: 768px) {
-    height: 100%;
     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
     background-repeat: no-repeat, no-repeat;
     background-position: right -25vw top, left bottom;
+    height: 100vh;
   }
   @media screen and (min-width: 1280px) {
-    background-position: right top, left bottom;
+    background-position: right top 80px, left bottom;
+    position: relative;
+  }
+
+  ${(props) =>
+    useLocation().pathname === "/home" &&
+    `
+    height: 100%;
+  `}
+`;
+
+export const MaxWrapper = styled.div`
+  @media screen and (min-width: 1500px) {
+    margin: auto;
+    max-width: 2500px;
   }
 `;
 
 export const Filter = styled.div`
   backdrop-filter: blur(40px);
+  height: 100%;
+  width: 100%;
 `;
 
 export const Wrapper = styled.div`
@@ -70,6 +87,7 @@ export const WrapperLeftAndUpSite = styled.div`
     padding-top: 40px;
     margin-bottom: 0px;
     padding-right: 60px;
+    height: 85vh;
     border-right-style: solid;
     border-right-color: #e7e5f2;
     border-right-width: 1px;
@@ -81,14 +99,12 @@ export const WrapperLeftAndUpSite = styled.div`
 export const WrapperRightAndDownSite = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
   @media screen and (min-width: 768px) {
-    /* position: fixed;
-    height: 100vh; */
+    padding-top: 20px;
   }
   @media screen and (min-width: 1280px) {
-    padding-top: 40px;
+    padding-top: 50px;
     padding-left: 60px;
     flex: 60%;
   }

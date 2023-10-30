@@ -9,6 +9,8 @@ import {
   ListItemValue,
   TableCell,
   TableHeaderCell,
+  TableHeaderCellFirst,
+  TableHeaderCellLast,
   DeleteButton,
   Button,
   StyledTable,
@@ -16,6 +18,7 @@ import {
   TableNextRows,
   TableCellType,
   TableHeaderCellNone,
+  TableCellButton,
   Message,
   Plus,
 } from "./HomeTab.styled";
@@ -117,13 +120,13 @@ export const HomeTab = () => {
               <TableWrapper>
                 <Table>
                   <TableHead>
-                    <TableHeaderCell>Date</TableHeaderCell>
+                    <TableHeaderCellFirst>Date</TableHeaderCellFirst>
                     <TableHeaderCell>Type</TableHeaderCell>
                     <TableHeaderCell>Category</TableHeaderCell>
                     <TableHeaderCell>Comment</TableHeaderCell>
                     <TableHeaderCell>Sum</TableHeaderCell>
                     <TableHeaderCellNone></TableHeaderCellNone>
-                    <TableHeaderCellNone></TableHeaderCellNone>
+                    <TableHeaderCellLast></TableHeaderCellLast>
                   </TableHead>
 
                   <TableBody>
@@ -162,7 +165,7 @@ export const HomeTab = () => {
                               <EditIcon></EditIcon>
                             </Button>
                           </TableCell>
-                          <TableCell>
+                          <TableCellButton>
                             <DeleteButton
                               type="submit"
                               onClick={() =>
@@ -171,7 +174,7 @@ export const HomeTab = () => {
                             >
                               Delete
                             </DeleteButton>
-                          </TableCell>
+                          </TableCellButton>
                         </TableNextRows>
                       ))
                     )}
@@ -183,9 +186,7 @@ export const HomeTab = () => {
               <StyledTable>
                 {fetchedTransactions.length === 0 ? (
                   <tr>
-                    {" "}
                     <td colSpan="7">
-                      {" "}
                       <Message>
                         There are no transactions. You can add one with the plus
                         button <Plus>+</Plus> in the right bottom corner.

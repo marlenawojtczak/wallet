@@ -94,43 +94,44 @@ export const EditText = styled.span`
 // min-width: 768px
 
 export const TableWrapper = styled.div`
-  height: 100vh;
-  padding: 14px 30px;
+  height: 55vh;
+  overflow: auto;
 
-  animation: ${showIn} 500ms linear;
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 52px;
-    background-color: var(--font-light);
-    border-radius: 30px 30px;
-    z-index: -1;
-  }
   @media screen and (min-width: 1280px) {
+    height: 75vh;
   }
 `;
 
 export const Table = styled.table`
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 `;
 
 export const TableHead = styled.thead`
-  padding: 0;
-  margin: 0;
+  position: sticky;
   text-align: left;
+  top: 0px;
+  background-color: var(--font-light);
 `;
-
 export const TableHeaderCell = styled.th`
   font-family: Circe;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  padding: 20px 0px 20px 28px;
+  @media screen and (min-width: 1280px) {
+    padding: 20px 0px 20px 28px;
+  }
+`;
+export const TableHeaderCellFirst = styled(TableHeaderCell)`
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+`;
+
+export const TableHeaderCellLast = styled(TableHeaderCell)`
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 `;
 
 export const TableHeaderCellNone = styled.th`
@@ -147,24 +148,31 @@ export const TableNextRows = styled.tr`
 `;
 
 export const TableCell = styled.td`
-  padding-top: 20px;
+  padding: 15px 25px 15px;
   font-family: Circe;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  text-align: left;
+  @media screen and (min-width: 1280px) {
+    padding: 20px 0px 15px 28px;
+  }
+`;
+export const TableCellButton = styled.td`
+  display: flex;
+  padding-top: 7px;
+  padding-right: 20px;
+  @media screen and (min-width: 1280px) {
+    padding-top: 9px;
+    padding-right: 15px;
+  }
 `;
 
 export const TableCellType = styled.td`
-  padding-top: 20px;
-  padding-left: 14px;
+  padding-left: 40px;
 `;
 
 export const DeleteButton = styled.button`
-  /* display: flex;
-  justify-content: center;
-  text-align: center; */
   width: 67px;
 
   font-size: 14px;
@@ -172,15 +180,22 @@ export const DeleteButton = styled.button`
   font-family: Circe;
   font-weight: 400;
   line-height: normal;
-
+  margin: auto;
   border: none;
   border-radius: 18px;
-  padding: 4px 0;
+  padding: 10px 10px;
+  display: flex;
+
+  justify-content: center;
   color: var(--bg-light);
   background-color: var(--brand-secondary);
   cursor: pointer;
-  margin: auto;
-
+  @media screen and (min-width: 768px) {
+    width: 90%;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 80%;
+  }
   &:hover {
     transform: scale(1.02);
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
