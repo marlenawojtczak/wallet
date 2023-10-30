@@ -40,9 +40,10 @@ import {
 import { getColor } from "../../utils/helperFunctions";
 
 export const Table = ({ options }) => {
+  const fetchedTransactions = useSelector(selectTransactions);
+
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
-  const fetchedTransactions = useSelector(selectTransactions);
 
   const dispatch = useDispatch();
 
@@ -65,6 +66,14 @@ export const Table = ({ options }) => {
       dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
     }
   }, [dispatch, selectedMonth, selectedYear]);
+
+  const getMaxYear = () => {
+    const yearsArr = years(fetchedTransactions);
+    const maxYear = yearsArr.reduce((maxValue, currentObject) => {
+      return Math.max(maxValue, currentObject.value);
+    }, -Infinity);
+    return maxYear;
+  };
 
   const totalIncome = useSelector(selectTotalIncome);
   const totalExpenses = useSelector(selectTotalExpenses);
@@ -91,10 +100,10 @@ export const Table = ({ options }) => {
                   placeholder={"Month"}
                 ></Select>
                 <Select
+                  defaultValue={{ label: getMaxYear() }}
                   onChange={(e) => setSelectedYear(e.value)}
                   options={years(fetchedTransactions)}
                   styles={SelectStylesSmall}
-                  placeholder={"Year"}
                 ></Select>
               </>
             )}
@@ -112,10 +121,10 @@ export const Table = ({ options }) => {
                 </WrapperMonth>
                 <WrapperYear>
                   <Select
+                    defaultValue={{ label: getMaxYear() }}
                     onChange={(e) => setSelectedYear(e.value)}
                     options={years(fetchedTransactions)}
                     styles={SelectStylesMedium}
-                    placeholder={"Year"}
                   ></Select>
                 </WrapperYear>
               </>
@@ -134,10 +143,10 @@ export const Table = ({ options }) => {
                 </WrapperMonth>
                 <WrapperYear>
                   <Select
+                    defaultValue={{ label: getMaxYear() }}
                     onChange={(e) => setSelectedYear(e.value)}
                     options={years(fetchedTransactions)}
                     styles={SelectStylesLarge}
-                    placeholder={"Year"}
                   ></Select>
                 </WrapperYear>
               </>
