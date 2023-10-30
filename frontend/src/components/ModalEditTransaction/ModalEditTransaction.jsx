@@ -6,7 +6,6 @@ import {
   ModalHeader,
   StyledCategoryInput,
   AddButton,
-  CancelButton,
   CloseButton,
   CalendarIcon,
   ModalBackground,
@@ -54,20 +53,19 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     { value: "other expenses", label: "Other expenses" },
   ];
 
+  const INITIAL_VALUES = { ...transaction };
+
   const formik = useFormik({
-    initialValues: { ...transaction } || {
-      type: "Expense",
-      category: "",
-      amount: "",
-      date: new Date(),
-      comment: "",
-    },
+    initialValues: INITIAL_VALUES,
+
     onChange: (values) => {
       formik.setValues({
         ...values,
       });
     },
+
     onSubmit: async (values) => {
+      console.log("Submitting values:", values);
       const formattedDate = moment(values.date).format(
         "YYYY-MM-DDTHH:mm:ss.SSSZ"
       );
@@ -87,6 +85,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
         );
         dispatch(fetchTotals());
         dispatch(fetchTransactions());
+        formik.resetForm();
       } catch (error) {
         Notiflix.Notify.failure("Cannot edit transaction");
       }
@@ -151,10 +150,13 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                   placeholder="0.00"
                   onChange={formik.handleChange}
                   value={formik.values.amount}
+                  defaultValue={INITIAL_VALUES.amount}
                 />
                 <StyledDateTime
                   name="date"
-                  value={formik.values.date}
+                  // value={formik.values.date}
+                  // value={moment(INITIAL_VALUES.date).toDate()}
+                  value={INITIAL_VALUES.date}
                   onChange={(date) =>
                     formik.setFieldValue("date", moment(date).toDate())
                   }
@@ -170,11 +172,12 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                 placeholder="Comment"
                 onChange={formik.handleChange}
                 value={formik.values.comment}
+                defaultValue={INITIAL_VALUES.comment}
               />
               <AddButton type="button" onClick={formik.handleSubmit}>
                 Save
               </AddButton>
-              <CancelButton onClick={onClose}>Cancel</CancelButton>
+              {/* <CancelButton onClick={onClose}>Cancel</CancelButton> */}
             </ModalWrapper>
           </ModalContent>
         </ModalBackground>

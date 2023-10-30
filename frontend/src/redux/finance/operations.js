@@ -4,8 +4,11 @@ import { selectAccessToken } from "../session/selectors";
 import { openLoading, closeLoading } from "../../redux/global/globalSlice";
 import Notiflix from "notiflix";
 
+// const api = axios.create({
+//   baseURL: "https://wallet.dupawklamerkach.pl",
+// });
 const api = axios.create({
-  baseURL: "https://wallet.dupawklamerkach.pl",
+  baseURL: "http://localhost:3000",
 });
 
 export const editTransactionAction = (state, action) => {
@@ -105,6 +108,7 @@ export const addTransaction = createAsyncThunk(
         fontFamily: "Poppins",
         fontSize: "16px",
       });
+
       return res.data;
     } catch (error) {
       Notiflix.Notify.failure("Cannot add transaction", {
