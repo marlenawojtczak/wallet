@@ -4,9 +4,16 @@ import { selectAccessToken } from "../session/selectors";
 import { openLoading, closeLoading } from "../../redux/global/globalSlice";
 import Notiflix from "notiflix";
 
+// const api = axios.create({
+//   baseURL: "https://wallet.dupawklamerkach.pl",
+// });
 const api = axios.create({
+<<<<<<< HEAD
   baseURL: "https://wallet.dupawklamerkach.pl",
   // baseURL: "http://localhost:3000",
+=======
+  baseURL: "http://localhost:3000",
+>>>>>>> 3990973c30c8cfae8b2b9c7fde8b6cf9a8273fcd
 });
 
 const setAuthHeader = (token) => {

@@ -48,6 +48,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     { value: "other expenses", label: "Other expenses" },
   ];
 
+<<<<<<< HEAD
   const dispatch = useDispatch();
   const [checked] = useState(false);
   const transactions = useSelector(selectTransactions);
@@ -67,6 +68,12 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
       type: "Expense",
       ...transaction,
     },
+=======
+  const INITIAL_VALUES = { ...transaction };
+
+  const formik = useFormik({
+    initialValues: INITIAL_VALUES,
+>>>>>>> 3990973c30c8cfae8b2b9c7fde8b6cf9a8273fcd
 
     onChange: (values) => {
       formik.setValues({
@@ -75,6 +82,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     },
 
     onSubmit: async (values) => {
+      console.log("Submitting values:", values);
       const formattedDate = moment(values.date).format(
         "YYYY-MM-DDTHH:mm:ss.SSSZ"
       );
@@ -163,7 +171,13 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                 />
                 <StyledDateTime
                   name="date"
+<<<<<<< HEAD
                   value={formated(INITIAL_VALUES.date)}
+=======
+                  // value={formik.values.date}
+                  // value={moment(INITIAL_VALUES.date).toDate()}
+                  value={INITIAL_VALUES.date}
+>>>>>>> 3990973c30c8cfae8b2b9c7fde8b6cf9a8273fcd
                   onChange={(date) =>
                     formik.setFieldValue("date", moment(date).toDate())
                   }
