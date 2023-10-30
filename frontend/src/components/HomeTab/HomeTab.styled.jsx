@@ -96,6 +96,21 @@ export const EditText = styled.span`
 export const TableWrapper = styled.div`
   height: 55vh;
   overflow: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #a7a6a6;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #afafaf #f1f1f1;
 
   @media screen and (min-width: 1280px) {
     height: 75vh;
