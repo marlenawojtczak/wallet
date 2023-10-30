@@ -162,6 +162,16 @@ export const updateTransaction = createAsyncThunk(
         values,
         setAuthHeader(accessToken)
       );
+      Notiflix.Notify.success("Successs! Transaction updated", {
+        width: "300px",
+        position: "center-top",
+        distance: "18px",
+        svgSize: "120px",
+        timeout: 2200,
+        borderRadius: "20px",
+        fontFamily: "Poppins",
+        fontSize: "16px",
+      });
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

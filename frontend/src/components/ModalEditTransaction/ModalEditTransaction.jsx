@@ -15,7 +15,7 @@ import {
   ModalPosition,
 } from "./ModalEditTransaction.styled";
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { Notiflix } from "notiflix";
 import moment from "moment";
@@ -36,11 +36,6 @@ const getTransaction = (transactions, id) => {
 };
 
 export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
-  const dispatch = useDispatch();
-  const [checked] = useState(false);
-  const transactions = useSelector(selectTransactions);
-  const transaction = getTransaction(transactions, id);
-
   const options = [
     { value: "main expenses", label: "Main expenses" },
     { value: "products", label: "Products" },
@@ -53,10 +48,25 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     { value: "other expenses", label: "Other expenses" },
   ];
 
+  const dispatch = useDispatch();
+  const [checked] = useState(false);
+  const transactions = useSelector(selectTransactions);
+  const transaction = getTransaction(transactions, id);
+
+  const [initialValueDisplayed, setInitialValueDisplayed] = useState(false);
+  const [categoryChanged, setCategoryChanged] = useState(false);
+
   const INITIAL_VALUES = { ...transaction };
 
+  useEffect(() => {
+    setInitialValueDisplayed(true);
+  }, [id]);
+
   const formik = useFormik({
-    initialValues: INITIAL_VALUES,
+    initialValues: {
+      type: "Expense",
+      ...transaction,
+    },
 
     onChange: (values) => {
       formik.setValues({
@@ -65,7 +75,6 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     },
 
     onSubmit: async (values) => {
-      console.log("Submitting values:", values);
       const formattedDate = moment(values.date).format(
         "YYYY-MM-DDTHH:mm:ss.SSSZ"
       );
@@ -93,10 +102,16 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
   });
 
   const handleCategoryChange = (selectedOption) => {
-    if (!checked) {
-      formik.setFieldValue("category", selectedOption.label);
+    setInitialValueDisplayed(false);
+    setCategoryChanged(true);
+    formik.setFieldValue("category", selectedOption.label);
+  };
+
+  const formated = (date) => {
+    if (date) {
+      return date.slice(0, 10);
     } else {
-      formik.setFieldValue("category", "");
+      return "";
     }
   };
 
@@ -130,20 +145,14 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                 </span>
               </TransactionType>
 
-              {!checked ? (
-                <StyledCategoryInput
-                  name="category"
-                  placeholder="Select a category"
-                  value={options.find(
-                    (option) => option.value === formik.values.category
-                  )}
-                  onChange={handleCategoryChange}
-                  onBlur={formik.handleBlur}
-                  options={options}
-                />
-              ) : (
-                <></>
-              )}
+              <StyledCategoryInput
+                name="category"
+                defaultValue={{ label: INITIAL_VALUES.category }}
+                onChange={handleCategoryChange}
+                onBlur={formik.handleBlur}
+                options={options}
+              />
+
               <SectionWrapper>
                 <ValueInput
                   name="amount"
@@ -154,9 +163,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                 />
                 <StyledDateTime
                   name="date"
-                  // value={formik.values.date}
-                  // value={moment(INITIAL_VALUES.date).toDate()}
-                  value={INITIAL_VALUES.date}
+                  value={formated(INITIAL_VALUES.date)}
                   onChange={(date) =>
                     formik.setFieldValue("date", moment(date).toDate())
                   }
