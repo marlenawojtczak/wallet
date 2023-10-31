@@ -3,6 +3,7 @@ import axios from "axios";
 import { selectAccessToken } from "../session/selectors";
 import { openLoading, closeLoading } from "../../redux/global/globalSlice";
 import Notiflix from "notiflix";
+import { toastifyOptions } from "../../utils/helperFunctions";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
@@ -81,29 +82,14 @@ export const addTransaction = createAsyncThunk(
         credentials,
         setAuthHeader(accessToken)
       );
-      Notiflix.Notify.success("Successs! Transaction added to your list", {
-        width: "300px",
-        position: "center-top",
-        distance: "18px",
-        svgSize: "120px",
-        timeout: 2200,
-        borderRadius: "20px",
-        fontFamily: "Poppins",
-        fontSize: "16px",
-      });
+      Notiflix.Notify.success(
+        "Successs! Transaction added to your list",
+        toastifyOptions
+      );
 
       return res.data;
     } catch (error) {
-      Notiflix.Notify.failure("Cannot add transaction", {
-        width: "300px",
-        position: "center-top",
-        distance: "18px",
-        svgSize: "120px",
-        timeout: 2200,
-        borderRadius: "20px",
-        fontFamily: "Poppins",
-        fontSize: "16px",
-      });
+      Notiflix.Notify.failure("Cannot add transaction", toastifyOptions);
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(closeLoading());
@@ -118,16 +104,10 @@ export const deleteTransaction = createAsyncThunk(
     thunkAPI.dispatch(openLoading());
     try {
       await api.delete(`/api/transactions/${id}`, setAuthHeader(accessToken));
-      Notiflix.Notify.info("Transaction removed from your list", {
-        width: "300px",
-        position: "center-top",
-        distance: "18px",
-        svgSize: "120px",
-        timeout: 2200,
-        borderRadius: "20px",
-        fontFamily: "Poppins",
-        fontSize: "16px",
-      });
+      Notiflix.Notify.info(
+        "Transaction removed from your list",
+        toastifyOptions
+      );
       return `Deleted transaction: ${id}`;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -148,16 +128,7 @@ export const updateTransaction = createAsyncThunk(
         values,
         setAuthHeader(accessToken)
       );
-      Notiflix.Notify.success("Successs! Transaction updated", {
-        width: "300px",
-        position: "center-top",
-        distance: "18px",
-        svgSize: "120px",
-        timeout: 2200,
-        borderRadius: "20px",
-        fontFamily: "Poppins",
-        fontSize: "16px",
-      });
+      Notiflix.Notify.success("Successs! Transaction updated", toastifyOptions);
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

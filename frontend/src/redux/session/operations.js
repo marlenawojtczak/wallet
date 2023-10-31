@@ -1,4 +1,3 @@
-import { resetFinance } from "../../redux/finance/financeSlice";
 import {
   selectAccessToken,
   selectRefreshToken,
@@ -75,7 +74,6 @@ export const signOut = createAsyncThunk(
         setAuthHeader(accessToken)
       );
       thunkAPI.dispatch(resetGlobal());
-      thunkAPI.dispatch(resetFinance());
       clearAuthHeader();
     } catch (error) {
       toast.error("Oops something went wrong during logout.");

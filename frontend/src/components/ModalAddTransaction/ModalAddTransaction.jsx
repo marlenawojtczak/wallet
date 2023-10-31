@@ -26,10 +26,10 @@ import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
 import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
-import { resetFinance } from "../../redux/finance/financeSlice";
 import Notiflix from "notiflix";
 
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
+import { toastifyOptions } from "../../utils/helperFunctions";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -70,7 +70,6 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       saveTransaction(values);
       onClose();
       formik.resetForm();
-      dispatch(resetFinance());
     },
   });
 
@@ -93,16 +92,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   };
 
   const notify = (message) => {
-    Notiflix.Notify.failure(message, {
-      width: "300px",
-      position: "center-top",
-      distance: "18px",
-      svgSize: "120px",
-      timeout: 2200,
-      borderRadius: "20px",
-      fontFamily: "Poppins",
-      fontSize: "16px",
-    });
+    Notiflix.Notify.failure(message, toastifyOptions);
   };
 
   const handleAddClick = () => {
