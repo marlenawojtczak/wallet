@@ -9,10 +9,9 @@ import {
   closeModalAddTransaction,
 } from "../../redux/global/globalSlice";
 import { selectIsModalAddTransactionOpen } from "../../redux/global/selectors";
-import Media from "react-media";
 import { Balance } from "../../components";
 
-import { ButtonWrapper } from "./HomePage.styled";
+import { ButtonWrapper, BalanceNav } from "./HomePage.styled";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -44,16 +43,14 @@ const HomePage = () => {
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <Media query={{ maxWidth: 767 }}>
-        {(matches) => (matches ? <Balance /> : <></>)}
-      </Media>
+      <BalanceNav>
+        <Balance />
+      </BalanceNav>
       <HomeTab />
-
       <ButtonWrapper>
         <ButtonScroll onClick={handleScroll} />
         <ButtonAddTransactions onClick={handleOpenModal} />
       </ButtonWrapper>
-
       <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
     </>
   );

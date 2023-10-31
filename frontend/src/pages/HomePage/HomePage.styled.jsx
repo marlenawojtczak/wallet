@@ -18,3 +18,11 @@ export const ButtonWrapper = styled.div`
     bottom: 0%;
   }
 `;
+
+export const BalanceNav = styled.div`
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  @media screen and (min-width: 1280px) {
+  }
+`;
