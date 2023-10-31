@@ -12,19 +12,6 @@ const setAuthHeader = (token) => {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export const editTransactionAction = (state, action) => {
-  const { id, updatedTransaction } = action.payload;
-  const index = state.transactions.findIndex(
-    (transaction) => transaction._id === id
-  );
-  if (index !== -1) {
-    state.transactions[index] = {
-      ...state.transactions[index],
-      ...updatedTransaction,
-    };
-  }
-};
-
 export const fetchTotals = createAsyncThunk(
   "finance/fetchTotals",
   async (_, thunkAPI) => {

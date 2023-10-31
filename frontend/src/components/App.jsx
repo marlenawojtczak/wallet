@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { SharedLayout, AccessLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
-import { useAuth } from "../hooks/useAuth";
 import { currentUser } from "../redux/session/operations";
 import { Loader } from "../components";
 import { TokenRefresher } from "./TokenRefresher";
@@ -19,15 +18,12 @@ const Currency = lazy(() => import("../pages/CurrencyPage/CurrencyPage"));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(currentUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <Loader />
-  ) : (
+  return (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
