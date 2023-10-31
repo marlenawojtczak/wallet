@@ -26,11 +26,7 @@ import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
 import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
-import {
-  setCategory,
-  resetFinance,
-  resetAddedTransaction,
-} from "../../redux/finance/financeSlice";
+import { resetFinance } from "../../redux/finance/financeSlice";
 import Notiflix from "notiflix";
 
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
@@ -75,17 +71,16 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       onClose();
       formik.resetForm();
       dispatch(resetFinance());
-      dispatch(resetAddedTransaction());
     },
   });
 
   const handleCategoryChange = (selectedOption) => {
     if (!checked) {
       formik.setFieldValue("category", selectedOption.label);
-      dispatch(setCategory(selectedOption.label));
+      formik.setFieldValue(selectedOption.label);
     } else {
       formik.setFieldValue("category", "");
-      dispatch(setCategory(""));
+      formik.setFieldValue("");
     }
   };
 
