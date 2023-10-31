@@ -5,8 +5,6 @@ import {
   fetchTransactions,
   deleteTransaction,
   updateTransaction,
-  // addTransaction,
-  editTransactionAction,
 } from "./operations";
 
 const initialState = {
@@ -15,12 +13,38 @@ const initialState = {
   totalBalance: 0,
   totals: [],
   transactions: [],
-  // type: "",
-  category: "",
-  // amount: "",
-  // date: "",
-  // comment: "",
-  addedTransaction: null,
+};
+
+const handleFulfilled = (state, { payload }) => {
+  state.totalIncome = payload.totalIncome;
+  state.totalExpense = payload.totalExpense;
+  state.totalBalance = payload.totalBalance;
+  state.totals = payload.totals;
+};
+
+const handleFetchTransactions = (state, { payload }) => {
+  return {
+    ...state,
+    transactions: payload,
+  };
+};
+
+const handleDeleteTransaction = (state) => {
+  return {
+    ...state,
+  };
+};
+
+const handleUpdateTransaction = (state, { payload }) => {
+  const index = state.transactions.findIndex(
+    (transaction) => transaction._id === payload._id
+  );
+  if (index !== -1) {
+    state.transactions[index] = {
+      ...state.transactions[index],
+      ...payload,
+    };
+  }
 };
 
 export const financeSlice = createSlice({
@@ -30,88 +54,16 @@ export const financeSlice = createSlice({
     resetFinance: () => {
       return { ...initialState };
     },
-    // setType: (state, action) => {
-    //   state.type = action.payload;
-    // },
-    setCategory: (state, action) => {
-      state.category = action.payload;
-    },
-    // setAmount: (state, action) => {
-    //   state.amount = action.payload;
-    // },
-    setDate: (state, action) => {
-      state.date = action.payload;
-    },
-    // setComment: (state, action) => {
-    //   state.comment = action.payload;
-    // },
-    resetAddedTransaction: (state) => {
-      state.addedTransaction = null;
-    },
-    editTransaction: editTransactionAction,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTotals.fulfilled, (state, action) => {
-        return {
-          ...state,
-          totalIncome: action.payload.totalIncome,
-          totalExpense: action.payload.totalExpense,
-          totalBalance: action.payload.totalBalance,
-          totals: action.payload.totals,
-        };
-      })
-      .addCase(fetchTotalsByDate.fulfilled, (state, action) => {
-        return {
-          ...state,
-          totalIncome: action.payload.totalIncome,
-          totalExpense: action.payload.totalExpense,
-          totalBalance: action.payload.totalBalance,
-          totals: action.payload.totals,
-        };
-      })
-      // .addCase(fetchTransactions.fulfilled, (state, action) => {
-      //   return {
-      //     ...state,
-      //     transactions: action.payload,
-      //   };
-      // })
-      .addCase(fetchTransactions.fulfilled, (state, { payload }) => {
-        return {
-          ...state,
-          transactions: payload,
-        };
-      })
-      .addCase(deleteTransaction.fulfilled, (state, action) => {
-        return {
-          ...state,
-        };
-      })
-      .addCase(updateTransaction.fulfilled, (state, action) => {
-        editTransactionAction(state, action);
-        // do dodania logika aktualizacji Balance
-      });
-    // .addCase(addTransaction.fulfilled, (state, action) => {
-    //   return {
-    //     ...state,
-    //     category: action.payload.category,
-    //     value: action.payload.value,
-    //     date: action.payload.date,
-    //     comment: action.payload.comment,
-    //     addedTransaction: action.payload,
-    //   };
-    // });
+      .addCase(fetchTotals.fulfilled, handleFulfilled)
+      .addCase(fetchTotalsByDate.fulfilled, handleFulfilled)
+      .addCase(fetchTransactions.fulfilled, handleFetchTransactions)
+      .addCase(deleteTransaction.fulfilled, handleDeleteTransaction)
+      .addCase(updateTransaction.fulfilled, handleUpdateTransaction);
   },
 });
 
-export const {
-  resetFinance,
-  resetAddedTransaction,
-  setType,
-  setCategory,
-  setAmount,
-  setDate,
-  setComment,
-  editTransaction,
-} = financeSlice.actions;
+export const { resetFinance } = financeSlice.actions;
 export const financeReducer = financeSlice.reducer;
