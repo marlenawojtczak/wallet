@@ -74,6 +74,8 @@ export const Table = () => {
 
     if (isMonthInArray) {
       return setSelectedMonth(getCurrentMonth());
+    } else if (monthsArr[0] === undefined) {
+      return setSelectedMonth(getCurrentMonth());
     } else {
       return setSelectedMonth(changeMonthToNumber(monthsArr[0].label));
     }
