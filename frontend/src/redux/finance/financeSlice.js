@@ -50,6 +50,9 @@ const handleUpdateTransaction = (state, { payload }) => {
 export const financeSlice = createSlice({
   name: "finance",
   initialState,
+  reducers: {
+    resetFinance: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTotals.fulfilled, handleFulfilled)
@@ -59,5 +62,7 @@ export const financeSlice = createSlice({
       .addCase(updateTransaction.fulfilled, handleUpdateTransaction);
   },
 });
+
+export const { resetFinance } = financeSlice.actions;
 
 export const financeReducer = financeSlice.reducer;

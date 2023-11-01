@@ -76,14 +76,12 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const handleCategoryChange = (selectedOption) => {
     if (!checked) {
       formik.setFieldValue("category", selectedOption.label);
-      formik.setFieldValue(selectedOption.label);
     } else {
       formik.setFieldValue("category", "");
-      formik.setFieldValue("");
     }
   };
 
-  const handleButtonChange = (e) => {
+  const handleButtonChange = () => {
     formik.setFieldValue(
       "type",
       formik.values.type === "Expense" ? "Income" : "Expense"

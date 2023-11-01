@@ -1,12 +1,13 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import Notiflix from "notiflix";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { selectAccessToken } from "../session/selectors";
 import { openLoading, closeLoading } from "../../redux/global/globalSlice";
-import Notiflix from "notiflix";
 import { toastifyOptions } from "../../utils/helperFunctions";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
+  // baseURL: "http://localhost:3000",
 });
 
 const setAuthHeader = (token) => {

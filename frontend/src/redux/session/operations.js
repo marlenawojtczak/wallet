@@ -8,9 +8,9 @@ import {
   openLoading,
   closeLoading,
 } from "../../redux/global/globalSlice.js";
-
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { resetFinance } from "../finance/financeSlice";
 import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 const api = axios.create({
@@ -74,6 +74,7 @@ export const signOut = createAsyncThunk(
         setAuthHeader(accessToken)
       );
       thunkAPI.dispatch(resetGlobal());
+      thunkAPI.dispatch(resetFinance());
       clearAuthHeader();
     } catch (error) {
       toast.error("Oops something went wrong during logout.");
@@ -116,7 +117,6 @@ export const refreshAuthTokens = createAsyncThunk(
       setAuthHeader(refreshToken);
       const res = await api.post("api/auth/refresh", { sid: credentials });
       replaceAuthHeader(res.data.user.accessToken);
-      await thunkAPI.dispatch(currentUser());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
