@@ -12,8 +12,6 @@ import { selectTotalBalance } from "../../redux/finance/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { selectTotals } from "../../redux/finance/selectors";
 import { getColor } from "../../utils/helperFunctions";
-import { useState, useEffect } from "react";
-import { fetchTotals } from "../../redux/finance/operations";
 
 const plugin = {
   id: "emptyDoughnut",
@@ -49,11 +47,6 @@ Chart.register(CategoryScale);
 Chart.register(plugin);
 
 export const ChartContainer = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchTotals());
-  }, []);
-
   const totals = useSelector(selectTotals);
 
   const filteredTotals = totals
