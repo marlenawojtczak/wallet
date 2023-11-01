@@ -42,6 +42,11 @@ export const changeMonthToNumber = (namedMonth) => {
   return monthNumber;
 };
 
+export const changeNumberToMonth = (monthNumber) => {
+  const index = parseInt(monthNumber, 10) - 1;
+  return monthNames[index];
+};
+
 export const years = (fetchedTransactions) => {
   const yearsArray = fetchedTransactions.map((transaction) =>
     new Date(transaction.date).getFullYear()
