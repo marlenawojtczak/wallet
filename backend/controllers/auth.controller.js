@@ -3,6 +3,7 @@ import User from "../models/users.model.js";
 import Session from "../models/session.model.js";
 import { generateTokens } from "../utils/generateTokens.js";
 import { JWT_SECRET } from "../config/config.js";
+import { sendVerificationEmail } from "../utils/emailVerification.js";
 
 export const singup = async (req, res, next) => {
   const body = req.body;
@@ -16,9 +17,14 @@ export const singup = async (req, res, next) => {
       .send({ message: `User with ${email} email already exists` });
   }
 
+  const verificationToken = jwt.sign(email, JWT_SECRET);
+
   const newUser = await User.create({
     ...body,
+    verificationToken,
   });
+
+  sendVerificationEmail(email, verificationToken, "Email Verification");
 
   return res.status(201).send({
     message: "Register successful",
@@ -31,6 +37,57 @@ export const singup = async (req, res, next) => {
   });
 };
 
+export const verify = async (req, res, next) => {
+  const { verificationToken } = req.params;
+
+  const user = await User.findOne({ verificationToken });
+
+  if (!user) {
+    return res.status(404).json({
+      status: false,
+      message: "User Not Found",
+    });
+  }
+
+  await User.findByIdAndUpdate(user._id, {
+    verify: true,
+    verificationToken: "",
+  });
+
+  res.redirect("http://localhost:4000/#/login");
+};
+
+export const resendVerify = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: "User Not Found",
+      });
+    }
+
+    const { verificationToken, verify } = user;
+
+    if (verify)
+      return res.status(400).json({
+        status: false,
+        message: "Verification has already been passed",
+      });
+
+    await sendVerificationEmail(email, verificationToken, "Email Verification");
+    res.status(200).json({
+      message: "Verification email sent",
+    });
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+};
+
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -41,6 +98,14 @@ export const signin = async (req, res, next) => {
   }
 
   const user = await User.findOne({ email });
+
+  const { verify } = user;
+
+  if (!verify) {
+    return res.status(401).send({
+      message: "Please verify your email",
+    });
+  }
 
   if (!user) {
     return res

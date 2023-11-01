@@ -10,6 +10,14 @@ const userAddSchema = Joi.object({
   refreshToken: Joi.string().default(""),
 });
 
+const userVerifySchema = Joi.object({
+  email: Joi.string()
+    .email()
+    .pattern(emailRegexp)
+    .required()
+    .messages({ "any.required": "Missing required field email" }),
+});
+
 const userLoginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required().messages({
     "any.required": "Missing field 'email'",
@@ -39,4 +47,9 @@ export const validateUser = (req, res, next) => {
 export const validateLogin = (req, res, next) => {
   const { userPayLoad } = req.body;
   return validate(userLoginSchema, userPayLoad, next);
+};
+
+export const validateVerifyUser = (req, res, next) => {
+  const { userPayLoad } = req.body;
+  return validate(userVerifySchema, userPayLoad, next);
 };
