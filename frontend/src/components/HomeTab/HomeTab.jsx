@@ -69,12 +69,12 @@ export const HomeTab = () => {
 
   useEffect(() => {
     dispatch(fetchTransactions());
-  }, [dispatch]);
+  }, []);
 
-  const TransactionsDeleteHandler = (id) => {
-    dispatch(deleteTransaction(id));
-    dispatch(fetchTransactions());
-    dispatch(fetchTotals());
+  const TransactionsDeleteHandler = async (id) => {
+    await dispatch(deleteTransaction(id));
+    await dispatch(fetchTransactions());
+    await dispatch(fetchTotals());
   };
 
   const transformedTableTransactions = fetchedTransactions.map(
