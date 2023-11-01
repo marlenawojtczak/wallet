@@ -19,3 +19,13 @@ export const getColor = (categoryToFind) => {
 
   return color;
 };
+
+export const getCurrentYear = () => {
+  const currentDate = new Date();
+  return currentDate.getFullYear();
+};
+
+export const getCurrentMonth = () => {
+  const currentDate = new Date();
+  return currentDate.getMonth() + 1;
+};

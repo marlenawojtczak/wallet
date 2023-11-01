@@ -23,6 +23,7 @@ import {
   years,
   amountFormatter,
   changeMonthToNumber,
+  changeNumberToMonth,
 } from "../../utils/formatUtils";
 import { useState, useEffect } from "react";
 import Select from "react-select";
@@ -31,27 +32,30 @@ import {
   selectTotalIncome,
   selectTotalExpenses,
   selectTransactions,
+  selectTotals,
 } from "../../redux/finance/selectors";
+import { fetchTotalsByDate } from "../../redux/finance/operations";
 import {
-  fetchTotals,
-  fetchTotalsByDate,
-  fetchTransactions,
-} from "../../redux/finance/operations";
-import { getColor } from "../../utils/helperFunctions";
+  getColor,
+  getCurrentYear,
+  getCurrentMonth,
+} from "../../utils/helperFunctions";
 
-export const Table = ({ options }) => {
-  const [selectedMonth, setSelectedMonth] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
+export const Table = () => {
+  const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth());
+  const [selectedYear, setSelectedYear] = useState(getCurrentYear());
   const fetchedTransactions = useSelector(selectTransactions);
+
+  const totals = useSelector(selectTotals);
+
+  const filteredTotals = totals
+    .filter((item) => item.total !== 0)
+    .filter((item) => item.category !== "Income");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTotals());
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchTransactions());
+    dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
   }, []);
 
   const getMonths = () => {
@@ -60,19 +64,30 @@ export const Table = ({ options }) => {
     }
   };
 
+  const chekingFirstMonth = () => {
+    const monthsArr = getMonths();
+    const monthtoCheck = changeNumberToMonth(getCurrentMonth());
+
+    const isMonthInArray = monthsArr.some((monthObj) => {
+      return monthObj.value === monthtoCheck;
+    });
+
+    if (isMonthInArray) {
+      return setSelectedMonth(getCurrentMonth());
+    } else {
+      return setSelectedMonth(changeMonthToNumber(monthsArr[0].label));
+    }
+  };
+
+  useEffect(() => {
+    chekingFirstMonth();
+  }, [selectedYear]);
+
   useEffect(() => {
     if (selectedMonth && selectedYear) {
       dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
     }
-  }, [dispatch, selectedMonth, selectedYear]);
-
-  const getMaxYear = () => {
-    const yearsArr = years(fetchedTransactions);
-    const maxYear = yearsArr.reduce((maxValue, currentObject) => {
-      return Math.max(maxValue, currentObject.value);
-    }, -Infinity);
-    return maxYear;
-  };
+  }, [selectedMonth, selectedYear]);
 
   const totalIncome = useSelector(selectTotalIncome);
   const totalExpenses = useSelector(selectTotalExpenses);
@@ -91,6 +106,12 @@ export const Table = ({ options }) => {
             {matches.small && (
               <>
                 <Select
+                  defaultValue={{
+                    label: changeNumberToMonth(selectedMonth),
+                  }}
+                  value={{
+                    label: changeNumberToMonth(selectedMonth),
+                  }}
                   onChange={(e) =>
                     setSelectedMonth(changeMonthToNumber(e.value))
                   }
@@ -99,7 +120,7 @@ export const Table = ({ options }) => {
                   placeholder={"Month"}
                 ></Select>
                 <Select
-                  defaultValue={{ label: getMaxYear() }}
+                  defaultValue={{ label: selectedYear }}
                   onChange={(e) => setSelectedYear(e.value)}
                   options={years(fetchedTransactions)}
                   styles={SelectStylesSmall}
@@ -110,6 +131,12 @@ export const Table = ({ options }) => {
               <>
                 <WrapperMonth>
                   <Select
+                    defaultValue={{
+                      label: changeNumberToMonth(selectedMonth),
+                    }}
+                    value={{
+                      label: changeNumberToMonth(selectedMonth),
+                    }}
                     onChange={(e) =>
                       setSelectedMonth(changeMonthToNumber(e.value))
                     }
@@ -120,7 +147,7 @@ export const Table = ({ options }) => {
                 </WrapperMonth>
                 <WrapperYear>
                   <Select
-                    defaultValue={{ label: getMaxYear() }}
+                    defaultValue={{ label: selectedYear }}
                     onChange={(e) => setSelectedYear(e.value)}
                     options={years(fetchedTransactions)}
                     styles={SelectStylesMedium}
@@ -132,6 +159,12 @@ export const Table = ({ options }) => {
               <>
                 <WrapperMonth>
                   <Select
+                    defaultValue={{
+                      label: changeNumberToMonth(selectedMonth),
+                    }}
+                    value={{
+                      label: changeNumberToMonth(selectedMonth),
+                    }}
                     onChange={(e) =>
                       setSelectedMonth(changeMonthToNumber(e.value))
                     }
@@ -142,7 +175,7 @@ export const Table = ({ options }) => {
                 </WrapperMonth>
                 <WrapperYear>
                   <Select
-                    defaultValue={{ label: getMaxYear() }}
+                    defaultValue={{ label: selectedYear }}
                     onChange={(e) => setSelectedYear(e.value)}
                     options={years(fetchedTransactions)}
                     styles={SelectStylesLarge}
@@ -159,8 +192,8 @@ export const Table = ({ options }) => {
         <span>Sum</span>
       </TableHeader>
       <StyledTable>
-        <List options={options}>
-          {options.map((option, index) => (
+        <List filteredTotals={filteredTotals}>
+          {filteredTotals.map((option, index) => (
             <ListItem key={index}>
               <ColorIcon
                 style={{ backgroundColor: getColor(option.category) }}
