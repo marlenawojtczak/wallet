@@ -33,6 +33,7 @@ import { toastifyOptions } from "../../utils/helperFunctions";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
+
   const [checked] = useState(false);
 
   const options = [
@@ -55,21 +56,27 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     comment: "",
   };
 
-  const saveTransaction = ({ type, category, amount, date, comment }) => {
-    dispatch(
-      addTransaction({ type, category, amount, date: date, comment: comment })
-    );
-    dispatch(fetchTotals());
-    dispatch(fetchTransactions());
-  };
-
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
 
-    onSubmit: (values) => {
-      saveTransaction(values);
-      onClose();
-      formik.resetForm();
+    onSubmit: async (values) => {
+      try {
+        await dispatch(
+          addTransaction({
+            type: values.type,
+            category: values.category,
+            amount: values.amount,
+            date: values.date,
+            comment: values.comment,
+          })
+        );
+        dispatch(fetchTotals());
+        dispatch(fetchTransactions());
+        onClose();
+        formik.resetForm();
+      } catch (error) {
+        return console.log(error.message);
+      }
     },
   });
 
