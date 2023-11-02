@@ -23,6 +23,8 @@ services:
   backend:
     image: platyna100/wallet-backend:stack
     secrets:
+      - APP_PASSWORD
+      - APP_USER
       - JWT_ACCESS_EXPIRE_TIME
       - JWT_REFRESH_EXPIRE_TIME
       - JWT_SECRET
