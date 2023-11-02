@@ -54,7 +54,7 @@ export const verify = async (req, res, next) => {
     verificationToken: "",
   });
 
-  res.redirect("http://localhost:4000/#/login");
+  res.redirect("https://wallet.dupawklamerkach.pl/#/login");
 };
 
 export const resendVerify = async (req, res, next) => {
