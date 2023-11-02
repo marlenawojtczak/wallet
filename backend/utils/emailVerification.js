@@ -22,12 +22,10 @@ export const sendVerificationEmail = async (
       to: email,
       subject: subject,
       html: `<p>Hello, ${email}</p><p>Please click on the link below to verify your account.</p>
-      <a href="http://localhost:3000/api/auth/verify/${verificationToken}">Verification Link</a>`,
+      <a href="https://wallet.dupawklamerkach.pl/api/auth/verify/${verificationToken}">Verification Link</a>`,
     });
   } catch (error) {
     console.log("ERROR here - ", error);
     return error;
   }
 };
-
-// naukait123@gmail.com
