@@ -122,6 +122,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       notify("Please type only numbers");
       return;
     }
+
     formik.handleSubmit();
   };
 
