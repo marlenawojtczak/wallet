@@ -70,8 +70,8 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             comment: values.comment,
           })
         );
-        dispatch(fetchTotals());
-        dispatch(fetchTransactions());
+        await dispatch(fetchTotals());
+        await dispatch(fetchTransactions());
         onClose();
         formik.resetForm();
       } catch (error) {
