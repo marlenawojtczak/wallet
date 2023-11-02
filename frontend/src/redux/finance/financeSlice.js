@@ -51,9 +51,7 @@ export const financeSlice = createSlice({
   name: "finance",
   initialState,
   reducers: {
-    resetFinance: () => {
-      return { ...initialState };
-    },
+    resetFinance: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -66,4 +64,5 @@ export const financeSlice = createSlice({
 });
 
 export const { resetFinance } = financeSlice.actions;
+
 export const financeReducer = financeSlice.reducer;

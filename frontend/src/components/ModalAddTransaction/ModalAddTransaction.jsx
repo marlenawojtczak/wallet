@@ -26,13 +26,14 @@ import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
 import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
-import { resetFinance } from "../../redux/finance/financeSlice";
 import Notiflix from "notiflix";
 
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
+import { toastifyOptions } from "../../utils/helperFunctions";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
+
   const [checked] = useState(false);
 
   const options = [
@@ -55,36 +56,39 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     comment: "",
   };
 
-  const saveTransaction = ({ type, category, amount, date, comment }) => {
-    dispatch(
-      addTransaction({ type, category, amount, date: date, comment: comment })
-    );
-    dispatch(fetchTotals());
-    dispatch(fetchTransactions());
-  };
-
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
 
-    onSubmit: (values) => {
-      saveTransaction(values);
-      onClose();
-      formik.resetForm();
-      dispatch(resetFinance());
+    onSubmit: async (values) => {
+      try {
+        await dispatch(
+          addTransaction({
+            type: values.type,
+            category: values.category,
+            amount: values.amount,
+            date: values.date,
+            comment: values.comment,
+          })
+        );
+        await dispatch(fetchTotals());
+        await dispatch(fetchTransactions());
+        onClose();
+        formik.resetForm();
+      } catch (error) {
+        return console.log(error.message);
+      }
     },
   });
 
   const handleCategoryChange = (selectedOption) => {
     if (!checked) {
       formik.setFieldValue("category", selectedOption.label);
-      formik.setFieldValue(selectedOption.label);
     } else {
       formik.setFieldValue("category", "");
-      formik.setFieldValue("");
     }
   };
 
-  const handleButtonChange = (e) => {
+  const handleButtonChange = () => {
     formik.setFieldValue(
       "type",
       formik.values.type === "Expense" ? "Income" : "Expense"
@@ -93,16 +97,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   };
 
   const notify = (message) => {
-    Notiflix.Notify.failure(message, {
-      width: "300px",
-      position: "center-top",
-      distance: "18px",
-      svgSize: "120px",
-      timeout: 2200,
-      borderRadius: "20px",
-      fontFamily: "Poppins",
-      fontSize: "16px",
-    });
+    Notiflix.Notify.failure(message, toastifyOptions);
   };
 
   const handleAddClick = () => {

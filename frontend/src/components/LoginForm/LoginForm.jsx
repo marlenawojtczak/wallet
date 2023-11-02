@@ -26,6 +26,7 @@ import {
   StyledButtons,
   StyledButton,
 } from "./LoginForm.styled";
+import { toastifyOptions } from "../../utils/helperFunctions";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -58,16 +59,7 @@ export const LoginForm = () => {
       try {
         await dispatch(signIn(values)).unwrap();
       } catch (error) {
-        Notiflix.Notify.failure("<br />" + error, {
-          width: "300px",
-          position: "center-top",
-          distance: "18px",
-          svgSize: "120px",
-          timeout: 2200,
-          borderRadius: "20px",
-          fontFamily: "Poppins",
-          fontSize: "16px",
-        });
+        Notiflix.Notify.failure("<br />" + error, toastifyOptions);
       }
     },
   });
@@ -89,16 +81,7 @@ export const LoginForm = () => {
       const errors = Object.values(formik.errors);
       if (errors.length > 0) {
         const errorMessage = errors.map((error) => `<br /> ${error}`).join();
-        Notiflix.Notify.failure("<br />" + errorMessage, {
-          width: "300px",
-          position: "center-top",
-          distance: "18px",
-          svgSize: "120px",
-          timeout: 2200,
-          borderRadius: "20px",
-          fontFamily: "Poppins",
-          fontSize: "16px",
-        });
+        Notiflix.Notify.failure("<br />" + errorMessage, toastifyOptions);
       }
     }
   };
@@ -159,16 +142,10 @@ export const LoginForm = () => {
                 const errorMessage = errors
                   .map((error) => `<br /> ${error}`)
                   .join();
-                Notiflix.Notify.failure("<br />" + errorMessage, {
-                  width: "300px",
-                  position: "center-top",
-                  distance: "18px",
-                  svgSize: "120px",
-                  timeout: 2200,
-                  borderRadius: "20px",
-                  fontFamily: "Poppins",
-                  fontSize: "16px",
-                });
+                Notiflix.Notify.failure(
+                  "<br />" + errorMessage,
+                  toastifyOptions
+                );
               }
             }}
           >

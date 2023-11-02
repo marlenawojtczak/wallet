@@ -1,4 +1,3 @@
-import { resetFinance } from "../../redux/finance/financeSlice";
 import {
   selectAccessToken,
   selectRefreshToken,
@@ -9,9 +8,9 @@ import {
   openLoading,
   closeLoading,
 } from "../../redux/global/globalSlice.js";
-
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { resetFinance } from "../finance/financeSlice";
 import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 const api = axios.create({
@@ -118,7 +117,6 @@ export const refreshAuthTokens = createAsyncThunk(
       setAuthHeader(refreshToken);
       const res = await api.post("api/auth/refresh", { sid: credentials });
       replaceAuthHeader(res.data.user.accessToken);
-      await thunkAPI.dispatch(currentUser());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

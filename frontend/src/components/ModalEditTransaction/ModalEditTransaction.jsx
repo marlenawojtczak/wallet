@@ -27,6 +27,7 @@ import {
   updateTransaction,
 } from "../../redux/finance/operations";
 import { selectTransactions } from "../../redux/finance/selectors";
+import { toastifyOptions } from "../../utils/helperFunctions";
 
 const getTransaction = (transactions, id) => {
   const transaction = transactions.find(
@@ -97,7 +98,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
         dispatch(fetchTransactions());
         formik.resetForm();
       } catch (error) {
-        Notiflix.Notify.failure("Cannot edit transaction");
+        Notiflix.Notify.failure("Cannot edit transaction", toastifyOptions);
       }
     },
   });
