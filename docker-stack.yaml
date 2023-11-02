@@ -1,6 +1,10 @@
 version: "3.8"
 
 secrets:
+  APP_PASSWORD:
+    external: true
+  APP_USER:
+    external: true
   JWT_ACCESS_EXPIRE_TIME:
     external: true
   JWT_REFRESH_EXPIRE_TIME:
