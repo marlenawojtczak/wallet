@@ -20,6 +20,7 @@ export const getColor = (categoryToFind) => {
   return color;
 };
 
+
 export const toastifyOptions = {
   width: "300px",
   position: "center-top",
@@ -29,4 +30,14 @@ export const toastifyOptions = {
   borderRadius: "20px",
   fontFamily: "Poppins",
   fontSize: "16px",
+};
+
+export const getCurrentYear = () => {
+  const currentDate = new Date();
+  return currentDate.getFullYear();
+};
+
+export const getCurrentMonth = () => {
+  const currentDate = new Date();
+  return currentDate.getMonth() + 1;
 };
