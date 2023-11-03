@@ -123,6 +123,7 @@ export const ValueInput = styled.input`
     text-align: center;
   }
 `;
+
 export const SectionInput = styled.div`
   font-family: Circe;
   font-size: 18px;
