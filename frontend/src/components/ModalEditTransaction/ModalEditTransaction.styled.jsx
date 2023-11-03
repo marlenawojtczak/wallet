@@ -193,13 +193,12 @@ export const TransactionType = styled.div`
     margin: 0 5px;
   }
   .income {
-    color: ${(props) =>
-      props.type === "Income" ? "var(--brand-secondary)" : "var(--font-grey)"};
-    cursor: pointer;
+    color: var(--brand-secondary);
   }
   .expense {
-    color: ${(props) =>
-      props.type === "Expense" ? "var(--brand-accent)" : "var(--font-grey)"};
-    cursor: pointer;
+    color: var(--brand-accent);
+  }
+  .inactive-color {
+    color: var(--brand-logout);
   }
 `;
