@@ -51,11 +51,12 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
 
   const dispatch = useDispatch();
   const [checked] = useState(false);
-  const transactions = useSelector(selectTransactions);
-  const transaction = getTransaction(transactions, id);
-
   const [initialValueDisplayed, setInitialValueDisplayed] = useState(false);
   const [categoryChanged, setCategoryChanged] = useState(false);
+  const [isIncome, setIsIncome] = useState(false);
+
+  const transactions = useSelector(selectTransactions);
+  const transaction = getTransaction(transactions, id);
 
   const INITIAL_VALUES = { ...transaction };
 
@@ -63,9 +64,16 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     setInitialValueDisplayed(true);
   }, [id]);
 
+  useEffect(() => {
+    if (transaction && transaction.type === "Income") {
+      setIsIncome(true);
+    } else {
+      setIsIncome(false);
+    }
+  }, [transaction]);
+
   const formik = useFormik({
     initialValues: {
-      type: "Expense",
       ...transaction,
     },
 
@@ -76,12 +84,14 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     },
 
     onSubmit: async (values) => {
-      console.log("Submitting values:", values);
       const formattedDate = moment(values.date).format(
         "YYYY-MM-DDTHH:mm:ss.SSSZ"
       );
 
       try {
+        if (values.type === "Income") {
+          values.category = "Income";
+        }
         dispatch(
           updateTransaction({
             id,
@@ -133,28 +143,32 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
 
               <TransactionType type={formik.values.type}>
                 <span
-                  className="income"
+                  className={
+                    "income " + (isIncome ? "income-color" : "inactive-color")
+                  }
                   onClick={() => formik.setFieldValue("type", "Income")}
                 >
                   Income
                 </span>
                 <span>/</span>
                 <span
-                  className="expense"
+                  className={
+                    "expense " + (isIncome ? "inactive-color" : "expense-color")
+                  }
                   onClick={() => formik.setFieldValue("type", "Expense")}
                 >
                   Expense
                 </span>
               </TransactionType>
-
-              <StyledCategoryInput
-                name="category"
-                defaultValue={{ label: INITIAL_VALUES.category }}
-                onChange={handleCategoryChange}
-                onBlur={formik.handleBlur}
-                options={options}
-              />
-
+              {!isIncome && (
+                <StyledCategoryInput
+                  name="category"
+                  defaultValue={{ label: INITIAL_VALUES.category }}
+                  onChange={handleCategoryChange}
+                  onBlur={formik.handleBlur}
+                  options={options}
+                />
+              )}
               <SectionWrapper>
                 <ValueInput
                   name="amount"
@@ -186,7 +200,6 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
               <AddButton type="button" onClick={formik.handleSubmit}>
                 Save
               </AddButton>
-              {/* <CancelButton onClick={onClose}>Cancel</CancelButton> */}
             </ModalWrapper>
           </ModalContent>
         </ModalBackground>
