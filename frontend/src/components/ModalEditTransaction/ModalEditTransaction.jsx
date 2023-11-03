@@ -119,7 +119,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     formik.setFieldValue("category", selectedOption.label);
   };
 
-  const formatted = (date) => {
+  const formated = (date) => {
     if (date) {
       return date.slice(0, 10);
     } else {
@@ -179,7 +179,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                 />
                 <StyledDateTime
                   name="date"
-                  value={formatted(INITIAL_VALUES.date)}
+                  value={formated(INITIAL_VALUES.date)}
                   onChange={(date) =>
                     formik.setFieldValue("date", moment(date).toDate())
                   }
