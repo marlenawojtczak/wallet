@@ -12,13 +12,15 @@ export const ModalPosition = styled.div`
 export const ModalBackground = styled(ReactModal)`
   display: ${(props) => (props.isOpen ? "block" : "none")};
   border-radius: 20px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  z-index: 1;
-  @media screen and (min-width: 769px) and (max-width: 1279px) {
+
+  @media screen and (min-width: 768px) {
     background: var(--bg-modal-overlay);
+    margin-top: 0px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 1;
   }
   @media screen and (min-width: 1280px) {
     background: var(--bg-modal-overlay);
@@ -26,10 +28,10 @@ export const ModalBackground = styled(ReactModal)`
 `;
 
 export const ModalWrapper = styled.div`
-  padding: 20px 40px;
-  margin: 0 auto;
+  padding-top: 20px;
+  margin: 0 20px;
 
-  @media screen and (min-width: 769px) and (max-width: 1279px) {
+  @media screen and (min-width: 768px) {
     padding: 40px 80px;
   }
 
@@ -40,34 +42,32 @@ export const ModalWrapper = styled.div`
 
 export const SectionWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 30px;
 `;
 
 export const ModalContent = styled.div`
-  position: relative;
   background-color: #fefefe;
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
-  border-radius: 20px;
 
-  @media screen and (min-width: 769px) and (max-width: 1279px) {
+  @media screen and (min-width: 768px) {
+    border-radius: 20px;
     width: 540px;
-    height: ${(props) => (props.isHidden ? "508px" : "603px")};
+    height: auto;
   }
 
   @media screen and (min-width: 1280px) {
     width: 540px;
-    height: ${(props) => (props.isHidden ? "508px" : "603px")};
   }
 `;
 
 export const ModalHeader = styled.div`
   display: flex;
-  height: 31px;
   flex-direction: column;
   justify-content: center;
-  flex-shrink: 0;
+
   color: #000;
   text-align: center;
   font-family: Poppins;
@@ -76,7 +76,7 @@ export const ModalHeader = styled.div`
   font-weight: 400;
   line-height: normal;
 
-  @media screen and (min-width: 769px) and (max-width: 1279px) {
+  @media screen and (min-width: 768px) {
     font-size: 30px;
     height: 40px;
   }
@@ -88,7 +88,7 @@ export const ModalHeader = styled.div`
 `;
 
 export const StyledCategoryInput = styled(Select)`
-  margin: 0 0 85px 0;
+  margin: 0 0 42px 0;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -101,8 +101,6 @@ export const StyledCategoryInput = styled(Select)`
 `;
 
 export const ValueInput = styled.input`
-  width: 181px;
-  height: 24px;
   font-family: Circe;
   font-size: 18px;
   font-style: normal;
@@ -111,20 +109,19 @@ export const ValueInput = styled.input`
   border: none;
   border-bottom: 2px solid var(--bg-gray);
   outline: none;
-  padding: 0;
-  padding-bottom: 8px;
+  width: 100%;
+  text-align: left;
+  @media screen and (min-width: 768px) {
+    text-align: center;
+  }
 `;
 
 export const CommentInput = styled(ValueInput)`
-  width: 394px;
-  margin: 40px 0 0;
+  text-align: left;
 `;
 
 export const StyledDateTime = styled(Datetime)`
   input {
-    position: relative;
-    width: 181px;
-    height: 24px;
     font-family: Circe;
     font-size: 18px;
     font-style: normal;
@@ -133,16 +130,13 @@ export const StyledDateTime = styled(Datetime)`
     border: none;
     border-bottom: 2px solid var(--bg-gray);
     outline: none;
-    padding-bottom: 8px;
+
+    cursor: pointer;
+    width: 100%;
   }
 `;
 
-export const CalendarIcon = styled(DateRange)`
-  position: absolute;
-  right: 84px;
-`;
-
-export const AddButton = styled.button`
+export const AddButton = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
@@ -159,7 +153,6 @@ export const AddButton = styled.button`
   color: var(--bg-light);
   background-color: var(--brand-secondary);
   cursor: pointer;
-  margin: 41px auto 0;
 
   &:hover {
     transform: scale(1.02);
@@ -171,7 +164,6 @@ export const CancelButton = styled(AddButton)`
   border: 1px solid var(--brand-primary);
   color: var(--brand-primary);
   background-color: var(--bg-light);
-  margin: 20px auto 60px;
 `;
 
 export const CloseButton = styled(Exit)`
@@ -201,4 +193,46 @@ export const TransactionType = styled.div`
   .inactive-color {
     color: var(--brand-logout);
   }
+`;
+
+export const SectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+
+export const SectionInput = styled.div`
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  @media screen and (min-width: 768px) {
+  }
+
+  @media screen and (min-width: 1280px) {
+  }
+`;
+
+export const SectionDate = styled.div`
+  position: absolute;
+  top: 0;
+  right: 10px;
+  pointer-events: none;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+  gap: 20px;
+`;
+
+export const SectionDateWrapper = styled.div`
+  position: relative;
 `;
