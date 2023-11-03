@@ -92,7 +92,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
         if (values.type === "Income") {
           values.category = "Income";
         }
-        dispatch(
+        await dispatch(
           updateTransaction({
             id,
             values: {
@@ -104,8 +104,9 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
             },
           })
         );
-        dispatch(fetchTotals());
-        dispatch(fetchTransactions());
+        await dispatch(fetchTotals());
+        await dispatch(fetchTransactions());
+        onClose();
         formik.resetForm();
       } catch (error) {
         Notiflix.Notify.failure("Cannot edit transaction", toastifyOptions);
@@ -127,6 +128,13 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      formik.handleSubmit();
+    }
+  };
+
   return (
     <>
       <ModalPosition>
@@ -137,7 +145,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
           isOpen={isOpen}
         >
           <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
-            <ModalWrapper>
+            <ModalWrapper onKeyDown={handleKeyDown}>
               <CloseButton onClick={onClose} />
               <ModalHeader>Edit transaction</ModalHeader>
 

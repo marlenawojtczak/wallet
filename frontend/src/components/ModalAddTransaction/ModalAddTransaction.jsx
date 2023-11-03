@@ -126,6 +126,13 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     formik.handleSubmit();
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      formik.handleSubmit();
+    }
+  };
+
   return (
     <>
       <ModalPosition>
@@ -136,7 +143,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
           isOpen={isOpen}
         >
           <ModalContent isHidden={checked} onClick={(e) => e.stopPropagation()}>
-            <ModalWrapper>
+            <ModalWrapper onKeyDown={handleKeyDown}>
               <CloseButton onClick={onClose} />
               <ModalHeader>Add transaction</ModalHeader>
               <SwitchButton
