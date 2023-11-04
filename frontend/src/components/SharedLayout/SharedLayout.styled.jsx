@@ -28,7 +28,7 @@ export const BackgroundContainer = styled.div`
 export const MaxWrapper = styled.div`
   @media screen and (min-width: 1500px) {
     margin: auto;
-    max-width: 2500px;
+    max-width: 3000px;
   }
 `;
 

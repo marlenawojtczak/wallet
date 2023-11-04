@@ -9,25 +9,22 @@ import {
   ListItemValue,
   TableCell,
   TableHeaderCell,
-  TableHeaderCellFirst,
-  TableHeaderCellLast,
   DeleteButton,
   Button,
   StyledTable,
   EditText,
   TableNextRows,
-  TableCellType,
-  TableHeaderCellNone,
-  TableCellButton,
   Message,
   Plus,
+  SortIcon,
+  TableCellActions,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
   deleteTransaction,
   fetchTotals,
 } from "../../redux/finance/operations";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   openModalEditTransaction,
@@ -44,11 +41,13 @@ import {
 } from "../../utils/formatUtils";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import Media from "react-media";
+import { useTable, useSortBy } from "react-table";
 
 export const HomeTab = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(selectIsModalEditTransactionOpen);
   const id = useSelector(selectIsModalEditTransactionOpen);
+  const transactions = useSelector(selectTransactions);
 
   const handleOpenModal = (id) => {
     dispatch(openModalEditTransaction(id));
@@ -64,7 +63,6 @@ export const HomeTab = () => {
     document.body.style.overflow = "auto";
   }
 
-  const transactions = useSelector(selectTransactions);
   const fetchedTransactions = transactions.slice().reverse();
 
   useEffect(() => {
@@ -76,6 +74,88 @@ export const HomeTab = () => {
     await dispatch(fetchTransactions());
     await dispatch(fetchTotals());
   };
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Date",
+        accessor: "date",
+        Cell: ({ value }) => formatDate(value),
+      },
+      {
+        Header: "Type",
+        accessor: "type",
+        Cell: ({ value }) => typeFormatter(value),
+      },
+      {
+        Header: "Category",
+        accessor: "category",
+      },
+      {
+        Header: "Comment",
+        accessor: "comment",
+        disableSortBy: true,
+      },
+      {
+        Header: "Sum",
+        accessor: "amount",
+        Cell: ({ value }) => amountFormatter(value.toString()),
+      },
+
+      {
+        Header: "",
+        id: "actions",
+        disableSortBy: true,
+        Cell: ({ row }) => (
+          <TableCellActions>
+            <Button
+              type="button"
+              onClick={() => handleOpenModal(row.original._id)}
+            >
+              <EditIcon />
+            </Button>
+            <DeleteButton
+              type="submit"
+              onClick={() => TransactionsDeleteHandler(row.original._id)}
+            >
+              Delete
+            </DeleteButton>
+          </TableCellActions>
+        ),
+      },
+
+      // {
+      //   Header: "",
+      //   id: "editAction",
+      //   disableSortBy: true,
+      //   Cell: ({ row }) => (
+      //     <Button
+      //       type="button"
+      //       onClick={() => handleOpenModal(row.original._id)}
+      //     >
+      //       <EditIcon />
+      //     </Button>
+      //   ),
+      // },
+      // {
+      //   Header: "",
+      //   id: "deleteAction",
+      //   disableSortBy: true,
+      //   Cell: ({ row }) => (
+      //     <DeleteButton
+      //       type="submit"
+      //       onClick={() => TransactionsDeleteHandler(row.original._id)}
+      //     >
+      //       Delete
+      //     </DeleteButton>
+      //   ),
+      // },
+    ],
+    []
+  );
+  const tableInstance = useTable({ columns, data: transactions }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance;
 
   const transformedTableTransactions = fetchedTransactions.map(
     (item, index) => {
@@ -118,21 +198,35 @@ export const HomeTab = () => {
           <>
             {matches.medium && (
               <TableWrapper>
-                <Table>
+                <Table {...getTableProps()}>
                   <TableHead>
-                    <TableHeaderCellFirst>Date</TableHeaderCellFirst>
-                    <TableHeaderCell>Type</TableHeaderCell>
-                    <TableHeaderCell>Category</TableHeaderCell>
-                    <TableHeaderCell>Comment</TableHeaderCell>
-                    <TableHeaderCell>Sum</TableHeaderCell>
-                    <TableHeaderCellNone></TableHeaderCellNone>
-                    <TableHeaderCellLast></TableHeaderCellLast>
+                    {headerGroups.map((headerGroup) => (
+                      <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map((column) => (
+                          <TableHeaderCell
+                            {...column.getHeaderProps(
+                              column.getSortByToggleProps()
+                            )}
+                          >
+                            {column.render("Header")}
+                            {!column.disableSortBy && (
+                              <SortIcon>
+                                {column.isSorted
+                                  ? column.isSortedDesc
+                                    ? " ↓"
+                                    : " ↑"
+                                  : " ↕️"}
+                              </SortIcon>
+                            )}
+                          </TableHeaderCell>
+                        ))}
+                      </tr>
+                    ))}
                   </TableHead>
-
-                  <TableBody>
-                    {fetchedTransactions.length === 0 ? (
+                  <TableBody {...getTableBodyProps()}>
+                    {rows.length === 0 ? (
                       <TableNextRows>
-                        <TableCell colSpan="7">
+                        <TableCell colSpan="100%">
                           <Message>
                             There are no transactions. You can add one with the
                             plus button <Plus>+</Plus> in the right bottom
@@ -141,42 +235,20 @@ export const HomeTab = () => {
                         </TableCell>
                       </TableNextRows>
                     ) : (
-                      fetchedTransactions.map((option, index) => (
-                        <TableNextRows key={index}>
-                          <TableCell>{formatDate(option.date)}</TableCell>
-                          <TableCellType>
-                            {typeFormatter(option.type)}
-                          </TableCellType>
-                          <TableCell>{option.category}</TableCell>
-                          <TableCell>{option.comment}</TableCell>
-                          <TableCell
-                            style={{
-                              color: amountColorFormatter(option.type),
-                            }}
-                          >
-                            {amountFormatter(option.amount)}
-                          </TableCell>
-                          <TableCell>
-                            <Button
-                              type="button"
-                              onClick={() => handleOpenModal(option._id)}
-                              option={option}
-                            >
-                              <EditIcon></EditIcon>
-                            </Button>
-                          </TableCell>
-                          <TableCellButton>
-                            <DeleteButton
-                              type="submit"
-                              onClick={() =>
-                                TransactionsDeleteHandler(option._id)
-                              }
-                            >
-                              Delete
-                            </DeleteButton>
-                          </TableCellButton>
-                        </TableNextRows>
-                      ))
+                      rows.map((row) => {
+                        prepareRow(row);
+                        return (
+                          <TableNextRows {...row.getRowProps()}>
+                            {row.cells.map((cell) => {
+                              return (
+                                <TableCell {...cell.getCellProps()}>
+                                  {cell.render("Cell")}
+                                </TableCell>
+                              );
+                            })}
+                          </TableNextRows>
+                        );
+                      })
                     )}
                   </TableBody>
                 </Table>
