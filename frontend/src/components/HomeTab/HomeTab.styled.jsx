@@ -94,7 +94,7 @@ export const EditText = styled.span`
 // min-width: 768px
 
 export const TableWrapper = styled.div`
-  height: 55vh;
+  height: 50vh;
   overflow: auto;
   &::-webkit-scrollbar {
     width: 10px;
@@ -113,7 +113,7 @@ export const TableWrapper = styled.div`
   scrollbar-color: #afafaf #f1f1f1;
 
   @media screen and (min-width: 1280px) {
-    height: 75vh;
+    height: 70vh;
   }
 `;
 
@@ -127,6 +127,14 @@ export const TableHead = styled.thead`
   text-align: left;
   top: 0px;
   background-color: var(--font-light);
+  & tr:first-child th:first-child {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+  & tr:first-child th:last-child {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 `;
 export const TableHeaderCell = styled.th`
   font-family: Circe;
@@ -134,26 +142,15 @@ export const TableHeaderCell = styled.th`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding: 20px 0px 20px 28px;
-  @media screen and (min-width: 1280px) {
-    padding: 20px 0px 20px 28px;
-  }
-`;
-export const TableHeaderCellFirst = styled(TableHeaderCell)`
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-`;
-
-export const TableHeaderCellLast = styled(TableHeaderCell)`
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-`;
-
-export const TableHeaderCellNone = styled.th`
-  width: 5%;
+  padding: 20px 0px 20px 20px;
 `;
 
 export const TableBody = styled.tbody``;
+
+export const SortIcon = styled.div`
+  display: inline-block;
+  padding-left: 6px;
+`;
 
 export const TableNextRows = styled.tr`
   border-bottom: 1px solid var(--border-transactions);
@@ -162,15 +159,20 @@ export const TableNextRows = styled.tr`
   }
 `;
 
+export const TableCellActions = styled.tr`
+  display: flex;
+  gap: 20px;
+`;
+
 export const TableCell = styled.td`
-  padding: 15px 25px 15px;
+  padding: 15px 15px;
   font-family: Circe;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   @media screen and (min-width: 1280px) {
-    padding: 20px 0px 15px 28px;
+    padding: 20px 20px;
   }
 `;
 export const TableCellButton = styled.td`
@@ -181,10 +183,6 @@ export const TableCellButton = styled.td`
     padding-top: 9px;
     padding-right: 15px;
   }
-`;
-
-export const TableCellType = styled.td`
-  padding-left: 40px;
 `;
 
 export const DeleteButton = styled.button`
