@@ -45,6 +45,8 @@ export const Table = () => {
   const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth());
   const [selectedYear, setSelectedYear] = useState(getCurrentYear());
   const fetchedTransactions = useSelector(selectTransactions);
+  const [loading, setLoading] = useState(true);
+  console.log("isloading", loading);
 
   const totals = useSelector(selectTotals);
 
@@ -55,7 +57,13 @@ export const Table = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
+    const fetchingData = async () => {
+      await dispatch(
+        fetchTotalsByDate({ month: selectedMonth, year: selectedYear })
+      );
+    };
+    fetchingData();
+    setLoading(false);
   }, []);
 
   const getMonths = () => {
@@ -86,9 +94,19 @@ export const Table = () => {
   }, [selectedYear]);
 
   useEffect(() => {
-    if (selectedMonth && selectedYear) {
-      dispatch(fetchTotalsByDate({ month: selectedMonth, year: selectedYear }));
-    }
+    const fetchingData = async () => {
+      if (
+        getMonths().some(
+          (month) => month.value === changeNumberToMonth(selectedMonth)
+        )
+      ) {
+        await dispatch(
+          fetchTotalsByDate({ month: selectedMonth, year: selectedYear })
+        );
+      }
+    };
+
+    fetchingData();
   }, [selectedMonth, selectedYear]);
 
   const totalIncome = useSelector(selectTotalIncome);
