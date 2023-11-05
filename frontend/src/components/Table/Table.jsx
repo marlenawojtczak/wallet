@@ -61,7 +61,6 @@ export const Table = () => {
       );
     };
     fetchingData();
-    setLoading(false);
   }, []);
 
   const getMonths = () => {
