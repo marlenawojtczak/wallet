@@ -45,8 +45,6 @@ export const Table = () => {
   const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth());
   const [selectedYear, setSelectedYear] = useState(getCurrentYear());
   const fetchedTransactions = useSelector(selectTransactions);
-  const [loading, setLoading] = useState(true);
-  console.log("isloading", loading);
 
   const totals = useSelector(selectTotals);
 
