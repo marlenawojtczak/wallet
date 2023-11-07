@@ -18,6 +18,7 @@ import {
   Plus,
   SortIcon,
   TableCellActions,
+  TypeSpace,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -85,7 +86,7 @@ export const HomeTab = () => {
       {
         Header: "Type",
         accessor: "type",
-        Cell: ({ value }) => typeFormatter(value),
+        Cell: ({ value }) => <TypeSpace>{typeFormatter(value)}</TypeSpace>,
       },
       {
         Header: "Category",
@@ -94,7 +95,6 @@ export const HomeTab = () => {
       {
         Header: "Comment",
         accessor: "comment",
-        disableSortBy: true,
       },
       {
         Header: "Sum",
@@ -123,33 +123,6 @@ export const HomeTab = () => {
           </TableCellActions>
         ),
       },
-
-      // {
-      //   Header: "",
-      //   id: "editAction",
-      //   disableSortBy: true,
-      //   Cell: ({ row }) => (
-      //     <Button
-      //       type="button"
-      //       onClick={() => handleOpenModal(row.original._id)}
-      //     >
-      //       <EditIcon />
-      //     </Button>
-      //   ),
-      // },
-      // {
-      //   Header: "",
-      //   id: "deleteAction",
-      //   disableSortBy: true,
-      //   Cell: ({ row }) => (
-      //     <DeleteButton
-      //       type="submit"
-      //       onClick={() => TransactionsDeleteHandler(row.original._id)}
-      //     >
-      //       Delete
-      //     </DeleteButton>
-      //   ),
-      // },
     ],
     []
   );
