@@ -7,6 +7,7 @@ import { RestrictedRoute } from "../routes/RestrictedRoute";
 import { currentUser } from "../redux/session/operations";
 import { Loader } from "../components";
 import { TokenRefresher } from "./TokenRefresher";
+import { ToastContainer } from "react-toastify";
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -61,6 +62,7 @@ export const App = () => {
         </Routes>
       </Suspense>
       <TokenRefresher />
+      <ToastContainer />
     </>
   );
 };

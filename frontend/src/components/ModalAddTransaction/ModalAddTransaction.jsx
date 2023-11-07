@@ -26,10 +26,9 @@ import "react-datetime/css/react-datetime.css";
 import { SwitchButton } from "../SwitchButton/SwitchButton";
 import { addTransaction } from "../../redux/finance/operations";
 import { fetchTotals, fetchTransactions } from "../../redux/finance/operations";
-import Notiflix from "notiflix";
 
 import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
-import { toastifyOptions } from "../../utils/helperFunctions";
+import { showToast } from "../../utils/helperFunctions";
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -96,30 +95,26 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     formik.setFieldValue("category", "Income");
   };
 
-  const notify = (message) => {
-    Notiflix.Notify.failure(message, toastifyOptions);
-  };
-
   const handleAddClick = () => {
     if (
       formik.values.type === "Expense" &&
       formik.values.category === "Income" &&
       !formik.values.amount
     ) {
-      notify("Please choose a category and amount");
+      showToast("Please choose a category and amount", "error");
       return;
     } else if (
       formik.values.type === "Expense" &&
       formik.values.category === "Income"
     ) {
-      notify("Please select a category");
+      showToast("Please select a category", "error");
       return;
     } else if (!formik.values.amount) {
-      notify("Please enter the amount");
+      showToast("Please enter the amount", "error");
       return;
     }
     if (!/^\d+(\.\d{1,2})?$/.test(formik.values.amount)) {
-      notify("Please type only numbers");
+      showToast("Please type only numbers", "error");
       return;
     }
 

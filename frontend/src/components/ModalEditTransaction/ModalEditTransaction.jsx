@@ -22,7 +22,6 @@ import { ReactComponent as DateRange } from "../../assets/icons/date_range.svg";
 
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import { Notiflix } from "notiflix";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import "react-datetime/css/react-datetime.css";
@@ -32,7 +31,7 @@ import {
   updateTransaction,
 } from "../../redux/finance/operations";
 import { selectTransactions } from "../../redux/finance/selectors";
-import { toastifyOptions } from "../../utils/helperFunctions";
+import { showToast } from "../../utils/helperFunctions";
 
 const getTransaction = (transactions, id) => {
   const transaction = transactions.find(
@@ -114,7 +113,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
         onClose();
         formik.resetForm();
       } catch (error) {
-        Notiflix.Notify.failure("Cannot edit transaction", toastifyOptions);
+        showToast("Cannot edit transaction", "error");
       }
     },
   });

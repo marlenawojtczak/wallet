@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Notiflix from "notiflix";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/session/operations";
 import { ReactComponent as WalletLogoMobile } from "../../assets/icons/logo-mobile.svg";
@@ -27,19 +26,19 @@ import {
   StyledButton,
   StyledButtonIcon,
 } from "./RegisterForm.styled";
-import { toastifyOptions } from "../../utils/helperFunctions";
+import { showToast } from "../../utils/helperFunctions";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("First name is required"),
+  name: Yup.string().required("First name is required."),
   email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
+    .email("Invalid email address.")
+    .required("Email is required."),
   password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .min(6, "Password must be at least 6 characters.")
+    .required("Password is required."),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm Password is required"),
+    .oneOf([Yup.ref("password"), null], "Passwords must match.")
+    .required("Confirm Password is required."),
 });
 
 const ProgressBar = ({ value }) => {
@@ -85,7 +84,7 @@ export const RegisterForm = () => {
         ).unwrap();
         navigate("/login");
       } catch (error) {
-        Notiflix.Notify.failure("<br />" + error, toastifyOptions);
+        showToast(error, "error");
       }
     },
   });
@@ -123,8 +122,17 @@ export const RegisterForm = () => {
       formik.handleSubmit();
       const errors = Object.values(formik.errors);
       if (errors.length > 0) {
-        const errorMessage = errors.map((error) => `<br /> ${error}`).join();
-        Notiflix.Notify.failure("<br />" + errorMessage, toastifyOptions);
+        const errorMessage = (
+          <>
+            {errors.map((error, index) => (
+              <React.Fragment key={index}>
+                {error}
+                <br />
+              </React.Fragment>
+            ))}
+          </>
+        );
+        showToast(errorMessage, "error");
       }
     }
   };
@@ -217,13 +225,17 @@ export const RegisterForm = () => {
               formik.handleSubmit();
               const errors = Object.values(formik.errors);
               if (errors.length > 0) {
-                const errorMessage = errors
-                  .map((error) => `<br /> ${error}`)
-                  .join();
-                Notiflix.Notify.failure(
-                  "<br />" + errorMessage,
-                  toastifyOptions
+                const errorMessage = (
+                  <>
+                    {errors.map((error, index) => (
+                      <React.Fragment key={index}>
+                        {error}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </>
                 );
+                showToast(errorMessage, "error");
               }
             }}
           >

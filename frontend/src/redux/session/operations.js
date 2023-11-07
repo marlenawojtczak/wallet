@@ -11,7 +11,7 @@ import {
 import { resetFinance } from "../finance/financeSlice";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import { showToast } from "../../utils/helperFunctions.js";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
@@ -37,6 +37,7 @@ export const signUp = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-up", credentials);
       setAuthHeader(res.data.user.accessToken);
+      showToast("Verification email sent", "success");
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -55,6 +56,7 @@ export const signIn = createAsyncThunk(
       setAuthHeader(res.data.user.accessToken);
       return res.data;
     } catch (error) {
+      showToast("Verify your email first", "error");
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(closeLoading());
@@ -77,7 +79,7 @@ export const signOut = createAsyncThunk(
       thunkAPI.dispatch(resetFinance());
       clearAuthHeader();
     } catch (error) {
-      toast.error("Oops something went wrong during logout.");
+      showToast("Oops something went wrong during logout.", "error");
       thunkAPI.dispatch(closeModalLogout());
       throw error;
     } finally {
