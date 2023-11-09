@@ -159,6 +159,10 @@ export const TableNextRows = styled.tr`
   }
 `;
 
+export const TypeSpace = styled.div`
+  padding-left: 20px;
+`;
+
 export const TableCellActions = styled.tr`
   display: flex;
   gap: 20px;

@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SharedLayout, AccessLayout } from "../components";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { RestrictedRoute } from "../routes/RestrictedRoute";
@@ -8,6 +8,7 @@ import { currentUser } from "../redux/session/operations";
 import { Loader } from "../components";
 import { TokenRefresher } from "./TokenRefresher";
 import { ToastContainer } from "react-toastify";
+import { selectIsLoading } from "../redux/global/selectors";
 
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Register = lazy(() =>
@@ -24,9 +25,12 @@ export const App = () => {
     dispatch(currentUser());
   }, [dispatch]);
 
+  const isLoading = useSelector(selectIsLoading);
+
   return (
     <>
       <Suspense fallback={<Loader />}>
+        {isLoading ? <Loader /> : null}
         <Routes>
           <Route element={<AccessLayout />}>
             <Route
