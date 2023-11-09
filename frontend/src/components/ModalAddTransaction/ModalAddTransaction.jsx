@@ -101,20 +101,20 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
       formik.values.category === "Income" &&
       !formik.values.amount
     ) {
-      showToast("Please choose a category and amount", "error");
+      showToast("Please choose a category and amount.", "error");
       return;
     } else if (
       formik.values.type === "Expense" &&
       formik.values.category === "Income"
     ) {
-      showToast("Please select a category", "error");
+      showToast("Please select a category.", "error");
       return;
     } else if (!formik.values.amount) {
-      showToast("Please enter the amount", "error");
+      showToast("Please enter the amount.", "error");
       return;
     }
     if (!/^\d+(\.\d{1,2})?$/.test(formik.values.amount)) {
-      showToast("Please type only numbers", "error");
+      showToast("Please type only numbers.", "error");
       return;
     }
 

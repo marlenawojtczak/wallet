@@ -37,7 +37,11 @@ export const signUp = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-up", credentials);
       setAuthHeader(res.data.user.accessToken);
-      showToast("Verification email sent", "success");
+      showToast(
+        "Register successful. Verification link sent to your email.",
+        "success"
+      );
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -54,9 +58,22 @@ export const signIn = createAsyncThunk(
     try {
       const res = await api.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.user.accessToken);
+
       return res.data;
     } catch (error) {
-      showToast("Verify your email first", "error");
+      const isVerified = error.response?.data?.verify;
+      const emailExist = error.response?.data?.email;
+
+      if (!emailExist) {
+        showToast("User with that email does not exist", "error");
+      } else {
+        if (!isVerified) {
+          showToast("Verify your email first.", "error");
+        } else {
+          showToast("Email or password you have entered is invalid.", "error");
+        }
+      }
+
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(closeLoading());

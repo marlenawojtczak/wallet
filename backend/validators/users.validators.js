@@ -46,6 +46,7 @@ export const validateUser = (req, res, next) => {
 
 export const validateLogin = (req, res, next) => {
   const { userPayLoad } = req.body;
+
   return validate(userLoginSchema, userPayLoad, next);
 };
 

@@ -94,6 +94,28 @@ font-weight: 700;
 left:265px;
 padding-top: 14px;
 }
+
+.Toastify__toast--info {
+  border: 1px solid #3498db;
+  border-radius: 50px;
+ 
+  }
+  .Toastify__toast--info::before {
+  content: url("../assets/images/svg/warnToast.svg");// Your svg Path
+  position:relative; 
+  z-index:100000;
+  left:12px;
+  top:6px;
+  }  
+  .Toastify__toast--info::after {
+  content : url('../assets/images/svg/closeToast.svg'); // Your svg Path
+  position: absolute;
+  font-size: 16px;
+  font-weight: 700;
+  left:265px;
+  padding-top: 14px;
+  }
+
 .Toastify__toast-body {
 color: #000000;
 font-size: 16px;
