@@ -1,9 +1,8 @@
 import axios from "axios";
-import Notiflix from "notiflix";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { selectAccessToken } from "../session/selectors";
 import { openLoading, closeLoading } from "../../redux/global/globalSlice";
-import { toastifyOptions } from "../../utils/helperFunctions";
+import { showToast } from "../../utils/helperFunctions";
 
 const api = axios.create({
   baseURL: "https://wallet.dupawklamerkach.pl",
@@ -83,14 +82,11 @@ export const addTransaction = createAsyncThunk(
         credentials,
         setAuthHeader(accessToken)
       );
-      Notiflix.Notify.success(
-        "Successs! Transaction added to your list",
-        toastifyOptions
-      );
+      showToast("Success! Transaction added to your list.", "success");
 
       return res.data;
     } catch (error) {
-      Notiflix.Notify.failure("Cannot add transaction", toastifyOptions);
+      showToast("Cannot add transaction.", "error");
       return thunkAPI.rejectWithValue(error.message);
     } finally {
       thunkAPI.dispatch(closeLoading());
@@ -105,10 +101,7 @@ export const deleteTransaction = createAsyncThunk(
     thunkAPI.dispatch(openLoading());
     try {
       await api.delete(`/api/transactions/${id}`, setAuthHeader(accessToken));
-      Notiflix.Notify.info(
-        "Transaction removed from your list",
-        toastifyOptions
-      );
+      showToast("Transaction removed from your list.", "info");
       return `Deleted transaction: ${id}`;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -129,7 +122,7 @@ export const updateTransaction = createAsyncThunk(
         values,
         setAuthHeader(accessToken)
       );
-      Notiflix.Notify.success("Successs! Transaction updated", toastifyOptions);
+      showToast("Success! Transaction updated.", "success");
       return { id: id, updatedTransaction: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

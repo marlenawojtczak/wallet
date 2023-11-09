@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const getColor = (categoryToFind) => {
   const categoryColors = {};
   const data = [
@@ -20,7 +23,6 @@ export const getColor = (categoryToFind) => {
   return color;
 };
 
-
 export const toastifyOptions = {
   width: "300px",
   position: "center-top",
@@ -30,6 +32,31 @@ export const toastifyOptions = {
   borderRadius: "20px",
   fontFamily: "Poppins",
   fontSize: "16px",
+};
+
+export const showToast = (message, type) => {
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+  };
+
+  switch (type) {
+    case "success":
+      toast.success(message, toastOptions);
+      break;
+    case "info":
+      toast.info(message, toastOptions);
+      break;
+    case "error":
+      toast.error(message, toastOptions);
+      break;
+    default:
+      toast(message, toastOptions);
+  }
 };
 
 export const getCurrentYear = () => {
