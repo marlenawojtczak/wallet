@@ -91,8 +91,10 @@ export const WomanWithMobile = styled.img`
 `;
 
 export const BackgroundContainer = styled.div`
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
   @media screen and (min-width: 768px) {
-    position: relative;
     display: flex;
     flex-direction: column;
     height: 100vh;

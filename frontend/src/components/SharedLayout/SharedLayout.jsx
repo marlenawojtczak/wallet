@@ -7,6 +7,7 @@ import {
   Currency,
 } from "../../components";
 import { useSpring, animated } from "react-spring";
+import { Footer } from "../../components/Footer/Footer";
 
 import {
   BackgroundContainer,
@@ -53,6 +54,7 @@ export const SharedLayout = () => {
               </WrapperRightAndDownSite>
             </Wrapper>
           </MaxWrapper>
+          <Footer />
         </Filter>
       </BackgroundContainer>
     </>

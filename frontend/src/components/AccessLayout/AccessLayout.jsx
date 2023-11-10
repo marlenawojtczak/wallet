@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import manBackground from "../../assets/images/mobileMan.png";
 import womanBackground from "../../assets/images/mobileWoman.png";
 import logoMobile from "../../assets/images/logoMobile.png";
+import { Footer } from "../../components/Footer/Footer";
 
 import {
   BackgroundContainer,
@@ -64,13 +65,16 @@ export const AccessLayout = () => {
           </PhotoWrapper>
           <Info>Finance App</Info>
         </LogoWrapper>
+
         <MobileLogo>
           <Image src={logoMobile} alt="Shopping" />
         </MobileLogo>
+
         <RightContent>
           <Outlet />
         </RightContent>
       </Wrapper>
+      <Footer />
     </BackgroundContainer>
   );
 };
