@@ -5,7 +5,7 @@ import { openLoading, closeLoading } from "../../redux/global/globalSlice";
 import { showToast } from "../../utils/helperFunctions";
 
 const api = axios.create({
-  baseURL: "https://wallet.dupawklamerkach.pl",
+  baseURL: "https://uwallet.pl",
   // baseURL: "http://localhost:3000",
 });
 

@@ -54,7 +54,7 @@ export const verify = async (req, res, next) => {
     verificationToken: "",
   });
 
-  // res.redirect("https://wallet.dupawklamerkach.pl/#/login");
+  // res.redirect("https://uwallet.pl/#/login");
   // res.redirect("http://localhost:4000/#/login");
 };
 

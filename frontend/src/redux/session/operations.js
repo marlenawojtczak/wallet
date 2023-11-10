@@ -14,7 +14,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { showToast } from "../../utils/helperFunctions.js";
 
 const api = axios.create({
-  baseURL: "https://wallet.dupawklamerkach.pl",
+  baseURL: "https://uwallet.pl",
   // baseURL: "http://localhost:3000",
 });
 

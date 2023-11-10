@@ -22,7 +22,7 @@ export const sendVerificationEmail = async (
       to: email,
       subject: subject,
       html: `<p>Hello, ${email}</p><p>We just need to verify your email address before you can access Wallet App.</p><p>Please click on the link below.</p>
-      <a href="https://wallet.dupawklamerkach.pl/api/auth/verify/${verificationToken}">Verification Link</a>
+      <a href="https://uwallet.pl/api/auth/verify/${verificationToken}">Verification Link</a>
       <p>Best regards, the Dupa w Klamerkach Team</p>`,
     });
   } catch (error) {
