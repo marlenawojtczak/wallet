@@ -23,7 +23,7 @@ export const sendVerificationEmail = async (
       subject: subject,
       html: `<p>Hello, ${email}</p><p>We just need to verify your email address before you can access Wallet App.</p><p>Please click on the link below.</p>
       <a href="https://uwallet.pl/api/auth/verify/${verificationToken}">Verification Link</a>
-      <p>Best regards, the Dupa w Klamerkach Team</p>`,
+      <p>Best regards, Clammers Team</p>`,
     });
   } catch (error) {
     console.log("ERROR here - ", error);
