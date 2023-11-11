@@ -5,6 +5,7 @@ const initialState = {
   isModalAddTransactionOpen: false,
   isModalEditTransactionOpen: false,
   isLoading: false,
+  isModalTeamOpen: false,
 };
 
 const globalSlice = createSlice({
@@ -38,6 +39,12 @@ const globalSlice = createSlice({
     closeModalEditTransaction: (state) => {
       state.isModalEditTransactionOpen = false;
     },
+    openModalTeam: (state) => {
+      state.isModalTeamOpen = true;
+    },
+    closeModalTeam: (state) => {
+      state.isModalTeamOpen = false;
+    },
   },
 });
 
@@ -51,5 +58,7 @@ export const {
   openModalEditTransaction,
   closeModalEditTransaction,
   resetGlobal,
+  openModalTeam,
+  closeModalTeam,
 } = globalSlice.actions;
 export const globalReducer = globalSlice.reducer;
