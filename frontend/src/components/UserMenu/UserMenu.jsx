@@ -4,12 +4,7 @@ import { useDispatch } from "react-redux";
 import { openModalLogout } from "../../redux/global/globalSlice";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/session/selectors";
-// import { useAuth } from "../../hooks/useAuth";
-
 export const UserMenu = () => {
-  // autentykacja ???
-  // const { user } = useAuth();
-
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const openModal = () => {
