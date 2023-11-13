@@ -19,3 +19,11 @@ export const FooterBtn = styled.button`
     transform: translateY(0);
   }
 `;
+
+export const TeamName = styled.span`
+  font-weight: bold;
+
+  &:hover {
+    color: var(--linked-in);
+  }
+`;
