@@ -34,10 +34,7 @@ export const ModalTeam = () => {
         onRequestClose={handleClose}
         shouldCloseOnOverlayClick={true}
         style={{
-          overlay: {
-            backgroundColor: "rgba(150, 150, 150, 0.5)",
-            zIndex: 4,
-          },
+          overlay: { backgroundColor: "rgba(150, 150, 150, 0.5)", zIndex: 4 },
         }}
       >
         <CloseButton onClick={handleClose} />

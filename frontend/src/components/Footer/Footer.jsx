@@ -1,21 +1,29 @@
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { selectIsModalTeamClose } from "../../redux/global/selectors";
+import { openModalTeam } from "../../redux/global/globalSlice";
+
 import { FooterBtn, TeamName } from "./Footer.styled";
 import { ModalTeam } from "../ModalTeam/ModalTeam";
 
-import { useDispatch } from "react-redux";
-import { openModalTeam } from "../../redux/global/globalSlice";
-
 export const Footer = () => {
   const dispatch = useDispatch();
+  const isModalTeamClose = useSelector(selectIsModalTeamClose);
+
   const openModal = () => {
     dispatch(openModalTeam());
   };
+
+  useEffect(() => {}, [isModalTeamClose]);
+
   return (
-    <FooterBtn>
+    <FooterBtn isCollapsed={isModalTeamClose}>
       <ModalTeam />
       <span>^</span>
       <span>
         © 2023 | All Rights Reserved | Developed by{" "}
-        <TeamName onClick={openModal}>Clamers</TeamName>
+        <TeamName onClick={openModal}>Clammers</TeamName>
       </span>
     </FooterBtn>
   );
