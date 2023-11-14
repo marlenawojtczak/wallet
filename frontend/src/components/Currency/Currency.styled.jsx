@@ -13,62 +13,93 @@ const showIn = keyframes`
 export const TableWrapper = styled.div`
   animation: ${showIn} 500ms linear;
   width: 100%;
+
+  @media screen and (min-width: 768px) {
+    overflow: auto;
+    height: 190px;
+    border-radius: 10px;
+  }
+  @media screen and (min-width: 1280px) {
+    overflow: hidden;
+    height: auto;
+  }
 `;
 
 export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 30px;
+  border-radius: 10px;
   margin-top: 10px;
-  background-color: var(--nav-inactive);
-  background-image: url(${img});
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: 100%;
 
-  @media screen and (min-width: 1280px) {
+  background-color: rgba(0, 0, 0, 0.1);
+  @media screen and (min-width: 768px) {
     margin-top: 0px;
+  }
+  @media screen and (min-width: 1280px) {
   }
 `;
 
 export const Table = styled.table`
-  display: flex;
-  flex-direction: column;
+  border-collapse: collapse;
 `;
 
 export const TableHead = styled.thead`
   display: flex;
-  padding: 12px 20px;
-  justify-content: space-between;
-  border-radius: 30px 30px 0 0;
-  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: var(--font-light);
+  @media screen and (min-width: 768px) {
+    position: sticky;
+    top: 0px;
+  }
+
+  @media screen and (min-width: 1280px) {
+  }
 `;
 export const TableHeaderCell = styled.th`
-  font-family: Circe;
+  font-family: OpenSans;
+  text-align: center;
+  flex: 1;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  color: var(--font-light);
+  color: var(--font-dark);
+
+  @media screen and (min-width: 768px) {
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-weight: 700;
+  }
 `;
 
 export const TableBody = styled.tbody`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 12px 20px 52px;
+  padding: 15px 0;
 `;
 
 export const TableNextRows = styled.tr`
   display: flex;
-  justify-content: space-between;
 `;
 
 export const TableCell = styled.tr`
-  font-family: Circe;
+  flex: 1;
+  font-family: OpenSans;
+  text-align: center;
   font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   color: var(--font-light);
+  @media screen and (min-width: 768px) {
+    font-size: 17px;
+    font-weight: 400;
+  }
+  @media screen and (min-width: 1280px) {
+    font-weight: 300;
+  }
 `;

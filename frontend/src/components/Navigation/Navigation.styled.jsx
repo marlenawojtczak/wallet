@@ -22,7 +22,6 @@ export const NavList = styled.ul`
   display: flex;
   justify-content: center;
   gap: 32px;
-  list-style-type: none;
 
   @media screen and (min-width: 768px) {
     flex-direction: column;
@@ -33,35 +32,17 @@ export const NavList = styled.ul`
 export const Link = styled(NavLink)`
   display: flex;
   align-items: center;
-  text-decoration: none;
-  color: var(--font-dark);
-  font-family: Poppins;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  gap: 10px;
   margin: 0;
   padding: 0;
-
-  @media screen and (min-width: 768px) {
-    &:hover svg {
-      animation: ${rotateMobile} 500ms linear infinite;
-    }
-    svg {
-      transform: scale(0.6) translateX(-34%);
-    }
+  svg path {
+    fill: var(--font-light);
   }
 
-  /* &:hover svg path#Vector {
-    fill: var(--brand-primary);
-    cursor: pointer;
-  } */
-
   &.active {
-    font-weight: 700;
-    svg path#Vector {
-      fill: var(--brand-primary);
+    font-weight: 800;
+    font-size: 25px;
+    svg path {
+      fill: var(--font-light);
     }
   }
   &.active {
@@ -70,16 +51,33 @@ export const Link = styled(NavLink)`
       box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     }
   }
+  @media screen and (min-width: 768px) {
+    text-decoration: none;
+    color: var(--font-dark);
+    font-family: OpenSans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    &:hover svg {
+      animation: ${rotateMobile} 500ms linear infinite;
+    }
+    svg {
+      transform: scale(0.8) translateX(-34%);
+    }
+  }
 `;
 
 export const NavName = styled.p`
   display: none;
 
   @media screen and (min-width: 768px) {
-    display: flex;
+    display: block;
 
     &:hover {
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 25px;
     }
   }
 `;

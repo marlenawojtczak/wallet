@@ -6,25 +6,30 @@ import Notiflix from "notiflix";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/session/selectors";
 import { signIn } from "../../redux/session/operations";
-
-import { ReactComponent as WalletLogoMobile } from "../../assets/icons/logo-mobile.svg";
-import { ReactComponent as WalletLogo } from "../../assets/icons/logo.svg";
 import { ReactComponent as EmailIcon } from "../../assets/icons/email.svg";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
 import { ReactComponent as EyeOpenIcon } from "../../assets/icons/eyeOpen.svg";
 import { ReactComponent as EyeCloseIcon } from "../../assets/icons/eyeClose.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logoPocket.svg";
 
 import {
   StyledInputContainer,
   StyledWrapper,
   StyledForm,
-  StyledLogoMobile,
-  StyledLogo,
   StyledInput,
   StyledIcon,
   StyledButtonIcon,
   StyledButtons,
   StyledButton,
+  SpanLogin,
+  StyledInfo,
+  SpanLogo,
+  SpanText,
+  SpanInfo,
+  StyledButtonR,
+  StyledButtonMobileLogin,
+  Span,
+  LogoWrapper,
 } from "./LoginForm.styled";
 import { toastifyOptions } from "../../utils/helperFunctions";
 
@@ -44,6 +49,7 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleTogglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -63,6 +69,16 @@ export const LoginForm = () => {
       }
     },
   });
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -88,13 +104,24 @@ export const LoginForm = () => {
 
   return (
     <StyledWrapper>
+      {window.innerWidth >= 1280 && (
+        <StyledInfo>
+          <LogoWrapper>
+            <Logo
+              style={{ filter: "drop-shadow(6px 4px 3px var(--font-dark))" }}
+            />
+            <SpanLogo>uWallet</SpanLogo>
+          </LogoWrapper>
+          <SpanText>Start controlling your money</SpanText>
+          <SpanInfo>
+            If you don't have an account yet, join us and start creating your
+            budget
+          </SpanInfo>
+          <StyledButtonR onClick={registerButton}>Register</StyledButtonR>
+        </StyledInfo>
+      )}
       <StyledForm onKeyPress={handleKeyPress}>
-        <StyledLogoMobile>
-          <WalletLogoMobile />
-        </StyledLogoMobile>
-        <StyledLogo>
-          <WalletLogo />
-        </StyledLogo>
+        <SpanLogin>Login Here</SpanLogin>
 
         <StyledInputContainer>
           <StyledIcon>
@@ -149,10 +176,14 @@ export const LoginForm = () => {
               }
             }}
           >
-            LOG IN
+            Login
           </StyledButton>
-
-          <StyledButton onClick={registerButton}>REGISTER</StyledButton>
+          {window.innerWidth < 1280 && <Span>or</Span>}
+          {window.innerWidth < 1280 && (
+            <StyledButtonMobileLogin onClick={registerButton}>
+              Register
+            </StyledButtonMobileLogin>
+          )}
         </StyledButtons>
       </StyledForm>
     </StyledWrapper>

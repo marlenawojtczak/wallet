@@ -4,15 +4,23 @@ import {
   LogoTitle,
   RotatingLogoIcon,
 } from "./HeaderNavigation.styled";
-// import { ReactComponent as LogoIcon } from "../../assets/icons/wallet.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logoPocket.svg";
 
 export const HeaderNavigation = () => {
   return (
     <nav>
       <Link to="/home">
         <Wrapper>
-          <RotatingLogoIcon></RotatingLogoIcon>
-          <LogoTitle>Wallet</LogoTitle>
+          <RotatingLogoIcon>
+            <Logo
+              style={{
+                filter: "drop-shadow(2px 3px 6px var(--font-dark))",
+                width: "40px",
+                height: "40px",
+              }}
+            />
+          </RotatingLogoIcon>
+          <LogoTitle>uWallet</LogoTitle>
         </Wrapper>
       </Link>
     </nav>

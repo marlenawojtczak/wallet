@@ -12,7 +12,7 @@ import { Loader } from "../Loader/Loader";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import financeMp4 from "../../assets/mp4/finance.mp4";
 const currency_API_URL = "https://api.nbp.pl/api/exchangerates/rates/c/";
 
 async function fetchCurrency(currencyCode) {
@@ -33,7 +33,15 @@ export const Currency = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currenciesToFetch = ["EUR", "USD"];
+        const currenciesToFetch = [
+          "EUR",
+          "USD",
+          "GBP",
+          "CHF",
+          "NOK",
+          "SEK",
+          "DKK",
+        ];
         const currencyData = await Promise.all(
           currenciesToFetch.map((currencyCode) => fetchCurrency(currencyCode))
         );

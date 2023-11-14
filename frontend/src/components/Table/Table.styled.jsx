@@ -29,7 +29,7 @@ export const List = styled.ul`
   list-style: none;
   max-height: 35vh;
   overflow-y: auto;
-  border-radius: 8px;
+  border-radius: 10px;
   /* box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px inset,
     rgba(0, 0, 0, 0.5) 0px -2px 2px, rgba(0, 0, 0, 0.2) 0px 1px 1px inset; */
 `;
@@ -37,14 +37,13 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
-  font-family: "Circe";
-  font-size: 16px;
+  font-family: OpenSans;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
   padding: 14px 20px;
-
-  box-shadow: 0px 1px 0px var(--bg-gray);
+  box-shadow: 0px 1px 0px var(--bg-light);
 
   @media screen and (min-width: 768px) {
     margin: 0;
@@ -66,8 +65,9 @@ export const Amount = styled.p``;
 export const Sum = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 20px;
-  box-shadow: 0px -1px 0px var(--bg-gray);
+  margin: 0;
+  border-radius: 10px;
+  box-shadow: 0px -1px 3px var(--font-light);
 
   @media screen and (min-width: 768px) {
     margin: 0;
@@ -76,16 +76,20 @@ export const Sum = styled.div`
 export const Expenses = styled.div`
   display: flex;
   justify-content: space-between;
-  font-family: "Circe";
-  font-weight: 700;
+  font-family: OpenSans;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--font-light);
   padding: 16px 20px;
 `;
 
 export const Income = styled.div`
   display: flex;
   justify-content: space-between;
-  font-family: "Circe";
-  font-weight: 700;
+  font-family: OpenSans;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--font-light);
   padding: 0 20px;
   padding-bottom: 51px;
 `;
@@ -93,13 +97,13 @@ export const Income = styled.div`
 export const TableHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  font-family: Circe;
+  font-family: OpenSans;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   background-color: var(--bg-light);
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 15px 20px;
   margin-bottom: 20px;
   /* padding-right: 130px; */
@@ -116,7 +120,6 @@ export const TableSelectors = styled.div`
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
-    margin-top: 32px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -147,13 +150,13 @@ export const SelectStylesSmall = {
   }),
   control: (styles) => ({
     ...styles,
-    borderRadius: 30,
+    borderRadius: 10,
     height: 50,
     backgroundColor: "transparent",
     cursor: "pointer",
 
     padding: "0 20px 0 20px",
-    border: "1px solid var(--font-dark)",
+    border: "1px solid var(--font-light)",
     "&:hover": {
       color: "var(--font-dark)",
     },
@@ -172,11 +175,12 @@ export const SelectStylesSmall = {
   }),
   singleValue: (styles) => ({
     ...styles,
+    color: "var(--font-light)",
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
     transform: "scale(1.5)",
-    color: "var(--font-dark)",
+    color: "var(--font-light)",
     "&:hover": {
       color: "var(--font-dark)",
     },
@@ -185,7 +189,7 @@ export const SelectStylesSmall = {
     ...styles,
     backgroundColor: "var(--bg-gray)",
     boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
-    borderRadius: 20,
+    borderRadius: 10,
     overflow: "hidden",
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -203,7 +207,7 @@ export const SelectStylesSmall = {
   menuList: (styles) => ({
     ...styles,
     background: "var(--bg-accent)",
-    borderRadius: 20,
+    borderRadius: 10,
     cursor: "pointer",
   }),
 };
@@ -215,12 +219,12 @@ export const SelectStylesMedium = {
   control: (styles) => ({
     ...styles,
 
-    borderRadius: 30,
+    borderRadius: 10,
     height: 50,
     backgroundColor: "transparent",
     cursor: "pointer",
     padding: "0 20px 0 20px",
-    border: "1px solid var(--font-dark)",
+    border: "1px solid var(--font-light)",
     "&:hover": {
       color: "var(--font-dark)",
     },
@@ -240,11 +244,12 @@ export const SelectStylesMedium = {
   }),
   singleValue: (styles) => ({
     ...styles,
+    color: "var(--font-light)",
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
     transform: "scale(1.5)",
-    color: "var(--font-dark)",
+    color: "var(--font-light)",
     "&:hover": {
       color: "var(--font-dark)",
     },
@@ -253,7 +258,7 @@ export const SelectStylesMedium = {
     ...styles,
     backgroundColor: "var(--bg-gray)",
     boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
-    borderRadius: 20,
+    borderRadius: 10,
     overflow: "hidden",
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -271,7 +276,7 @@ export const SelectStylesMedium = {
   menuList: (styles) => ({
     ...styles,
     background: "var(--bg-accent)",
-    borderRadius: 20,
+    borderRadius: 10,
     cursor: "pointer",
   }),
 };
@@ -282,12 +287,12 @@ export const SelectStylesLarge = {
   }),
   control: (styles) => ({
     ...styles,
-    borderRadius: 30,
+    borderRadius: 10,
     height: 50,
     backgroundColor: "transparent",
     cursor: "pointer",
     padding: "0 20px 0 20px",
-    border: "1px solid var(--font-dark)",
+    border: "1px solid var(--font-light)",
     "&:hover": {
       color: "var(--font-dark)",
     },
@@ -307,11 +312,12 @@ export const SelectStylesLarge = {
   }),
   singleValue: (styles) => ({
     ...styles,
+    color: "var(--font-light)",
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
     transform: "scale(1.5)",
-    color: "var(--font-dark)",
+    color: "var(--font-light)",
     "&:hover": {
       color: "var(--font-dark)",
     },
@@ -320,7 +326,7 @@ export const SelectStylesLarge = {
     ...styles,
     backgroundColor: "var(--bg-gray)",
     boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
-    borderRadius: 20,
+    borderRadius: 10,
     overflow: "hidden",
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -338,7 +344,7 @@ export const SelectStylesLarge = {
   menuList: (styles) => ({
     ...styles,
     background: "var(--bg-accent)",
-    borderRadius: 20,
+    borderRadius: 10,
     cursor: "pointer",
   }),
 };

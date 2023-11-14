@@ -5,13 +5,13 @@ import * as Yup from "yup";
 import Notiflix from "notiflix";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/session/operations";
-import { ReactComponent as WalletLogoMobile } from "../../assets/icons/logo-mobile.svg";
-import { ReactComponent as WalletLogo } from "../../assets/icons/logo.svg";
+
 import { ReactComponent as EmailIcon } from "../../assets/icons/email.svg";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
 import { ReactComponent as AccountBoxIcon } from "../../assets/icons/account_box.svg";
 import { ReactComponent as EyeOpenIcon } from "../../assets/icons/eyeOpen.svg";
 import { ReactComponent as EyeCloseIcon } from "../../assets/icons/eyeClose.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logoPocket.svg";
 
 import {
   StyledInputContainer,
@@ -21,11 +21,18 @@ import {
   StyledForm,
   StyledInput,
   StyledIcon,
-  StyledLogo,
-  StyledLogoMobile,
   StyledButtons,
   StyledButton,
   StyledButtonIcon,
+  SpanLogin,
+  StyledInfo,
+  SpanLogo,
+  SpanText,
+  SpanInfo,
+  StyledButtonL,
+  StyledButtonMobileLogin,
+  Span,
+  LogoWrapper,
 } from "./RegisterForm.styled";
 import { toastifyOptions } from "../../utils/helperFunctions";
 
@@ -35,7 +42,11 @@ const validationSchema = Yup.object().shape({
     .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
+    .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])/,
+      "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character"
+    )
     .required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -57,6 +68,7 @@ export const RegisterForm = () => {
   const [progressValue, setProgressValue] = useState(0);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleTogglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -89,6 +101,17 @@ export const RegisterForm = () => {
       }
     },
   });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const { password, confirmPassword } = formik.values;
@@ -132,12 +155,7 @@ export const RegisterForm = () => {
   return (
     <StyledWrapper>
       <StyledForm onKeyPress={handleKeyPress}>
-        <StyledLogoMobile>
-          <WalletLogoMobile />
-        </StyledLogoMobile>
-        <StyledLogo>
-          <WalletLogo />
-        </StyledLogo>
+        <SpanLogin>Register Here</SpanLogin>
 
         <StyledInputContainer>
           <StyledIcon>
@@ -191,9 +209,8 @@ export const RegisterForm = () => {
           >
             {confirmPasswordVisible ? <EyeOpenIcon /> : <EyeCloseIcon />}
           </StyledButtonIcon>
+          <ProgressBar value={progressValue} />
         </StyledInputContainerExtra>
-
-        <ProgressBar value={progressValue} />
 
         <StyledInputContainer>
           <StyledIcon>
@@ -227,12 +244,35 @@ export const RegisterForm = () => {
               }
             }}
           >
-            REGISTER
+            Register
           </StyledButton>
-
-          <StyledButton onClick={loginButton}>LOG IN</StyledButton>
+          {window.innerWidth < 1280 && <Span>or</Span>}
+          {window.innerWidth < 1280 && (
+            <StyledButtonMobileLogin onClick={loginButton}>
+              Login
+            </StyledButtonMobileLogin>
+          )}
         </StyledButtons>
       </StyledForm>
+      {window.innerWidth >= 1280 && (
+        <StyledInfo>
+          <LogoWrapper>
+            <Logo
+              style={{
+                filter: "drop-shadow(6px 4px 3px var(--font-dark))",
+              }}
+            />
+            <SpanLogo>uWallet</SpanLogo>
+          </LogoWrapper>
+
+          <SpanText>Hello friends</SpanText>
+          <SpanInfo>
+            If you already have an account login here and have fun
+          </SpanInfo>
+
+          <StyledButtonL onClick={loginButton}>Login</StyledButtonL>
+        </StyledInfo>
+      )}
     </StyledWrapper>
   );
 };

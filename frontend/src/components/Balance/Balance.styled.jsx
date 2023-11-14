@@ -12,32 +12,28 @@ const showIn = keyframes`
 export const BalanceElement = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 8px 32px;
-  border-radius: 30px;
+  border-radius: 10px;
   background-color: var(--bg-light);
   animation: ${showIn} 500ms linear;
+  padding: 8px 0 6px 32px;
 
-  @media screen and (max-width: 767px) {
-    margin-bottom: 20px;
-  }
-
-  @media screen and (min-width: 768px) {
-    padding: 8px 40px;
-    width: calc(100% - 80px);
+  @media screen and (min-width: 767px) {
+    width: 100%;
   }
 `;
 
 export const BalanceHeader = styled.p`
-  font-family: Circe;
-  font-size: 12px;
+  font-family: OpenSans;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--font-grey);
 `;
 export const Cash = styled.span`
-  font-family: "Poppins";
+  font-family: OpenSans;
   font-size: 30px;
   font-weight: 400;
   color: var(--font-dark);
@@ -47,7 +43,7 @@ export const BalanceContent = styled.p`
   display: flex;
   gap: 8px;
   align-items: center;
-  font-family: "Poppins";
+  font-family: OpenSans;
   font-size: 30px;
   font-weight: 700;
   color: var(--font-dark);

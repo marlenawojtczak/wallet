@@ -53,5 +53,18 @@
   /* PlaceholderColor */
   ::placeholder {
     color: var(--brand-logout);
+    font-family: OpenSans;
+    font-weight: 300;
   }
+
+  @media (min-width: 1280px) {
+    ::placeholder {
+      color: rgb(71, 56, 56);
+      font-weight: 400;
+    }
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
 }

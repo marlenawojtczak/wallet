@@ -20,7 +20,6 @@ export const getColor = (categoryToFind) => {
   return color;
 };
 
-
 export const toastifyOptions = {
   width: "300px",
   position: "center-top",

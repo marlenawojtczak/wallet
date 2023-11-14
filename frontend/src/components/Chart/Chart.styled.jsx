@@ -8,7 +8,9 @@ export const StyledChart = styled.div`
   margin-bottom: 32px;
 
   @media screen and (min-width: 768px) {
-    margin-bottom: 0px;
+    margin: 0px;
+  }
+  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -24,29 +26,34 @@ export const WrapperDonat = styled.div`
 `;
 
 export const InsideText = styled.p`
-  color: var(--font-dark);
+  color: var(--font-light);
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, 50%);
-  font-family: "Circe";
-  font-size: 18px;
-  font-weight: 700;
+  font-family: OpenSans;
+  font-size: 20px;
+  font-weight: 400;
   @media screen and (min-width: 768px) {
-    top: 42%;
+    top: 41%;
   }
 `;
 
 export const ChartHeader = styled.p`
-  text-align: left;
-  font-family: "Poppins";
+  text-align: center;
+  font-family: OpenSans;
   font-size: 30px;
-  font-weight: 400;
+  font-weight: 300;
   margin-bottom: 8px;
+  letter-spacing: 1px;
   color: var(--font-dark);
+  text-shadow: 1px 1px 0 var(--font-dark), 2px 1px 0 var(--font-dark),
+    10px 2px 15px black;
 
   @media screen and (min-width: 768px) {
+    text-align: left;
     margin-bottom: 20px;
+    display: none;
   }
 `;
 /* 

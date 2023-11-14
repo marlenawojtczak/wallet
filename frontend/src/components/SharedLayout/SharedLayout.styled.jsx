@@ -1,28 +1,21 @@
 import styled from "styled-components";
-import backgroundElipseBlue from "../../assets/images/ellipseBlue.png";
-import backgroundElipsePink from "../../assets/images/ellipsePink.png";
-import { useLocation } from "react-router-dom";
+import finance from "../../assets/images/finance.png";
 
 export const BackgroundContainer = styled.div`
-  background-color: var(--bg-accent);
+  background-image: url(${finance});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right -200px top 100px;
   height: 100vh;
 
   @media screen and (min-width: 768px) {
-    background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
-    background-repeat: no-repeat, no-repeat;
-    background-position: right -25vw top, left bottom;
-    height: 100vh;
+    background-image: url(${finance});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top 110px;
   }
   @media screen and (min-width: 1280px) {
-    background-position: right top 80px, left bottom;
-    position: relative;
   }
-
-  ${(props) =>
-    useLocation().pathname === "/home" &&
-    `
-    height: 100%;
-  `}
 `;
 
 export const MaxWrapper = styled.div`
@@ -33,7 +26,7 @@ export const MaxWrapper = styled.div`
 `;
 
 export const Filter = styled.div`
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(25px);
   height: 100%;
   width: 100%;
 `;
@@ -46,11 +39,11 @@ export const Wrapper = styled.div`
 
   @media screen and (min-width: 768px) {
     display: flex;
-    margin: 0 32px;
+    margin: 0 50px;
   }
   @media screen and (min-width: 1280px) {
     padding-top: 0;
-    margin: 0 20px;
+    margin: 0 5%;
     flex-direction: row;
   }
 `;
@@ -78,21 +71,19 @@ export const CurrencyNav = styled.div`
 export const WrapperLeftAndUpSite = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
-    gap: 32px;
+    gap: 40px;
     margin-bottom: 20px;
   }
   @media screen and (min-width: 1280px) {
     flex-direction: column;
-    flex: 30%;
+    flex: 20%;
     padding-top: 40px;
     margin-bottom: 0px;
-    padding-right: 60px;
+    padding-right: 80px;
     height: 85vh;
     border-right-style: solid;
     border-right-color: #e7e5f2;
     border-right-width: 1px;
-    filter: drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.6))
-      drop-shadow(-1px 0px 0px rgba(0, 0, 0, 0.05));
   }
 `;
 
@@ -101,11 +92,11 @@ export const WrapperRightAndDownSite = styled.div`
   flex-direction: column;
 
   @media screen and (min-width: 768px) {
-    padding-top: 20px;
+    padding-top: 30px;
   }
   @media screen and (min-width: 1280px) {
-    padding-top: 50px;
-    padding-left: 60px;
+    padding: 50px 0 0 80px;
+
     flex: 60%;
   }
 `;
@@ -113,7 +104,7 @@ export const WrapperRightAndDownSite = styled.div`
 export const WrapperNav = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   @media screen and (min-width: 768px) {
     justify-content: flex-start;

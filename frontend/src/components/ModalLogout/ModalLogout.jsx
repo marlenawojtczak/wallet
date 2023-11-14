@@ -5,6 +5,7 @@ import {
   ButtonCancel,
   ModalOverlay,
   Modal,
+  ModalContainer,
 } from "./ModalLogout.styled";
 import { selectIsModalLogoutOpen } from "../../redux/global/selectors";
 import { selectSessionId } from "../../redux/session/selectors";
@@ -35,15 +36,17 @@ export const ModalLogout = () => {
         shouldCloseOnOverlayClick={true}
         style={{ overlay: { backgroundColor: "rgba(150, 150, 150, 0.5)" } }}
       >
-        <Text>Are you sure you want to logout?</Text>
-        <ButtonContainer>
-          <ButtonConfirm type="button" onClick={handleLogout}>
-            Confirm
-          </ButtonConfirm>
-          <ButtonCancel type="button" onClick={handleClose}>
-            Cancel
-          </ButtonCancel>
-        </ButtonContainer>
+        <ModalContainer>
+          <Text>Are you sure you want to logout?</Text>
+          <ButtonContainer>
+            <ButtonConfirm type="button" onClick={handleLogout}>
+              Confirm
+            </ButtonConfirm>
+            <ButtonCancel type="button" onClick={handleClose}>
+              Cancel
+            </ButtonCancel>
+          </ButtonContainer>
+        </ModalContainer>
       </Modal>
     </>
   );
