@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterBtn = styled.button`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;

@@ -26,7 +26,7 @@ export const LoaderContainer = styled.div`
   position: fixed;
   margin-top: 0px;
   top: 0px;
-  z-index: 9999;
+  z-index: 3;
 `;
 
 export const LoaderContent = styled.div`

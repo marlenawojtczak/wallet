@@ -33,7 +33,12 @@ export const ModalTeam = () => {
         isOpen={isModalTeamOpen}
         onRequestClose={handleClose}
         shouldCloseOnOverlayClick={true}
-        style={{ overlay: { backgroundColor: "rgba(150, 150, 150, 0.5)" } }}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(150, 150, 150, 0.5)",
+            zIndex: 4,
+          },
+        }}
       >
         <CloseButton onClick={handleClose} />
         <TeamList>
