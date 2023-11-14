@@ -58,6 +58,66 @@
         }
       }
     },
+    "/api/auth/verify/{verificationToken}": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "User verification",
+        "parameters": [],
+        "requestBody": {
+          "description": "User verification's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/verify": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "User verification again",
+        "parameters": [],
+        "requestBody": {
+          "description": "User verification's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyAgainRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verification email sent",
+            "content": {}
+          },
+          "400": {
+            "description": "Verification has already been passed",
+            "content": {}
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {}
+          }
+        }
+      }
+    },
     "/api/auth/sign-in": {
       "post": {
         "tags": ["Authentication"],
@@ -458,6 +518,29 @@
             "type": "integer",
             "description": "User's balance",
             "example": 0
+          }
+        }
+      },
+      "VerifyRequest": {
+        "type": "object",
+        "description": "Verification object",
+        "properties": {
+          "verificationToken": {
+            "type": "string",
+            "description": "User's verification token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTIzMjFiZDcyYTRiYjViMTM0MDljNDgiLCJzaWQiOiI2NTIzYzZmMWJiZDNkYmI0NDViMWRhY2YiLCJpYXQiOjE2OTY4NDM1MDUsImV4cCI6MTY5Njg2NTEwNX0.k0M6kbGPP-S-QhGJanXCdZJUhiPbGVlv5etExeN4EMs"
+          }
+        }
+      },
+      "VerifyAgainRequest": {
+        "type": "object",
+        "description": "Verification object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email",
+            "example": "user@mail.com"
           }
         }
       },
