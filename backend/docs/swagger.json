@@ -7,7 +7,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "https://wallet.dupawklamerkach.pl" }],
+  "servers": [{ "url": "https://uwallet.pl" }],
   "tags": [
     {
       "name": "Authentication"

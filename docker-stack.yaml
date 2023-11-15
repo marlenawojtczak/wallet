@@ -23,7 +23,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /etc/letsencrypt/ssl/wallet.dupawklamerkach.pl/:/etc/nginx/ssl/wallet.dupawklamerkach.pl/
+      - /etc/letsencrypt/ssl/uwallet.pl/:/etc/nginx/ssl/uwallet.pl/
   backend:
     image: platyna100/wallet-backend:stack
     secrets:

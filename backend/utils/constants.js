@@ -13,3 +13,14 @@ export const transactionsCategory = [
   "Other expenses",
   "Entertainment",
 ];
+
+export const toastifyOptions = {
+  width: "300px",
+  position: "center-top",
+  distance: "18px",
+  svgSize: "120px",
+  timeout: 2200,
+  borderRadius: "20px",
+  fontFamily: "Poppins",
+  fontSize: "16px",
+};

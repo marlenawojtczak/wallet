@@ -29,6 +29,7 @@ export const Filter = styled.div`
   backdrop-filter: blur(25px);
   height: 100%;
   width: 100%;
+  overflow: hidden;
 `;
 
 export const Wrapper = styled.div`

@@ -281,7 +281,25 @@ export const BackgroundContainer = styled.div`
     height: 100%;
     object-fit: cover;
     z-index: -1;
-  }
+
+//   overflow: hidden;
+//   position: relative;
+//   height: 100vh;
+//   @media screen and (min-width: 768px) {
+//     display: flex;
+//     flex-direction: column;
+//     height: 100vh;
+//     padding: 60px 118px;
+//     background-color: var(--bg-accent);
+//     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
+//     background-repeat: no-repeat, no-repeat;
+//     background-position: right -25vw top, left bottom;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     padding: 0;
+//     justify-content: center;
+//     background-position: right top, left bottom;
+//  }
 `;
 
 export const StyledInfo = styled.div`

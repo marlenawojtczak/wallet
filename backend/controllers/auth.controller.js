@@ -54,7 +54,8 @@ export const verify = async (req, res, next) => {
     verificationToken: "",
   });
 
-  res.redirect("https://wallet.dupawklamerkach.pl/#/login");
+  // res.redirect("https://uwallet.pl/#/login");
+  // res.redirect("http://localhost:4000/#/login");
 };
 
 export const resendVerify = async (req, res, next) => {
@@ -118,6 +119,8 @@ export const signin = async (req, res, next) => {
   if (!passwordIsValid) {
     return res.status(401).send({
       message: "Password is incorrect",
+      verify: user.verify,
+      email: user.email,
     });
   }
 
@@ -141,6 +144,7 @@ export const signin = async (req, res, next) => {
       balance: user.balance,
       accessToken,
       refreshToken,
+      verify: user.verify,
     },
     session: {
       sid: newSession._id,

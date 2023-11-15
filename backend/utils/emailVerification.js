@@ -21,8 +21,9 @@ export const sendVerificationEmail = async (
       replyTo: "naukait123@gmail.com",
       to: email,
       subject: subject,
-      html: `<p>Hello, ${email}</p><p>Please click on the link below to verify your account.</p>
-      <a href="https://wallet.dupawklamerkach.pl/api/auth/verify/${verificationToken}">Verification Link</a>`,
+      html: `<p>Hello, ${email}</p><p>We just need to verify your email address before you can access Wallet App.</p><p>Please click on the link below.</p>
+      <a href="https://uwallet.pl/api/auth/verify/${verificationToken}">Verification Link</a>
+      <p>Best regards, Clammers Team</p>`,
     });
   } catch (error) {
     console.log("ERROR here - ", error);
