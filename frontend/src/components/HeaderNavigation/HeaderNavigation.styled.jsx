@@ -1,21 +1,27 @@
 import styled, { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as LogoIcon } from "../../assets/icons/wallet.svg";
 
 const rotateAnimation = keyframes`
   0% {
-    transform: rotateY(0deg);
+    transform: scale(1);
+   
   }
   50% {
-    transform: rotateY(180deg);
+    transform: scale(0.97);
+    filter: drop-shadow(1px 2px 6px  rgba(0, 0, 0, 0.5));
+  }
+  75% {
+    transform: scale(1.03);
+    filter: drop-shadow(4px 5px 10px  rgba(0, 0, 0, 0.5));
   }
   100% {
-    transform: rotateY(360deg);
+    transform: scale(1);
+  
   }
 `;
 
-export const RotatingLogoIcon = styled(LogoIcon)`
-  animation: ${rotateAnimation} 10s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+export const RotatingLogoIcon = styled.div`
+  animation: ${rotateAnimation} 5s linear infinite;
 `;
 
 export const Link = styled(NavLink)`
@@ -25,15 +31,16 @@ export const Link = styled(NavLink)`
 
 export const Wrapper = styled.div`
   display: flex;
-  gap: 15px;
-  align-items: center;
+  gap: 10px;
 `;
 
 export const LogoTitle = styled.span`
   color: var(--font-dark);
-  font-family: "Poppins";
-  font-weight: 700;
+  font-family: OpenSans;
+  font-weight: 500;
   font-size: 30px;
+  text-shadow: 1px 1px 0 var(--font-dark), 2px 1px 0 var(--font-dark),
+    3px 0px 0 grey, 10px 2px 15px black;
 `;
 
 /* 

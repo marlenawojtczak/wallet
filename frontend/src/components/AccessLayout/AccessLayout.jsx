@@ -1,79 +1,89 @@
-import { Outlet, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import manBackground from "../../assets/images/mobileMan.png";
-import womanBackground from "../../assets/images/mobileWoman.png";
-import logoMobile from "../../assets/images/logoMobile.png";
+import { Outlet, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import financeMp4 from "../../assets/mp4/finance.mp4";
+import { ReactComponent as Logo } from "../../assets/icons/logoPocket.svg";
 import { Footer } from "../../components/Footer/Footer";
+
 
 import {
   BackgroundContainer,
   Wrapper,
+  StyledInfo,
+  SpanLogo,
+  SpanText,
+  SpanInfo,
+  ButtonLogin,
   LogoWrapper,
-  Info,
-  RightContent,
-  PhotoWrapper,
-  Photo,
-  MobileLogo,
-  Image,
-  ManWithBasket,
-  WomanWithMobile,
 } from "./AccessLayout.styled";
 
-import goMan from "../../assets/images/manOnly.png";
-import goWoman from "../../assets/images/womanOnly.png";
-
 export const AccessLayout = () => {
-  const location = useLocation();
-
-  const [showImage, setShowImage] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showWrapper, setShowWrapper] = useState(false);
+  const [showOutlet, setShowOutlet] = useState(false);
+  const [showButton, setShowButton] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowImage(true);
-    }, 1000);
-    return () => clearTimeout(timer);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  const getPhoto = () => {
-    if (location.pathname === "/login") {
-      return manBackground;
-    } else if (location.pathname === "/register") {
-      return womanBackground;
-    } else {
-      return manBackground;
-    }
+  useEffect(() => {
+    const timer = setTimeout(
+      () => {
+        setShowWrapper(true);
+      },
+      windowWidth < 768 ? 2200 : 0
+    );
+    return () => clearTimeout(timer);
+  }, [windowWidth]);
+
+  const handleLoginButtonClick = () => {
+    setShowOutlet(true);
+    setShowButton(false);
   };
 
   return (
     <BackgroundContainer>
-      <Wrapper>
-        <LogoWrapper>
-          <PhotoWrapper>
-            <Photo src={getPhoto()} alt="Shopping" />
-            {showImage && (
-              <ManWithBasket
-                src={location.pathname === "/login" ? goMan : {}}
-                alt=""
-              />
+      <video autoPlay muted loop id="background-video">
+        <source src={financeMp4} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      {window.innerWidth <= 1279 && (
+        <StyledInfo>
+          <SpanText>Welcome in</SpanText>
+          <LogoWrapper>
+            <Logo
+              style={{
+                filter: "drop-shadow(6px 4px 3px var(--font-dark))",
+              }}
+            />
+            <SpanLogo>uWallet</SpanLogo>
+          </LogoWrapper>
+          <SpanInfo>Start controlling your money</SpanInfo>
+        </StyledInfo>
+      )}
+      {showWrapper && (
+        <Wrapper>
+          {window.innerWidth > 767 &&
+            window.innerWidth < 1280 &&
+            showButton && (
+              <ButtonLogin onClick={handleLoginButtonClick}>
+                Login or Register
+              </ButtonLogin>
             )}
-            {showImage && (
-              <WomanWithMobile
-                src={location.pathname === "/register" ? goWoman : {}}
-                alt=""
-              />
-            )}
-          </PhotoWrapper>
-          <Info>Finance App</Info>
-        </LogoWrapper>
 
-        <MobileLogo>
-          <Image src={logoMobile} alt="Shopping" />
-        </MobileLogo>
-
-        <RightContent>
-          <Outlet />
-        </RightContent>
-      </Wrapper>
+          {window.innerWidth < 768 && <Outlet />}
+          {showOutlet && window.innerWidth >= 768 && <Outlet />}
+          {window.innerWidth >= 1280 && <Outlet />}
+        </Wrapper>
+      )}
       <Footer />
     </BackgroundContainer>
   );

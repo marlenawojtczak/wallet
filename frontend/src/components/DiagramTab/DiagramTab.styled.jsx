@@ -14,7 +14,6 @@ export const WrapperDonat = styled.div`
 export const WrapperTable = styled.div`
   flex: 1;
   @media screen and (min-width: 1280px) {
-    padding-top: 40px;
   }
 `;
 

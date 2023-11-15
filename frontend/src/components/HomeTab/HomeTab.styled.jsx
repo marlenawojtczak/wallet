@@ -11,7 +11,7 @@ const showIn = keyframes`
 
 export const TableHeader = styled.div`
   display: flex;
-  font-family: "Circe";
+  font-family: OpenSans;
   font-size: 18px;
   font-weight: 700;
   background-color: var(--bg-light);
@@ -35,7 +35,7 @@ export const ListItem = styled.tr`
   justify-content: space-between;
   height: 47px;
   align-items: center;
-  font-family: "Circe";
+  font-family: OpenSans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -52,7 +52,7 @@ export const ListItemValue = styled.tr`
   justify-content: space-between;
   height: 47px;
   align-items: center;
-  font-family: "Circe";
+  font-family: OpenSans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -76,7 +76,7 @@ export const StyledTable = styled.div`
 export const MainListItem = styled.li``;
 
 export const EditText = styled.span`
-  font-family: Circe;
+  font-family: OpenSans;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -96,6 +96,7 @@ export const EditText = styled.span`
 export const TableWrapper = styled.div`
   height: 50vh;
   overflow: auto;
+
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -120,6 +121,8 @@ export const TableWrapper = styled.div`
 export const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 `;
 
 export const TableHead = styled.thead`
@@ -128,16 +131,14 @@ export const TableHead = styled.thead`
   top: 0px;
   background-color: var(--font-light);
   & tr:first-child th:first-child {
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-top-left-radius: 10px;
   }
   & tr:first-child th:last-child {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-top-right-radius: 10px;
   }
 `;
 export const TableHeaderCell = styled.th`
-  font-family: Circe;
+  font-family: OpenSans;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -170,10 +171,11 @@ export const TableCellActions = styled.tr`
 
 export const TableCell = styled.td`
   padding: 15px 15px;
-  font-family: Circe;
-  font-size: 16px;
+  font-family: OpenSans;
+  font-size: 17px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 200;
+  color: var(--bg-light);
   line-height: normal;
   @media screen and (min-width: 1280px) {
     padding: 20px 20px;
@@ -190,23 +192,29 @@ export const TableCellButton = styled.td`
 `;
 
 export const DeleteButton = styled.button`
-  width: 67px;
-
-  font-size: 14px;
+  font-family: OpenSans;
+  font-size: 18px;
   font-style: normal;
-  font-family: Circe;
   font-weight: 400;
   line-height: normal;
+  text-transform: uppercase;
+  border: 1px solid var(--bg-light);
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px 35px;
+  margin: 30px 0 50px 0;
+  color: var(--bg-light);
+  backdrop-filter: blur(5px);
+  transition: all 150ms ease;
+  cursor: pointer;
+
   margin: auto;
-  border: none;
-  border-radius: 18px;
+
   padding: 10px 10px;
   display: flex;
 
   justify-content: center;
-  color: var(--bg-light);
-  background-color: var(--brand-secondary);
-  cursor: pointer;
+
   @media screen and (min-width: 768px) {
     width: 90%;
   }
@@ -214,8 +222,8 @@ export const DeleteButton = styled.button`
     width: 80%;
   }
   &:hover {
-    transform: scale(1.02);
-    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
+    color: var(--brand-accent);
+    border: 1px solid var(--brand-accent);
   }
 `;
 
@@ -227,18 +235,20 @@ export const Button = styled.button`
     cursor: pointer;
   }
   &:hover svg path#Icon {
-    fill: var(--brand-accent);
+    fill: var(--font-light);
   }
 `;
 
 export const Message = styled.p`
   text-align: center;
-  font-family: Circe;
+  font-family: OpenSans;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
+  letter-spacing: 0.5px;
   line-height: normal;
-  padding: 14px 0 110px 0;
+  padding: 20px 0 110px 0;
+  color: var(--font-light);
 `;
 export const Plus = styled.span`
   display: inline-block;

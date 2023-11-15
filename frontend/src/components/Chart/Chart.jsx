@@ -85,7 +85,7 @@ export const ChartContainer = () => {
 
   return (
     <>
-      <ChartHeader>Statistics</ChartHeader>
+      {/* <ChartHeader>Statistics</ChartHeader> */}
       <StyledChart>
         <WrapperDonat>
           <Doughnut data={chartData} options={options} />
