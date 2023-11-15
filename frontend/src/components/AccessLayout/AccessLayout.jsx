@@ -4,7 +4,6 @@ import financeMp4 from "../../assets/mp4/finance.mp4";
 import { ReactComponent as Logo } from "../../assets/icons/logoPocket.svg";
 import { Footer } from "../../components/Footer/Footer";
 
-
 import {
   BackgroundContainer,
   Wrapper,
