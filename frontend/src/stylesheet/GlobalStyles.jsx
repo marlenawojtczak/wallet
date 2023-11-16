@@ -4,6 +4,7 @@ import "./fonts.css";
 import "./vars.css";
 
 export const GlobalStyles = createGlobalStyle`
+
   body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.5;
@@ -36,7 +37,7 @@ export const GlobalStyles = createGlobalStyle`
   background: #FAE1E2;
 }
 .Toastify__toast--error::after {
-content : url('../assets/images/svg/closeToast.svg'); // Your svg Path
+content : url('../assets/images/svg/closeToast.svg'); 
 position: absolute;
 color: #333333;
 font-size: 16px;
@@ -46,9 +47,9 @@ left:265px;
 
 }
 .Toastify__toast--error::before {
-content: url("../assets/images/svg/errorToast.svg");// Your svg Path
+content: url("../assets/images/svg/errorToast.svg");
 position:relative; 
-z-index:100000;
+z-index:4;
 left:12px;
 top:6px;
 }
@@ -58,14 +59,14 @@ border-radius: 50px;
 background: #F0F9FA;
 }
 .Toastify__toast--success::before {
-content: url("../assets/images/svg/successToast.svg");// Your svg Path
+content: url("../assets/images/svg/successToast.svg");
 position:relative; 
-z-index:100000;
+z-index:4;
 left:12px;
 top:6px;
 }
 .Toastify__toast--success::after {
-content : url('../assets/images/svg/closeToast.svg');// Your svg Path
+content : url('../assets/images/svg/closeToast.svg');
 position: absolute;
 color: #333333;
 font-size: 16px;
@@ -79,14 +80,14 @@ border-radius: 50px;
 background: #FADFC5;
 }
 .Toastify__toast--warning::before {
-content: url("../assets/images/svg/warnToast.svg");// Your svg Path
+content: url("../assets/images/svg/warnToast.svg");
 position:relative; 
-z-index:100000;
+z-index:4;
 left:12px;
 top:6px;
 }  
 .Toastify__toast--warning::after {
-content : url('../assets/images/svg/closeToast.svg'); // Your svg Path
+content : url('../assets/images/svg/closeToast.svg'); 
 position: absolute;
 color: #E78326;
 font-size: 16px;
@@ -101,14 +102,14 @@ padding-top: 14px;
  
   }
   .Toastify__toast--info::before {
-  content: url("../assets/images/svg/warnToast.svg");// Your svg Path
+  content: url("../assets/images/svg/warnToast.svg");
   position:relative; 
-  z-index:100000;
+  z-index:4;
   left:12px;
   top:6px;
   }  
   .Toastify__toast--info::after {
-  content : url('../assets/images/svg/closeToast.svg'); // Your svg Path
+  content : url('../assets/images/svg/closeToast.svg'); 
   position: absolute;
   font-size: 16px;
   font-weight: 700;

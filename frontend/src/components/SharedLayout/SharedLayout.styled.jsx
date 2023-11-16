@@ -11,7 +11,7 @@ export const BackgroundContainer = styled.div`
     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
     background-repeat: no-repeat, no-repeat;
     background-position: right -25vw top, left bottom;
-    height: 100vh;
+    /* height: 100vh; */
   }
   @media screen and (min-width: 1280px) {
     background-position: right top 80px, left bottom;
@@ -34,9 +34,9 @@ export const MaxWrapper = styled.div`
 
 export const Filter = styled.div`
   backdrop-filter: blur(40px);
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
 `;
 
 export const Wrapper = styled.div`

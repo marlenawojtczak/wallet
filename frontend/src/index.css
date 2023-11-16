@@ -4,7 +4,7 @@ body {
   box-sizing: border-box;
   display: grid;
   justify-content: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 h1,
 h2,

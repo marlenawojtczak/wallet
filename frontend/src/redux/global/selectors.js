@@ -6,3 +6,4 @@ export const selectIsLoading = (state) => state.global.isLoading;
 export const selectIsModalEditTransactionOpen = (state) =>
   state.global.isModalEditTransactionOpen;
 export const selectIsModalTeamOpen = (state) => state.global.isModalTeamOpen;
+export const selectIsModalTeamClose = (state) => state.global.isModalTeamClose;
