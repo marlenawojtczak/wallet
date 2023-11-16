@@ -7,8 +7,9 @@ export const Modal = styled(ReactModal)`
   height: auto;
   width: 80%;
   margin: 0 auto;
+  padding: 5px 25px;
   background-color: #fefefe;
-  border-radius: 20px;
+  border-radius: 10px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -28,17 +29,18 @@ export const ModalOverlay = styled.div`
 `;
 
 export const CloseButton = styled(Exit)`
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
 `;
 
 export const TeamList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+
   gap: 10px;
   margin: 20px auto;
   padding: 0;

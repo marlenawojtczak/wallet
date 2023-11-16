@@ -5,6 +5,7 @@ export const FooterBtn = styled.button`
   bottom: 0;
   left: 0;
   width: 100%;
+  padding-bottom: 5px;
   background-color: white;
   display: flex;
   flex-direction: column;
