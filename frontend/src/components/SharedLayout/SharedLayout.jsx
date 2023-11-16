@@ -54,8 +54,8 @@ export const SharedLayout = () => {
               </WrapperRightAndDownSite>
             </Wrapper>
           </MaxWrapper>
-          <Footer />
         </Filter>
+        <Footer />
       </BackgroundContainer>
     </>
   );

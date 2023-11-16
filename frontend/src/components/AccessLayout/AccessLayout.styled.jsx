@@ -93,11 +93,11 @@ export const WomanWithMobile = styled.img`
 export const BackgroundContainer = styled.div`
   overflow: hidden;
   position: relative;
-  height: 100vh;
+  /* height: 100vh; */
   @media screen and (min-width: 768px) {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
     padding: 60px 118px;
     background-color: var(--bg-accent);
     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
