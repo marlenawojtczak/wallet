@@ -16,27 +16,43 @@ export const BalanceElement = styled.div`
   background-color: var(--bg-light);
   animation: ${showIn} 500ms linear;
   padding: 8px 0 6px 32px;
+  margin-bottom: 45px;
 
   @media screen and (min-width: 767px) {
     width: 100%;
+    margin: 0;
   }
 `;
 
 export const BalanceHeader = styled.p`
   font-family: OpenSans;
-  font-size: 13px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--font-grey);
+  @media screen and (min-width: 767px) {
+    font-size: 12px;
+    padding-top: 4px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 12px;
+    padding-top: 0;
+  }
 `;
 export const Cash = styled.span`
   font-family: OpenSans;
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 400;
   color: var(--font-dark);
+  @media screen and (min-width: 767px) {
+    font-size: 28px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 28px;
+  }
 `;
 
 export const BalanceContent = styled.p`
@@ -44,9 +60,15 @@ export const BalanceContent = styled.p`
   gap: 8px;
   align-items: center;
   font-family: OpenSans;
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--font-dark);
+  @media screen and (min-width: 767px) {
+    font-size: 28px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 28px;
+  }
 `;
 
 /* 

@@ -15,11 +15,14 @@ export const StyledChart = styled.div`
 `;
 
 export const WrapperDonat = styled.div`
-  width: 280px;
-  height: 280px;
-  display: flex;
-  justify-content: center;
+  width: 250px;
+  height: 250px;
+
   @media screen and (min-width: 768px) {
+    width: 300px;
+    height: 300px;
+  }
+  @media screen and (min-width: 1280px) {
     width: 336px;
     height: 336px;
   }
@@ -28,13 +31,18 @@ export const WrapperDonat = styled.div`
 export const InsideText = styled.p`
   color: var(--font-light);
   position: absolute;
-  top: 40%;
+  top: 39%;
   left: 50%;
   transform: translate(-50%, 50%);
   font-family: OpenSans;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
+  span {
+    padding-left: 6px;
+  }
+
   @media screen and (min-width: 768px) {
+    font-size: 20px;
     top: 41%;
   }
 `;

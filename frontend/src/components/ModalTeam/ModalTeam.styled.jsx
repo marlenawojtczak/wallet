@@ -7,8 +7,8 @@ export const Modal = styled(ReactModal)`
   height: auto;
   width: 80%;
   margin: 0 auto;
-  background-color: #fefefe;
-  border-radius: 20px;
+  background-color: transparent;
+  border-radius: 10px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -22,6 +22,11 @@ export const Modal = styled(ReactModal)`
     max-width: 760px;
   }
 `;
+export const ModalFilter = styled.div`
+  background: linear-gradient(to right, #00aaff, #0d91d3, #0792fd);
+  padding: 5px;
+  border-radius: 10px;
+`;
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -31,8 +36,8 @@ export const CloseButton = styled(Exit)`
   width: 16px;
   height: 16px;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 5px;
+  right: 10px;
   cursor: pointer;
 `;
 
@@ -40,7 +45,7 @@ export const TeamList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 20px auto;
+  margin: 20px auto 10px;
   padding: 0;
   justify-content: center;
 `;
@@ -52,26 +57,32 @@ export const TeamListEl = styled.li`
 `;
 
 export const TeamMember = styled.a`
-  color: var(--font-grey);
+  color: var(--font-light);
+  font-family: OpenSans;
+  font-weight: 300;
+  font-size: 20px;
   text-decoration: none;
   font-size: 13px;
   text-align: center;
   display: block;
+  fill: var(--font-light);
 
   img {
     margin-bottom: 6px;
     transition: 0.5s;
+    border-radius: 5px;
   }
 
   &:hover {
-    color: var(--linked-in);
-    fill: var(--linked-in);
+    font-weight: 500;
+    color: black;
+    fill: black;
   }
 
   &:hover img {
-    -webkit-box-shadow: 0px 0px 16px -1px rgba(0, 119, 181, 1);
-    -moz-box-shadow: 0px 0px 16px -1px rgba(0, 119, 181, 1);
-    box-shadow: 0px 0px 16px -1px rgba(0, 119, 181, 1);
+    -webkit-box-shadow: 0px 0px 16px -1px #080808;
+    -moz-box-shadow: 0px 0px 16px -1px #080808;
+    box-shadow: 0px 0px 16px -1px #080808;
   }
 `;
 
