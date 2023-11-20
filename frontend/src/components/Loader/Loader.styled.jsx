@@ -11,9 +11,30 @@ const animloader = keyframes`
   }
 `;
 
+// export const LoaderContent = styled.div`
+//   width: 100%;
+//   height: 5px;
+//   display: inline-block;
+//   background: transparent;
+//   overflow: hidden;
+//   position: absolute;
+
+//   &::after {
+//     content: "";
+//     box-sizing: border-box;
+//     width: 192px;
+//     height: 5px;
+//     background: var(--brand-primary);
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     animation: ${animloader} 900ms linear infinite;
+//   }
+// `;
+
 export const LoaderContent = styled.div`
   width: 100%;
-  height: 5px;
+  height: 100px;
   display: inline-block;
   background: transparent;
   overflow: hidden;
@@ -22,13 +43,13 @@ export const LoaderContent = styled.div`
   &::after {
     content: "";
     box-sizing: border-box;
-    width: 192px;
-    height: 5px;
-    background: var(--brand-primary);
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to right, #0370a7, #02527a, #0075ce);
     position: absolute;
     top: 0;
     left: 0;
-    animation: ${animloader} 900ms linear infinite;
+    animation: ${animloader} 200ms linear;
   }
 `;
 
