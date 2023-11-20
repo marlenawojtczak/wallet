@@ -62,7 +62,7 @@ export const Table = () => {
       );
     };
     fetchingData();
-  }, []);
+  }, [dispatch, selectedMonth, selectedYear]);
 
   const getMonths = () => {
     if (selectedYear) {

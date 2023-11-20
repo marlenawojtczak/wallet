@@ -54,6 +54,10 @@ export const verify = async (req, res, next) => {
     verificationToken: "",
   });
 
+  return res.status(200).send({
+    message: "Successful operation",
+  });
+
   // res.redirect("https://uwallet.pl/#/login");
   // res.redirect("http://localhost:4000/#/login");
 };
