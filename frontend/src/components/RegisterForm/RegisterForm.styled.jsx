@@ -291,7 +291,6 @@ export const StyledButton = styled.div`
   display: flex;
   justify-content: center;
   padding: 10px 0;
-  font-size: 20px;
   font-family: OpenSans;
   font-weight: 600;
   font-size: 20px;
@@ -368,5 +367,12 @@ export const StyledProgressBar = styled.div`
         return "linear-gradient(to right, #5eaa08, #82b857, #5a810a);";
       }
     }};
+  }
+`;
+
+export const FooterWrapper = styled.div`
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    justify-content: center;
   }
 `;

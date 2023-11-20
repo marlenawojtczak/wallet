@@ -38,15 +38,20 @@ export const ListItem = styled.li`
   display: flex;
   align-items: center;
   font-family: OpenSans;
-  font-size: 18px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 18px;
-  padding: 14px 20px;
+  padding: 10px 20px;
+  color: var(--bg-light);
   box-shadow: 0px 1px 0px var(--bg-light);
 
   @media screen and (min-width: 768px) {
     margin: 0;
+    padding: 14px 20px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
   }
 `;
 
@@ -67,48 +72,76 @@ export const Sum = styled.div`
   flex-direction: column;
   margin: 0;
   border-radius: 10px;
-  box-shadow: 0px -1px 3px var(--font-light);
+  /* border: 1px solid var(--bg-light); */
+  margin: 20px 0;
+  padding: 10px 20px;
+  gap: 5px;
+  background-color: white;
 
   @media screen and (min-width: 768px) {
-    margin: 0;
+    padding: 12px 20px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding: 15px 20px;
   }
 `;
+
+export const TableWrapper = styled.div`
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1280px) {
+  }
+`;
+
 export const Expenses = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: OpenSans;
-  font-weight: 400;
-  font-size: 18px;
-  color: var(--font-light);
-  padding: 16px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--font-dark);
+
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
+  }
 `;
 
 export const Income = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: OpenSans;
-  font-weight: 400;
-  font-size: 18px;
-  color: var(--font-light);
-  padding: 0 20px;
-  padding-bottom: 51px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--font-dark);
+
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
+  }
 `;
 
 export const TableHeader = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: OpenSans;
-  font-size: 18px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   background-color: var(--bg-light);
   border-radius: 10px;
-  padding: 15px 20px;
+  padding: 10px 20px;
   margin-bottom: 20px;
   /* padding-right: 130px; */
 
   @media screen and (min-width: 768px) {
+    padding: 15px 20px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
   }
 `;
 
@@ -151,7 +184,7 @@ export const SelectStylesSmall = {
   control: (styles) => ({
     ...styles,
     borderRadius: 10,
-    height: 50,
+    height: 40,
     backgroundColor: "transparent",
     cursor: "pointer",
 
@@ -182,11 +215,13 @@ export const SelectStylesSmall = {
     transform: "scale(1.5)",
     color: "var(--font-light)",
     "&:hover": {
-      color: "var(--font-dark)",
+      color: "var(--font-light)",
+      transform: "scale(1.8)",
     },
   }),
   menu: (styles) => ({
     ...styles,
+
     backgroundColor: "var(--bg-gray)",
     boxShadow: "0px 6px 15px 0px rgba(0, 0, 0, 0.1)",
     borderRadius: 10,
@@ -251,7 +286,8 @@ export const SelectStylesMedium = {
     transform: "scale(1.5)",
     color: "var(--font-light)",
     "&:hover": {
-      color: "var(--font-dark)",
+      color: "var(--font-light)",
+      transform: "scale(1.8)",
     },
   }),
   menu: (styles) => ({
@@ -319,7 +355,8 @@ export const SelectStylesLarge = {
     transform: "scale(1.5)",
     color: "var(--font-light)",
     "&:hover": {
-      color: "var(--font-dark)",
+      color: "var(--font-light)",
+      transform: "scale(1.8)",
     },
   }),
   menu: (styles) => ({

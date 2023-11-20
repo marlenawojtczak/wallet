@@ -13,11 +13,13 @@ const showIn = keyframes`
 export const TableWrapper = styled.div`
   animation: ${showIn} 500ms linear;
   width: 100%;
+  margin-bottom: 20px;
 
   @media screen and (min-width: 768px) {
     overflow: auto;
     height: 190px;
     border-radius: 10px;
+    margin-bottom: 0;
   }
   @media screen and (min-width: 1280px) {
     overflow: hidden;
@@ -61,17 +63,19 @@ export const TableHeaderCell = styled.th`
   font-family: OpenSans;
   text-align: center;
   flex: 1;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   color: var(--font-dark);
 
   @media screen and (min-width: 768px) {
+    font-size: 16px;
   }
 
   @media screen and (min-width: 1280px) {
     font-weight: 700;
+    font-size: 18px;
   }
 `;
 
@@ -90,16 +94,15 @@ export const TableCell = styled.tr`
   flex: 1;
   font-family: OpenSans;
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: normal;
   color: var(--font-light);
   @media screen and (min-width: 768px) {
-    font-size: 17px;
-    font-weight: 400;
   }
   @media screen and (min-width: 1280px) {
     font-weight: 300;
+    font-size: 16px;
   }
 `;

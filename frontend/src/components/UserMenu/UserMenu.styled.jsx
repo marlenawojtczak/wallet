@@ -11,12 +11,14 @@ export const UserName = styled.span`
   font-family: OpenSans;
   font-weight: 400;
   letter-spacing: 1px;
-  font-size: 20px;
+  font-size: 17px;
   text-shadow: 1px 1px 0 var(--font-dark), 2px 1px 0 var(--font-dark),
     3px 0px 0 grey, 10px 2px 15px black;
   border-right: 2px solid var(--font-dark);
-
   padding-right: 12px;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const Button = styled.button`

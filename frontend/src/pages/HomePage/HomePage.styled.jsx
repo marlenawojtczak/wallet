@@ -9,13 +9,14 @@ export const ButtonWrapper = styled.div`
   padding: 20px;
 
   @media screen and (min-width: 768px) {
-    padding: 20px 30px;
-    justify-content: flex-end;
-    bottom: 5%;
+    position: fixed;
+    bottom: 4%;
+    right: 50px;
+    padding: 0;
   }
   @media screen and (min-width: 1280px) {
-    padding: 40px;
-    bottom: 0%;
+    right: 5%;
+    padding: 0;
   }
 `;
 

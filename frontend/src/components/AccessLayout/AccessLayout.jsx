@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import financeMp4 from "../../assets/mp4/finance.mp4";
 import { ReactComponent as Logo } from "../../assets/icons/logoPocket.svg";
-import { Footer } from "../../components/Footer/Footer";
+import { Footer } from "../../components/Footer";
 
 import {
   BackgroundContainer,
@@ -13,6 +13,7 @@ import {
   SpanInfo,
   ButtonLogin,
   LogoWrapper,
+  FooterWrapper,
 } from "./AccessLayout.styled";
 
 export const AccessLayout = () => {
@@ -81,9 +82,13 @@ export const AccessLayout = () => {
           {window.innerWidth < 768 && <Outlet />}
           {showOutlet && window.innerWidth >= 768 && <Outlet />}
           {window.innerWidth >= 1280 && <Outlet />}
+          {window.innerWidth >= 768 && window.innerWidth < 1280 && (
+            <FooterWrapper>
+              <Footer />
+            </FooterWrapper>
+          )}
         </Wrapper>
       )}
-      <Footer />
     </BackgroundContainer>
   );
 };

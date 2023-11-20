@@ -29,8 +29,10 @@ import {
   StyledButtonMobileLogin,
   Span,
   LogoWrapper,
+  FooterWrapper,
 } from "./LoginForm.styled";
 import { showToast } from "../../utils/helperFunctions";
+import { Footer } from "../../components/Footer";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -125,6 +127,9 @@ export const LoginForm = () => {
             budget
           </SpanInfo>
           <StyledButtonR onClick={registerButton}>Register</StyledButtonR>
+          <FooterWrapper>
+            <Footer />
+          </FooterWrapper>
         </StyledInfo>
       )}
       <StyledForm onKeyPress={handleKeyPress}>

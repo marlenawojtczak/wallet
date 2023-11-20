@@ -5,23 +5,43 @@ export const Button = styled.button`
   height: 50px;
   border-radius: 50%;
   background-color: var(--brand-secondary);
-
+  color: var(--font-light);
   font-size: 16px;
   border: none;
   cursor: pointer;
-  /* position: sticky;
-  bottom: 30px; */
 
-  box-shadow: 1px 1px 8px;
+  box-shadow: 1px 1px 8px black;
   &:hover {
     transform: scale(1.1);
     box-shadow: 1px 1px 10px;
   }
-
   @media screen and (min-width: 768px) {
+    font-family: OpenSans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    box-shadow: none;
+    width: 100px;
+    height: auto;
+    background: linear-gradient(to right, #00aaff, #0074cc, #00aaff);
+    border-radius: 10px;
+    color: var(--font-light);
+    transition: all 150ms ease;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    border: 1px solid var(--font-light);
+    &:hover {
+      transition: all 150ms ease;
+      background: linear-gradient(to right, #00aaff, #0e8bca, #00aaff, #0074cc);
+      box-shadow: 1px 1px 10px;
+    }
   }
+
   @media screen and (min-width: 1280px) {
-    bottom: 30px;
-    left: 91%;
+    font-size: 20px;
+    width: 150px;
+    padding: 5px 0;
   }
 `;

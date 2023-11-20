@@ -9,9 +9,6 @@ export const Button = styled.button`
   font-size: 16px;
   border: none;
   cursor: pointer;
-  /* position: sticky;
-  bottom: 30px;
-  left: 5%; */
   box-shadow: 1px 1px 8px;
   &:hover {
     transform: scale(1.1);

@@ -6,14 +6,25 @@ export const ModalOverlay = styled.div`
 `;
 
 export const Modal = styled(ReactModal)`
-  padding: 15px 45px;
-  border-radius: 10px;
+  padding: 10px;
+
+  width: 100%;
   background-color: var(--bg-light);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
   z-index: 1;
+
+  @media screen and (min-width: 768px) {
+    width: auto;
+    padding: 10px 30px;
+    border-radius: 10px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding: 15px 45px;
+  }
 `;
 
 export const ModalContainer = styled.div`
@@ -22,26 +33,41 @@ export const ModalContainer = styled.div`
 `;
 
 export const Text = styled.span`
-  font-size: 18px;
+  font-size: 17px;
   font-family: OpenSans;
   color: var(--font-dark);
   font-weight: 400;
   display: block;
   text-align: center;
   padding-top: 15px;
+  @media screen and (min-width: 768px) {
+    font-size: 17px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 18px;
+  }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap: 15px;
-  padding: 15px 0;
+  gap: 20px;
+  padding: 15px 20px;
   justify-content: space-between;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    padding: 15px 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    gap: 15px;
+  }
 `;
 
 export const ButtonConfirm = styled.button`
   text-align: center;
   font-family: OpenSans;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   font-style: normal;
   line-height: normal;
@@ -49,7 +75,7 @@ export const ButtonConfirm = styled.button`
   text-transform: uppercase;
   border-radius: 10px;
   border: none;
-  padding: 13px 13px;
+  padding: 10px;
   color: var(--bg-light);
   background: linear-gradient(to right, #00aaff, #0074cc, #00aaff);
   transition: all 150ms ease;
@@ -67,6 +93,14 @@ export const ButtonConfirm = styled.button`
       #00aaff
     );
   }
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    padding: 13px 13px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 18px;
+  }
 `;
 
 export const ButtonCancel = styled.button`
@@ -81,7 +115,7 @@ export const ButtonCancel = styled.button`
   text-transform: uppercase;
   border: 2px solid #00aaff;
   border-radius: 10px;
-  padding: 13px 13px;
+  padding: 10px;
   color: #00aaff;
   background-color: var(--font-light);
   transition: all 150ms ease;
@@ -92,5 +126,13 @@ export const ButtonCancel = styled.button`
     color: red;
     border-color: red;
     letter-spacing: 3px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    padding: 13px 13px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 18px;
   }
 `;

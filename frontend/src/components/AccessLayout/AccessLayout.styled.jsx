@@ -184,14 +184,14 @@ export const Wrapper = styled.div`
 export const ButtonLogin = styled.button`
   @media screen and (min-width: 768px) {
     position: fixed;
-    width: 70%;
+
     display: flex;
     justify-content: center;
     text-align: center;
     bottom: 40%;
     border-radius: 10px;
     border: none;
-    padding: 10px 0;
+    padding: 10px 40px;
     backdrop-filter: blur(70px);
     color: var(--font-light);
     font-family: OpenSans;
@@ -199,14 +199,19 @@ export const ButtonLogin = styled.button`
     font-size: 30px;
     font-weight: 300;
     line-height: normal;
-    /* writing-mode: vertical-rl;
-    text-orientation: upright; */
-    /* text-transform: uppercase; */
+
     background-color: transparent;
     text-shadow: 1px 1px 0 var(--bg-light), 3px 0px 0 grey, 6px 1px 10px black;
     animation: ${fadeUp} 1.5s ease-in;
     cursor: pointer;
     box-shadow: 15px 0 20px 20px rgba(0, 0, 0, 0.5),
       5px 0 15px 15px rgba(0, 0, 0, 0.4), 2px 0 10px 10px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export const FooterWrapper = styled.div`
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
   }
 `;

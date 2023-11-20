@@ -11,6 +11,7 @@ import { ReactComponent as AccountBoxIcon } from "../../assets/icons/account_box
 import { ReactComponent as EyeOpenIcon } from "../../assets/icons/eyeOpen.svg";
 import { ReactComponent as EyeCloseIcon } from "../../assets/icons/eyeClose.svg";
 import { ReactComponent as Logo } from "../../assets/icons/logoPocket.svg";
+import { Footer } from "../../components/Footer";
 
 import {
   StyledInputContainer,
@@ -32,6 +33,7 @@ import {
   StyledButtonMobileLogin,
   Span,
   LogoWrapper,
+  FooterWrapper,
 } from "./RegisterForm.styled";
 import { showToast } from "../../utils/helperFunctions";
 
@@ -284,6 +286,9 @@ export const RegisterForm = () => {
           </SpanInfo>
 
           <StyledButtonL onClick={loginButton}>Login</StyledButtonL>
+          <FooterWrapper>
+            <Footer />
+          </FooterWrapper>
         </StyledInfo>
       )}
     </StyledWrapper>

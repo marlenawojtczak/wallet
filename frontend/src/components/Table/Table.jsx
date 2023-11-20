@@ -17,6 +17,7 @@ import {
   SelectStylesSmall,
   SelectStylesMedium,
   SelectStylesLarge,
+  TableWrapper,
 } from "./Table.styled";
 import {
   months,
@@ -221,18 +222,20 @@ export const Table = () => {
           ))}
         </List>
         <Sum>
-          <Expenses>
-            <span>Expenses:</span>
-            <span style={{ color: `var(--brand-accent)` }}>
-              {amountFormatter(totalExpenses)}
-            </span>
-          </Expenses>
-          <Income>
-            <span>Income:</span>
-            <span style={{ color: `var(--brand-secondary)` }}>
-              {amountFormatter(totalIncome)}
-            </span>
-          </Income>
+          <TableWrapper>
+            <Expenses>
+              <span>Expenses:</span>
+              <span style={{ color: `var(--brand-accent)` }}>
+                {amountFormatter(totalExpenses)}
+              </span>
+            </Expenses>
+            <Income>
+              <span>Income:</span>
+              <span style={{ color: `var(--brand-secondary)` }}>
+                {amountFormatter(totalIncome)}
+              </span>
+            </Income>{" "}
+          </TableWrapper>
         </Sum>
       </StyledTable>
     </TableContainer>

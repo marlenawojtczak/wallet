@@ -32,6 +32,8 @@ export const NavList = styled.ul`
 export const Link = styled(NavLink)`
   display: flex;
   align-items: center;
+  background-color: #0d91d3;
+  border-radius: 10px;
   margin: 0;
   padding: 0;
   svg path {
@@ -41,6 +43,7 @@ export const Link = styled(NavLink)`
   &.active {
     font-weight: 800;
     font-size: 25px;
+    background-color: #006597;
     svg path {
       fill: var(--font-light);
     }
@@ -59,12 +62,16 @@ export const Link = styled(NavLink)`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    background-color: transparent;
 
     &:hover svg {
       animation: ${rotateMobile} 500ms linear infinite;
     }
     svg {
       transform: scale(0.8) translateX(-34%);
+    }
+    &.active {
+      background-color: transparent;
     }
   }
 `;

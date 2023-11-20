@@ -1,13 +1,7 @@
 import { Outlet } from "react-router-dom";
-import {
-  Header,
-  // ButtonAddTransactions,
-  Navigation,
-  Balance,
-  Currency,
-} from "../../components";
-import { useSpring, animated } from "react-spring";
-import { Footer } from "../../components/Footer/Footer";
+import { useEffect, useState } from "react";
+import { Header, Navigation, Balance, Currency } from "../../components";
+import { Footer } from "../../components/Footer";
 
 import {
   BackgroundContainer,
@@ -20,13 +14,24 @@ import {
   WrapperRightAndDownSite,
   WrapperNavBal,
   MaxWrapper,
+  FooterWrapper,
 } from "./SharedLayout.styled";
 
 export const SharedLayout = () => {
-  const springAnimation = useSpring({
-    from: { opacity: 0, transform: "translateY(-20%)" },
-    to: { opacity: 1, transform: "translateY(0%)" },
-  });
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <BackgroundContainer>
@@ -36,11 +41,9 @@ export const SharedLayout = () => {
             <Wrapper>
               <WrapperLeftAndUpSite>
                 <WrapperNavBal>
-                  <animated.div style={springAnimation}>
-                    <WrapperNav>
-                      <Navigation />
-                    </WrapperNav>
-                  </animated.div>
+                  <WrapperNav>
+                    <Navigation />
+                  </WrapperNav>
                   <BalanceNav>
                     <Balance />
                   </BalanceNav>
@@ -48,14 +51,24 @@ export const SharedLayout = () => {
                 <CurrencyNav>
                   <Currency />
                 </CurrencyNav>
+                {windowWidth >= 1280 && (
+                  <FooterWrapper>
+                    <Footer />
+                  </FooterWrapper>
+                )}
               </WrapperLeftAndUpSite>
               <WrapperRightAndDownSite>
                 <Outlet />
               </WrapperRightAndDownSite>
             </Wrapper>
+            {window.innerWidth >= 768 && window.innerWidth < 1280 && (
+              <FooterWrapper>
+                <Footer />
+              </FooterWrapper>
+            )}
           </MaxWrapper>
-          <Footer />
         </Filter>
+        {window.innerWidth < 768 && <Footer />}
       </BackgroundContainer>
     </>
   );

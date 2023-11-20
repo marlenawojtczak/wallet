@@ -10,7 +10,7 @@ import {
   TableCell,
   TableHeaderCell,
   DeleteButton,
-  Button,
+  EditButton,
   StyledTable,
   EditText,
   TableNextRows,
@@ -40,7 +40,7 @@ import {
   amountColorFormatter,
   formatDate,
 } from "../../utils/formatUtils";
-import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
+import { ReactComponent as EditIcon } from "../../assets/icons/editBtn.svg";
 import Media from "react-media";
 import { useTable, useSortBy } from "react-table";
 
@@ -108,12 +108,13 @@ export const HomeTab = () => {
         disableSortBy: true,
         Cell: ({ row }) => (
           <TableCellActions>
-            <Button
+            <EditButton
               type="button"
               onClick={() => handleOpenModal(row.original._id)}
             >
               <EditIcon />
-            </Button>
+            </EditButton>
+
             <DeleteButton
               type="submit"
               onClick={() => TransactionsDeleteHandler(row.original._id)}
@@ -142,10 +143,10 @@ export const HomeTab = () => {
       );
 
       const editBtn = (
-        <Button type="button" onClick={() => handleOpenModal(item._id)}>
+        <EditButton type="button" onClick={() => handleOpenModal(item._id)}>
           <EditIcon></EditIcon>
           <EditText>Edit</EditText>
-        </Button>
+        </EditButton>
       );
 
       return [
@@ -154,7 +155,7 @@ export const HomeTab = () => {
         { header: "Category", value: item.category },
         { header: "Comment", value: item.comment },
         { header: "Sum", value: amountFormatter(item.amount.toString()) },
-        { header: deleteBtn, value: editBtn },
+        { header: editBtn, value: deleteBtn },
       ];
     }
   );
@@ -202,7 +203,7 @@ export const HomeTab = () => {
                         <TableCell colSpan="100%">
                           <Message>
                             There are no transactions. You can add one with the
-                            plus button <Plus>+</Plus> in the right bottom
+                            plus button <Plus>Add</Plus> in the right bottom
                             corner.
                           </Message>
                         </TableCell>
@@ -234,7 +235,7 @@ export const HomeTab = () => {
                     <td colSpan="7">
                       <Message>
                         There are no transactions. You can add one with the plus
-                        button <Plus>+</Plus> in the right bottom corner.
+                        button <Plus>Add</Plus> in the right bottom corner.
                       </Message>
                     </td>
                   </tr>

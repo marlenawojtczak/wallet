@@ -3,9 +3,5 @@ import * as React from "react";
 import { ReactComponent as PlusElement } from "../../assets/icons/plus.svg";
 
 export const ButtonAddTransactions = ({ onClick }) => {
-  return (
-    <Button onClick={onClick}>
-      <PlusElement />
-    </Button>
-  );
+  return <Button onClick={onClick}>Add</Button>;
 };

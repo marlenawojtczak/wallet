@@ -69,7 +69,7 @@ export const ChartContainer = () => {
   };
 
   const options = {
-    cutout: "70%",
+    cutout: "75%",
     maintainAspectRatio: true,
     plugins: {
       legend: {
@@ -90,7 +90,9 @@ export const ChartContainer = () => {
         <WrapperDonat>
           <Doughnut data={chartData} options={options} />
         </WrapperDonat>
-        <InsideText>PLN {amountFormatter(totalBalance)}</InsideText>
+        <InsideText>
+          PLN <span>{amountFormatter(totalBalance)}</span>{" "}
+        </InsideText>
       </StyledChart>
     </>
   );

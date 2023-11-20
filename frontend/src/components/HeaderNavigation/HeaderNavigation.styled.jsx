@@ -22,6 +22,16 @@ const rotateAnimation = keyframes`
 
 export const RotatingLogoIcon = styled.div`
   animation: ${rotateAnimation} 5s linear infinite;
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+  @media screen and (min-width: 768px) {
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
 `;
 
 export const Link = styled(NavLink)`
@@ -38,9 +48,13 @@ export const LogoTitle = styled.span`
   color: var(--font-dark);
   font-family: OpenSans;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 22px;
   text-shadow: 1px 1px 0 var(--font-dark), 2px 1px 0 var(--font-dark),
     3px 0px 0 grey, 10px 2px 15px black;
+
+  @media screen and (min-width: 768px) {
+    font-size: 30px;
+  }
 `;
 
 /* 

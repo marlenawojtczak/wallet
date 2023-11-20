@@ -1,4 +1,4 @@
-import { FooterBtn, TeamName } from "./Footer.styled";
+import { TeamName, FooterWrapper, FooterFilter } from "./Footer.styled";
 import { ModalTeam } from "../ModalTeam/ModalTeam";
 
 import { useDispatch } from "react-redux";
@@ -10,13 +10,13 @@ export const Footer = () => {
     dispatch(openModalTeam());
   };
   return (
-    <FooterBtn>
-      <ModalTeam />
-      <span>^</span>
-      <span>
-        © 2023 | All Rights Reserved | Developed by{" "}
-        <TeamName onClick={openModal}>Clamers</TeamName>
-      </span>
-    </FooterBtn>
+    <FooterWrapper>
+      <FooterFilter>
+        <ModalTeam />
+        <TeamName onClick={openModal}>
+          © 2023 | All Rights Reserved | Developed by <span>Clammers</span>
+        </TeamName>
+      </FooterFilter>
+    </FooterWrapper>
   );
 };

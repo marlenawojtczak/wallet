@@ -15,8 +15,6 @@ export const HeaderNavigation = () => {
             <Logo
               style={{
                 filter: "drop-shadow(2px 3px 6px var(--font-dark))",
-                width: "40px",
-                height: "40px",
               }}
             />
           </RotatingLogoIcon>
