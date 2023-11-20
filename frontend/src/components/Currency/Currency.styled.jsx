@@ -13,11 +13,13 @@ const showIn = keyframes`
 export const TableWrapper = styled.div`
   animation: ${showIn} 500ms linear;
   width: 100%;
+  margin-bottom: 20px;
 
   @media screen and (min-width: 768px) {
     overflow: auto;
     height: 190px;
     border-radius: 10px;
+    margin-bottom: 0;
   }
   @media screen and (min-width: 1280px) {
     overflow: hidden;

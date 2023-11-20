@@ -209,24 +209,9 @@ export const ButtonLogin = styled.button`
   }
 `;
 
-export const FotterPositionBig = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 export const FooterWrapper = styled.div`
-  width: 100%;
-  position: sticky;
-  bottom: 0;
   @media screen and (min-width: 768px) {
-    position: fixed;
-    width: auto;
-  }
-`;
-
-export const FotterPosition = styled.div`
-  display: flex;
-  justify-content: center;
-  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
   }
 `;

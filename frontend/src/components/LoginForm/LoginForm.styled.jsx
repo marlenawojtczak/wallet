@@ -688,7 +688,7 @@ export const StyledButtonIcon = styled.div`
 `;
 export const FooterWrapper = styled.div`
   @media screen and (min-width: 1280px) {
-    position: fixed;
-    bottom: 0;
+    display: flex;
+    justify-content: center;
   }
 `;

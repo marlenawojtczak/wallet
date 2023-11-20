@@ -47,10 +47,12 @@ const HomePage = () => {
         <Balance />
       </BalanceNav>
       <HomeTab />
+
       <ButtonWrapper>
         <ButtonScroll onClick={handleScroll} />
         <ButtonAddTransactions onClick={handleOpenModal} />
       </ButtonWrapper>
+
       <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
     </>
   );

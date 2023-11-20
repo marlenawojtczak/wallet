@@ -15,8 +15,6 @@ import {
   WrapperNavBal,
   MaxWrapper,
   FooterWrapper,
-  FotterPositionBig,
-  FotterPosition,
 } from "./SharedLayout.styled";
 
 export const SharedLayout = () => {
@@ -54,26 +52,23 @@ export const SharedLayout = () => {
                   <Currency />
                 </CurrencyNav>
                 {windowWidth >= 1280 && (
-                  <FotterPositionBig>
-                    <FooterWrapper>
-                      <Footer />
-                    </FooterWrapper>
-                  </FotterPositionBig>
+                  <FooterWrapper>
+                    <Footer />
+                  </FooterWrapper>
                 )}
               </WrapperLeftAndUpSite>
               <WrapperRightAndDownSite>
                 <Outlet />
               </WrapperRightAndDownSite>
             </Wrapper>
-            {windowWidth < 1280 && (
-              <FotterPosition>
-                <FooterWrapper>
-                  <Footer />
-                </FooterWrapper>
-              </FotterPosition>
+            {window.innerWidth >= 768 && window.innerWidth < 1280 && (
+              <FooterWrapper>
+                <Footer />
+              </FooterWrapper>
             )}
           </MaxWrapper>
         </Filter>
+        {window.innerWidth < 768 && <Footer />}
       </BackgroundContainer>
     </>
   );

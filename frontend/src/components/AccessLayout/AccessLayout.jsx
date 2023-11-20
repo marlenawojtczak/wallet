@@ -13,7 +13,6 @@ import {
   SpanInfo,
   ButtonLogin,
   LogoWrapper,
-  FotterPosition,
   FooterWrapper,
 } from "./AccessLayout.styled";
 
@@ -84,11 +83,9 @@ export const AccessLayout = () => {
           {showOutlet && window.innerWidth >= 768 && <Outlet />}
           {window.innerWidth >= 1280 && <Outlet />}
           {window.innerWidth >= 768 && window.innerWidth < 1280 && (
-            <FotterPosition>
-              <FooterWrapper>
-                <Footer />
-              </FooterWrapper>
-            </FotterPosition>
+            <FooterWrapper>
+              <Footer />
+            </FooterWrapper>
           )}
         </Wrapper>
       )}

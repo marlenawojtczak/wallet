@@ -1,24 +1,34 @@
 import styled from "styled-components";
 
 export const FooterWrapper = styled.div`
-  background-color: transparent;
-
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   text-align: center;
+  background: transparent;
+  border-radius: 0;
   border-top: 1px solid var(--bg-light);
-  border-radius: 5px;
-  border-bottom: none;
+
+  @media screen and (min-width: 768px) {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    width: auto;
+  }
+
   &:hover {
-    border: none;
+    background: linear-gradient(to right, #00aaff, #0d91d3, #0792fd);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
   }
 `;
 
 export const FooterFilter = styled.div`
-  backdrop-filter: blur(20px);
-  border-radius: 5px;
+  backdrop-filter: blur(200px);
 
   @media screen and (min-width: 768px) {
-    background-color: transparent;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
   }
   @media screen and (min-width: 1280px) {
   }
@@ -26,29 +36,30 @@ export const FooterFilter = styled.div`
 
 export const TeamName = styled.button`
   font-family: OpenSans;
-  font-size: 11px;
-  letter-spacing: 0.3px;
-  font-weight: 400;
+  font-size: 12px;
+
+  font-weight: 300;
   line-height: normal;
   text-align: center;
-  color: var(--bg-light);
+  color: var(--bg-dark);
 
   cursor: pointer;
   background-color: transparent;
   border: none;
-  transition: all 200ms ease-in;
 
   @media screen and (min-width: 768px) {
-    font-size: 13px;
+    font-size: 14px;
     padding: 3px 13px;
+    letter-spacing: 0.5px;
+    color: var(--bg-light);
   }
 
   @media screen and (min-width: 1280px) {
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
   }
   &:hover {
-    background: linear-gradient(to right, #00aaff, #0d91d3, #0792fd);
-    border-radius: 5px;
     span {
       text-shadow: 1px 1px 0 var(--bg-light), 3px 0px 0 grey, 3px 2px 2px black;
     }
