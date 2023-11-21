@@ -12,12 +12,6 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   animation: ${showIn} 500ms linear;
-  /* height: 100%; */
-
-  @media screen and (min-width: 768px) {
-    /* width: 100%;
-    height: 100%; */
-  }
 `;
 
 export const StyledTable = styled.div`
@@ -30,8 +24,6 @@ export const List = styled.ul`
   max-height: 35vh;
   overflow-y: auto;
   border-radius: 10px;
-  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px inset,
-    rgba(0, 0, 0, 0.5) 0px -2px 2px, rgba(0, 0, 0, 0.2) 0px 1px 1px inset; */
 `;
 
 export const ListItem = styled.li`
@@ -72,7 +64,6 @@ export const Sum = styled.div`
   flex-direction: column;
   margin: 0;
   border-radius: 10px;
-  /* border: 1px solid var(--bg-light); */
   margin: 20px 0;
   padding: 10px 20px;
   gap: 5px;
@@ -86,12 +77,7 @@ export const Sum = styled.div`
   }
 `;
 
-export const TableWrapper = styled.div`
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
-`;
+export const TableWrapper = styled.div``;
 
 export const Expenses = styled.div`
   display: flex;
@@ -100,12 +86,6 @@ export const Expenses = styled.div`
   font-weight: 700;
   font-size: 14px;
   color: var(--font-dark);
-
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-    font-size: 16px;
-  }
 `;
 
 export const Income = styled.div`
@@ -115,12 +95,6 @@ export const Income = styled.div`
   font-weight: 700;
   font-size: 14px;
   color: var(--font-dark);
-
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-    font-size: 16px;
-  }
 `;
 
 export const TableHeader = styled.div`
@@ -135,7 +109,6 @@ export const TableHeader = styled.div`
   border-radius: 10px;
   padding: 10px 20px;
   margin-bottom: 20px;
-  /* padding-right: 130px; */
 
   @media screen and (min-width: 768px) {
     padding: 15px 20px;
@@ -164,16 +137,10 @@ export const WrapperMonth = styled.div`
   @media screen and (min-width: 768px) {
     flex: 1;
   }
-
-  @media screen and (min-width: 1280px) {
-  }
 `;
 export const WrapperYear = styled.div`
   @media screen and (min-width: 768px) {
     flex: 1;
-  }
-
-  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -385,12 +352,3 @@ export const SelectStylesLarge = {
     cursor: "pointer",
   }),
 };
-/* 
-ALTERNATIVE WAY - in case we want to receive a document from the library, e.g. Material User Interface
-
-import { Button } from "@mui/material";
-
-export const AddButton = styled(Button)`
-   // styles here
-`;
-*/

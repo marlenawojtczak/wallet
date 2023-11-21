@@ -203,8 +203,7 @@ export const HomeTab = () => {
                         <TableCell colSpan="100%">
                           <Message>
                             There are no transactions. You can add one with the
-                            plus button <Plus>Add</Plus> in the right bottom
-                            corner.
+                            button <Plus>Add</Plus> in the right bottom corner.
                           </Message>
                         </TableCell>
                       </TableNextRows>
@@ -234,8 +233,8 @@ export const HomeTab = () => {
                   <tr>
                     <td colSpan="7">
                       <Message>
-                        There are no transactions. You can add one with the plus
-                        button <Plus>Add</Plus> in the right bottom corner.
+                        There are no transactions. You can add one with the
+                        button.
                       </Message>
                     </td>
                   </tr>

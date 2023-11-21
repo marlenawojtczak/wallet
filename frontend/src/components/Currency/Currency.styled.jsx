@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import img from "../../assets/images/mountains.png";
 
 const showIn = keyframes`
   0% {
