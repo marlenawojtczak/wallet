@@ -18,7 +18,7 @@ secrets:
 
 services:
   backend:
-    image: platyna100/wallet-backend:figma
+    image: platyna100/wallet-backend:new
     secrets:
       - APP_PASSWORD
       - APP_USER
@@ -32,7 +32,7 @@ services:
   frontend_figma:
     image: platyna100/wallet-frontend:figma
   nginx:
-    image: platyna100/walllet-nginx:figma
+    image: platyna100/walllet-nginx:new
     ports:
       - 80:80
       - 443:443
