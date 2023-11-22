@@ -130,31 +130,3 @@ export const FooterWrapper = styled.div`
     justify-content: center;
   }
 `;
-
-// import styled from "styled-components";
-// import finance from "../../assets/images/finance.png";
-// import { useLocation } from "react-router-dom";
-
-// export const BackgroundContainer = styled.div`
-//   background-image: url(${finance});
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   background-position: right -200px top 100px;
-//   height: 100vh;
-
-//   ${(props) =>
-//     useLocation().pathname === "/home" &&
-//     `
-//     height: 100vh;
-// `}
-
-//   @media screen and (min-width: 768px) {
-//     background-image: url(${finance});
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     background-position: right top 110px;
-//     height: 100vh;
-//   }
-//   @media screen and (min-width: 1280px) {
-//   }
-// `;

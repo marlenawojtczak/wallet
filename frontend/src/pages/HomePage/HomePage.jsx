@@ -23,6 +23,7 @@ const HomePage = () => {
 
   const handleCloseModal = () => {
     dispatch(closeModalAddTransaction());
+    document.body.style.overflow = "auto";
   };
 
   const handleScroll = () => {
@@ -49,7 +50,7 @@ const HomePage = () => {
       <HomeTab />
 
       <ButtonWrapper>
-        <ButtonScroll onClick={handleScroll} />
+        {/* <ButtonScroll onClick={handleScroll} /> */}
         <ButtonAddTransactions onClick={handleOpenModal} />
       </ButtonWrapper>
 

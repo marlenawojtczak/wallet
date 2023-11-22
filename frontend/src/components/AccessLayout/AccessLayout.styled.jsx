@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import financeLow from "../../assets/images/financeLow.jpg";
 
 const fadeInLogo = keyframes`
   0% {
@@ -65,6 +66,20 @@ const fadeWrapper = keyframes`
 }
 `;
 
+export const HelpWrapper = styled.div`
+  position: fixed;
+  background-image: url(${financeLow});
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1280px) {
+  }
+`;
+
 export const BackgroundContainer = styled.div`
   position: relative;
   width: 100%;
@@ -78,24 +93,6 @@ export const BackgroundContainer = styled.div`
     z-index: -1;
   }
 `;
-//   overflow: hidden;
-//   position: relative;
-//   height: 100vh;
-//   @media screen and (min-width: 768px) {
-//     display: flex;
-//     flex-direction: column;
-//     height: 100vh;
-//     padding: 60px 118px;
-//     background-color: var(--bg-accent);
-//     background-image: url(${backgroundElipsePink}), url(${backgroundElipseBlue});
-//     background-repeat: no-repeat, no-repeat;
-//     background-position: right -25vw top, left bottom;
-//   }
-//   @media screen and (min-width: 1280px) {
-//     padding: 0;
-//     justify-content: center;
-//     background-position: right top, left bottom;
-//  }
 
 export const StyledInfo = styled.div`
   display: flex;

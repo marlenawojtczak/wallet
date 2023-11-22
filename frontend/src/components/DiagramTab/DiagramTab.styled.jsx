@@ -16,13 +16,3 @@ export const WrapperTable = styled.div`
   @media screen and (min-width: 1280px) {
   }
 `;
-
-/* 
-ALTERNATIVE WAY - in case we want to receive a document from the library, e.g. Material User Interface
-
-import { Button } from "@mui/material";
-
-export const AddButton = styled(Button)`
-   // styles here
-`;
-*/

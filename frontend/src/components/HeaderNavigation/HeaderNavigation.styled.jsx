@@ -56,13 +56,3 @@ export const LogoTitle = styled.span`
     font-size: 30px;
   }
 `;
-
-/* 
-ALTERNATIVE WAY - in case we want to receive a document from the library, e.g. Material User Interface
-
-import { Button } from "@mui/material";
-
-export const AddButton = styled(Button)`
-   // styles here
-`;
-*/

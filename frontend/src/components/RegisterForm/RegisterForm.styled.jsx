@@ -92,9 +92,6 @@ export const StyledForm = styled.div`
       rgba(255, 255, 255, 0.8),
       rgba(255, 255, 255, 0.05)
     );
-
-    /* box-shadow: 15px 0 20px 20px rgba(0, 0, 0, 0.5),
-      5px 0 15px 15px rgba(0, 0, 0, 0.4), 2px 0 10px 10px rgba(0, 0, 0, 0.2); */
     animation: ${formIn} 800ms ease-out;
   }
 `;
@@ -312,23 +309,6 @@ export const StyledButton = styled.div`
       letter-spacing: 3px;
     }
   }
-
-  /* @media screen and (min-width: 1280px) {
-    font-size: 25px;
-    padding-bottom: 5px;
-    border-radius: 10px;
-    padding: 7px 35px;
-    margin: 0px 0 50px 0;
-    color: var(--brand-logout);
-    transition: all 150ms ease;
-    cursor: pointer;
-    &:hover,
-    &:focus {
-      box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.6);
-      letter-spacing: 3px;
-      background: linear-gradient(to right, #00aaff, #0d91d3, #0792fd);
-    }
-  } */
 `;
 export const StyledButtonIcon = styled.div`
   display: flex;
