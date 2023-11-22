@@ -7,7 +7,7 @@ import { sendVerificationEmail } from "../utils/emailVerification.js";
 
 export const singup = async (req, res, next) => {
   const body = req.body;
-  const { email } = body;
+  const { email, originDomain } = body;
 
   const user = await User.findOne({ email });
 
@@ -24,7 +24,12 @@ export const singup = async (req, res, next) => {
     verificationToken,
   });
 
-  sendVerificationEmail(email, verificationToken, "Email Verification");
+  sendVerificationEmail(
+    email,
+    verificationToken,
+    "Email Verification",
+    originDomain
+  );
 
   return res.status(201).send({
     message: "Register successful",
@@ -39,6 +44,7 @@ export const singup = async (req, res, next) => {
 
 export const verify = async (req, res, next) => {
   const { verificationToken } = req.params;
+  const originDomain = req.query.origin;
 
   const user = await User.findOne({ verificationToken });
 
@@ -54,12 +60,7 @@ export const verify = async (req, res, next) => {
     verificationToken: "",
   });
 
-  return res.status(200).send({
-    message: "Successful operation",
-  });
-
-  // res.redirect("https://uwallet.pl/#/login");
-  // res.redirect("http://localhost:4000/#/login");
+  return res.redirect(`${originDomain}`);
 };
 
 export const resendVerify = async (req, res, next) => {
