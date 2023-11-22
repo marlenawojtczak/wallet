@@ -1,6 +1,5 @@
 # Add Frontend build to Nginx
 FROM nginx:1.24
-COPY --from=platyna100/wallet-frontend:figma /app/build/ /usr/share/nginx/html
 
 COPY services/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY services/nginx/sites_enabled/wallet.conf /etc/nginx/sites-enabled/wallet.conf
