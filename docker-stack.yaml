@@ -17,15 +17,8 @@ secrets:
     external: true
 
 services:
-  frontend:
-    image: platyna100/wallet-frontend:stack
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /etc/letsencrypt/ssl/uwallet.pl/:/etc/nginx/ssl/uwallet.pl/
   backend:
-    image: platyna100/wallet-backend:stack
+    image: platyna100/wallet-backend:figma
     secrets:
       - APP_PASSWORD
       - APP_USER
@@ -34,3 +27,15 @@ services:
       - JWT_SECRET
       - MONGODB_URI
       - PORT
+  frontend:
+    image: platyna100/wallet-frontend:new
+  frontend_figma:
+    image: platyna100/wallet-frontend:figma
+  nginx:
+    image: platyna100/walllet-nginx:figma
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/letsencrypt/ssl/uwallet.pl/:/etc/nginx/ssl/uwallet.pl/
+      - /etc/letsencrypt/ssl/figma.uwallet.pl/:/etc/nginx/ssl/figma.uwallet.pl/
