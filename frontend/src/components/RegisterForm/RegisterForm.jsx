@@ -65,6 +65,11 @@ export const RegisterForm = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
+  const handleDomain = () => {
+    const originDomain = window.location.origin;
+    return originDomain;
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -75,11 +80,13 @@ export const RegisterForm = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
+        const originDomain = handleDomain();
         await dispatch(
           signUp({
             email: values.email,
             password: values.password,
             username: values.name,
+            originDomain,
           })
         ).unwrap();
         navigate("/login");
@@ -223,6 +230,8 @@ export const RegisterForm = () => {
             onClick={(e) => {
               e.preventDefault();
               formik.handleSubmit();
+              handleDomain();
+
               const errors = Object.values(formik.errors);
               if (errors.length > 0) {
                 const errorMessage = (
