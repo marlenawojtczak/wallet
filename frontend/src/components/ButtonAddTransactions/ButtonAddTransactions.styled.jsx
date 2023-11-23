@@ -7,6 +7,7 @@ export const Button = styled.button`
   font-weight: 400;
   line-height: normal;
   box-shadow: 1px 1px 5px #4e4e4e, 1px 1px 6px #292929, 1px 1px 7px #000000;
+
   height: auto;
   background: linear-gradient(to right, #00aaff, #0074cc, #00aaff);
   border-radius: 10px;

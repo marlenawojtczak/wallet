@@ -61,7 +61,7 @@ const HomePage = () => {
     <>
       {window.innerWidth < 768 && (
         <>
-          <Helmet>
+          {/* <Helmet>
             <title>Home</title>
           </Helmet>
           <BalanceNav>
@@ -73,7 +73,15 @@ const HomePage = () => {
               <ButtonAddTransactions onClick={handleOpenModal} />
             </ButtonWrapperMobile>
             <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
-          </Wrapper>
+          </Wrapper> */}
+          <Helmet>
+            <title>Home</title>
+          </Helmet>
+          <BalanceNav>
+            <Balance />
+          </BalanceNav>
+
+          <HomeTab />
         </>
       )}
       {window.innerWidth >= 768 && (

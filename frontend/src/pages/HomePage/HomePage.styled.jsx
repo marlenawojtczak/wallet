@@ -4,12 +4,16 @@ export const Wrapper = styled.div`
   position: relative;
 `;
 
+// export const ButtonWrapperMobile = styled.div`
+//   position: sticky;
+//   z-index: 9999;
+//   bottom: 30px;
+//   display: flex;
+//   justify-content: center;
+// `;
+
 export const ButtonWrapperMobile = styled.div`
-  position: sticky;
-  z-index: 9999;
-  bottom: 30px;
-  display: flex;
-  justify-content: center;
+  display: none;
 `;
 
 export const ButtonWrapper = styled.div`

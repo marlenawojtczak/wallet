@@ -1,7 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Header, Navigation, Balance, Currency } from "../../components";
 import { Footer } from "../../components/Footer";
+import { ButtonAddTransactions } from "../../components/ButtonAddTransactions";
+import { ModalAddTransaction } from "../../components/ModalAddTransaction";
+import {
+  openModalAddTransaction,
+  closeModalAddTransaction,
+} from "../../redux/global/globalSlice";
+import { selectIsModalAddTransactionOpen } from "../../redux/global/selectors";
 
 import {
   BackgroundContainer,
@@ -15,10 +23,16 @@ import {
   WrapperNavBal,
   MaxWrapper,
   FooterWrapper,
+  ButtonWrapper,
+  BtnWrapper,
 } from "./SharedLayout.styled";
 
 export const SharedLayout = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const dispatch = useDispatch();
+  const isOpen = useSelector(selectIsModalAddTransactionOpen);
+  const location = useLocation();
+  const isHomeRoute = location.pathname === "/home";
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,6 +45,21 @@ export const SharedLayout = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleOpenModal = () => {
+    dispatch(openModalAddTransaction());
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModalAddTransaction());
+    document.body.style.overflow = "auto";
+  };
+
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 
   return (
     <>
@@ -68,7 +97,17 @@ export const SharedLayout = () => {
             )}
           </MaxWrapper>
         </Filter>
-        {window.innerWidth < 768 && <Footer />}
+        {window.innerWidth < 768 && (
+          <FooterWrapper>
+            <Footer />
+            <BtnWrapper>
+              {isHomeRoute && (
+                <ButtonAddTransactions onClick={handleOpenModal} />
+              )}
+              <ModalAddTransaction isOpen={isOpen} onClose={handleCloseModal} />
+            </BtnWrapper>
+          </FooterWrapper>
+        )}
       </BackgroundContainer>
     </>
   );
