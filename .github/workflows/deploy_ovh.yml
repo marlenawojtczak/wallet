@@ -2,7 +2,9 @@ name: ci
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - main2
 
 jobs:
   build_and_push:
