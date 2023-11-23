@@ -51,13 +51,7 @@ export const AccessLayout = () => {
 
   return (
     <BackgroundContainer>
-      <video
-        autoPlay
-        muted
-        loop
-        id="background-video"
-        onError={handleVideoError}
-      >
+      <video autoPlay muted loop id="background-video">
         <source src={financeMp4} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
