@@ -8,6 +8,7 @@ export const FooterWrapper = styled.div`
   background: transparent;
   border-radius: 0;
   border-top: 1px solid var(--bg-light);
+  z-index: 999;
 
   @media screen and (min-width: 768px) {
     border-top-right-radius: 10px;

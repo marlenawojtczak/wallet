@@ -66,20 +66,6 @@ const fadeWrapper = keyframes`
 }
 `;
 
-export const HelpWrapper = styled.div`
-  position: fixed;
-  background-image: url(${financeLow});
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1280px) {
-  }
-`;
-
 export const BackgroundContainer = styled.div`
   position: relative;
   width: 100%;

@@ -1,17 +1,20 @@
 import styled from "styled-components";
 
 export const ButtonWrapper = styled.div`
-  display: grid;
+  display: flex;
   align-self: center;
   position: sticky;
   bottom: 2%;
   padding: 20px;
+  z-index: 999;
 
   @media screen and (min-width: 768px) {
+    display: flex;
     position: fixed;
     bottom: 4%;
     right: 50px;
     padding: 0;
+    z-index: 999;
   }
   @media screen and (min-width: 1280px) {
     right: 5%;
