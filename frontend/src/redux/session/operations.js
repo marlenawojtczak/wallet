@@ -35,7 +35,12 @@ export const signUp = createAsyncThunk(
   async (credentials, thunkAPI) => {
     thunkAPI.dispatch(openLoading());
     try {
-      const res = await api.post("/api/auth/sign-up", credentials);
+      const dataToSend = {
+        ...credentials,
+        originDomain: credentials.originDomain,
+      };
+
+      const res = await api.post("/api/auth/sign-up", dataToSend);
       setAuthHeader(res.data.user.accessToken);
       showToast(
         "Register successful. Verification link sent to your email.",
