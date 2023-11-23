@@ -92,6 +92,7 @@ export const TeamMember = styled.a`
 export const NameWrapper = styled.div`
   text-align: center;
   margin-top: 5px;
+  transition: 0.3s;
 `;
 export const Name = styled.div``;
 
@@ -102,4 +103,5 @@ export const LinkedInIcon = styled(LinkedIn)`
   position: absolute;
   top: 122px;
   right: 95px;
+  transition: 0.3s;
 `;
