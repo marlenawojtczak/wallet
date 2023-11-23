@@ -7,6 +7,8 @@ import {
   TeamMember,
   LinkedInIcon,
   ModalFilter,
+  NameWrapper,
+  Name,
 } from "./ModalTeam.styled";
 
 import Jakub from "../../assets/images/Jakub.png";
@@ -45,16 +47,13 @@ export const ModalTeam = () => {
                 href="https://www.linkedin.com/in/jakubantoniak/"
                 target="_blank"
               >
-                <img
-                  src={Jakub}
-                  width="115"
-                  heigth="115"
-                  alt="Jakub's pic"
-                ></img>
-                <LinkedInIcon></LinkedInIcon>
-                Jakub
-                <br />
-                Antoniak
+                <img src={Jakub} alt="Jakub's pic"></img>
+                <LinkedInIcon />
+                <NameWrapper>
+                  Jakub
+                  <br />
+                  Antoniak
+                </NameWrapper>
               </TeamMember>
             </TeamListEl>
             <TeamListEl>
@@ -62,16 +61,13 @@ export const ModalTeam = () => {
                 href="https://www.linkedin.com/in/marlena-wojtczak-89438527b/"
                 target="_blank"
               >
-                <img
-                  src={Marlena}
-                  width="115"
-                  heigth="115"
-                  alt="Marlena's pic"
-                ></img>
-                <LinkedInIcon></LinkedInIcon>
-                Marlena
-                <br />
-                Wojtczak
+                <img src={Marlena} alt="Marlena's pic"></img>
+                <LinkedInIcon />
+                <NameWrapper>
+                  Marlena
+                  <br />
+                  Wojtczak
+                </NameWrapper>
               </TeamMember>
             </TeamListEl>
             <TeamListEl>
@@ -79,16 +75,13 @@ export const ModalTeam = () => {
                 href="https://www.linkedin.com/in/katarzyna-w%C3%B3jcikowska-59a650192/"
                 target="_blank"
               >
-                <img
-                  src={KatarzynaW}
-                  width="115"
-                  heigth="115"
-                  alt="Katarzyna's pic"
-                ></img>
-                <LinkedInIcon></LinkedInIcon>
-                Katarzyna
-                <br />
-                Wójcikowska
+                <img src={KatarzynaW} alt="Katarzyna's pic"></img>
+                <LinkedInIcon />
+                <NameWrapper>
+                  Katarzyna
+                  <br />
+                  Wójcikowska
+                </NameWrapper>
               </TeamMember>
             </TeamListEl>
             <TeamListEl>
@@ -96,16 +89,13 @@ export const ModalTeam = () => {
                 href="https://www.linkedin.com/in/mateusz-lis-8840ba280/"
                 target="_blank"
               >
-                <img
-                  src={Mateusz}
-                  width="115"
-                  heigth="115"
-                  alt="Mateusz's pic"
-                ></img>
-                <LinkedInIcon></LinkedInIcon>
-                Mateusz
-                <br />
-                Lis
+                <img src={Mateusz} alt="Mateusz's pic"></img>
+                <LinkedInIcon />
+                <NameWrapper>
+                  Mateusz
+                  <br />
+                  Lis
+                </NameWrapper>
               </TeamMember>
             </TeamListEl>
             <TeamListEl>
@@ -113,16 +103,13 @@ export const ModalTeam = () => {
                 href="https://www.linkedin.com/in/rolidabrowski/"
                 target="_blank"
               >
-                <img
-                  src={Roland}
-                  width="115"
-                  heigth="115"
-                  alt="Roland's pic"
-                ></img>
-                <LinkedInIcon></LinkedInIcon>
-                Roland
-                <br />
-                Dąbrowski
+                <img src={Roland} alt="Roland's pic"></img>
+                <LinkedInIcon />
+                <NameWrapper>
+                  Roland
+                  <br />
+                  Dąbrowski
+                </NameWrapper>
               </TeamMember>
             </TeamListEl>
             <TeamListEl>
@@ -130,15 +117,12 @@ export const ModalTeam = () => {
                 href="https://www.linkedin.com/in/katarzyna-cependa/"
                 target="_blank"
               >
-                <img
-                  src={KatarzynaC}
-                  width="115"
-                  heigth="115"
-                  alt="Katarzyna's pic"
-                ></img>
-                <LinkedInIcon></LinkedInIcon>
-                Katarzyna <br />
-                Cependa
+                <img src={KatarzynaC} alt="Katarzyna's pic"></img>
+                <LinkedInIcon />
+                <NameWrapper>
+                  Katarzyna <br />
+                  Cependa
+                </NameWrapper>
               </TeamMember>
             </TeamListEl>
           </TeamList>

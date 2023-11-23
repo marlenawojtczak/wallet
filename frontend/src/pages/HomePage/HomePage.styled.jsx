@@ -1,13 +1,18 @@
 import styled from "styled-components";
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  align-self: center;
-  position: sticky;
-  bottom: 2%;
-  padding: 20px;
-  z-index: 999;
+export const Wrapper = styled.div`
+  position: relative;
+`;
 
+export const ButtonWrapperMobile = styled.div`
+  position: sticky;
+  z-index: 9999;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const ButtonWrapper = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
     position: fixed;

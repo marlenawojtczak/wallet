@@ -62,15 +62,18 @@ export const TeamMember = styled.a`
   font-weight: 300;
   font-size: 20px;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
   display: block;
   fill: var(--font-light);
+  position: relative;
 
   img {
-    margin-bottom: 6px;
     transition: 0.5s;
     border-radius: 5px;
+    object-fit: contain;
+    width: 115px;
+    aspect-ratio: 1/1;
   }
 
   &:hover {
@@ -86,7 +89,17 @@ export const TeamMember = styled.a`
   }
 `;
 
+export const NameWrapper = styled.div`
+  text-align: center;
+  margin-top: 5px;
+`;
+export const Name = styled.div``;
+
 export const LinkedInIcon = styled(LinkedIn)`
-  display: flex;
+  /* padding: 3px 0 0 0;
+  margin: 0;
+  width: 24px; */
   position: absolute;
+  top: 122px;
+  right: 95px;
 `;

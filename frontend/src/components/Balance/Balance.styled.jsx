@@ -18,7 +18,7 @@ export const BalanceElement = styled.div`
   padding: 8px 0 6px 32px;
   margin-bottom: 45px;
 
-  @media screen and (min-width: 767px) {
+  @media screen and (min-width: 768px) {
     width: 100%;
     margin: 0;
   }
@@ -33,7 +33,7 @@ export const BalanceHeader = styled.p`
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--font-grey);
-  @media screen and (min-width: 767px) {
+  @media screen and (min-width: 768px) {
     font-size: 12px;
     padding-top: 4px;
   }
@@ -47,7 +47,7 @@ export const Cash = styled.span`
   font-size: 22px;
   font-weight: 400;
   color: var(--font-dark);
-  @media screen and (min-width: 767px) {
+  @media screen and (min-width: 768px) {
     font-size: 28px;
   }
   @media screen and (min-width: 1280px) {
@@ -63,7 +63,7 @@ export const BalanceContent = styled.p`
   font-size: 22px;
   font-weight: 700;
   color: var(--font-dark);
-  @media screen and (min-width: 767px) {
+  @media screen and (min-width: 768px) {
     font-size: 28px;
   }
   @media screen and (min-width: 1280px) {
