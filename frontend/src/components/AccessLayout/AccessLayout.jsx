@@ -14,7 +14,6 @@ import {
   ButtonLogin,
   LogoWrapper,
   FooterWrapper,
-  HelpWrapper,
 } from "./AccessLayout.styled";
 
 export const AccessLayout = () => {
@@ -22,7 +21,6 @@ export const AccessLayout = () => {
   const [showWrapper, setShowWrapper] = useState(false);
   const [showOutlet, setShowOutlet] = useState(false);
   const [showButton, setShowButton] = useState(true);
-  const [videoError, setVideoError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,26 +49,18 @@ export const AccessLayout = () => {
     setShowButton(false);
   };
 
-  const handleVideoError = () => {
-    setVideoError(true);
-  };
-
   return (
     <BackgroundContainer>
-      {videoError ? (
-        <HelpWrapper onError={handleVideoError} />
-      ) : (
-        <video
-          autoPlay
-          muted
-          loop
-          id="background-video"
-          onError={handleVideoError}
-        >
-          <source src={financeMp4} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      )}
+      <video
+        autoPlay
+        muted
+        loop
+        id="background-video"
+        onError={handleVideoError}
+      >
+        <source src={financeMp4} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       {window.innerWidth <= 1279 && (
         <StyledInfo>
           <SpanText>Welcome in</SpanText>
