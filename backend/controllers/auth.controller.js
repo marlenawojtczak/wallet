@@ -60,7 +60,7 @@ export const verify = async (req, res, next) => {
     verificationToken: "",
   });
 
-  return res.redirect(`${originDomain}`);
+  return res.redirect(`https://${originDomain}`);
 };
 
 export const resendVerify = async (req, res, next) => {
