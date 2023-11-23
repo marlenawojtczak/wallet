@@ -14,6 +14,7 @@ import {
   ButtonLogin,
   LogoWrapper,
   FooterWrapper,
+  HelpWrapper,
 } from "./AccessLayout.styled";
 
 export const AccessLayout = () => {
@@ -51,10 +52,13 @@ export const AccessLayout = () => {
 
   return (
     <BackgroundContainer>
-      <video autoPlay muted loop id="background-video">
-        <source src={financeMp4} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {window.innerWidth < 768 && <HelpWrapper />}
+      {window.innerWidth >= 768 && (
+        <video autoPlay muted loop id="background-video">
+          <source src={financeMp4} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
       {window.innerWidth <= 1279 && (
         <StyledInfo>
           <SpanText>Welcome in</SpanText>
