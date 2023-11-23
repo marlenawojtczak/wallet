@@ -70,12 +70,13 @@ export const ModalHeader = styled.div`
 
   color: #000;
   text-align: center;
-  font-family: Poppins;
+  font-family: OpenSans;
   font-size: 24px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
-
+  text-shadow: 1px 1px 0 var(--font-dark), 2px 1px 0 var(--font-dark),
+    3px 0px 0 grey, 10px 2px 15px black;
   @media screen and (min-width: 768px) {
     font-size: 30px;
     height: 40px;
@@ -93,7 +94,7 @@ export const StyledCategoryInput = styled(Select)`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  font-family: Circe;
+  font-family: OpenSans;
   border: none;
   border-bottom: 2px solid var(--bg-gray);
   height: 24px;
@@ -101,7 +102,7 @@ export const StyledCategoryInput = styled(Select)`
 `;
 
 export const ValueInput = styled.input`
-  font-family: Circe;
+  font-family: OpenSans;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -122,7 +123,7 @@ export const CommentInput = styled(ValueInput)`
 
 export const StyledDateTime = styled(Datetime)`
   input {
-    font-family: Circe;
+    font-family: OpenSans;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -140,23 +141,25 @@ export const AddButton = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
-  width: 300px;
+  width: 250px;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
+  font-family: OpenSans;
   line-height: normal;
   letter-spacing: 1.8px;
   text-transform: uppercase;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 13px 0;
   color: var(--bg-light);
-  background-color: var(--brand-secondary);
+  background: linear-gradient(to right, #00aaff, #0074cc, #00aaff);
   cursor: pointer;
 
   &:hover {
+    background: linear-gradient(to right, #00aaff, #00aaff, #0074cc);
+    letter-spacing: 3px;
     transform: scale(1.02);
-    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -205,7 +208,7 @@ export const SectionContainer = styled.div`
 `;
 
 export const SectionInput = styled.div`
-  font-family: Circe;
+  font-family: OpenSans;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

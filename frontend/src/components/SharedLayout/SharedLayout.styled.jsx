@@ -125,8 +125,17 @@ export const BalanceNav = styled.div`
 `;
 
 export const FooterWrapper = styled.div`
+  position: relative;
   @media screen and (min-width: 768px) {
     display: flex;
     justify-content: center;
   }
+`;
+
+export const BtnWrapper = styled.div`
+  position: fixed;
+
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
