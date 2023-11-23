@@ -81,7 +81,7 @@ export const RegisterForm = () => {
   };
 
   const handleDomain = () => {
-    const originDomain = window.location.origin;
+    const originDomain = window.location.hostname;
     return originDomain;
   };
 
