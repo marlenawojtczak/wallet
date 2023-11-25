@@ -7,6 +7,7 @@ import {
   TableNextRows,
   TableHeaderCell,
   TableCell,
+  TableHeadRows,
 } from "./Currency.styled";
 
 import axios from "axios";
@@ -57,9 +58,11 @@ export const Currency = () => {
       <TableContainer>
         <Table>
           <TableHead>
-            <TableHeaderCell>Currency</TableHeaderCell>
-            <TableHeaderCell>Purchase</TableHeaderCell>
-            <TableHeaderCell>Sale</TableHeaderCell>
+            <TableHeadRows>
+              <TableHeaderCell>Currency</TableHeaderCell>
+              <TableHeaderCell>Purchase</TableHeaderCell>
+              <TableHeaderCell>Sale</TableHeaderCell>
+            </TableHeadRows>
           </TableHead>
           <TableBody>
             {exchangeRate.map((item, index) => (

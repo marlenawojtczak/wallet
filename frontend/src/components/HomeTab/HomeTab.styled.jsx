@@ -27,6 +27,16 @@ export const TableHeader = styled.div`
   }
 `;
 
+export const TableCellMobile = styled.div`
+  padding: 5px 15px;
+  font-family: OpenSans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  color: var(--bg-light);
+  line-height: normal;
+`;
+
 export const List = styled.ul`
   margin: 0;
   list-style: none;
@@ -36,7 +46,7 @@ export const List = styled.ul`
   overflow-y: auto;
 `;
 
-export const ListItem = styled.tr`
+export const ListItem = styled.div`
   display: flex;
   justify-content: space-between;
   height: 47px;
@@ -53,7 +63,7 @@ export const ListItem = styled.tr`
   border-bottom: 1px solid var(--bg-gray);
 `;
 
-export const ListItemValue = styled.tr`
+export const ListItemValue = styled.div`
   display: flex;
   justify-content: space-between;
   height: 47px;
@@ -177,13 +187,15 @@ export const TypeSpace = styled.div`
 `;
 
 export const TableCell = styled.td`
-  padding: 5px 15px;
-  font-family: OpenSans;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 300;
-  color: var(--bg-light);
-  line-height: normal;
+  @media screen and (min-width: 768px) {
+    padding: 5px 15px;
+    font-family: OpenSans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    color: var(--bg-light);
+    line-height: normal;
+  }
 
   @media screen and (min-width: 1280px) {
     padding: 5px 20px;
@@ -191,7 +203,7 @@ export const TableCell = styled.td`
   }
 `;
 
-export const TableCellActions = styled.tr`
+export const TableCellActions = styled.div`
   display: flex;
   gap: 10px;
   padding: 10px 0px;
