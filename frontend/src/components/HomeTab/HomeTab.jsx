@@ -19,6 +19,7 @@ import {
   SortIcon,
   TableCellActions,
   TypeSpace,
+  TableCellMobile,
 } from "./HomeTab.styled";
 import {
   fetchTransactions,
@@ -46,7 +47,7 @@ import { useTable, useSortBy } from "react-table";
 
 export const HomeTab = () => {
   const dispatch = useDispatch();
-  const isOpen = useSelector(selectIsModalEditTransactionOpen);
+  const isOpen = !!useSelector(selectIsModalEditTransactionOpen);
   const id = useSelector(selectIsModalEditTransactionOpen);
   const transactions = useSelector(selectTransactions);
 
@@ -230,14 +231,12 @@ export const HomeTab = () => {
             {matches.small && (
               <StyledTable>
                 {fetchedTransactions.length === 0 ? (
-                  <tr>
-                    <td colSpan="7">
-                      <Message>
-                        There are no transactions. You can add one with the
-                        button.
-                      </Message>
-                    </td>
-                  </tr>
+                  <TableCellMobile colSpan="7">
+                    <Message>
+                      There are no transactions. You can add one with the
+                      button.
+                    </Message>
+                  </TableCellMobile>
                 ) : (
                   transformedTableTransactions.map((item, rowIndex) => {
                     const type = item[1].value;

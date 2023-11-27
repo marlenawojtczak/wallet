@@ -15,9 +15,9 @@ export const TableWrapper = styled.div`
   margin-bottom: 20px;
 
   @media screen and (min-width: 768px) {
+    border-radius: 10px;
     overflow: auto;
     height: 190px;
-    border-radius: 10px;
     margin-bottom: 0;
   }
   @media screen and (min-width: 1280px) {
@@ -42,11 +42,22 @@ export const TableContainer = styled.div`
 
 export const Table = styled.table`
   border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TableHeadRows = styled.tr`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  @media screen and (min-width: 768px) {
+  }
+
+  @media screen and (min-width: 1280px) {
+  }
 `;
 
 export const TableHead = styled.thead`
-  display: flex;
-  padding: 10px 0;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   background-color: var(--font-light);
@@ -60,8 +71,7 @@ export const TableHead = styled.thead`
 `;
 export const TableHeaderCell = styled.th`
   font-family: OpenSans;
-  text-align: center;
-  flex: 1;
+
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -78,21 +88,17 @@ export const TableHeaderCell = styled.th`
   }
 `;
 
-export const TableBody = styled.tbody`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 15px 0;
-`;
+export const TableBody = styled.tbody``;
 
 export const TableNextRows = styled.tr`
   display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
 `;
 
-export const TableCell = styled.tr`
-  flex: 1;
+export const TableCell = styled.td`
   font-family: OpenSans;
-  text-align: center;
+
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
