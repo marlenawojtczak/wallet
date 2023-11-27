@@ -47,7 +47,7 @@ import { useTable, useSortBy } from "react-table";
 
 export const HomeTab = () => {
   const dispatch = useDispatch();
-  const isOpen = useSelector(selectIsModalEditTransactionOpen);
+  const isOpen = !!useSelector(selectIsModalEditTransactionOpen);
   const id = useSelector(selectIsModalEditTransactionOpen);
   const transactions = useSelector(selectTransactions);
 
