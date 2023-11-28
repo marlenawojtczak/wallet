@@ -13,4 +13,4 @@ COPY ./frontend /app
 
 RUN npm run build
 RUN npm install -g serve
-CMD ["npm", "-s", "build", "-l", "4000"]
+CMD ["serve", "-s", "build", "-l", "4000"]
