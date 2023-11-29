@@ -86,7 +86,6 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
         ...values,
       });
     },
-
     onSubmit: async (values) => {
       const formattedDate = moment(values.date).format(
         "YYYY-MM-DDTHH:mm:ss.SSSZ"
@@ -126,7 +125,7 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
 
   const formated = (date) => {
     if (date) {
-      return date.slice(0, 10);
+      return moment(date).format("DD-MM-YYYY");
     } else {
       return "";
     }
@@ -195,7 +194,11 @@ export const ModalEditTransaction = ({ isOpen, onClose, id }) => {
                   <SectionDateWrapper>
                     <StyledDateTime
                       name="date"
-                      value={formated(INITIAL_VALUES.date)}
+                      value={
+                        formated(formik.values.date)
+                          ? ""
+                          : formated(INITIAL_VALUES.date)
+                      }
                       onChange={(date) =>
                         formik.setFieldValue("date", moment(date).toDate())
                       }
