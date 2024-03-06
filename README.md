@@ -63,7 +63,7 @@ Unfortunately, when using Windows, you have to go from the main directory to the
 FRONTEND runs on [localhost:4000](localhost:4000)
 
 <!--
-## BACKEND
+## BACKEND.
 
 INSTALATION: `npm i --prefix backend`
 
